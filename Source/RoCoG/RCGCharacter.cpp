@@ -83,14 +83,14 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	MCOffset->RelativeLocation = FVector(80.0f, 0.0f, 0.0f);
 
 	// Create left/right motion controller
-	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
-	RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightMotionController"));
+	//LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
+	//RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightMotionController"));
 	// Attach controllers to root component
-	LeftMC->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
-	RightMC->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
+	//LeftMC->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
+	//RightMC->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
 	// Set the mapped hand (from the Motion Controller)
-	LeftMC->Hand = EControllerHand::Left;
-	RightMC->Hand = EControllerHand::Right;
+	//LeftMC->Hand = EControllerHand::Left;
+	//RightMC->Hand = EControllerHand::Right;
 
 	// Create left/right target vis arrows
 	LeftTargetArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("LeftVisArrow"));
@@ -99,8 +99,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftTargetArrow->ArrowSize = 0.1;
 	RightTargetArrow->ArrowSize = 0.1;
 	// Attach vis arrow to motion controllers
-	LeftTargetArrow->AttachToComponent(LeftMC, FAttachmentTransformRules::KeepWorldTransform);
-	RightTargetArrow->AttachToComponent(RightMC, FAttachmentTransformRules::KeepWorldTransform);
+	//LeftTargetArrow->AttachToComponent(LeftMC, FAttachmentTransformRules::KeepWorldTransform);
+	//RightTargetArrow->AttachToComponent(RightMC, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Default type of the hands
 	LeftHand = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("LeftSkeletalMesh"));
@@ -280,8 +280,8 @@ void ARCGCharacter::Tick( float DeltaTime )
 
 	//// Compute location
 	// Get the target location (motion controller loc)
-	const FVector LeftTargetLoc = LeftMC->GetComponentLocation();
-	const FVector RightTargetLoc = RightMC->GetComponentLocation();
+	const FVector LeftTargetLoc = FVector(0, 0, 0);// LeftMC->GetComponentLocation();
+	const FVector RightTargetLoc = FVector(0, 0, 0);//RightMC->GetComponentLocation();
 
 	// Get the loc errors
 	const FVector LeftError = LeftTargetLoc - LeftCurrLoc;
@@ -301,8 +301,8 @@ void ARCGCharacter::Tick( float DeltaTime )
 
 	//// Compute rotation
 	// Get the target rotation (motion controller loc)
-	const FQuat LeftTargetQuat = LeftMC->GetComponentQuat();
-	const FQuat RightTargetQuat = RightMC->GetComponentQuat();
+	const FQuat LeftTargetQuat = FQuat(1, 0, 0, 0);//LeftMC->GetComponentQuat();
+	const FQuat RightTargetQuat = FQuat(1, 0, 0, 0);//RightMC->GetComponentQuat();
 
 	// Lambda to compute the rotational output velocity
 	auto RotOutputLambda = [&](const FQuat& TargetQuat, FQuat CurrQuat)

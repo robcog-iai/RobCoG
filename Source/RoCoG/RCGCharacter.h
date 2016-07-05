@@ -6,7 +6,7 @@
 #include "RCGPid3d.h"
 #include "RCGGrasp.h"
 #include "RCGUtils.h"
-#include "MotionControllerComponent.h"
+//#include "MotionControllerComponent.h"
 #include "RCGCharacter.generated.h"
 
 UCLASS()
@@ -137,10 +137,10 @@ private:
 	USceneComponent* MCOffset;
 	
 	// Left hand motion controller
-	UMotionControllerComponent* LeftMC;
+	//UMotionControllerComponent* LeftMC;
 	
 	// Right hand motion controller
-	UMotionControllerComponent* RightMC;
+	//UMotionControllerComponent* RightMC;
 	
 	// Left target arrow visual
 	UArrowComponent* LeftTargetArrow;
