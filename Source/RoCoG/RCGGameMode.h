@@ -19,6 +19,4 @@ public:
 
 	// Called when the game starts or when spawned
 	virtual void StartPlay() override;
-	
-	
 };

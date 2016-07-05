@@ -6,7 +6,18 @@ public class RoCoG : ModuleRules
 {
 	public RoCoG(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] {
+			"Core",
+			"CoreUObject",
+			"Engine",
+			"InputCore",
+			"HydraPlugin",
+			//"XmlParser"
+			//"PhysX",
+			//"APEX",
+			//"Json",
+			//"JsonUtilities"
+        });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
