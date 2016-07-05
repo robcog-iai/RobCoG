@@ -1,0 +1,8 @@
+{
+	"Changelist" : 3005592,
+	"BuildId" : "ae2874d1-70b0-450d-9692-deb3ea12a5bd",
+	"Modules" : 
+	{
+		"HydraPlugin" : "UE4Editor-HydraPlugin.dll"
+	}
+}
