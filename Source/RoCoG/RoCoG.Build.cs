@@ -12,6 +12,7 @@ public class RoCoG : ModuleRules
 			"Engine",
 			"InputCore",
 			"HydraPlugin",
+			"HeadMountedDisplay",
 			//"XmlParser"
 			//"PhysX",
 			//"APEX",
