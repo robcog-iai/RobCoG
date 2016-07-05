@@ -13,7 +13,12 @@ class ROCOG_API ARCGGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
-	
+public:
+	// Constructor
+	ARCGGameMode(const FObjectInitializer& ObjectInitializer);
+
+	// Called when the game starts or when spawned
+	virtual void StartPlay() override;
 	
 	
 };
