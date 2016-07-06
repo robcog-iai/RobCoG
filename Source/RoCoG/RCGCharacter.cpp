@@ -20,21 +20,22 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	bRightGraspActive = false;
 
 	// Bone names
-	LeftControlBoneName = FName("hand_l");
-	RightControlBoneName = FName("hand_l");
+	LeftControlBoneName = FName("palm_l");
+	RightControlBoneName = FName("palm_r");
 
+	// TODO check that bones exist (in begin play)
 	// Left hands finger collision (sensor) names
-	LeftCollisionBoneNames.Add(FName("hand_l"));
-	LeftCollisionBoneNames.Add(FName("index_3_l"));
-	LeftCollisionBoneNames.Add(FName("middle_3_l"));
-	LeftCollisionBoneNames.Add(FName("ring_3_l"));
-	LeftCollisionBoneNames.Add(FName("pinky_3_l"));
+	LeftCollisionBoneNames.Add(FName("palm_l"));
+	LeftCollisionBoneNames.Add(FName("index_03_l"));
+	LeftCollisionBoneNames.Add(FName("middle_03_l"));
+	LeftCollisionBoneNames.Add(FName("ring_03_l"));
+	LeftCollisionBoneNames.Add(FName("pinky_03_l"));
 	// Right hands finger collision (sensor) names
-	RightCollisionBoneNames.Add(FName("hand_l"));
-	RightCollisionBoneNames.Add(FName("index_3_l"));
-	RightCollisionBoneNames.Add(FName("middle_3_l"));
-	RightCollisionBoneNames.Add(FName("ring_3_l"));
-	RightCollisionBoneNames.Add(FName("pinky_3_l"));
+	RightCollisionBoneNames.Add(FName("palm_r"));
+	RightCollisionBoneNames.Add(FName("index_03_r"));
+	RightCollisionBoneNames.Add(FName("middle_03_r"));
+	RightCollisionBoneNames.Add(FName("ring_03_r"));
+	RightCollisionBoneNames.Add(FName("pinky_03_r"));
 
 	// PID params
 	PGain = 40.0f;
@@ -67,7 +68,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Create a CameraComponent, attach to capsule
 	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("CharacterCamera"));
-	CharCamera->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
+	//CharCamera->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
+	CharCamera->SetupAttachment(GetCapsuleComponent());
 	// Position the camera
 	CharCamera->RelativeLocation = FVector(0.0f, 0.0f, BaseEyeHeight);
 	// Allow the pawn to control the camera rotation
@@ -99,17 +101,17 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftTargetArrow->ArrowSize = 0.1;
 	RightTargetArrow->ArrowSize = 0.1;
 	// Attach vis arrow to motion controllers
-	//LeftTargetArrow->AttachToComponent(LeftMC, FAttachmentTransformRules::KeepWorldTransform);
-	//RightTargetArrow->AttachToComponent(RightMC, FAttachmentTransformRules::KeepWorldTransform);
+	LeftTargetArrow->AttachToComponent(LeftMC, FAttachmentTransformRules::KeepWorldTransform);
+	RightTargetArrow->AttachToComponent(RightMC, FAttachmentTransformRules::KeepWorldTransform);
 
 	// Default type of the hands
 	LeftHand = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("LeftSkeletalMesh"));
 	RightHand = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("RightSkeletalMesh"));
 	// Get default skeletal mesh of the right / left hands
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> LeftSkelMesh(TEXT(
-		"SkeletalMesh'/Game/Models/Hands/HandConstraint/LeftHandLarge.LeftHandLarge'"));
+		"SkeletalMesh'/Game/Models/Hands/LeftHand/LeftHand.LeftHand'"));
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> RightSkelMesh(TEXT(
-		"SkeletalMesh'/Game/Models/Hands/HandConstraint/LeftHandLarge.LeftHandLarge'"));
+		"SkeletalMesh'/Game/Models/Hands/RightHand/RightHand.RightHand'"));
 	// Set default skeletal mesh
 	LeftHand->SetSkeletalMesh(LeftSkelMesh.Object);
 	RightHand->SetSkeletalMesh(RightSkelMesh.Object);
@@ -121,8 +123,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	//LeftHand->SetPhysicsAsset(LeftPhysAsset.Object);
 	//RightHand->SetPhysicsAsset(RightPhysAsset.Object);
 	// Scale the hands
-	LeftHand->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
-	RightHand->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
+	//LeftHand->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
+	//RightHand->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
 	// Simulate physics
 	LeftHand->SetSimulatePhysics(true);
 	RightHand->SetSimulatePhysics(true);
@@ -171,7 +173,7 @@ void ARCGCharacter::BeginPlay()
 			TEXT("LeftControlBody or RightControlBody not set, check if [%s] or [%s] exists!"),
 			*LeftControlBoneName.ToString(), *RightControlBoneName.ToString());
 	}
-
+	
 	// Hand joint velocity drive
 	LeftHand->SetAllMotorsAngularPositionDrive(true, true);
 	RightHand->SetAllMotorsAngularPositionDrive(true, true);
@@ -179,8 +181,7 @@ void ARCGCharacter::BeginPlay()
 	// Set drive parameters
 	LeftHand->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
 	RightHand->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
-
-
+	
 	// Lambda to map the hand fingers constraints to its type (index, middle etc.)
 	auto GetFingerToConstrLambda = [&](TArray<FConstraintInstance*>& Constraints)
 	{
@@ -210,6 +211,7 @@ void ARCGCharacter::BeginPlay()
 	LFingerTypeToConstrs = GetFingerToConstrLambda(LeftHand->Constraints);
 	RFingerTypeToConstrs = GetFingerToConstrLambda(RightHand->Constraints);
 
+	UE_LOG(LogTemp, Warning, TEXT("T3"));
 
 	// Get the hands finger collisions map, make sure hit events are set
 	auto GetFingerCollisionBonesLambda = [](USkeletalMeshComponent* Hand, TArray<FName>& CollisionBoneNames)
@@ -233,8 +235,7 @@ void ARCGCharacter::BeginPlay()
 	// Get the left / right hand finger sensor collision map
 	LFingerBoneNameToBody = GetFingerCollisionBonesLambda(LeftHand, LeftCollisionBoneNames);
 	RFingerBoneNameToBody = GetFingerCollisionBonesLambda(RightHand, RightCollisionBoneNames);
-
-
+	
 	// Add bone names to limb type Map
 	auto AddBoneNamesToLimbsLambda = [&](TArray<FName> BoneNames, TMap<FName, ERCGHandLimb>& NameToLimbMap)
 	{
