@@ -15,10 +15,6 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Visualize motion controller debug arrows
 	bVisTargetArrows = true;
 
-	// Grasping command active
-	bLeftGraspActive = false;
-	bRightGraspActive = false;
-
 	// Bone names
 	LeftControlBoneName = FName("palm_l");
 	RightControlBoneName = FName("palm_r");
@@ -30,19 +26,21 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftCollisionBoneNames.Add(FName("middle_03_l"));
 	LeftCollisionBoneNames.Add(FName("ring_03_l"));
 	LeftCollisionBoneNames.Add(FName("pinky_03_l"));
+	LeftCollisionBoneNames.Add(FName("thumb_03_l"));
 	// Right hands finger collision (sensor) names
 	RightCollisionBoneNames.Add(FName("palm_r"));
 	RightCollisionBoneNames.Add(FName("index_03_r"));
 	RightCollisionBoneNames.Add(FName("middle_03_r"));
 	RightCollisionBoneNames.Add(FName("ring_03_r"));
 	RightCollisionBoneNames.Add(FName("pinky_03_r"));
+	RightCollisionBoneNames.Add(FName("thumb_03_r"));
 
 	// PID params
-	PGain = 40.0f;
+	PGain = 140.0f;
 	IGain = 0.0f;
-	DGain = 10.0f;
-	PIDMaxOutput = 500.0f;
-	PIDMinOutput = -500.0f;
+	DGain = 20.0f;
+	PIDMaxOutput = 1500.0f;
+	PIDMinOutput = -1500.0f;
 
 	// Rotation control param
 	RotOutStrength = 1000.0f;
@@ -68,7 +66,6 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Create a CameraComponent, attach to capsule
 	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("CharacterCamera"));
-	//CharCamera->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
 	CharCamera->SetupAttachment(GetCapsuleComponent());
 	// Position the camera
 	CharCamera->RelativeLocation = FVector(0.0f, 0.0f, BaseEyeHeight);
@@ -80,7 +77,7 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Create the motion controller offset (hands in front of the character)
 	MCOffset = CreateDefaultSubobject<USceneComponent>(TEXT("MCOffsetComponent"));
 	// Attach Offset to root
-	MCOffset->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
+	MCOffset->SetupAttachment(RootComponent);
 	// Position of the offset
 	MCOffset->RelativeLocation = FVector(80.0f, 0.0f, 0.0f);
 
@@ -88,8 +85,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
 	RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightMotionController"));
 	// Attach controllers to root component
-	LeftMC->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
-	RightMC->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
+	LeftMC->SetupAttachment(MCOffset);
+	RightMC->SetupAttachment(MCOffset);
 	// Set the mapped hand (from the Motion Controller)
 	LeftMC->Hand = EControllerHand::Left;
 	RightMC->Hand = EControllerHand::Right;
@@ -101,8 +98,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftTargetArrow->ArrowSize = 0.1;
 	RightTargetArrow->ArrowSize = 0.1;
 	// Attach vis arrow to motion controllers
-	LeftTargetArrow->AttachToComponent(LeftMC, FAttachmentTransformRules::KeepWorldTransform);
-	RightTargetArrow->AttachToComponent(RightMC, FAttachmentTransformRules::KeepWorldTransform);
+	LeftTargetArrow->SetupAttachment(LeftMC);
+	RightTargetArrow->SetupAttachment(RightMC);
 
 	// Default type of the hands
 	LeftHand = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("LeftSkeletalMesh"));
@@ -115,16 +112,6 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Set default skeletal mesh
 	LeftHand->SetSkeletalMesh(LeftSkelMesh.Object);
 	RightHand->SetSkeletalMesh(RightSkelMesh.Object);
-	// Get/Set default physics asset of the right / left hands
-	//static ConstructorHelpers::FObjectFinder<UPhysicsAsset> LeftPhysAsset(TEXT(
-	//	"PhysicsAsset'/Game/Models/Hands/HandConstraint/LeftHandLarge_PhysicsAsset.LeftHandLarge_PhysicsAsset'"));
-	//static ConstructorHelpers::FObjectFinder<UPhysicsAsset> RightPhysAsset(TEXT(
-	//	"PhysicsAsset'/Game/Models/Hands/HandConstraint/LeftHandLarge_PhysicsAsset.LeftHandLarge_PhysicsAsset'"));
-	//LeftHand->SetPhysicsAsset(LeftPhysAsset.Object);
-	//RightHand->SetPhysicsAsset(RightPhysAsset.Object);
-	// Scale the hands
-	//LeftHand->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
-	//RightHand->SetWorldScale3D(FVector(0.1f, 0.1f, 0.1f));
 	// Simulate physics
 	LeftHand->SetSimulatePhysics(true);
 	RightHand->SetSimulatePhysics(true);
@@ -135,8 +122,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftHand->SetCollisionProfileName(TEXT("BLockAll"));
 	RightHand->SetCollisionProfileName(TEXT("BLockAll"));
 	// Attach hands to the motion controller offset parent
-	LeftHand->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
-	RightHand->AttachToComponent(MCOffset, FAttachmentTransformRules::KeepWorldTransform);
+	LeftHand->SetupAttachment(MCOffset);
+	RightHand->SetupAttachment(MCOffset);
 
 	// Make sure collision hit events are enabled on the hands
 	LeftHand->SetNotifyRigidBodyCollision(true);
@@ -210,9 +197,7 @@ void ARCGCharacter::BeginPlay()
 	// Get the left and right hand finger constraints
 	LFingerTypeToConstrs = GetFingerToConstrLambda(LeftHand->Constraints);
 	RFingerTypeToConstrs = GetFingerToConstrLambda(RightHand->Constraints);
-
-	UE_LOG(LogTemp, Warning, TEXT("T3"));
-
+	
 	// Get the hands finger collisions map, make sure hit events are set
 	auto GetFingerCollisionBonesLambda = [](USkeletalMeshComponent* Hand, TArray<FName>& CollisionBoneNames)
 	{
@@ -270,8 +255,8 @@ void ARCGCharacter::BeginPlay()
 	RightCurrQuat = RightHand->GetBoneQuaternion(RightControlBoneName);
 
 	// Collision callbacks for the hands
-	//LeftHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::LeftOnHit);
-	//RightHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::RightOnHit);
+	LeftHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitLeft);
+	RightHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitRight);
 }
 
 // Called every frame
@@ -345,13 +330,14 @@ void ARCGCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("CameraPitch", this, &ARCGCharacter::AddControllerPitchInput);
 	InputComponent->BindAxis("CameraYaw", this, &ARCGCharacter::AddControllerYawInput);
 	// Set up hand bindings
-	InputComponent->BindAxis("LOpenHandHydraBumper", this, &ARCGCharacter::OpenHand);
-	InputComponent->BindAxis("LCloseHandHydraTrigger", this, &ARCGCharacter::CloseHand);
+	InputComponent->BindAxis("OpenHandLeft", this, &ARCGCharacter::OpenHandLeft);
+	InputComponent->BindAxis("CloseHandLeft", this, &ARCGCharacter::CloseHandLeft);
+	InputComponent->BindAxis("OpenHandRight", this, &ARCGCharacter::OpenHandRight);
+	InputComponent->BindAxis("CloseHandRight", this, &ARCGCharacter::CloseHandRight);
 	// TODO TEST
 	// Set up grasp switch
 	InputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &ARCGCharacter::OnSwitchGrasp);
 }
-
 
 // Handles moving forward/backward
 void ARCGCharacter::MoveForward(const float Value)
@@ -367,7 +353,7 @@ void ARCGCharacter::MoveForward(const float Value)
 		}
 		// add movement in that direction
 		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
+		AddMovementInput(Direction, Value * 0.1);
 	}
 }
 
@@ -380,62 +366,77 @@ void ARCGCharacter::MoveRight(const float Value)
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
 		// add movement in that direction
-		AddMovementInput(Direction, Value);
+		AddMovementInput(Direction, Value * 0.1);
 	}
 }
 
 // Called to bind functionality to input
-void ARCGCharacter::CloseHand(const float AxisValue)
+void ARCGCharacter::CloseHandLeft(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
-		// Grasp action inactive
-		bLeftGraspActive = false;
-		bRightGraspActive = false;
 		return;
 	}
-
-	// Grasp action is active
-	bLeftGraspActive = true;
-	bRightGraspActive = true;
-
-	// Update grasping
-	LeftGrasp->Update(LFingerTypeToConstrs, -0.5f);
-	RightGrasp->Update(RFingerTypeToConstrs, -0.5f);
-}
-
-// Called to bind functionality to input
-void ARCGCharacter::OpenHand(const float AxisValue)
-{
-	if (AxisValue == 0)
-	{
-		// Grasp action inactive
-		bLeftGraspActive = false;
-		bRightGraspActive = false;
-		return;
-	}
-
-	// Grasp action is active
-	bLeftGraspActive = true;
-	bRightGraspActive = true;
 
 	// Update grasping
 	LeftGrasp->Update(LFingerTypeToConstrs, 0.5f);
+}
+
+// Called to bind functionality to input
+void ARCGCharacter::OpenHandLeft(const float AxisValue)
+{
+	if (AxisValue == 0)
+	{
+		// Grasp action inactive
+		return;
+	}
+
+	// Update grasping
+	LeftGrasp->Update(LFingerTypeToConstrs, -0.5f);
+}
+
+// Called to bind functionality to input
+void ARCGCharacter::CloseHandRight(const float AxisValue)
+{
+	if (AxisValue == 0)
+	{
+		return;
+	}
+
+	// Update grasping
 	RightGrasp->Update(RFingerTypeToConstrs, 0.5f);
 }
 
-// Collision callback
-void ARCGCharacter::LeftOnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+// Called to bind functionality to input
+void ARCGCharacter::OpenHandRight(const float AxisValue)
 {
-	UE_LOG(LogTemp, Warning, TEXT("OtherActor: %s, OtherComp: %s, Hit: %s"),
-		*OtherActor->GetName(), *OtherComp->GetName(), *Hit.ToString());
+	if (AxisValue == 0)
+	{
+		// Grasp action inactive
+		return;
+	}
 
-	//if (bLeftGraspActive)
-	//{
-	//	UE_LOG(LogTemp, Warning, TEXT("BoneName: %s, ts: %f"), *Hit.BoneName.ToString(), GetWorld()->GetDeltaSeconds());
+	// Update grasping
+	RightGrasp->Update(RFingerTypeToConstrs, -0.5f);
+}
 
-	//	LeftGrasp->BlockFinger(*BoneNameToLimbMap.Find(Hit.BoneName));
-	//}
+
+// Collision callback
+void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("**LEFT** SelfComp: %s, OtherActor: %s, OtherComp: %s"),
+	//	*SelfComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+
+	//UE_LOG(LogTemp, Warning, TEXT("BoneName: %s, ts: %f"), *Hit.BoneName.ToString(), GetWorld()->GetDeltaSeconds());
+
+	ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
+
+	if (Limb != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", *Limb));
+		
+		LeftGrasp->BlockFinger(*Limb);
+	}
 
 
 	//UE_LOG(LogTemp, Warning, TEXT("HIT %s"), *Hit.BoneName.ToString());
@@ -455,12 +456,16 @@ void ARCGCharacter::LeftOnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp
 }
 
 // Collision callback
-void ARCGCharacter::RightOnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ARCGCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("OtherActor: %s, OtherComp: %s, Hit: %s"),
-		*OtherActor->GetName(), *OtherComp->GetName(), *Hit.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("**RIGHT** SelfComp: %s, OtherActor: %s, OtherComp: %s"),
+	//	*SelfComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
 
-	UE_LOG(LogTemp, Warning, TEXT("BoneName: %s, ts: %f"), *Hit.BoneName.ToString(), GetWorld()->GetDeltaSeconds());
+	//	*SelfComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName(), *Hit.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("OtherActor: %s, OtherComp: %s, Hit: %s"),
+	//	*OtherActor->GetName(), *OtherComp->GetName(), *Hit.ToString());
+
+	//UE_LOG(LogTemp, Warning, TEXT("BoneName: %s, ts: %f"), *Hit.BoneName.ToString(), GetWorld()->GetDeltaSeconds());
 }
 
 // Swith between grasping styles

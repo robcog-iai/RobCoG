@@ -44,7 +44,7 @@ void FRCGGrasp::Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerType
 			// Skip iteration if finger is blocked 
 			if (BlockedFingers.Contains(Type))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Blocked Skipping"));
+				UE_LOG(LogTemp, Warning, TEXT("Blocked Skipping %s"), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", Type));
 				continue;
 			}
 
@@ -68,7 +68,7 @@ void FRCGGrasp::Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerType
 				}
 				else
 				{
-					Constr->SetAngularOrientationTarget(FQuat(FRotator(Target, 0.0f, 0.0f)));
+					Constr->SetAngularOrientationTarget(FQuat(FRotator(0.0f, 0.0f, Target)));
 				}
 			}
 		}

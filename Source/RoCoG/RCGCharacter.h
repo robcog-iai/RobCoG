@@ -75,7 +75,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Motion Controller")
 	float PIDMinOutput;
 	
-	// Rotation controller output strength
+	// Hand rotation controller output strength (multiply output velocity)
 	UPROPERTY(EditAnywhere, Category = "Motion Controller")
 	float RotOutStrength;
 	
@@ -112,21 +112,29 @@ public:
 	UFUNCTION()
 	void MoveRight(const float Val);
 	
-	// Handles closing hands
+	// Handles closing the left hand
 	UFUNCTION()
-	void CloseHand(const float Val);
+	void CloseHandLeft(const float Val);
 	
-	// Handles opening hands
+	// Handles opening the left hand
 	UFUNCTION()
-	void OpenHand(const float Val);
+	void OpenHandLeft(const float Val);
+	
+	// Handles closing the left hand
+	UFUNCTION()
+	void CloseHandRight(const float Val);
+
+	// Handles opening the left hand
+	UFUNCTION()
+	void OpenHandRight(const float Val);
+
+	// Callback on collision
+	UFUNCTION()
+	void OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	
 	// Callback on collision
 	UFUNCTION()
-	void LeftOnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-	
-	// Callback on collision
-	UFUNCTION()
-	void RightOnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	void OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	
 	// Switch between grasp types
 	UFUNCTION()
@@ -192,10 +200,4 @@ private:
 	
 	// Bone name to hand limb Map
 	TMap<FName, ERCGHandLimb> BoneNameToLimbMap;
-	
-	// Left grasp active
-	bool bLeftGraspActive;
-	
-	// Left grasp active
-	bool bRightGraspActive;
 };
