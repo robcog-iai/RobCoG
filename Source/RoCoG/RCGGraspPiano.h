@@ -19,8 +19,7 @@ public:
 	~FRCGGraspPiano();
 	
 	// Update the grasping (open/close fingers with the given step)
-	virtual void Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs,
-		const float Step) override;
+	virtual void Update(const float Step) override;
 
 private:
 	// Set active finger, return true if succesfull

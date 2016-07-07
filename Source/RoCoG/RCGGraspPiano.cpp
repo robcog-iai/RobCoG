@@ -15,6 +15,9 @@ FRCGGraspPiano::FRCGGraspPiano(TMultiMap<ERCGHandLimb, FConstraintInstance*>& Fi
 {
 	// Set default state
 	State = EGraspState::Free;
+
+	// Set the fingers to control
+	FingerTypeToConstraintsMMap = FingerTypeToConstrs;
 	
 	// Set the finger states
 	for (const auto TypeToConstr : FingerTypeToConstrs)
@@ -41,8 +44,7 @@ FRCGGraspPiano::~FRCGGraspPiano()
 }
 
 // Update grasping
-void FRCGGraspPiano::Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs,
-	const float Step)
+void FRCGGraspPiano::Update(const float Step)
 {
 	// Lambda function for updating grasping
 	auto FingerUpdateLambda = [&](TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrsLambda,
@@ -86,14 +88,14 @@ void FRCGGraspPiano::Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& Finge
 		if (FingerToStateMap[ActiveFinger] == EGraspState::Free)
 		{
 			// Apply movement to the active finger
-			FingerUpdateLambda(FingerTypeToConstrs, ActiveFinger);
+			FingerUpdateLambda(FingerTypeToConstraintsMMap, ActiveFinger);
 		}
 		else if (FingerTypesArr.IsValidIndex(++ActiveFingerIdx))
 		{
 			// Set active finger
 			SetActiveFinger(ActiveFingerIdx);
 			// Apply movement to the active finger
-			FingerUpdateLambda(FingerTypeToConstrs, ActiveFinger);
+			FingerUpdateLambda(FingerTypeToConstraintsMMap, ActiveFinger);
 		}
 		else
 		{

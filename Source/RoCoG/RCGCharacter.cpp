@@ -128,10 +128,6 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Make sure collision hit events are enabled on the hands
 	LeftHand->SetNotifyRigidBodyCollision(true);
 	RightHand->SetNotifyRigidBodyCollision(true);
-
-	// Initialize grasp type
-	LeftGrasp = new FRCGGrasp(LFingerTypeToConstrs);
-	RightGrasp = new FRCGGrasp(RFingerTypeToConstrs);
 }
 
 // Called when the game starts or when spawned
@@ -254,6 +250,10 @@ void ARCGCharacter::BeginPlay()
 	RightCurrLoc = RightHand->GetBoneLocation(RightControlBoneName);
 	RightCurrQuat = RightHand->GetBoneQuaternion(RightControlBoneName);
 
+	// Initialize grasp type
+	LeftGrasp = new FRCGGrasp(LFingerTypeToConstrs);
+	RightGrasp = new FRCGGrasp(RFingerTypeToConstrs);
+
 	// Collision callbacks for the hands
 	LeftHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitLeft);
 	RightHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitRight);
@@ -334,6 +334,9 @@ void ARCGCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	InputComponent->BindAxis("CloseHandLeft", this, &ARCGCharacter::CloseHandLeft);
 	InputComponent->BindAxis("OpenHandRight", this, &ARCGCharacter::OpenHandRight);
 	InputComponent->BindAxis("CloseHandRight", this, &ARCGCharacter::CloseHandRight);
+	// Bind hand attach
+	InputComponent->BindAction("AttachHandLeft", IE_Released, this, &ARCGCharacter::AttachHandLeft);
+	InputComponent->BindAction("AttachHandRight", IE_Released, this, &ARCGCharacter::AttachHandRight);
 	// TODO TEST
 	// Set up grasp switch
 	InputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &ARCGCharacter::OnSwitchGrasp);
@@ -377,9 +380,9 @@ void ARCGCharacter::CloseHandLeft(const float AxisValue)
 	{
 		return;
 	}
-
+	
 	// Update grasping
-	LeftGrasp->Update(LFingerTypeToConstrs, 0.5f);
+	LeftGrasp->Update(0.5 * AxisValue);
 }
 
 // Called to bind functionality to input
@@ -391,8 +394,13 @@ void ARCGCharacter::OpenHandLeft(const float AxisValue)
 		return;
 	}
 
+	if (LeftGrasp->State != EGraspState::Free)
+	{
+		LeftGrasp->FreeFingers();
+	}
+
 	// Update grasping
-	LeftGrasp->Update(LFingerTypeToConstrs, -0.5f);
+	LeftGrasp->Update(-0.5 * AxisValue );
 }
 
 // Called to bind functionality to input
@@ -404,7 +412,7 @@ void ARCGCharacter::CloseHandRight(const float AxisValue)
 	}
 
 	// Update grasping
-	RightGrasp->Update(RFingerTypeToConstrs, 0.5f);
+	RightGrasp->Update(0.5 * AxisValue);
 }
 
 // Called to bind functionality to input
@@ -416,56 +424,51 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 		return;
 	}
 
+	if (RightGrasp->State != EGraspState::Free)
+	{
+		RightGrasp->FreeFingers();
+	}
+
 	// Update grasping
-	RightGrasp->Update(RFingerTypeToConstrs, -0.5f);
+	RightGrasp->Update(-0.5 * AxisValue);
 }
 
+// Attach grasped object to hand
+void ARCGCharacter::AttachHandLeft()
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Attach left!"));
+}
 
-// Collision callback
+// Attach grasped object to hand
+void ARCGCharacter::AttachHandRight()
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Attach right!"));
+}
+
+// Hand collision callback
 void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("**LEFT** SelfComp: %s, OtherActor: %s, OtherComp: %s"),
-	//	*SelfComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
-
-	//UE_LOG(LogTemp, Warning, TEXT("BoneName: %s, ts: %f"), *Hit.BoneName.ToString(), GetWorld()->GetDeltaSeconds());
-
 	ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
 
-	if (Limb != nullptr)
+	if (Limb != nullptr) //TODO ignore selfcollision
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", *Limb));
+		UE_LOG(LogTemp, Warning, TEXT("Left Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", *Limb));
 		
 		LeftGrasp->BlockFinger(*Limb);
 	}
-
-
-	//UE_LOG(LogTemp, Warning, TEXT("HIT %s"), *Hit.BoneName.ToString());
-
-	////ERCGHandLimb Limb = BoneNameToLimbMap.Find(Hit.BoneName);
-
-	//ERCGHandLimb* Limb2 = BoneNameToLimbMap.Find(Hit.BoneName);
-
-	//if (BoneNameToLimbMap.Contains(Hit.BoneName))
-	//{
-	//	ERCGHandLimb Limb = BoneNameToLimbMap[Hit.BoneName];
-	//	UE_LOG(LogTemp, Warning, TEXT("CONTAINS"));
-
-	//	UE_LOG(LogTemp, Warning, TEXT("Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", Limb));
-
-	//}
 }
 
-// Collision callback
+// Hand collision callback
 void ARCGCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("**RIGHT** SelfComp: %s, OtherActor: %s, OtherComp: %s"),
-	//	*SelfComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName());
+	ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
 
-	//	*SelfComp->GetName(), *OtherActor->GetName(), *OtherComp->GetName(), *Hit.ToString());
-	//UE_LOG(LogTemp, Warning, TEXT("OtherActor: %s, OtherComp: %s, Hit: %s"),
-	//	*OtherActor->GetName(), *OtherComp->GetName(), *Hit.ToString());
+	if (Limb != nullptr)//TODO ignore selfcollision
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Right Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", *Limb));
 
-	//UE_LOG(LogTemp, Warning, TEXT("BoneName: %s, ts: %f"), *Hit.BoneName.ToString(), GetWorld()->GetDeltaSeconds());
+		RightGrasp->BlockFinger(*Limb);
+	}
 }
 
 // Swith between grasping styles
@@ -473,6 +476,6 @@ void ARCGCharacter::OnSwitchGrasp()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Switch!"));
 
-	LeftGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(LFingerTypeToConstrs));
-	RightGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(RFingerTypeToConstrs));
+	//LeftGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(LFingerTypeToConstrs));
+	//RightGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(RFingerTypeToConstrs));
 }

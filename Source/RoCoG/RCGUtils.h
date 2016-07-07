@@ -2,20 +2,6 @@
 #include "RoCoG.h"
 #include "RCGUtils.generated.h"
 
-
-/** Enum indicating the finger type */
-UENUM(BlueprintType)
-enum class ERCGHandLimb : uint8
-{
-	Thumb		UMETA(DisplayName = "Thumb"),
-	Index		UMETA(DisplayName = "Index"),
-	Middle		UMETA(DisplayName = "Middle"),
-	Ring		UMETA(DisplayName = "Ring"),
-	Pinky		UMETA(DisplayName = "Pinky"),
-	Palm		UMETA(DisplayName = "Palm")
-};
-
-
 /** Utils */
 USTRUCT()
 struct FRCGUtils

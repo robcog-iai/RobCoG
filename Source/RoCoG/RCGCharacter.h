@@ -128,6 +128,14 @@ public:
 	UFUNCTION()
 	void OpenHandRight(const float Val);
 
+	// Attach grasped object to hand
+	UFUNCTION()
+	void AttachHandLeft();
+
+	// Attach grasped object to hand
+	UFUNCTION()
+	void AttachHandRight();
+
 	// Callback on collision
 	UFUNCTION()
 	void OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);

@@ -8,19 +8,29 @@ FRCGGrasp::FRCGGrasp()
 {
 	// Set default state
 	State = EGraspState::Free;
-
-	// Set constraints target
-	Target = 0.0f;
 }
 
 // Set default values 
-FRCGGrasp::FRCGGrasp(TMultiMap<ERCGHandLimb, FConstraintInstance*>& /*FingerTypeToConstrs*/)
+FRCGGrasp::FRCGGrasp(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs)
 {
+	// Set the fingers to control
+	FingerTypeToConstraintsMMap = FingerTypeToConstrs;
+
 	// Set default state
 	State = EGraspState::Free;
 
-	// Set constraints target
-	Target = 0.0f;
+	// Set every finger default target
+	// This iterates every finger multiple types, since it is a multimap
+	for (const auto FingerToConstr : FingerTypeToConstraintsMMap)
+	{
+		// Get the finger type
+		const ERCGHandLimb FingerType = FingerToConstr.Key;
+		// Set finger target
+		FingerToTargetMap.Emplace(FingerType, 0.0f);
+	}
+
+	// Set prev step as a positive value (opening hand)
+	PrevStep = 0.1;
 }
 
 // Destructor
@@ -29,42 +39,52 @@ FRCGGrasp::~FRCGGrasp()
 }
 
 // Update grasping
-void FRCGGrasp::Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs,
-	const float Step)
+void FRCGGrasp::Update(const float Step)
 {
-	// Lambda function for updating grasping
-	auto GraspUpdateLambda = [&](TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrsLambda)
+	auto GraspUpdateLambda = [&](const float LambStep)
 	{
-		// Iterate the finger type to constraints (joints) map
-		for (const auto& TypeToConstr : FingerTypeToConstrsLambda)
+		// Iterate through all the fingers
+		for (auto FingerToConstrs : FingerToTargetMap)
 		{
-			// Get finger type
-			const ERCGHandLimb Type = TypeToConstr.Key;
+			// Finger type
+			const ERCGHandLimb Finger = FingerToConstrs.Key;
 
 			// Skip iteration if finger is blocked 
-			if (BlockedFingers.Contains(Type))
+			if (BlockedFingers.Contains(Finger))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Blocked Skipping %s"), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", Type));
 				continue;
 			}
 
-			// Get finger constraints array
-			TArray<FConstraintInstance*> FingerConstrArr;
-			FingerTypeToConstrsLambda.MultiFind(Type, FingerConstrArr);
+			// Get and update finger target
+			const float Target = FingerToTargetMap[Finger] += LambStep;
 
-			// Apply position to the current finger types constraints
+			// Get the fingers constraints array
+			TArray<FConstraintInstance*> FingerConstrArr;
+			FingerTypeToConstraintsMMap.MultiFind(Finger, FingerConstrArr);
+
+			// Apply position to the current finger's constraints
 			for (FConstraintInstance* Constr : FingerConstrArr)
 			{
-				// get the limit of the constraint
-				const float ConstrLimit = Constr->TwistLimitAngle;
+				// Get the limit of the constraint
+				const float ConstrLimit = Constr->Swing2LimitAngle;
 				// Apply orientation target if constraints are not violated
 				if (Target > ConstrLimit)
 				{
-					State = EGraspState::Closed;
+					// The finger reached it's limit, mark it blocked
+					FRCGGrasp::BlockFinger(Finger);
+					// Set it's taget to the contsraint limit,
+					// otherwise the value might still be over the limit in the next tick,
+					// thus blocking the fingers again
+					FingerToTargetMap[Finger] = ConstrLimit;
 				}
 				else if (Target < - ConstrLimit)
 				{
-					State = EGraspState::Opened;
+					// The finger reached it's limit, mark it blocked
+					FRCGGrasp::BlockFinger(Finger);
+					// Set it's taget to the contsraint limit,
+					// otherwise the value might still be over the limit in the next tick,
+					// thus blocking the fingers again
+					FingerToTargetMap[Finger] = - ConstrLimit;
 				}
 				else
 				{
@@ -73,43 +93,51 @@ void FRCGGrasp::Update(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerType
 			}
 		}
 	};
-	
 
 	// Check grasping states in order to apply/or not the relevant movement
 	if (State == EGraspState::Free)
 	{
-		// Update target
-		Target += Step;
+		// If the current and the previous step are positive (did not change)
+		if (Step * PrevStep >= 0)
+		{
+			//UE_LOG(LogTemp, Warning, TEXT("\tPOS %f"), Step * PrevStep);
+			// Update target
+			GraspUpdateLambda(Step);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("\tNEG %f"), Step * PrevStep);
 
-		// Apply any movement
-		GraspUpdateLambda(FingerTypeToConstrs);
+			// The orientation of the movement changed, free blocked fingers
+			FRCGGrasp::FreeFingers();
+			// Update target
+			GraspUpdateLambda(Step);
+		}
 	}
-	else if (State == EGraspState::Closed && Step < 0)
-	{
-		// Update target
-		Target += Step;
+	//else if (State == EGraspState::Closed && Step < 0)
+	//{
+	//	// Set state to free and apply opening movement
+	//	State = EGraspState::Free;
 
-		// Set state to free and apply opening movement
-		State = EGraspState::Free;
-		GraspUpdateLambda(FingerTypeToConstrs);
+	//	// Update target
+	//	GraspUpdateLambda(Step);
+	//}
+	//else if (State == EGraspState::Opened && Step > 0)
+	//{
+	//	// Set state to free and apply opening movement
+	//	State = EGraspState::Free;
 
-	}
-	else if (State == EGraspState::Opened && Step > 0)
-	{
-		// Update target
-		Target += Step;
+	//	// Update target
+	//	GraspUpdateLambda(Step);
+	//}
 
-		// Set state to free and apply closing movement
-		State = EGraspState::Free;
-		GraspUpdateLambda(FingerTypeToConstrs);
-	}
+	// Update the prevous step (used for checking open/close variation)
+	PrevStep = Step;
 }
 
-// Add finger to the blocked ones (grasping will have no effect on it)
+// Block the given finger at its current target
 void FRCGGrasp::BlockFinger(ERCGHandLimb Finger)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Block test"));
-
 	// Add unique
 	if (!BlockedFingers.Contains(Finger))
 	{
@@ -121,14 +149,15 @@ void FRCGGrasp::BlockFinger(ERCGHandLimb Finger)
 	}
 }
 
-// Remove finger from the blocked ones (grasping will effect it)
+// Free finger
 void FRCGGrasp::FreeFinger(ERCGHandLimb Finger)
-{
+{	
 	BlockedFingers.Remove(Finger);
 }
 
 // Free all fingers
 void FRCGGrasp::FreeFingers()
 {
+	State = EGraspState::Free;
 	BlockedFingers.Empty();
 }
