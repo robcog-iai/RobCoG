@@ -208,4 +208,20 @@ private:
 	
 	// Bone name to hand limb Map
 	TMap<FName, ERCGHandLimb> BoneNameToLimbMap;
+
+	// Grasp is idle (no input from controller)
+	bool bLeftGraspIdle;
+
+	// Grasp is idle (no input from controller)
+	bool bRightGraspIdle;
+
+	// Store a map of components in contact with fingers,
+	// used for reasoning on what objects to attach to the hand
+	// (e.g. Cup : Index, Middle, Pinky, Thumb; Table : Palm; -> Attach Cup )
+	TMultiMap<AActor*, ERCGHandLimb> LeftHitActorToFingerMMap;
+
+	// Store a map of components in contact with fingers,
+	// used for reasoning on what objects to attach to the hand
+	// (e.g. Cup : Index, Middle, Pinky, Thumb; Table : Palm; -> Attach Cup )
+	TMultiMap<AActor*, ERCGHandLimb> RightHitActorToFingerMMap;
 };

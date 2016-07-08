@@ -7,7 +7,7 @@
 FRCGGrasp::FRCGGrasp()
 {
 	// Set default state
-	State = EGraspState::Free;
+	SetState(ERCGGraspState::Free);
 }
 
 // Set default values 
@@ -17,7 +17,7 @@ FRCGGrasp::FRCGGrasp(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeTo
 	FingerTypeToConstraintsMMap = FingerTypeToConstrs;
 
 	// Set default state
-	State = EGraspState::Free;
+	SetState(ERCGGraspState::Free);
 
 	// Set every finger default target
 	// This iterates every finger multiple types, since it is a multimap
@@ -94,59 +94,53 @@ void FRCGGrasp::Update(const float Step)
 		}
 	};
 
-	// Check grasping states in order to apply/or not the relevant movement
-	if (State == EGraspState::Free)
+	// If the curr and prev step have the same sign, 
+	// the grasping state has not changed (e.g. still closing, still opening)
+	if (Step * PrevStep >= 0)
 	{
-		// If the current and the previous step are positive (did not change)
-		if (Step * PrevStep >= 0)
+		// Ignore movements if state is blocked or attached
+		if ((GraspState != ERCGGraspState::Blocked) || (GraspState != ERCGGraspState::Attached))
 		{
-			//UE_LOG(LogTemp, Warning, TEXT("\tPOS %f"), Step * PrevStep);
 			// Update target
 			GraspUpdateLambda(Step);
-		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("\tNEG %f"), Step * PrevStep);
 
-			// The orientation of the movement changed, free blocked fingers
-			FRCGGrasp::FreeFingers();
-			// Update target
-			GraspUpdateLambda(Step);
+			// If all the fingers are blocked set state as blocked
+			if (BlockedFingers.Num() == FingerToTargetMap.Num())
+			{
+				SetState(ERCGGraspState::Blocked);
+			}
 		}
 	}
-	//else if (State == EGraspState::Closed && Step < 0)
-	//{
-	//	// Set state to free and apply opening movement
-	//	State = EGraspState::Free;
+	else
+	{
+		// The orientation of the movement changed, free blocked fingers
+		FRCGGrasp::FreeFingers();
+		// Set state to free
+		SetState(ERCGGraspState::Free);
+		// Update target
+		GraspUpdateLambda(Step);
+	}
 
-	//	// Update target
-	//	GraspUpdateLambda(Step);
-	//}
-	//else if (State == EGraspState::Opened && Step > 0)
-	//{
-	//	// Set state to free and apply opening movement
-	//	State = EGraspState::Free;
-
-	//	// Update target
-	//	GraspUpdateLambda(Step);
-	//}
-
-	// Update the prevous step (used for checking open/close variation)
+	// Update the previous step (used for checking open/close variation)
 	PrevStep = Step;
+}
+
+// Set the grasp state
+void FRCGGrasp::SetState(const ERCGGraspState State)
+{
+	GraspState = State;
+}
+
+// Get the grasp state
+ERCGGraspState FRCGGrasp::GetState()
+{
+	return GraspState;
 }
 
 // Block the given finger at its current target
 void FRCGGrasp::BlockFinger(ERCGHandLimb Finger)
 {
-	// Add unique
-	if (!BlockedFingers.Contains(Finger))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ADD BLOCK FINGER"));
-		BlockedFingers.Add(Finger);
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Is already in the blocked fingers container"));
-	}
+	BlockedFingers.AddUnique(Finger);
 }
 
 // Free finger
@@ -158,6 +152,11 @@ void FRCGGrasp::FreeFinger(ERCGHandLimb Finger)
 // Free all fingers
 void FRCGGrasp::FreeFingers()
 {
-	State = EGraspState::Free;
 	BlockedFingers.Empty();
+}
+
+// Check if finger is free
+bool FRCGGrasp::IsFingerBlocked(const ERCGHandLimb Finger)
+{
+	return BlockedFingers.Contains(Finger);
 }

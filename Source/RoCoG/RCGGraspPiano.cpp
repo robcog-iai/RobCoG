@@ -7,14 +7,14 @@
 FRCGGraspPiano::FRCGGraspPiano()
 {
 	// Set default state
-	State = EGraspState::Free;
+	SetState(ERCGGraspState::Free);
 }
 
 // Set default values
 FRCGGraspPiano::FRCGGraspPiano(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs)
 {
 	// Set default state
-	State = EGraspState::Free;
+	SetState(ERCGGraspState::Free);
 
 	// Set the fingers to control
 	FingerTypeToConstraintsMMap = FingerTypeToConstrs;
@@ -27,7 +27,7 @@ FRCGGraspPiano::FRCGGraspPiano(TMultiMap<ERCGHandLimb, FConstraintInstance*>& Fi
 		// Add type to the array
 		FingerTypesArr.Add(Type);
 		// Set finger state
-		FingerToStateMap.Add(Type, EGraspState::Free);
+		FingerToStateMap.Add(Type, ERCGGraspState::Free);
 		// Set finger target 
 		FingerToTargetMap.Add(Type, 0.0f);
 	}
@@ -65,11 +65,11 @@ void FRCGGraspPiano::Update(const float Step)
 			// Apply orientation target if constraints are not violated
 			if (CurrFingerTarget > ConstrLimit)
 			{
-				FingerToStateMap[Type] = EGraspState::Closed;
+				FingerToStateMap[Type] = ERCGGraspState::Closed;
 			}
 			else if (CurrFingerTarget < - ConstrLimit)
 			{
-				FingerToStateMap[Type] = EGraspState::Opened;
+				FingerToStateMap[Type] = ERCGGraspState::Opened;
 			}
 			else
 			{
@@ -85,7 +85,7 @@ void FRCGGraspPiano::Update(const float Step)
 		FingerToTargetMap[ActiveFinger] += Step;
 
 		// Check if the active finger is in state free
-		if (FingerToStateMap[ActiveFinger] == EGraspState::Free)
+		if (FingerToStateMap[ActiveFinger] == ERCGGraspState::Free)
 		{
 			// Apply movement to the active finger
 			FingerUpdateLambda(FingerTypeToConstraintsMMap, ActiveFinger);
@@ -105,23 +105,23 @@ void FRCGGraspPiano::Update(const float Step)
 	};
 
 	// Check grasping states in order to apply/or not the relevant movement
-	if (State == EGraspState::Free)
+	if (State == ERCGGraspState::Free)
 	{
 		ChooseFingerLambda();
 	}
-	else if (State == EGraspState::Closed && Step < 0)
+	else if (State == ERCGGraspState::Closed && Step < 0)
 	{
 		// Set state to free and apply opening movement
-		State = EGraspState::Free;
+		State = ERCGGraspState::Free;
 
 		ActiveFingerIdx = 0;
 
 		ChooseFingerLambda();
 	}
-	else if (State == EGraspState::Opened && Step > 0)
+	else if (State == ERCGGraspState::Opened && Step > 0)
 	{
 		// Set state to free and apply closing movement
-		State = EGraspState::Free;
+		State = ERCGGraspState::Free;
 
 		ActiveFingerIdx = 0;
 

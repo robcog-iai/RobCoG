@@ -18,5 +18,3 @@ void ARCGGameMode::StartPlay()
 
 	StartMatch();
 }
-
-

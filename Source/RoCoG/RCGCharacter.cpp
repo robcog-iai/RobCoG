@@ -12,8 +12,15 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//TODO separate control and grasp into two classes
+	// set all their values here in local variables and then load in their constructor
+
 	// Visualize motion controller debug arrows
 	bVisTargetArrows = true;
+
+	// Grasp idle
+	bLeftGraspIdle = true;
+	bRightGraspIdle = true;
 
 	// Bone names
 	LeftControlBoneName = FName("palm_l");
@@ -21,7 +28,7 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// TODO check that bones exist (in begin play)
 	// Left hands finger collision (sensor) names
-	LeftCollisionBoneNames.Add(FName("palm_l"));
+	LeftCollisionBoneNames.Add(FName("palm_l"));//TODO check if palm needed
 	LeftCollisionBoneNames.Add(FName("index_03_l"));
 	LeftCollisionBoneNames.Add(FName("middle_03_l"));
 	LeftCollisionBoneNames.Add(FName("ring_03_l"));
@@ -359,7 +366,7 @@ void ARCGCharacter::MoveForward(const float Value)
 		}
 		// add movement in that direction
 		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-		AddMovementInput(Direction, Value * 0.1);
+		AddMovementInput(Direction, Value);
 	}
 }
 
@@ -372,7 +379,7 @@ void ARCGCharacter::MoveRight(const float Value)
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
 		// add movement in that direction
-		AddMovementInput(Direction, Value * 0.1);
+		AddMovementInput(Direction, Value);
 	}
 }
 
@@ -381,8 +388,13 @@ void ARCGCharacter::CloseHandLeft(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
+		// Grasp action inactive
+		bLeftGraspIdle = true;
 		return;
 	}
+
+	// Grasp action active
+	bLeftGraspIdle = false;
 	
 	// Update grasping
 	LeftGrasp->Update(0.5 * AxisValue);
@@ -394,13 +406,14 @@ void ARCGCharacter::OpenHandLeft(const float AxisValue)
 	if (AxisValue == 0)
 	{
 		// Grasp action inactive
+		bLeftGraspIdle = true;		
 		return;
 	}
+	// Grasp action active
+	bLeftGraspIdle = false;
 
-	if (LeftGrasp->State != EGraspState::Free)
-	{
-		LeftGrasp->FreeFingers();
-	}
+	// Free the finger collisions
+	LeftHitActorToFingerMMap.Empty();
 
 	// Update grasping
 	LeftGrasp->Update(-0.5 * AxisValue );
@@ -411,8 +424,12 @@ void ARCGCharacter::CloseHandRight(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
+		// Grasp action inactive
+		bRightGraspIdle = true;
 		return;
 	}
+	// Grasp action active
+	bRightGraspIdle = false;
 
 	// Update grasping
 	RightGrasp->Update(0.5 * AxisValue);
@@ -424,13 +441,11 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 	if (AxisValue == 0)
 	{
 		// Grasp action inactive
+		bRightGraspIdle = true;
 		return;
 	}
-
-	if (RightGrasp->State != EGraspState::Free)
-	{
-		RightGrasp->FreeFingers();
-	}
+	// Grasp action active
+	bRightGraspIdle = false;
 
 	// Update grasping
 	RightGrasp->Update(-0.5 * AxisValue);
@@ -439,7 +454,123 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 // Attach grasped object to hand
 void ARCGCharacter::AttachHandLeft()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Attach left!"));
+	// Attach object only if the state is blocked
+	if (LeftGrasp->GetState() == ERCGGraspState::Blocked)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Grasp by attachment left!"));
+		
+		// Map colliding component with the number of appearance
+		TMap<AActor*, uint8> ActorToCount;
+
+		// Iterate and count the colliding actors
+		for (const auto ActorToFinger : LeftHitActorToFingerMMap)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor->Finger: %s -> %s"),
+				*ActorToFinger.Key->GetName(),
+				*FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", ActorToFinger.Value));
+
+			// If the map already contains the actor
+			if (ActorToCount.Contains(ActorToFinger.Key))
+			{
+				// Increase the count
+				ActorToCount[ActorToFinger.Key]++;
+			}
+			else
+			{
+				// Add actor to map, set count to 1
+				ActorToCount.Add(ActorToFinger.Key, 1);
+			}
+		}
+
+		// Sort the map (most frequent actor first)
+		ActorToCount.ValueSort([](const uint8 A, const uint8 B)
+		{
+			return A > B;
+		});
+
+		// If the count is enough, attach actor to hand
+		for (const auto ActToCount : ActorToCount)
+		{
+			if (ActToCount.Value > 2)
+			{
+				AActor* AttachParentBefore = ActToCount.Key->GetAttachParentActor();
+				if (AttachParentBefore != nullptr)
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentBefore->GetName());
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: NULLTPR"));
+				}
+
+
+
+				ActToCount.Key->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
+
+
+				AActor* AttachParentAfter = ActToCount.Key->GetAttachParentActor();
+				if (AttachParentAfter != nullptr)
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentAfter->GetName());
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Attached parent name after: NULLTPR"));
+				}
+				
+				USceneComponent* HandAttachParent = LeftHand->AttachParent;
+				if (HandAttachParent != nullptr)
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Hand attach parent: %s"), *HandAttachParent->GetName());
+				}
+				else
+				{
+					UE_LOG(LogTemp, Warning, TEXT("Hand attach parent name: NULLTPR"));
+				}
+
+				UE_LOG(LogTemp, Warning, TEXT("ATTACH: %s -> %i, attach comp: %s"),
+					*ActToCount.Key->GetName(),
+					ActToCount.Value,
+					*LeftHand->GetName());
+
+				// Attach actor to the hand
+				//ActToCount.Key->GetDefaultAttachComponent()->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
+
+				//LeftHand->AttachToComponent(ActToCount.Key->GetDefaultAttachComponent(),
+				//	FAttachmentTransformRules::KeepWorldTransform);
+
+			}
+			break;
+		}
+
+		
+		for (const auto ActToCount : ActorToCount)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Actor->Count: %s -> %i, attach comp: %s"),
+				*ActToCount.Key->GetName(),
+				ActToCount.Value,
+				*ActToCount.Key->GetDefaultAttachComponent()->GetName());
+
+			
+		}
+
+
+
+		for (const auto ActToCount : ActorToCount)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Sorted Actor->Count: %s -> %i"),
+				*ActToCount.Key->GetName(),
+				ActToCount.Value);
+		}
+
+
+
+		// Set state to attached
+		LeftGrasp->SetState(ERCGGraspState::Attached);
+
+		// Free the finger collisions
+		LeftHitActorToFingerMMap.Empty();
+	}
 }
 
 // Attach grasped object to hand
@@ -451,27 +582,41 @@ void ARCGCharacter::AttachHandRight()
 // Hand collision callback
 void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
-
-	if (Limb != nullptr) //TODO ignore selfcollision
+	// Return if grasp is idle (button not pressed)
+	if (bLeftGraspIdle)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Left Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", *Limb));
-		
-		LeftGrasp->BlockFinger(*Limb);
+		return;
+	}
+	
+	// Check collisions if grasp state is free, 
+	if (LeftGrasp->GetState() == ERCGGraspState::Free)
+	{		
+		// Get the finger in collision
+		const ERCGHandLimb* Finger = BoneNameToLimbMap.Find(Hit.BoneName);
+
+		// Block finger if free, and not colliding with self
+		if ((Finger != nullptr) && (!LeftGrasp->IsFingerBlocked(*Finger)) && (SelfComp != OtherComp))
+		{
+			// Block finger
+			LeftGrasp->BlockFinger(*Finger);
+
+			// Add colliding component to the map
+			LeftHitActorToFingerMMap.Add(OtherActor, *Finger);
+		}
 	}
 }
 
 // Hand collision callback
 void ARCGCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
+	//// Get the hand part in collision
+	//ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
 
-	if (Limb != nullptr)//TODO ignore selfcollision
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Right Blocked %s, Limb: %s"), *Hit.BoneName.ToString(), *FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", *Limb));
-
-		RightGrasp->BlockFinger(*Limb);
-	}
+	//// Check that grasp is not idle, and the don't block self colliding fingers colliding
+	//if ((!bRightGraspIdle) && (Limb != nullptr) && (SelfComp != OtherComp))
+	//{
+	//	RightGrasp->BlockFinger(*Limb);
+	//}
 }
 
 // Swith between grasping styles

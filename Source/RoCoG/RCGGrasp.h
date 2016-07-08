@@ -16,13 +16,15 @@ enum class ERCGHandLimb : uint8
 };
 
 /** Enum indicating the grasp state */
-enum class EGraspState : uint8
+enum class ERCGGraspState : uint8
 {
 	Opened		UMETA(DisplayName = "Opened"),
 	Opening		UMETA(DisplayName = "Opening"),
 	Closed		UMETA(DisplayName = "Closed"),
-	Closing		UMETA(DisplayName = "Closed"),
+	Closing		UMETA(DisplayName = "Closing"),
 	Free		UMETA(DisplayName = "Free"),
+	Blocked		UMETA(DisplayName = "Blocked"),
+	Attached	UMETA(DisplayName = "Attached"),
 };
 
 /**
@@ -36,46 +38,46 @@ public:
 
 	// Constructor with access to the fingers and the constraints
 	FRCGGrasp(TMultiMap<ERCGHandLimb, FConstraintInstance*>& /*FingerTypeToConstrs*/);
-	
+
 	// Destructor
 	~FRCGGrasp();
 
 	// Update the grasping (open/close fingers with the given step)
 	virtual void Update(const float Step);
 
+	// Set the state of the grasp
+	void SetState(const ERCGGraspState State);
+
+	// Get the state of the grasp
+	ERCGGraspState GetState();
+
 	// Add finger to the blocked ones (grasping will have no effect on it)
-	void BlockFinger(ERCGHandLimb Finger);
+	void BlockFinger(const ERCGHandLimb Finger);
 
 	// Remove finger from the blocked ones (grasping will effect it)
-	void FreeFinger(ERCGHandLimb Finger);
+	void FreeFinger(const ERCGHandLimb Finger);
 
 	// Free all fingers
-	void FreeFingers();	
+	void FreeFingers();
 
-	// Grasping state
-	EGraspState State;
+	// Check if finger is free
+	bool IsFingerBlocked(const ERCGHandLimb Finger);
 
 protected:
+	// Grasping state
+	ERCGGraspState GraspState;
+
 	// Finger types and their constraints as multi map (e.g Index : index_01_l, index_02_l)
 	TMultiMap<ERCGHandLimb, FConstraintInstance*> FingerTypeToConstraintsMMap;
 
 	// Map hand fingers to their target
 	TMap<ERCGHandLimb, float> FingerToTargetMap;
 
-	// Map hand fingers to their limits
-	TMap<ERCGHandLimb, float> FingerToUpperLimitMap;
-
-	// Map hand fingers to their limits
-	TMap<ERCGHandLimb, float> FingerToLowerLimitMap;
-
 	// Blocked fingers
-	TSet<ERCGHandLimb> BlockedFingers;
+	TArray<ERCGHandLimb> BlockedFingers;
 
 private:
 	// Store the value of the previous step
 	float PrevStep;
-
-	// 
-
 };
 

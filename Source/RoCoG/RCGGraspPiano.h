@@ -26,13 +26,13 @@ private:
 	bool SetActiveFinger(uint8 ActiveFingerIdx);
 
 	// Grasping state
-	EGraspState State;
+	ERCGGraspState State;
 
 	// Fingers targets map
 	TMap<ERCGHandLimb, float> FingerToTargetMap;
 
 	// Finger states map
-	TMap<ERCGHandLimb, EGraspState> FingerToStateMap;
+	TMap<ERCGHandLimb, ERCGGraspState> FingerToStateMap;
 
 	// Array of the finger types //TODO use list
 	TArray<ERCGHandLimb> FingerTypesArr;
