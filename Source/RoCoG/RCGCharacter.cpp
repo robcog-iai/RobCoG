@@ -134,6 +134,9 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 void ARCGCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//TODO check that a physics asset is present
+	//TODO check that all bones exist (return error if not)
 	
 	if (bVisTargetArrows)
 	{
