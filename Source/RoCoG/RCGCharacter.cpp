@@ -18,9 +18,9 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Visualize motion controller debug arrows
 	bVisTargetArrows = true;
 
-	// Grasp idle
-	bLeftGraspIdle = true;
-	bRightGraspIdle = true;
+	// Flag showing if the finger collisions events are enabled or disabled
+	bLeftFingerHitEvents = false;
+	bRightFingerHitEvents = false;
 
 	// Bone names
 	LeftControlBoneName = FName("palm_l");
@@ -214,10 +214,10 @@ void ARCGCharacter::BeginPlay()
 		{
 			// Get the body instance
 			FBodyInstance* BoneBody = Hand->GetBodyInstance(BoneName);
-			// Make sure the body returns hit events
-			BoneBody->bNotifyRigidBodyCollision = true;
-			// Add to map
-			FingerBoneNameToBodyMap.Add(BoneName, BoneBody);
+			// Disable collision notification for now (active only during grasping)
+			BoneBody->SetInstanceNotifyRBCollision(false);
+			// Add the body instance to the map
+			FingerBoneNameToBodyMap.Add(BoneName, Hand->GetBodyInstance(BoneName));
 		}
 		// Return the map
 		return FingerBoneNameToBodyMap;
@@ -387,14 +387,30 @@ void ARCGCharacter::MoveRight(const float Value)
 void ARCGCharacter::CloseHandLeft(const float AxisValue)
 {
 	if (AxisValue == 0)
-	{
-		// Grasp action inactive
-		bLeftGraspIdle = true;
+	{		
+		// Disable finger hit events
+		if (bLeftFingerHitEvents)
+		{
+			for (auto BoneName : LeftCollisionBoneNames)
+			{
+				LeftHand->GetBodyInstance(BoneName)->SetInstanceNotifyRBCollision(false);
+			}
+			// Set finger notification flag
+			bLeftFingerHitEvents = false;
+		}		
 		return;
 	}
 
-	// Grasp action active
-	bLeftGraspIdle = false;
+	// Enable finger hit events
+	if (!bLeftFingerHitEvents)
+	{
+		for (auto BoneName : LeftCollisionBoneNames)
+		{
+			LeftHand->GetBodyInstance(BoneName)->SetInstanceNotifyRBCollision(true);
+		}
+		// Set finger notification flag
+		bLeftFingerHitEvents = true;
+	}
 	
 	// Update grasping
 	LeftGrasp->Update(0.5 * AxisValue);
@@ -405,15 +421,14 @@ void ARCGCharacter::OpenHandLeft(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
-		// Grasp action inactive
-		bLeftGraspIdle = true;		
 		return;
 	}
-	// Grasp action active
-	bLeftGraspIdle = false;
 
-	// Free the finger collisions
-	LeftHitActorToFingerMMap.Empty();
+	// Free the colliding fingers map
+	if (LeftHitActorToFingerMMap.Num() != 0)
+	{
+		LeftHitActorToFingerMMap.Empty();
+	}
 
 	// Update grasping
 	LeftGrasp->Update(-0.5 * AxisValue );
@@ -424,12 +439,29 @@ void ARCGCharacter::CloseHandRight(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
-		// Grasp action inactive
-		bRightGraspIdle = true;
+		// Disable finger hit events
+		if (bRightFingerHitEvents)
+		{
+			for (auto BoneName : RightCollisionBoneNames)
+			{
+				RightHand->GetBodyInstance(BoneName)->SetInstanceNotifyRBCollision(false);
+			}
+			// Set finger notification flag
+			bRightFingerHitEvents = false;
+		}
 		return;
 	}
-	// Grasp action active
-	bRightGraspIdle = false;
+
+	// Enable finger hit events
+	if (!bRightFingerHitEvents)
+	{
+		for (auto BoneName : RightCollisionBoneNames)
+		{
+			RightHand->GetBodyInstance(BoneName)->SetInstanceNotifyRBCollision(true);
+		}
+		// Set finger notification flag
+		bRightFingerHitEvents = true;
+	}
 
 	// Update grasping
 	RightGrasp->Update(0.5 * AxisValue);
@@ -440,12 +472,14 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
-		// Grasp action inactive
-		bRightGraspIdle = true;
 		return;
 	}
-	// Grasp action active
-	bRightGraspIdle = false;
+
+	// Free the colliding fingers map
+	if (RightHitActorToFingerMMap.Num() != 0)
+	{
+		RightHitActorToFingerMMap.Empty();
+	}
 
 	// Update grasping
 	RightGrasp->Update(-0.5 * AxisValue);
@@ -493,45 +527,44 @@ void ARCGCharacter::AttachHandLeft()
 		{
 			if (ActToCount.Value > 2)
 			{
-				AActor* AttachParentBefore = ActToCount.Key->GetAttachParentActor();
-				if (AttachParentBefore != nullptr)
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentBefore->GetName());
-				}
-				else
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: NULLTPR"));
-				}
-
-
-
-				ActToCount.Key->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
-
-
-				AActor* AttachParentAfter = ActToCount.Key->GetAttachParentActor();
-				if (AttachParentAfter != nullptr)
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentAfter->GetName());
-				}
-				else
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Attached parent name after: NULLTPR"));
-				}
+				//AActor* AttachParentBefore = ActToCount.Key->GetAttachParentActor();
+				//if (AttachParentBefore != nullptr)
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentBefore->GetName());
+				//}
+				//else
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: NULLTPR"));
+				//}
 				
-				USceneComponent* HandAttachParent = LeftHand->AttachParent;
-				if (HandAttachParent != nullptr)
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Hand attach parent: %s"), *HandAttachParent->GetName());
-				}
-				else
-				{
-					UE_LOG(LogTemp, Warning, TEXT("Hand attach parent name: NULLTPR"));
-				}
 
-				UE_LOG(LogTemp, Warning, TEXT("ATTACH: %s -> %i, attach comp: %s"),
-					*ActToCount.Key->GetName(),
-					ActToCount.Value,
-					*LeftHand->GetName());
+				//ActToCount.Key->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
+
+
+				//AActor* AttachParentAfter = ActToCount.Key->GetAttachParentActor();
+				//if (AttachParentAfter != nullptr)
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentAfter->GetName());
+				//}
+				//else
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name after: NULLTPR"));
+				//}
+				//
+				//USceneComponent* HandAttachParent = LeftHand->AttachParent;
+				//if (HandAttachParent != nullptr)
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Hand attach parent: %s"), *HandAttachParent->GetName());
+				//}
+				//else
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Hand attach parent name: NULLTPR"));
+				//}
+
+				//UE_LOG(LogTemp, Warning, TEXT("ATTACH: %s -> %i, attach comp: %s"),
+				//	*ActToCount.Key->GetName(),
+				//	ActToCount.Value,
+				//	*LeftHand->GetName());
 
 				// Attach actor to the hand
 				//ActToCount.Key->GetDefaultAttachComponent()->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
@@ -539,6 +572,18 @@ void ARCGCharacter::AttachHandLeft()
 				//LeftHand->AttachToComponent(ActToCount.Key->GetDefaultAttachComponent(),
 				//	FAttachmentTransformRules::KeepWorldTransform);
 
+				//TArray<USceneComponent*> HandComponentsArr;
+				//LeftHand->GetChildrenComponents(true, HandComponentsArr);
+
+				//for (auto Comp : HandComponentsArr)
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Hand descendant component: %s"),
+				//		*Comp->GetName());
+				//}
+
+				// Attach component to the hand
+				//ActToCount.Key->GetDefaultAttachComponent()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
+				
 			}
 			break;
 		}
@@ -581,13 +626,7 @@ void ARCGCharacter::AttachHandRight()
 
 // Hand collision callback
 void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
-	// Return if grasp is idle (button not pressed)
-	if (bLeftGraspIdle)
-	{
-		return;
-	}
-	
+{	
 	// Check collisions if grasp state is free, 
 	if (LeftGrasp->GetState() == ERCGGraspState::Free)
 	{		
@@ -609,14 +648,22 @@ void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor,
 // Hand collision callback
 void ARCGCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//// Get the hand part in collision
-	//ERCGHandLimb* Limb = BoneNameToLimbMap.Find(Hit.BoneName);
+	// Check collisions if grasp state is free, 
+	if (RightGrasp->GetState() == ERCGGraspState::Free)
+	{
+		// Get the finger in collision
+		const ERCGHandLimb* Finger = BoneNameToLimbMap.Find(Hit.BoneName);
 
-	//// Check that grasp is not idle, and the don't block self colliding fingers colliding
-	//if ((!bRightGraspIdle) && (Limb != nullptr) && (SelfComp != OtherComp))
-	//{
-	//	RightGrasp->BlockFinger(*Limb);
-	//}
+		// Block finger if free, and not colliding with self
+		if ((Finger != nullptr) && (!RightGrasp->IsFingerBlocked(*Finger)) && (SelfComp != OtherComp))
+		{
+			// Block finger
+			RightGrasp->BlockFinger(*Finger);
+
+			// Add colliding component to the map
+			RightHitActorToFingerMMap.Add(OtherActor, *Finger);
+		}
+	}
 }
 
 // Swith between grasping styles

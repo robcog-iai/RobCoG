@@ -77,14 +77,14 @@ void FRCGGrasp::Update(const float Step)
 					// thus blocking the fingers again
 					FingerToTargetMap[Finger] = ConstrLimit;
 				}
-				else if (Target < - ConstrLimit)
+				else if (Target < - /*ConstrLimit*/ 5)
 				{
 					// The finger reached it's limit, mark it blocked
 					FRCGGrasp::BlockFinger(Finger);
 					// Set it's taget to the contsraint limit,
 					// otherwise the value might still be over the limit in the next tick,
 					// thus blocking the fingers again
-					FingerToTargetMap[Finger] = - ConstrLimit;
+					FingerToTargetMap[Finger] = - /*ConstrLimit*/ 5;
 				}
 				else
 				{

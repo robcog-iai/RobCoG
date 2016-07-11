@@ -209,11 +209,11 @@ private:
 	// Bone name to hand limb Map
 	TMap<FName, ERCGHandLimb> BoneNameToLimbMap;
 
-	// Grasp is idle (no input from controller)
-	bool bLeftGraspIdle;
+	// Finger hit events enable flag
+	bool bLeftFingerHitEvents;
 
-	// Grasp is idle (no input from controller)
-	bool bRightGraspIdle;
+	// Finger hit events enable flag
+	bool bRightFingerHitEvents;
 
 	// Store a map of components in contact with fingers,
 	// used for reasoning on what objects to attach to the hand
