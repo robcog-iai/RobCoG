@@ -7,7 +7,7 @@
 FRCGGrasp::FRCGGrasp()
 {
 	// Set default state
-	SetState(ERCGGraspState::Free);
+	SetState(ERCGGraspState::Free);	
 }
 
 // Set default values 
@@ -98,8 +98,9 @@ void FRCGGrasp::Update(const float Step)
 	// the grasping state has not changed (e.g. still closing, still opening)
 	if (Step * PrevStep >= 0)
 	{
-		// Ignore movements if state is blocked or attached
-		if ((GraspState != ERCGGraspState::Blocked) || (GraspState != ERCGGraspState::Attached))
+		// Update movements if state differs of blocked and attached
+		//if ((GraspState != ERCGGraspState::Blocked) && (GraspState != ERCGGraspState::Attached))
+		if (GraspState == ERCGGraspState::Free)
 		{
 			// Update target
 			GraspUpdateLambda(Step);
@@ -107,7 +108,7 @@ void FRCGGrasp::Update(const float Step)
 			// If all the fingers are blocked set state as blocked
 			if (BlockedFingers.Num() == FingerToTargetMap.Num())
 			{
-				SetState(ERCGGraspState::Blocked);
+				SetState(ERCGGraspState::Blocked);				
 			}
 		}
 	}
@@ -159,4 +160,15 @@ void FRCGGrasp::FreeFingers()
 bool FRCGGrasp::IsFingerBlocked(const ERCGHandLimb Finger)
 {
 	return BlockedFingers.Contains(Finger);
+}
+
+// Check if finger is free
+FString FRCGGrasp::GetStateAsString()
+{
+	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ERCGGraspState"), true);
+	if (!EnumPtr)
+	{
+		return FString("Invalid");
+	}
+	return EnumPtr->GetEnumName((int32)GraspState);
 }

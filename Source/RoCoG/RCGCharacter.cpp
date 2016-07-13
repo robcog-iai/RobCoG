@@ -5,6 +5,10 @@
 #include "RCGGraspPiano.h" //TODO remove this?
 #include "RCGCharacter.h"
 
+#define PrintLong(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.0, FColor::White,text)
+#define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
+#define PrintRed(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red,text)
+#define PrintGreen(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green,text)
 
 // Sets default values
 ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
@@ -98,6 +102,7 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftMC->Hand = EControllerHand::Left;
 	RightMC->Hand = EControllerHand::Right;
 
+	// TODO check if arrows should be created in begin play
 	// Create left/right target vis arrows
 	LeftTargetArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("LeftVisArrow"));
 	RightTargetArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("RightVisArrow"));
@@ -132,6 +137,53 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftHand->SetupAttachment(MCOffset);
 	RightHand->SetupAttachment(MCOffset);
 
+	// Set default values for the constraint instance
+	FixatingGraspConstraintInstance.SetDisableCollision(true);
+	FixatingGraspConstraintInstance.SetLinearXLimit(ELinearConstraintMotion::LCM_Locked, 0);
+	FixatingGraspConstraintInstance.SetLinearYLimit(ELinearConstraintMotion::LCM_Locked, 0);
+	FixatingGraspConstraintInstance.SetLinearZLimit(ELinearConstraintMotion::LCM_Locked, 0);
+	FixatingGraspConstraintInstance.SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, 0);
+	FixatingGraspConstraintInstance.SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, 0);
+	FixatingGraspConstraintInstance.SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, 0);
+
+	// TODO check if this should be created in begin play 
+	// (if we want a flag to allow fixation grasp)
+	// (then use NewObject<UPhysicsConstraintComponent>(LeftHand)
+	// Create the fixating grasp constraint components
+	LeftGraspFixatingConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("LeftFixatingGraspConstr"));
+	RightGraspFixatingConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("RightFixatingGraspConstr"));
+	///////////////////////////////////////////////////
+	// .CPP
+	// CONSTRUCTOR
+	// Create the physics constraint
+	MConstraintComp = CreateDefaultSubobject<UPhysicsConstraintComponent>(TEXT("MFixatingGraspConstr"));
+	bAttached = false;
+	///////////////////////////////////////////////////
+	// Attach the fixating grasp components to the hands
+	LeftGraspFixatingConstraint->SetupAttachment(LeftHand);
+	RightGraspFixatingConstraint->SetupAttachment(RightHand);
+
+	// Create the static mesh components as fixating grasp helpers
+	LeftFixatingGraspStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LeftFixatingGraspStaticMesh"));
+	RightFixatingGraspStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightFixatingGraspStaticMesh"));
+	GraspHelperStaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GraspHelperStaticMesh"));
+	// Get the static mesh asset
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
+
+	// Attach sphere mesh asset to the components
+	if (SphereMeshAsset.Succeeded())
+	{
+		LeftFixatingGraspStaticMesh->SetStaticMesh(SphereMeshAsset.Object);
+		LeftFixatingGraspStaticMesh->SetWorldScale3D(FVector(0.01f));
+		RightFixatingGraspStaticMesh->SetStaticMesh(SphereMeshAsset.Object);
+		RightFixatingGraspStaticMesh->SetWorldScale3D(FVector(0.01f));
+		GraspHelperStaticMesh->SetStaticMesh(SphereMeshAsset.Object);
+		GraspHelperStaticMesh->SetWorldScale3D(FVector(0.3f));
+	}
+	// Attach components to hand
+	LeftFixatingGraspStaticMesh->SetupAttachment(LeftHand);
+	RightFixatingGraspStaticMesh->SetupAttachment(RightHand);
+	
 	// Make sure collision hit events are enabled on the hands
 	LeftHand->SetNotifyRigidBodyCollision(true);
 	RightHand->SetNotifyRigidBodyCollision(true);
@@ -144,7 +196,7 @@ void ARCGCharacter::BeginPlay()
 
 	//TODO check that a physics asset is present
 	//TODO check that all bones exist (return error if not)
-	
+
 	if (bVisTargetArrows)
 	{
 		// Set arrows to visible
@@ -264,9 +316,69 @@ void ARCGCharacter::BeginPlay()
 	LeftGrasp = new FRCGGrasp(LFingerTypeToConstrs);
 	RightGrasp = new FRCGGrasp(RFingerTypeToConstrs);
 
+	// Set the grasp constraint instance
+	LeftGraspFixatingConstraint->ConstraintInstance = FixatingGraspConstraintInstance;
+	RightGraspFixatingConstraint->ConstraintInstance = FixatingGraspConstraintInstance;
+
 	// Collision callbacks for the hands
 	LeftHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitLeft);
 	RightHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitRight);
+
+
+	/////////////////////////////////////////////////////////////////
+	for (TActorIterator<AStaticMeshActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+	{
+		if (ActorItr->GetName().Equals("CAct1"))
+		{
+			StaticMeshAct1 = *ActorItr;
+			UE_LOG(LogTemp, Warning, TEXT("StaticMeshAct1: %s SET"), *StaticMeshAct1->GetName());
+		}
+		else if (ActorItr->GetName().Equals("CAct2"))
+		{
+			StaticMeshAct2 = *ActorItr;
+			UE_LOG(LogTemp, Warning, TEXT("StaticMeshAct2: %s SET"), *StaticMeshAct2->GetName());
+		}
+		else if (ActorItr->GetName().Equals("GraspCone"))
+		{
+			AttachedConeAct = *ActorItr;
+			UE_LOG(LogTemp, Warning, TEXT("AttachedCone: %s SET"), *AttachedConeAct->GetName());
+		}
+	}
+	for (TActorIterator<ASkeletalMeshActor> SkelActorItr(GetWorld()); SkelActorItr; ++SkelActorItr)
+	{
+		
+		if (SkelActorItr->GetName().Equals("LeftHand_2"))
+		{
+			HandSkelAct = *SkelActorItr;
+			UE_LOG(LogTemp, Warning, TEXT("HandSkelAct: %s SET"), *HandSkelAct->GetName());
+		}
+	}
+
+	//Set Constraint Instance!
+	MConstraintComp->ConstraintInstance = FixatingGraspConstraintInstance;
+	FVector NewLocation = LeftHand->GetComponentLocation() + FVector(0.f, 0.f, 300.f);
+	FRotator Rot = FRotator::ZeroRotator;
+
+	FTransform transf = FTransform();
+	transf.SetLocation(NewLocation);
+
+	GraspHelperStaticMeshAct = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass());
+	//GraspHelperStaticMeshAct = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), transf);
+	//GraspHelperStaticMeshAct = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), &NewLocation, &Rot);
+
+	GraspHelperStaticMeshAct->SetMobility(EComponentMobility::Movable);
+	GraspHelperStaticMeshAct->StaticMeshComponent = GraspHelperStaticMesh;
+	//GraspHelperStaticMeshAct->GetStaticMeshComponent()->SetSimulatePhysics(true);
+	GraspHelperStaticMeshAct->GetStaticMeshComponent()->SetCollisionProfileName(TEXT("BLockAllDynamic"));
+
+
+	GraspHelperStaticMeshAct->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
+	//GraspHelperStaticMeshAct->AttachToActor(HandSkelAct, FAttachmentTransformRules::SnapToTargetIncludingScale);
+	//GraspHelperStaticMeshAct->GetStaticMeshComponent()->SetStaticMesh(MeshAsset);
+	/////////////////////////////////////////////////////////////////
+
+	PrintLong(TEXT("PhysicsConstraint between ASkeletalMeshActor <-> AStaticMeshActor"));
+
 }
 
 // Called every frame
@@ -350,6 +462,7 @@ void ARCGCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompon
 	// TODO TEST
 	// Set up grasp switch
 	InputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &ARCGCharacter::OnSwitchGrasp);
+	InputComponent->BindAction("ConstraintTest", IE_Pressed, this, &ARCGCharacter::OnCreateConstraint);
 }
 
 // Handles moving forward/backward
@@ -423,15 +536,96 @@ void ARCGCharacter::OpenHandLeft(const float AxisValue)
 	{
 		return;
 	}
-
+	
 	// Free the colliding fingers map
 	if (LeftHitActorToFingerMMap.Num() != 0)
 	{
 		LeftHitActorToFingerMMap.Empty();
 	}
 
+	// Detach object if case
+	if (LeftGrasp->GetState() == ERCGGraspState::Attached)
+	{
+		// Break constraint
+		LeftGraspFixatingConstraint->BreakConstraint();
+
+		// Set state to free
+		LeftGrasp->SetState(ERCGGraspState::Free);
+	}
+
 	// Update grasping
-	LeftGrasp->Update(-0.5 * AxisValue );
+	LeftGrasp->Update(- AxisValue );
+}
+
+// Attach grasped object to hand
+void ARCGCharacter::AttachHandLeft()
+{
+	// Attach object only if the state is blocked
+	if (LeftGrasp->GetState() == ERCGGraspState::Blocked)
+	{
+		// Map colliding component with the number of appearance
+		TMap<AActor*, uint8> ActorToCount;
+
+		// Iterate and count the colliding actors
+		for (const auto ActorToFinger : LeftHitActorToFingerMMap)
+		{
+			// If the map already contains the actor
+			if (ActorToCount.Contains(ActorToFinger.Key))
+			{
+				// Increase the count
+				ActorToCount[ActorToFinger.Key]++;
+			}
+			else
+			{
+				// Add actor to map, set count to 1
+				ActorToCount.Add(ActorToFinger.Key, 1);
+			}
+		}
+
+		// Sort the map (most frequent actor first)
+		ActorToCount.ValueSort([](const uint8 A, const uint8 B)
+		{
+			return A > B;
+		});
+
+		// If the count is enough, attach actor to hand
+		for (const auto ActToCount : ActorToCount)
+		{
+			if (ActToCount.Value > 2)
+			{
+				LeftGraspFixatingConstraint->SetWorldLocation(ActToCount.Key->GetActorLocation());
+
+				//LeftGraspFixatingConstraint->SetWorldLocation(LeftHand->GetComponentLocation());
+
+				//for (TActorIterator<AStaticMeshActor> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("ActorItr: %s"), *ActorItr->GetName());
+				//	if (ActorItr->GetName().Equals("SCube3"))
+				//	{
+				//		Sphere = *ActorItr;
+				//		break;
+				//	}
+				//}
+
+				//if (Sphere)
+				//{
+				//	UE_LOG(LogTemp, Warning, TEXT("Sphere name: %s"), *Sphere->GetName());
+				//}
+
+				LeftGraspFixatingConstraint->SetConstrainedComponents(
+					LeftFixatingGraspStaticMesh, NAME_None,
+					Cast<AStaticMeshActor>(ActToCount.Key)->GetStaticMeshComponent(), NAME_None);
+			}
+			break;
+		}
+		
+		// Set state to attached
+		LeftGrasp->SetState(ERCGGraspState::Attached);
+		
+		
+		// Free the finger collisions
+		LeftHitActorToFingerMMap.Empty();
+	}
 }
 
 // Called to bind functionality to input
@@ -481,28 +675,32 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 		RightHitActorToFingerMMap.Empty();
 	}
 
+	// Detach object if case
+	if (RightGrasp->GetState() == ERCGGraspState::Attached)
+	{
+		// Break constraint
+		RightGraspFixatingConstraint->BreakConstraint();
+
+		// Set state to free
+		RightGrasp->SetState(ERCGGraspState::Free);
+	}
+
 	// Update grasping
-	RightGrasp->Update(-0.5 * AxisValue);
+	RightGrasp->Update(- AxisValue);
 }
 
 // Attach grasped object to hand
-void ARCGCharacter::AttachHandLeft()
+void ARCGCharacter::AttachHandRight()
 {
 	// Attach object only if the state is blocked
-	if (LeftGrasp->GetState() == ERCGGraspState::Blocked)
+	if (RightGrasp->GetState() == ERCGGraspState::Blocked)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Grasp by attachment left!"));
-		
 		// Map colliding component with the number of appearance
 		TMap<AActor*, uint8> ActorToCount;
 
 		// Iterate and count the colliding actors
-		for (const auto ActorToFinger : LeftHitActorToFingerMMap)
+		for (const auto ActorToFinger : RightHitActorToFingerMMap)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Actor->Finger: %s -> %s"),
-				*ActorToFinger.Key->GetName(),
-				*FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", ActorToFinger.Value));
-
 			// If the map already contains the actor
 			if (ActorToCount.Contains(ActorToFinger.Key))
 			{
@@ -527,101 +725,19 @@ void ARCGCharacter::AttachHandLeft()
 		{
 			if (ActToCount.Value > 2)
 			{
-				//AActor* AttachParentBefore = ActToCount.Key->GetAttachParentActor();
-				//if (AttachParentBefore != nullptr)
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentBefore->GetName());
-				//}
-				//else
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: NULLTPR"));
-				//}
-				
-
-				//ActToCount.Key->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
-
-
-				//AActor* AttachParentAfter = ActToCount.Key->GetAttachParentActor();
-				//if (AttachParentAfter != nullptr)
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name before: %s"), *AttachParentAfter->GetName());
-				//}
-				//else
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Attached parent name after: NULLTPR"));
-				//}
-				//
-				//USceneComponent* HandAttachParent = LeftHand->AttachParent;
-				//if (HandAttachParent != nullptr)
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Hand attach parent: %s"), *HandAttachParent->GetName());
-				//}
-				//else
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Hand attach parent name: NULLTPR"));
-				//}
-
-				//UE_LOG(LogTemp, Warning, TEXT("ATTACH: %s -> %i, attach comp: %s"),
-				//	*ActToCount.Key->GetName(),
-				//	ActToCount.Value,
-				//	*LeftHand->GetName());
-
-				// Attach actor to the hand
-				//ActToCount.Key->GetDefaultAttachComponent()->AttachToComponent(LeftHand, FAttachmentTransformRules::KeepWorldTransform);
-
-				//LeftHand->AttachToComponent(ActToCount.Key->GetDefaultAttachComponent(),
-				//	FAttachmentTransformRules::KeepWorldTransform);
-
-				//TArray<USceneComponent*> HandComponentsArr;
-				//LeftHand->GetChildrenComponents(true, HandComponentsArr);
-
-				//for (auto Comp : HandComponentsArr)
-				//{
-				//	UE_LOG(LogTemp, Warning, TEXT("Hand descendant component: %s"),
-				//		*Comp->GetName());
-				//}
-
-				// Attach component to the hand
-				//ActToCount.Key->GetDefaultAttachComponent()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepWorldTransform);
-				
+				RightGraspFixatingConstraint->SetConstrainedComponents(
+					Cast<UPrimitiveComponent>(ActToCount.Key->GetRootComponent()), NAME_None,
+					Cast<UPrimitiveComponent>(RightHand), NAME_None);
 			}
 			break;
 		}
 
-		
-		for (const auto ActToCount : ActorToCount)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Actor->Count: %s -> %i, attach comp: %s"),
-				*ActToCount.Key->GetName(),
-				ActToCount.Value,
-				*ActToCount.Key->GetDefaultAttachComponent()->GetName());
-
-			
-		}
-
-
-
-		for (const auto ActToCount : ActorToCount)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Sorted Actor->Count: %s -> %i"),
-				*ActToCount.Key->GetName(),
-				ActToCount.Value);
-		}
-
-
-
 		// Set state to attached
-		LeftGrasp->SetState(ERCGGraspState::Attached);
+		RightGrasp->SetState(ERCGGraspState::Attached);
 
 		// Free the finger collisions
-		LeftHitActorToFingerMMap.Empty();
+		RightHitActorToFingerMMap.Empty();
 	}
-}
-
-// Attach grasped object to hand
-void ARCGCharacter::AttachHandRight()
-{
-	//UE_LOG(LogTemp, Warning, TEXT("Attach right!"));
 }
 
 // Hand collision callback
@@ -673,4 +789,52 @@ void ARCGCharacter::OnSwitchGrasp()
 
 	//LeftGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(LFingerTypeToConstrs));
 	//RightGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(RFingerTypeToConstrs));
+}
+
+// Swith between grasping styles
+void ARCGCharacter::OnCreateConstraint()
+{
+	// Action binding function
+	if (!bAttached)
+	{
+		//Set World Location
+		//MConstraintComp->SetWorldLocation(LeftFixatingGraspStaticMesh->GetComponentLocation());
+		MConstraintComp->SetWorldLocation(HandSkelAct->GetActorLocation());
+
+		//Attach to Root!
+		//MConstraintComp->AttachToComponent(LeftFixatingGraspStaticMesh, FAttachmentTransformRules::KeepWorldTransform);
+		MConstraintComp->AttachToComponent(HandSkelAct->GetRootComponent(), FAttachmentTransformRules::KeepWorldTransform);
+
+		//MConstraintComp->RegisterComponent();
+
+
+
+		MConstraintComp->SetConstrainedComponents(
+			//AttachedConeAct->GetStaticMeshComponent(), NAME_None,
+			HandSkelAct->GetSkeletalMeshComponent(), NAME_None,
+			//StaticMeshAct1->GetStaticMeshComponent(), NAME_None,
+			//LeftFixatingGraspStaticMesh, NAME_None,
+			//GraspHelperStaticMeshAct->GetStaticMeshComponent(), NAME_None,
+			//LeftHand, NAME_None,
+
+			//Cast<UPrimitiveComponent>(SkelAct1->SkeletalMeshComponent), NAME_None,
+			//Cast<UPrimitiveComponent>(LeftControlBody), NAME_None,
+			//Cast<UPrimitiveComponent>(Act2->GetStaticMeshComponent()), NAME_None);
+
+			StaticMeshAct2->GetStaticMeshComponent(), NAME_None);
+
+
+		UE_LOG(LogTemp, Warning, TEXT("Attach!"));
+		bAttached = true;
+		PrintGreen(TEXT("Attached!"));
+	}
+	else if (bAttached)
+	{
+
+		MConstraintComp->BreakConstraint();
+		UE_LOG(LogTemp, Warning, TEXT("Detach!"));
+		bAttached = false;
+		PrintRed(TEXT("Detached!"));
+	}
+
 }

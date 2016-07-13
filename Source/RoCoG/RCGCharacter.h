@@ -3,11 +3,13 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Animation/SkeletalMeshActor.h"
 #include "RCGPid3d.h"
 #include "RCGGrasp.h"
 #include "RCGUtils.h"
 #include "MotionControllerComponent.h"
 #include "RCGCharacter.generated.h"
+
 
 UCLASS()
 class ROCOG_API ARCGCharacter : public ACharacter
@@ -98,11 +100,10 @@ public:
 	// Initial velocity
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
 	float Velocity;
-	
-	// Character camera
-	// TODO camera does not need to be visible
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	UCameraComponent* CharCamera;	
+
+	// Fixating grasp constraint instance
+	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	FConstraintInstance FixatingGraspConstraintInstance;
 	
 	// Handles moving forward/backward
 	UFUNCTION()
@@ -138,7 +139,8 @@ public:
 
 	// Callback on collision
 	UFUNCTION()
-	void OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	void OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+		FVector NormalImpulse, const FHitResult& Hit);
 	
 	// Callback on collision
 	UFUNCTION()
@@ -148,7 +150,14 @@ public:
 	UFUNCTION()
 	void OnSwitchGrasp();
 
+	// Create constraint TEST TODO remove
+	UFUNCTION()
+	void OnCreateConstraint();
+
 private:
+	// Character camera
+	UCameraComponent* CharCamera;
+
 	// Motion controller offset parent
 	USceneComponent* MCOffset;
 	
@@ -224,4 +233,33 @@ private:
 	// used for reasoning on what objects to attach to the hand
 	// (e.g. Cup : Index, Middle, Pinky, Thumb; Table : Palm; -> Attach Cup )
 	TMultiMap<AActor*, ERCGHandLimb> RightHitActorToFingerMMap;
+
+	// Left grasp physics constraint component (fixating grasp case)
+	UPhysicsConstraintComponent* LeftGraspFixatingConstraint;
+
+	// Right grasp physics constraint component (fixating grasp case)
+	UPhysicsConstraintComponent* RightGraspFixatingConstraint;
+
+	// Left fixating grasp static mesh (currently directly attaching to the hand is problematic)
+	UStaticMeshComponent* LeftFixatingGraspStaticMesh;
+
+	// Right fixating grasp static mesh (currently directly attaching to the hand is problematic)
+	UStaticMeshComponent* RightFixatingGraspStaticMesh;
+
+	// .H
+	// Constraint component
+	UPhysicsConstraintComponent* MConstraintComp;
+	// Hand skeleton as fixed actor
+	ASkeletalMeshActor* HandSkelAct;
+	// Brown cylinder as fixed static mesh actor
+	AStaticMeshActor* StaticMeshAct1;
+	// Gray cylinder falling down and attaching the constraint to
+	AStaticMeshActor* StaticMeshAct2;
+	
+
+	AStaticMeshActor* AttachedConeAct;
+	AStaticMeshActor* GraspHelperStaticMeshAct;
+	UStaticMeshComponent* GraspHelperStaticMesh;
+	bool bAttached;
+
 };

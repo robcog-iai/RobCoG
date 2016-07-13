@@ -16,6 +16,7 @@ enum class ERCGHandLimb : uint8
 };
 
 /** Enum indicating the grasp state */
+UENUM(BlueprintType)
 enum class ERCGGraspState : uint8
 {
 	Opened		UMETA(DisplayName = "Opened"),
@@ -62,6 +63,9 @@ public:
 
 	// Check if finger is free
 	bool IsFingerBlocked(const ERCGHandLimb Finger);
+
+	// Return the grasp state as string
+	FString GetStateAsString();
 
 protected:
 	// Grasping state
