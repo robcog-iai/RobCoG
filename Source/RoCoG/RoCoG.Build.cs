@@ -12,7 +12,7 @@ public class RoCoG : ModuleRules
 			"Engine",
 			"InputCore",
 			"HydraPlugin",
-			"HeadMountedDisplay",
+			//"HeadMountedDisplay",
 			//"XmlParser"
 			//"PhysX",
 			//"APEX",
@@ -20,7 +20,11 @@ public class RoCoG : ModuleRules
 			//"JsonUtilities"
         });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		
+		PrivateDependencyModuleNames.AddRange(new string[] {
+			"HeadMountedDisplay",
+			"SteamVR"
+		 });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

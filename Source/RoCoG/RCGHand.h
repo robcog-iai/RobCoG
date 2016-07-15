@@ -88,34 +88,22 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
 	FConstraintInstance FixatingGraspConstraintInstance;
 
-
-	//// Dummy static mesh (workaround for the contraint attachment directly to the skeleton issue)
-	//UPROPERTY(EditAnywhere, Category = "Joint Controller")
-	//UStaticMeshComponent* DummyStaticMesh;
-	// Dummy static mesh actor
-	//UPROPERTY(EditAnywhere, Category = "Joint Controller")
-	//AStaticMeshActor* DummyStaticMeshActor;
-
-
 	// Handles closing the hand
 	UFUNCTION()
 	void CloseHand(const float Val);
-
-	// Handles opening the left hand
-	UFUNCTION()
-	void OpenHand(const float Val);
 
 	// Attach grasped object to hand
 	UFUNCTION()
 	void AttachToHand();
 
+	// Handles opening the left hand
+	UFUNCTION()
+	void OpenHand(const float Val);
+
 	// Callback on collision
 	UFUNCTION()
 	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		FVector NormalImpulse, const FHitResult& Hit);
-
-	//
-	void AttachHandLeft();
 
 private:
 	// Motion controller component for the hand to follow
@@ -164,7 +152,4 @@ private:
 
 	// Currently grasped component (to enable/disable gravity when grasped)
 	UStaticMeshComponent* GraspedComponent;
-
-
-	bool bAttachNextTick;
 };

@@ -87,37 +87,13 @@ ARCGHand::ARCGHand()
 	DummyStaticMesh->SetCollisionProfileName(TEXT("NoCollision"));
 	DummyStaticMesh->SetWorldScale3D(FVector(0.01f));
 	DummyStaticMesh->SetupAttachment(RootComponent);
-
-	bAttachNextTick = false;
 }
 
 // Called when the game starts or when spawned
 void ARCGHand::BeginPlay()
 {
 	Super::BeginPlay();
-
-	GraspFixatingConstraint = ConstructObject<UPhysicsConstraintComponent>(UPhysicsConstraintComponent::StaticClass());
-	//NewObject(this, UPhysicsConstraintComponent::StaticClass());
-	//GraspFixatingConstraint->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
-
-	DummyStaticMeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass());
-	DummyStaticMeshActor->SetMobility(EComponentMobility::Movable);
-	DummyStaticMeshActor->GetStaticMeshComponent()->SetStaticMesh(DummyStaticMesh->StaticMesh);
-	DummyStaticMeshActor->SetRootComponent(DummyStaticMeshActor->GetStaticMeshComponent());
-	DummyStaticMeshActor->GetStaticMeshComponent()->SetWorldScale3D(FVector(0.01f));
-	DummyStaticMeshActor->SetActorEnableCollision(false);
-	DummyStaticMeshActor->AttachToActor(this,FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-
-	//DummyStaticMeshActor = GetWorld()->SpawnActor<ARCGDummyStaticMeshActor>(ARCGDummyStaticMeshActor::StaticClass());
-	//DummyStaticMeshActor->SetMobility(EComponentMobility::Movable);
-	////DummyStaticMeshActor->GetStaticMeshComponent()->SetStaticMesh(DummyStaticMesh->StaticMesh);
-	////DummyStaticMeshActor->SetRootComponent(DummyStaticMeshActor->GetStaticMeshComponent());
-	////DummyStaticMeshActor->GetStaticMeshComponent()->SetWorldScale3D(FVector(0.01f));
-	//DummyStaticMeshActor->SetActorEnableCollision(false);
-	////DummyStaticMeshActor->AttachToActor(this, FAttachmentTransformRules::KeepWorldTransform);
-	//DummyStaticMeshActor->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-
-
+	///////////////////////////////////////////////////////////////////////
 	// Get the motion controller of the character
 	for (TActorIterator<ACharacter> CharItr(GetWorld()); CharItr; ++CharItr)
 	{
@@ -161,7 +137,7 @@ void ARCGHand::BeginPlay()
 			*GetName());
 	}
 
-	
+	///////////////////////////////////////////////////////////////////////
 	// Hand joint velocity drive
 	GetSkeletalMeshComponent()->SetAllMotorsAngularPositionDrive(true, true);
 	// Set drive parameters
@@ -214,8 +190,22 @@ void ARCGHand::BeginPlay()
 	// Initialize grasp type
 	Grasp = new FRCGGrasp(FingerTypeToConstrs);
 
+	///////////////////////////////////////////////////////////////////////
+	// Create grasp fixating constraint
+	GraspFixatingConstraint = NewObject<UPhysicsConstraintComponent>(this, UPhysicsConstraintComponent::StaticClass());
+	//GraspFixatingConstraint->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);// TODO needed?
+
 	// Set the grasp constraint instance
 	GraspFixatingConstraint->ConstraintInstance = FixatingGraspConstraintInstance;
+
+	// Create dummy actor to attach the grasped object to
+	DummyStaticMeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass());
+	DummyStaticMeshActor->SetMobility(EComponentMobility::Movable);
+	DummyStaticMeshActor->GetStaticMeshComponent()->SetStaticMesh(DummyStaticMesh->StaticMesh);
+	DummyStaticMeshActor->SetRootComponent(DummyStaticMeshActor->GetStaticMeshComponent());
+	DummyStaticMeshActor->GetStaticMeshComponent()->SetWorldScale3D(FVector(0.01f));
+	DummyStaticMeshActor->SetActorEnableCollision(false);
+	DummyStaticMeshActor->AttachToActor(this, FAttachmentTransformRules::SnapToTargetNotIncludingScale);
 
 	// Collision callbacks for the hands
 	GetSkeletalMeshComponent()->OnComponentHit.AddDynamic(this, &ARCGHand::OnFingerHit);
@@ -224,7 +214,6 @@ void ARCGHand::BeginPlay()
 	APlayerController* PC = GetWorld()->GetFirstPlayerController();
 	// Enable input
 	EnableInput(PC);
-
 	// Set up hand bindings
 	if (HandType == EControllerHand::Left)
 	{
@@ -310,42 +299,13 @@ void ARCGHand::CloseHand(const float AxisValue)
 	Grasp->Update(0.5 * AxisValue);
 }
 
-// Open hand fingers
-void ARCGHand::OpenHand(const float AxisValue)
-{
-	if (AxisValue == 0)
-	{
-		return;
-	}
-
-	// Free the colliding fingers map
-	if (HitActorToFingerMMap.Num() != 0)
-	{
-		HitActorToFingerMMap.Empty();
-	}
-
-	// Detach object if case
-	if (Grasp->GetState() == ERCGGraspState::Attached)
-	{
-		// Enable gravity to the grasped component
-		GraspedComponent->SetEnableGravity(true);
-		// Set mass scale back
-		GraspedComponent->SetAllMassScale(1.0f);
-		// Break constraint
-		GraspFixatingConstraint->BreakConstraint();
-		// Set state to free
-		Grasp->SetState(ERCGGraspState::Free);
-	}
-
-	// Update grasping
-	Grasp->Update( - AxisValue);
-}
-
 // Attach grasped object to hand
 void ARCGHand::AttachToHand()
 {
 	// Attach object only if the state is blocked
-	if (Grasp->GetState() == ERCGGraspState::Blocked)
+	// and we have objects colliding with fingers
+	if ((Grasp->GetState() == ERCGGraspState::Blocked) &&
+		(HitActorToFingerMMap.Num() > 0))
 	{
 		// Map colliding component with the number of appearance
 		TMap<AActor*, uint8> ActorToCount;
@@ -376,13 +336,15 @@ void ARCGHand::AttachToHand()
 		for (const auto ActToCountItr : ActorToCount)
 		{
 			if (ActToCountItr.Value > 2)
-			{				
+			{
 				// Set the grasped component
 				GraspedComponent = Cast<AStaticMeshActor>(ActToCountItr.Key)->GetStaticMeshComponent();
 				// Disable gravity on the grasped model
 				GraspedComponent->SetEnableGravity(false);
 				// Set a very small mass scale
-				GraspedComponent->SetAllMassScale(0.00001f);
+				GraspedComponent->SetAllMassScale(0.0000001f);
+				GraspedComponent->SetLinearDamping(0.0f);
+				GraspedComponent->SetAngularDamping(0.0f);
 				// Constrain components
 				GraspFixatingConstraint->SetConstrainedComponents(
 					DummyStaticMeshActor->GetStaticMeshComponent(), NAME_None,
@@ -396,6 +358,41 @@ void ARCGHand::AttachToHand()
 		// Free the finger collisions
 		HitActorToFingerMMap.Empty();
 	}
+}
+
+// Open hand fingers
+void ARCGHand::OpenHand(const float AxisValue)
+{
+	if (AxisValue == 0)
+	{
+		return;
+	}
+
+	// Free the colliding fingers map
+	if (HitActorToFingerMMap.Num() != 0)
+	{
+		HitActorToFingerMMap.Empty();
+	}
+
+	// Detach object if case
+	if (Grasp->GetState() == ERCGGraspState::Attached)
+	{
+		if (GraspedComponent)
+		{
+			// Enable gravity to the grasped component
+			GraspedComponent->SetEnableGravity(true);
+			// Set mass scale back
+			GraspedComponent->SetAllMassScale(1.0f);
+			GraspedComponent->SetLinearDamping(0.1f);
+			// Break constraint
+			GraspFixatingConstraint->BreakConstraint();
+		}
+		// Set state to free
+		Grasp->SetState(ERCGGraspState::Free);
+	}
+
+	// Update grasping
+	Grasp->Update( - AxisValue);
 }
 
 // Hand collision callback
@@ -412,7 +409,6 @@ void ARCGHand::OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UP
 		{
 			// Block finger
 			Grasp->BlockFinger(*Finger);
-
 			// Add colliding component to the map
 			HitActorToFingerMMap.Add(OtherActor, *Finger);
 		}
