@@ -11,7 +11,7 @@ public class RoCoG : ModuleRules
 			"CoreUObject",
 			"Engine",
 			"InputCore",
-			"HydraPlugin",
+			//"HydraPlugin",
 			//"HeadMountedDisplay",
 			//"XmlParser"
 			//"PhysX",

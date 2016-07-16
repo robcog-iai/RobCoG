@@ -211,7 +211,7 @@ void ARCGHand::BeginPlay()
 	GetSkeletalMeshComponent()->OnComponentHit.AddDynamic(this, &ARCGHand::OnFingerHit);
 
 	// Get the player controller, enable and bind inputs
-	APlayerController* PC = GetWorld()->GetFirstPlayerController();
+	PC = GetWorld()->GetFirstPlayerController();
 	// Enable input
 	EnableInput(PC);
 	// Set up hand bindings
@@ -352,6 +352,7 @@ void ARCGHand::AttachToHand()
 			}
 			break;
 		}
+		//TODO put this inside the if, and check is the grasped object is not the other hand
 		// Set state to attached
 		Grasp->SetState(ERCGGraspState::Attached);
 
@@ -398,6 +399,19 @@ void ARCGHand::OpenHand(const float AxisValue)
 // Hand collision callback
 void ARCGHand::OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
+	//Print("Collision");
+	//FLatentActionInfo ActionInfo;
+	//ActionInfo.CallbackTarget = this;
+	//if (HandType == EControllerHand::Left)
+	//{
+	//	PC->PlayDynamicForceFeedback(1.0f, 0.1f, true, false, false, false, EDynamicForceFeedbackAction::Start, ActionInfo);
+	//}
+	//else if (HandType == EControllerHand::Left)
+	//{
+	//	PC->PlayDynamicForceFeedback(1.0f, 0.1f, false, false, true, true, EDynamicForceFeedbackAction::Start, ActionInfo);
+	//}
+
+
 	// Check collisions if grasp state is free, 
 	if (Grasp->GetState() == ERCGGraspState::Free)
 	{

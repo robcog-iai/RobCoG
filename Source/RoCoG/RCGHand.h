@@ -7,7 +7,6 @@
 #include "RCGUtils.h"
 #include "RCGPid3d.h"
 #include "RCGGrasp.h"
-//#include "RCGDummyStaticMeshActor.h"
 #include "RCGHand.generated.h"
 
 /**
@@ -152,4 +151,7 @@ private:
 
 	// Currently grasped component (to enable/disable gravity when grasped)
 	UStaticMeshComponent* GraspedComponent;
+
+	// Player controller to apply force feedback and enable input
+	APlayerController* PC;
 };
