@@ -327,6 +327,7 @@ void ARCGHand::AttachToHand()
 		// If the count is enough, attach actor to hand
 		for (const auto ActToCountItr : ActorToCount)
 		{
+			//TODO make sure hand to hand attachment is avoided
 			if (ActToCountItr.Value > 2)
 			{
 				// Set the grasped component
@@ -341,13 +342,25 @@ void ARCGHand::AttachToHand()
 				GraspFixatingConstraint->SetConstrainedComponents(
 					DummyStaticMeshActor->GetStaticMeshComponent(), NAME_None,
 					GraspedComponent, NAME_None);
+
+				// Set state to attached
+				Grasp->SetState(ERCGGraspState::Attached);
+
+				// Attachment constroller feedback
+				FLatentActionInfo ActionInfo;
+				ActionInfo.CallbackTarget = this;
+				if (HandType == EControllerHand::Left)
+				{
+					PC->PlayDynamicForceFeedback(1.0f, 0.05f, true, false, false, false, EDynamicForceFeedbackAction::Start, ActionInfo);
+				}
+				else if (HandType == EControllerHand::Right)
+				{
+					PC->PlayDynamicForceFeedback(1.0f, 0.05f, false, false, true, true, EDynamicForceFeedbackAction::Start, ActionInfo);
+				}
 			}
+			// We only need the first value with the most contact counts
 			break;
 		}
-		//TODO put this inside the if, and check is the grasped object is not the other hand
-		// Set state to attached
-		Grasp->SetState(ERCGGraspState::Attached);
-
 		// Free the finger collisions
 		HitActorToFingerMMap.Empty();
 	}
@@ -379,6 +392,17 @@ void ARCGHand::OpenHand(const float AxisValue)
 			GraspedComponent->SetLinearDamping(0.1f);
 			// Break constraint
 			GraspFixatingConstraint->BreakConstraint();
+
+			FLatentActionInfo ActionInfo;
+			ActionInfo.CallbackTarget = this;
+			if (HandType == EControllerHand::Left)
+			{
+				PC->PlayDynamicForceFeedback(1.0f, 0.05f, true, false, false, false, EDynamicForceFeedbackAction::Start, ActionInfo);
+			}
+			else if (HandType == EControllerHand::Right)
+			{
+				PC->PlayDynamicForceFeedback(1.0f, 0.05f, false, false, true, true, EDynamicForceFeedbackAction::Start, ActionInfo);
+			}
 		}
 		// Set state to free
 		Grasp->SetState(ERCGGraspState::Free);
@@ -396,19 +420,6 @@ void ARCGHand::SetMCTrackingOffset()
 // Hand collision callback
 void ARCGHand::OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	//Print("Collision");
-	//FLatentActionInfo ActionInfo;
-	//ActionInfo.CallbackTarget = this;
-	//if (HandType == EControllerHand::Left)
-	//{
-	//	PC->PlayDynamicForceFeedback(1.0f, 0.1f, true, false, false, false, EDynamicForceFeedbackAction::Start, ActionInfo);
-	//}
-	//else if (HandType == EControllerHand::Left)
-	//{
-	//	PC->PlayDynamicForceFeedback(1.0f, 0.1f, false, false, true, true, EDynamicForceFeedbackAction::Start, ActionInfo);
-	//}
-
-
 	// Check collisions if grasp state is free, 
 	if (Grasp->GetState() == ERCGGraspState::Free)
 	{
@@ -422,6 +433,17 @@ void ARCGHand::OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UP
 			Grasp->BlockFinger(*Finger);
 			// Add colliding component to the map
 			HitActorToFingerMMap.Add(OtherActor, *Finger);
+
+			FLatentActionInfo ActionInfo;
+			ActionInfo.CallbackTarget = this;
+			if (HandType == EControllerHand::Left)
+			{
+				PC->PlayDynamicForceFeedback(0.3f, 0.05f, true, false, false, false, EDynamicForceFeedbackAction::Start, ActionInfo);
+			}
+			else if (HandType == EControllerHand::Right)
+			{
+				PC->PlayDynamicForceFeedback(0.3f, 0.05f, false, false, true, true, EDynamicForceFeedbackAction::Start, ActionInfo);
+			}
 		}
 	}
 }
