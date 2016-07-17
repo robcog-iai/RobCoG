@@ -34,9 +34,6 @@ ARCGHand::ARCGHand()
 	PIDMinOutput = -1500.0f;
 	// Rotation control param (angular movement strength)
 	RotOutStrength = 1000.0f;
-	
-	// Flag showing if the motion controller offset has been set
-	bMCOffsetSet = false;
 
 	// Flag showing if the finger collisions events are enabled or disabled
 	bFingerHitEvents = false;
