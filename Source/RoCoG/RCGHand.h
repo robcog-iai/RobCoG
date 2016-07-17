@@ -4,6 +4,7 @@
 
 #include "Animation/SkeletalMeshActor.h"
 #include "MotionControllerComponent.h"
+#include "RCGMotionControllerCharacter.h"
 #include "RCGUtils.h"
 #include "RCGPid3d.h"
 #include "RCGGrasp.h"
@@ -86,17 +87,18 @@ public:
 	// Fixating grasp constraint instance
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
 	FConstraintInstance FixatingGraspConstraintInstance;
+	
+protected:
+	// Set the tracking offset of the motion controller
+	void SetMCTrackingOffset();
 
 	// Handles closing the hand
-	UFUNCTION()
 	void CloseHand(const float Val);
 
 	// Attach grasped object to hand
-	UFUNCTION()
 	void AttachToHand();
 
 	// Handles opening the left hand
-	UFUNCTION()
 	void OpenHand(const float Val);
 
 	// Callback on collision
@@ -105,6 +107,9 @@ public:
 		FVector NormalImpulse, const FHitResult& Hit);
 
 private:
+	// Pointer to the motion controller character
+	ARCGMotionControllerCharacter* MCCharacter;
+
 	// Motion controller component for the hand to follow
 	UMotionControllerComponent* MCComponent;
 

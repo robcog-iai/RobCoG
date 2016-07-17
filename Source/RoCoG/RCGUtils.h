@@ -2,6 +2,9 @@
 #include "RoCoG.h"
 #include "RCGUtils.generated.h"
 
+#define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
+#define PrintDur(text, duration) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, duration, FColor::White,text)
+#define Log(text) UE_LOG(LogTemp, Warning, text);
 
 /** Enum indicating the hand type */
 UENUM(BlueprintType)

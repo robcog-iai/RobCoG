@@ -24,16 +24,26 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
+	// Get the Motion Controller Component
+	UMotionControllerComponent* GetMotionController(EControllerHand HandType);
+
+	// Get Motion Controller calibration offset location
+	FVector GetMCTrackingOffsetLoc(EControllerHand HandType);
+
+	// Get Motion Controller calibration offset orientation
+	FQuat GetMCTrackingOffsetRot(EControllerHand HandType);
+
 	// Visualise or not target arrows
 	UPROPERTY(EditAnywhere, Category = "Motion Controller")
 	bool bVisTargetArrows;
 
+
+
+protected:
 	// Handles moving forward/backward
-	UFUNCTION()
 	void MoveForward(const float Val);
 
 	// Handles strafing Left/Right
-	UFUNCTION()
 	void MoveRight(const float Val);
 
 private:
@@ -41,7 +51,7 @@ private:
 	UCameraComponent* CharCamera;
 
 	// Motion controller offset parent
-	USceneComponent* MCOffset;
+	USceneComponent* MCOffsetComponent;
 
 	// Left hand motion controller
 	UMotionControllerComponent* LeftMC;

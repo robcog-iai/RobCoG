@@ -3,9 +3,6 @@
 #include "RoCoG.h"
 #include "RCGHand.h"
 
-#define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
-#define Log(text) UE_LOG(LogTemp, Warning, text);
-
 // Sets default values
 ARCGHand::ARCGHand()
 {
@@ -37,6 +34,9 @@ ARCGHand::ARCGHand()
 	PIDMinOutput = -1500.0f;
 	// Rotation control param (angular movement strength)
 	RotOutStrength = 1000.0f;
+	
+	// Flag showing if the motion controller offset has been set
+	bMCOffsetSet = false;
 
 	// Flag showing if the finger collisions events are enabled or disabled
 	bFingerHitEvents = false;
@@ -95,28 +95,22 @@ void ARCGHand::BeginPlay()
 	Super::BeginPlay();
 	///////////////////////////////////////////////////////////////////////
 	// Get the motion controller of the character
-	for (TActorIterator<ACharacter> CharItr(GetWorld()); CharItr; ++CharItr)
+	for (TActorIterator<ARCGMotionControllerCharacter> CharItr(GetWorld()); CharItr; ++CharItr)
 	{
-		// Get the motion controller component
-		for (auto CompItr : CharItr->GetComponentsByClass(UMotionControllerComponent::StaticClass()))
-		{
-			UMotionControllerComponent* MC = Cast<UMotionControllerComponent>(CompItr);
-			// Check that the motion controller is for the correct hand (left/right)
-			if (MC->Hand == HandType)
-			{
-				// Set the hands motion controller to follow
-				MCComponent = MC;
-				break;
-			}		
-		}
+		// Pointer to the motion controller character
+		MCCharacter = *CharItr;
+		// Pointer to the motion controller component
+		MCComponent = CharItr->GetMotionController(HandType);
+		// Stop the loop since we only need the first character (there should be only one)
+		break;
 	}
 
-	// Disable Tick if no motion controller was found
-	if (!MCComponent)
+	// Disable Tick if no motion controller component or character has been found
+	if ((!MCComponent) || (!MCCharacter))
 	{
 		SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Error, TEXT("No motion controller was found, Tick disabled for: %s "),
-			*GetName());
+		UE_LOG(LogTemp, Error, 
+			TEXT("No motion controller (character or component)! Tick disabled for: %s "), *GetName());
 	}
 
 	// Get the body to apply forces on for pose control
@@ -133,7 +127,7 @@ void ARCGHand::BeginPlay()
 	else
 	{
 		SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Error, TEXT("No control body was found, Tick disabled for: %s "),
+		UE_LOG(LogTemp, Error, TEXT("No control body was found! Tick disabled for: %s "),
 			*GetName());
 	}
 
@@ -227,16 +221,19 @@ void ARCGHand::BeginPlay()
 		PC->InputComponent->BindAxis("CloseHandRight", this, &ARCGHand::CloseHand);
 		PC->InputComponent->BindAction("AttachHandRight", IE_Released, this, &ARCGHand::AttachToHand);
 	}
+	PC->InputComponent->BindAction("SetTrackingOffset", IE_Pressed, this, &ARCGHand::SetMCTrackingOffset);
 }
 
 // Called every frame, used for motion control
 void ARCGHand::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	//// Location
-	// Get the target location (motion controller loc)
+
+	// Get the target (motion controller) location and rotation
 	const FVector TargetLoc = MCComponent->GetComponentLocation();
+	const FQuat TargetQuat = MCComponent->GetComponentQuat();
+
+	//// Location
 	// Get the pos errors
 	const FVector LocError = TargetLoc - CurrLoc;
 	// Compute the pos output
@@ -247,8 +244,6 @@ void ARCGHand::Tick(float DeltaTime)
 	CurrLoc = GetSkeletalMeshComponent()->GetBoneLocation(ControlBoneName);
 
 	//// Rotation
-	// Get the target rotation (motion controller loc)
-	const FQuat TargetQuat = MCComponent->GetComponentQuat();
 	// Dot product to get costheta
 	const float CosTheta = TargetQuat | CurrQuat;
 	// Avoid taking the long path around the sphere
@@ -394,6 +389,11 @@ void ARCGHand::OpenHand(const float AxisValue)
 
 	// Update grasping
 	Grasp->Update( - AxisValue);
+}
+
+// Set tracking offset
+void ARCGHand::SetMCTrackingOffset()
+{
 }
 
 // Hand collision callback

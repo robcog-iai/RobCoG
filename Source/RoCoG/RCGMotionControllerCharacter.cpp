@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RoCoG.h"
+#include "RCGUtils.h"
 #include "RCGMotionControllerCharacter.h"
 
 
@@ -8,13 +9,13 @@
 ARCGMotionControllerCharacter::ARCGMotionControllerCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	// Visualize motion controller debug arrows
 	bVisTargetArrows = true;
 
 	// Make the capsule thin
-	GetCapsuleComponent()->SetCapsuleRadius(5);
+	GetCapsuleComponent()->SetCapsuleRadius(5);	
 
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -30,18 +31,19 @@ ARCGMotionControllerCharacter::ARCGMotionControllerCharacter(const FObjectInitia
 	// Get root component
 	RootComponent = GetRootComponent();
 	// Create the motion controller offset (hands in front of the character)
-	MCOffset = CreateDefaultSubobject<USceneComponent>(TEXT("MCOffsetComponent"));
+	MCOffsetComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOffsetComponent"));
 	// Attach Offset to root
-	MCOffset->SetupAttachment(RootComponent);
+	MCOffsetComponent->SetupAttachment(RootComponent);
 	// Position of the offset
-	MCOffset->RelativeLocation = FVector(80.0f, 0.0f, 0.0f);
+	MCOffsetComponent->RelativeLocation = FVector(
+		0.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
 	// Create left/right motion controller
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
 	RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightMotionController"));
 	// Attach controllers to root component
-	LeftMC->SetupAttachment(MCOffset);
-	RightMC->SetupAttachment(MCOffset);
+	LeftMC->SetupAttachment(MCOffsetComponent);
+	RightMC->SetupAttachment(MCOffsetComponent);
 	// Set the mapped hand (from the Motion Controller)
 	LeftMC->Hand = EControllerHand::Left;
 	RightMC->Hand = EControllerHand::Right;
@@ -62,20 +64,18 @@ void ARCGMotionControllerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Set arrows to visible
 	if (bVisTargetArrows)
 	{
-		// Set arrows to visible
 		LeftTargetArrow->SetHiddenInGame(false);
 		RightTargetArrow->SetHiddenInGame(false);
 	}
-
 }
 
 // Called every frame
 void ARCGMotionControllerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -90,6 +90,57 @@ void ARCGMotionControllerCharacter::SetupPlayerInputComponent(class UInputCompon
 	InputComponent->BindAxis("CameraPitch", this, &ARCGMotionControllerCharacter::AddControllerPitchInput);
 	InputComponent->BindAxis("CameraYaw", this, &ARCGMotionControllerCharacter::AddControllerYawInput);
 
+}
+
+// Get the Motion Controller Component
+UMotionControllerComponent* ARCGMotionControllerCharacter::GetMotionController(EControllerHand HandType)
+{
+	if (HandType == EControllerHand::Left)
+	{
+		return LeftMC;
+	}
+	else if (HandType == EControllerHand::Right)
+	{
+		return RightMC;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+// Get Motion Controller calibration offset location
+FVector ARCGMotionControllerCharacter::GetMCTrackingOffsetLoc(EControllerHand HandType)
+{
+	if (HandType == EControllerHand::Left)
+	{
+		return LeftMC->RelativeLocation;
+	}
+	else if (HandType == EControllerHand::Right)
+	{
+		return RightMC->RelativeLocation;
+	}
+	else
+	{
+		return FVector(0.0f);
+	}
+}
+
+// Get Motion Controller calibration offset orientation
+FQuat ARCGMotionControllerCharacter::GetMCTrackingOffsetRot(EControllerHand HandType)
+{
+	if (HandType == EControllerHand::Left)
+	{
+		return LeftMC->RelativeRotation.Quaternion();
+	}
+	else if (HandType == EControllerHand::Right)
+	{
+		return RightMC->RelativeRotation.Quaternion();
+	}
+	else
+	{
+		return FQuat::Identity;
+	}
 }
 
 // Handles moving forward/backward
@@ -122,4 +173,3 @@ void ARCGMotionControllerCharacter::MoveRight(const float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
-
