@@ -3,11 +3,11 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class RoCoGEditorTarget : TargetRules
+public class RobCoGTarget : TargetRules
 {
-	public RoCoGEditorTarget(TargetInfo Target)
+	public RobCoGTarget(TargetInfo Target)
 	{
-		Type = TargetType.Editor;
+		Type = TargetType.Game;
 	}
 
 	//
@@ -20,6 +20,6 @@ public class RoCoGEditorTarget : TargetRules
 		ref List<string> OutExtraModuleNames
 		)
 	{
-		OutExtraModuleNames.AddRange( new string[] { "RoCoG" } );
+		OutExtraModuleNames.AddRange( new string[] { "RobCoG" } );
 	}
 }

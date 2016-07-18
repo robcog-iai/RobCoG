@@ -1,14 +1,17 @@
 #pragma once
-#include "RoCoG.h"
-#include "RCGUtils.generated.h"
+#include "RobCoG.h"
+#include "RUtils.generated.h"
 
-#define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
-#define PrintDur(text, duration) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, duration, FColor::White,text)
+
 #define Log(text) UE_LOG(LogTemp, Warning, text);
+#define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
+#define PrintRed(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red,text)
+#define PrintGreen(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green,text)
+#define PrintDur(text, duration) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, duration, FColor::White,text)
 
 /** Enum indicating the hand type */
 UENUM(BlueprintType)
-enum class ERCGHandType : uint8
+enum class ERHandType : uint8
 {
 	Left		UMETA(DisplayName = "Left"),
 	Right		UMETA(DisplayName = "Right"),
@@ -16,7 +19,7 @@ enum class ERCGHandType : uint8
 
 /** Enum indicating the finger type */
 UENUM(BlueprintType)
-enum class ERCGFingerType : uint8
+enum class ERFingerType : uint8
 {
 	Thumb		UMETA(DisplayName = "Thumb"),
 	Index		UMETA(DisplayName = "Index"),
@@ -28,7 +31,7 @@ enum class ERCGFingerType : uint8
 
 /** Enum indicating the finger type */
 UENUM(BlueprintType)
-enum class ERCGHandLimb : uint8
+enum class ERHandLimb : uint8
 {
 	Thumb		UMETA(DisplayName = "Thumb"),
 	Index		UMETA(DisplayName = "Index"),
@@ -40,7 +43,7 @@ enum class ERCGHandLimb : uint8
 
 /** Enum indicating the grasp state */
 UENUM(BlueprintType)
-enum class ERCGGraspState : uint8
+enum class ERGraspState : uint8
 {
 	Opened		UMETA(DisplayName = "Opened"),
 	Opening		UMETA(DisplayName = "Opening"),
@@ -54,17 +57,17 @@ enum class ERCGGraspState : uint8
 
 /** Utils */
 USTRUCT()
-struct FRCGUtils
+struct FRUtils
 {
 GENERATED_USTRUCT_BODY()
 
 	// Default constructor	
-	FRCGUtils()
+	FRUtils()
 	{
 	};
 
 	// Destructor
-	~FRCGUtils()
+	~FRUtils()
 	{
 	};
 

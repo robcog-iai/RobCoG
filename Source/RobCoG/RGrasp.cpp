@@ -1,30 +1,30 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "RoCoG.h"
-#include "RCGGrasp.h"
+#include "RobCoG.h"
+#include "RGrasp.h"
 
 // Set default values
-FRCGGrasp::FRCGGrasp()
+FRGrasp::FRGrasp()
 {
 	// Set default state
-	SetState(ERCGGraspState::Free);	
+	SetState(ERGraspState::Free);	
 }
 
 // Set default values 
-FRCGGrasp::FRCGGrasp(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs)
+FRGrasp::FRGrasp(TMultiMap<ERHandLimb, FConstraintInstance*>& FingerTypeToConstrs)
 {
 	// Set the fingers to control
 	FingerTypeToConstraintsMMap = FingerTypeToConstrs;
 
 	// Set default state
-	SetState(ERCGGraspState::Free);
+	SetState(ERGraspState::Free);
 
 	// Set every finger default target
 	// This iterates every finger multiple types, since it is a multimap
 	for (const auto FingerToConstr : FingerTypeToConstraintsMMap)
 	{
 		// Get the finger type
-		const ERCGHandLimb FingerType = FingerToConstr.Key;
+		const ERHandLimb FingerType = FingerToConstr.Key;
 		// Set finger target
 		FingerToTargetMap.Emplace(FingerType, 0.0f);
 	}
@@ -34,12 +34,12 @@ FRCGGrasp::FRCGGrasp(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeTo
 }
 
 // Destructor
-FRCGGrasp::~FRCGGrasp()
+FRGrasp::~FRGrasp()
 {
 }
 
 // Update grasping
-void FRCGGrasp::Update(const float Step)
+void FRGrasp::Update(const float Step)
 {
 	auto GraspUpdateLambda = [&](const float LambStep)
 	{
@@ -47,7 +47,7 @@ void FRCGGrasp::Update(const float Step)
 		for (auto FingerToConstrs : FingerToTargetMap)
 		{
 			// Finger type
-			const ERCGHandLimb Finger = FingerToConstrs.Key;
+			const ERHandLimb Finger = FingerToConstrs.Key;
 
 			// Skip iteration if finger is blocked 
 			if (BlockedFingers.Contains(Finger))
@@ -71,7 +71,7 @@ void FRCGGrasp::Update(const float Step)
 				if (Target > ConstrLimit)
 				{
 					// The finger reached it's limit, mark it blocked
-					FRCGGrasp::BlockFinger(Finger);
+					FRGrasp::BlockFinger(Finger);
 					// Set it's taget to the contsraint limit,
 					// otherwise the value might still be over the limit in the next tick,
 					// thus blocking the fingers again
@@ -80,7 +80,7 @@ void FRCGGrasp::Update(const float Step)
 				else if (Target < - /*ConstrLimit*/ 5)
 				{
 					// The finger reached it's limit, mark it blocked
-					FRCGGrasp::BlockFinger(Finger);
+					FRGrasp::BlockFinger(Finger);
 					// Set it's taget to the contsraint limit,
 					// otherwise the value might still be over the limit in the next tick,
 					// thus blocking the fingers again
@@ -99,8 +99,8 @@ void FRCGGrasp::Update(const float Step)
 	if (Step * PrevStep >= 0)
 	{
 		// Update movements if state differs of blocked and attached
-		//if ((GraspState != ERCGGraspState::Blocked) && (GraspState != ERCGGraspState::Attached))
-		if (GraspState == ERCGGraspState::Free)
+		//if ((GraspState != ERGraspState::Blocked) && (GraspState != ERGraspState::Attached))
+		if (GraspState == ERGraspState::Free)
 		{
 			// Update target
 			GraspUpdateLambda(Step);
@@ -108,16 +108,16 @@ void FRCGGrasp::Update(const float Step)
 			// If all the fingers are blocked set state as blocked
 			if (BlockedFingers.Num() == FingerToTargetMap.Num())
 			{
-				SetState(ERCGGraspState::Blocked);				
+				SetState(ERGraspState::Blocked);				
 			}
 		}
 	}
 	else
 	{
 		// The orientation of the movement changed, free blocked fingers
-		FRCGGrasp::FreeFingers();
+		FRGrasp::FreeFingers();
 		// Set state to free
-		SetState(ERCGGraspState::Free);
+		SetState(ERGraspState::Free);
 		// Update target
 		GraspUpdateLambda(Step);
 	}
@@ -127,45 +127,45 @@ void FRCGGrasp::Update(const float Step)
 }
 
 // Set the grasp state
-void FRCGGrasp::SetState(const ERCGGraspState State)
+void FRGrasp::SetState(const ERGraspState State)
 {
 	GraspState = State;
 }
 
 // Get the grasp state
-ERCGGraspState FRCGGrasp::GetState()
+ERGraspState FRGrasp::GetState()
 {
 	return GraspState;
 }
 
 // Block the given finger at its current target
-void FRCGGrasp::BlockFinger(ERCGHandLimb Finger)
+void FRGrasp::BlockFinger(ERHandLimb Finger)
 {
 	BlockedFingers.AddUnique(Finger);
 }
 
 // Free finger
-void FRCGGrasp::FreeFinger(ERCGHandLimb Finger)
+void FRGrasp::FreeFinger(ERHandLimb Finger)
 {	
 	BlockedFingers.Remove(Finger);
 }
 
 // Free all fingers
-void FRCGGrasp::FreeFingers()
+void FRGrasp::FreeFingers()
 {
 	BlockedFingers.Empty();
 }
 
 // Check if finger is free
-bool FRCGGrasp::IsFingerBlocked(const ERCGHandLimb Finger)
+bool FRGrasp::IsFingerBlocked(const ERHandLimb Finger)
 {
 	return BlockedFingers.Contains(Finger);
 }
 
 // Check if finger is free
-FString FRCGGrasp::GetStateAsString()
+FString FRGrasp::GetStateAsString()
 {
-	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ERCGGraspState"), true);
+	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("ERGraspState"), true);
 	if (!EnumPtr)
 	{
 		return FString("Invalid");

@@ -3,22 +3,19 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "RCGMotionControllerCharacterVR.generated.h"
+#include "RMotionControllerCharacter.generated.h"
 
 UCLASS()
-class ROCOG_API ARCGMotionControllerCharacterVR : public ACharacter
+class ROBCOG_API ARMotionControllerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ARCGMotionControllerCharacterVR(const FObjectInitializer& ObjectInitializer);
+	ARMotionControllerCharacter(const FObjectInitializer& ObjectInitializer);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
@@ -26,20 +23,28 @@ public:
 	// Get the Motion Controller Component
 	UMotionControllerComponent* GetMotionController(EControllerHand HandType);
 
+	// Get Motion Controller calibration offset location
+	FVector GetMCTrackingOffsetLoc(EControllerHand HandType);
+
+	// Get Motion Controller calibration offset orientation
+	FQuat GetMCTrackingOffsetRot(EControllerHand HandType);
+
 protected:
 	// Visualise or not target arrows
 	UPROPERTY(EditAnywhere, Category = "Motion Controller")
 	bool bVisTargetArrows;
 
-	// Enable HMD tracking
-	UPROPERTY(EditDefaultsOnly, Category = "Motion Controller")
-	bool bPositionalHeadTracking;
+	// Handles moving forward/backward
+	void MoveForward(const float Val);
+
+	// Handles strafing Left/Right
+	void MoveRight(const float Val);
 
 private:
 	// Character camera
 	UCameraComponent* CharCamera;
 
-	// Motion controller origin
+	// Motion controller origin parent
 	USceneComponent* MCOriginComponent;
 
 	// Left hand motion controller
@@ -52,5 +57,5 @@ private:
 	UArrowComponent* LeftTargetArrow;
 
 	// Right target arrow visual
-	UArrowComponent* RightTargetArrow;	
+	UArrowComponent* RightTargetArrow;
 };

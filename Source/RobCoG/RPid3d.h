@@ -1,6 +1,6 @@
 #pragma once
 #include "EngineUtils.h"
-#include "RCGPid3d.generated.h"
+#include "RPid3d.generated.h"
 
 /*
 3D PID controller implementation (for 3D vectors)
@@ -19,16 +19,16 @@ Your robot may not actually do exactly what you tell it to do.
 The integral helps determine how much you need to compensate for that.
 */
 USTRUCT()
-struct FRCGPid3d
+struct FRPid3d
 {
 	GENERATED_USTRUCT_BODY()
 
 	// Constructor
-	FRCGPid3d(float _P = 0.0f, float _I = 0.0f, float _D = 0.0f,
+	FRPid3d(float _P = 0.0f, float _I = 0.0f, float _D = 0.0f,
 		float _OutMax = 0.0, float _OutMin = 0.0f);
 
 	// Destructor
-	~FRCGPid3d();
+	~FRPid3d();
 
 	// Initialise all PID values
 	void Init(float _P = 0.0f, float _I = 0.0f, float _D = 0.0f,

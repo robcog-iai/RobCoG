@@ -1,8 +1,8 @@
-#include "RoCoG.h"
-#include "RCGPid.h"
+#include "RobCoG.h"
+#include "RPid.h"
 
 // Constructor
-FRCGPid::FRCGPid(float _P, float _I, float _D,
+FRPid::FRPid(float _P, float _I, float _D,
 	float _OutMax, float _OutMin) :
 	P(_P), I(_I), D(_D), OutMax(_OutMax), OutMin(_OutMin)
 {
@@ -11,12 +11,12 @@ FRCGPid::FRCGPid(float _P, float _I, float _D,
 }
 
 // Destructor
-FRCGPid::~FRCGPid()
+FRPid::~FRPid()
 {
 }
 
 // Init
-void FRCGPid::Init(float _P, float _I, float _D,
+void FRPid::Init(float _P, float _I, float _D,
 	float _OutMax, float _OutMin)
 {
 	P = _P;
@@ -25,11 +25,11 @@ void FRCGPid::Init(float _P, float _I, float _D,
 	OutMax = _OutMax;
 	OutMin = _OutMin;
 
-	FRCGPid::Reset();
+	FRPid::Reset();
 }
 
 // Update
-float FRCGPid::Update(const float Error, const float DeltaT)
+float FRPid::Update(const float Error, const float DeltaT)
 {
 	if (DeltaT == 0.0f || FMath::IsNaN(Error))
 	{
@@ -63,7 +63,7 @@ float FRCGPid::Update(const float Error, const float DeltaT)
 }
 
 // Reset
-void FRCGPid::Reset()
+void FRPid::Reset()
 {
 	PrevErr = 0.0f;
 	IErr = 0.0f;

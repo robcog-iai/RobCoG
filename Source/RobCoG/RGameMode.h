@@ -3,19 +3,19 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
-#include "RCGGameMode.generated.h"
+#include "RGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ROCOG_API ARCGGameMode : public AGameMode
+class ROBCOG_API ARGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	
 public:
 	// Constructor
-	ARCGGameMode(const FObjectInitializer& ObjectInitializer);
+	ARGameMode(const FObjectInitializer& ObjectInitializer);
 
 	// Called when the game starts or when spawned
 	virtual void StartPlay() override;

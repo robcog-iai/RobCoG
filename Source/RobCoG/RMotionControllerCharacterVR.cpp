@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "RoCoG.h"
+#include "RobCoG.h"
 #include "HeadMountedDisplay.h"
 #include "MotionControllerComponent.h"
-#include "RCGMotionControllerCharacterVR.h"
+#include "RMotionControllerCharacterVR.h"
 
 
 // Sets default values
-ARCGMotionControllerCharacterVR::ARCGMotionControllerCharacterVR(const FObjectInitializer& ObjectInitializer)
+ARMotionControllerCharacterVR::ARMotionControllerCharacterVR(const FObjectInitializer& ObjectInitializer)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -66,7 +66,7 @@ ARCGMotionControllerCharacterVR::ARCGMotionControllerCharacterVR(const FObjectIn
 }
 
 // Called when the game starts or when spawned
-void ARCGMotionControllerCharacterVR::BeginPlay()
+void ARMotionControllerCharacterVR::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -92,20 +92,20 @@ void ARCGMotionControllerCharacterVR::BeginPlay()
 }
 
 // Called every frame
-void ARCGMotionControllerCharacterVR::Tick( float DeltaTime )
+void ARMotionControllerCharacterVR::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
 }
 
 // Called to bind functionality to input
-void ARCGMotionControllerCharacterVR::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void ARMotionControllerCharacterVR::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 }
 
 // Get the Motion Controller Component
-UMotionControllerComponent* ARCGMotionControllerCharacterVR::GetMotionController(EControllerHand HandType)
+UMotionControllerComponent* ARMotionControllerCharacterVR::GetMotionController(EControllerHand HandType)
 {
 	if (HandType == EControllerHand::Left)
 	{

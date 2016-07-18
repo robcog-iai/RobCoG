@@ -3,13 +3,13 @@
 #pragma once
 
 #include "GameFramework/GameMode.h"
-#include "RoCoGGameMode.generated.h"
+#include "RobCoGGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ROCOG_API ARoCoGGameMode : public AGameMode
+class ROBCOG_API ARobCoGGameMode : public AGameMode
 {
 	GENERATED_BODY()
 	

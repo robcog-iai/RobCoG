@@ -1,8 +1,8 @@
-#include "RoCoG.h"
-#include "RCGPid3d.h"
+#include "RobCoG.h"
+#include "RPid3d.h"
 
 // Constructor
-FRCGPid3d::FRCGPid3d(float _P, float _I, float _D,
+FRPid3d::FRPid3d(float _P, float _I, float _D,
 	float _OutMax, float _OutMin) :
 	P(_P), I(_I), D(_D), OutMax(_OutMax), OutMin(_OutMin)
 {
@@ -11,12 +11,12 @@ FRCGPid3d::FRCGPid3d(float _P, float _I, float _D,
 }
 
 // Destructor
-FRCGPid3d::~FRCGPid3d()
+FRPid3d::~FRPid3d()
 {
 }
 
 // Init
-void FRCGPid3d::Init(float _P, float _I, float _D,
+void FRPid3d::Init(float _P, float _I, float _D,
 	float _OutMax, float _OutMin)
 {
 	P = _P;
@@ -25,11 +25,11 @@ void FRCGPid3d::Init(float _P, float _I, float _D,
 	OutMax = _OutMax;
 	OutMin = _OutMin;
 
-	FRCGPid3d::Reset();
+	FRPid3d::Reset();
 }
 
 // Update the PID loop
-FVector FRCGPid3d::Update(const FVector Error, const float DeltaT)
+FVector FRPid3d::Update(const FVector Error, const float DeltaT)
 {
 	if (DeltaT == 0.0f)
 	{
@@ -64,7 +64,7 @@ FVector FRCGPid3d::Update(const FVector Error, const float DeltaT)
 }
 
 // Reset
-void FRCGPid3d::Reset()
+void FRPid3d::Reset()
 {
 	IErr = FVector(0.0f, 0.0f, 0.0f);
 	PrevErr = FVector(0.0f, 0.0f, 0.0f);

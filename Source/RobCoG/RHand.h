@@ -3,22 +3,22 @@
 #pragma once
 
 #include "Animation/SkeletalMeshActor.h"
-#include "RCGUtils.h"
-#include "RCGPid3d.h"
-#include "RCGGrasp.h"
-#include "RCGHand.generated.h"
+#include "RUtils.h"
+#include "RPid3d.h"
+#include "RGrasp.h"
+#include "RHand.generated.h"
 
 /**
 *
 */
 UCLASS()
-class ROCOG_API ARCGHand : public ASkeletalMeshActor
+class ROBCOG_API ARHand : public ASkeletalMeshActor
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ARCGHand();
+	ARHand();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -61,7 +61,7 @@ protected:
 
 	// Finger types of the hand (make sure the skeletal bone name is part of the finger name)
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
-	TArray<ERCGHandLimb> FingerTypes;
+	TArray<ERHandLimb> FingerTypes;
 
 	// Finger collision bone name (used for collision detection)
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
@@ -109,7 +109,7 @@ private:
 	UMotionControllerComponent* MCComponent;
 
 	// 3D PID controller for all axis
-	FRCGPid3d HandPID3D;
+	FRPid3d HandPID3D;
 	
 	// Current location of the control body
 	FVector CurrLoc;
@@ -121,16 +121,16 @@ private:
 	FBodyInstance* ControlBody;
 
 	// Fingers type to constraints Map
-	TMultiMap<ERCGHandLimb, FConstraintInstance*> FingerTypeToConstrs;
+	TMultiMap<ERHandLimb, FConstraintInstance*> FingerTypeToConstrs;
 
 	// Fingers type name to finger body (collision)
 	TMap<FName, FBodyInstance*> FingerBoneNameToBody;
 
 	// Grasp base class
-	FRCGGrasp* Grasp;
+	FRGrasp* Grasp;
 
 	// Bone name to finger type
-	TMap<FName, ERCGHandLimb> BoneNameToFingerTypeMap;
+	TMap<FName, ERHandLimb> BoneNameToFingerTypeMap;
 
 	// Finger hit events enable flag
 	bool bFingerHitEvents;
@@ -138,7 +138,7 @@ private:
 	// Store a map of components in contact with fingers,
 	// used for reasoning on what objects to attach to the hand
 	// (e.g. Cup : Index, Middle, Pinky, Thumb; Table : Palm; -> Attach Cup )
-	TMultiMap<AActor*, ERCGHandLimb> HitActorToFingerMMap;
+	TMultiMap<AActor*, ERHandLimb> HitActorToFingerMMap;
 
 	// Grasp physics constraint component (fixating grasp case)
 	UPhysicsConstraintComponent* GraspFixatingConstraint;

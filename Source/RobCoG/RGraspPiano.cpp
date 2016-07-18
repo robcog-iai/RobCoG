@@ -1,20 +1,20 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "RoCoG.h"
-#include "RCGGraspPiano.h"
+#include "RobCoG.h"
+#include "RGraspPiano.h"
 
 // Set default values
-FRCGGraspPiano::FRCGGraspPiano()
+FRGraspPiano::FRGraspPiano()
 {
 	// Set default state
-	SetState(ERCGGraspState::Free);
+	SetState(ERGraspState::Free);
 }
 
 // Set default values
-FRCGGraspPiano::FRCGGraspPiano(TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrs)
+FRGraspPiano::FRGraspPiano(TMultiMap<ERHandLimb, FConstraintInstance*>& FingerTypeToConstrs)
 {
 	// Set default state
-	SetState(ERCGGraspState::Free);
+	SetState(ERGraspState::Free);
 
 	// Set the fingers to control
 	FingerTypeToConstraintsMMap = FingerTypeToConstrs;
@@ -23,11 +23,11 @@ FRCGGraspPiano::FRCGGraspPiano(TMultiMap<ERCGHandLimb, FConstraintInstance*>& Fi
 	for (const auto TypeToConstr : FingerTypeToConstrs)
 	{
 		// Get current finger type
-		const ERCGHandLimb Type = TypeToConstr.Key;
+		const ERHandLimb Type = TypeToConstr.Key;
 		// Add type to the array
 		FingerTypesArr.Add(Type);
 		// Set finger state
-		FingerToStateMap.Add(Type, ERCGGraspState::Free);
+		FingerToStateMap.Add(Type, ERGraspState::Free);
 		// Set finger target 
 		FingerToTargetMap.Add(Type, 0.0f);
 	}
@@ -39,16 +39,16 @@ FRCGGraspPiano::FRCGGraspPiano(TMultiMap<ERCGHandLimb, FConstraintInstance*>& Fi
 }
 
 // Destructor
-FRCGGraspPiano::~FRCGGraspPiano()
+FRGraspPiano::~FRGraspPiano()
 {
 }
 
 // Update grasping
-void FRCGGraspPiano::Update(const float Step)
+void FRGraspPiano::Update(const float Step)
 {
 	// Lambda function for updating grasping
-	auto FingerUpdateLambda = [&](TMultiMap<ERCGHandLimb, FConstraintInstance*>& FingerTypeToConstrsLambda,
-		ERCGHandLimb Type)
+	auto FingerUpdateLambda = [&](TMultiMap<ERHandLimb, FConstraintInstance*>& FingerTypeToConstrsLambda,
+		ERHandLimb Type)
 	{
 		// Get finger constraints array
 		TArray<FConstraintInstance*> FingerConstrArr;
@@ -65,11 +65,11 @@ void FRCGGraspPiano::Update(const float Step)
 			// Apply orientation target if constraints are not violated
 			if (CurrFingerTarget > ConstrLimit)
 			{
-				FingerToStateMap[Type] = ERCGGraspState::Closed;
+				FingerToStateMap[Type] = ERGraspState::Closed;
 			}
 			else if (CurrFingerTarget < - ConstrLimit)
 			{
-				FingerToStateMap[Type] = ERCGGraspState::Opened;
+				FingerToStateMap[Type] = ERGraspState::Opened;
 			}
 			else
 			{
@@ -85,7 +85,7 @@ void FRCGGraspPiano::Update(const float Step)
 		FingerToTargetMap[ActiveFinger] += Step;
 
 		// Check if the active finger is in state free
-		if (FingerToStateMap[ActiveFinger] == ERCGGraspState::Free)
+		if (FingerToStateMap[ActiveFinger] == ERGraspState::Free)
 		{
 			// Apply movement to the active finger
 			FingerUpdateLambda(FingerTypeToConstraintsMMap, ActiveFinger);
@@ -105,23 +105,23 @@ void FRCGGraspPiano::Update(const float Step)
 	};
 
 	// Check grasping states in order to apply/or not the relevant movement
-	if (State == ERCGGraspState::Free)
+	if (State == ERGraspState::Free)
 	{
 		ChooseFingerLambda();
 	}
-	else if (State == ERCGGraspState::Closed && Step < 0)
+	else if (State == ERGraspState::Closed && Step < 0)
 	{
 		// Set state to free and apply opening movement
-		State = ERCGGraspState::Free;
+		State = ERGraspState::Free;
 
 		ActiveFingerIdx = 0;
 
 		ChooseFingerLambda();
 	}
-	else if (State == ERCGGraspState::Opened && Step > 0)
+	else if (State == ERGraspState::Opened && Step > 0)
 	{
 		// Set state to free and apply closing movement
-		State = ERCGGraspState::Free;
+		State = ERGraspState::Free;
 
 		ActiveFingerIdx = 0;
 
@@ -130,7 +130,7 @@ void FRCGGraspPiano::Update(const float Step)
 }
 
 // Set the active finger in the grasp
-bool FRCGGraspPiano::SetActiveFinger(uint8 ActiveFingerIdx)
+bool FRGraspPiano::SetActiveFinger(uint8 ActiveFingerIdx)
 {
 	// Set active finger
 	if (FingerTypesArr.IsValidIndex(ActiveFingerIdx))

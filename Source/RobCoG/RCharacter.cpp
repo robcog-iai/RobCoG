@@ -1,17 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "RoCoG.h"
-#include "RCGUtils.h"
-#include "RCGGraspPiano.h" //TODO remove this?
-#include "RCGCharacter.h"
-
-#define PrintLong(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.0, FColor::White,text)
-#define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
-#define PrintRed(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Red,text)
-#define PrintGreen(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green,text)
+#include "RobCoG.h"
+#include "RUtils.h"
+#include "RGraspPiano.h" //TODO remove this?
+#include "RCharacter.h"
 
 // Sets default values
-ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
+ARCharacter::ARCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -63,11 +58,11 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	Velocity = 0.1f;
 
 	// Finger types
-	FingerTypes.Add(ERCGHandLimb::Index);
-	FingerTypes.Add(ERCGHandLimb::Middle);
-	FingerTypes.Add(ERCGHandLimb::Ring);
-	FingerTypes.Add(ERCGHandLimb::Pinky);
-	FingerTypes.Add(ERCGHandLimb::Thumb);
+	FingerTypes.Add(ERHandLimb::Index);
+	FingerTypes.Add(ERHandLimb::Middle);
+	FingerTypes.Add(ERHandLimb::Ring);
+	FingerTypes.Add(ERHandLimb::Pinky);
+	FingerTypes.Add(ERHandLimb::Thumb);
 
 	// Make the capsule thin
 	GetCapsuleComponent()->SetCapsuleRadius(5);
@@ -190,7 +185,7 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 }
 
 // Called when the game starts or when spawned
-void ARCGCharacter::BeginPlay()
+void ARCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -205,8 +200,8 @@ void ARCGCharacter::BeginPlay()
 	}
 
 	// Linear movement PIDs
-	LeftPID3D = FRCGPid3d(PGain, IGain, DGain, PIDMaxOutput, PIDMinOutput);
-	RightPID3D = FRCGPid3d(PGain, IGain, DGain, PIDMaxOutput, PIDMinOutput);
+	LeftPID3D = FRPid3d(PGain, IGain, DGain, PIDMaxOutput, PIDMinOutput);
+	RightPID3D = FRPid3d(PGain, IGain, DGain, PIDMaxOutput, PIDMinOutput);
 
 	// Get the bodies to apply forces on for pose control
 	LeftControlBody = LeftHand->GetBodyInstance(LeftControlBoneName);
@@ -231,17 +226,17 @@ void ARCGCharacter::BeginPlay()
 	auto GetFingerToConstrLambda = [&](TArray<FConstraintInstance*>& Constraints)
 	{
 		// Finger type to contraint map
-		TMultiMap<ERCGHandLimb, FConstraintInstance*> FingersMap;
+		TMultiMap<ERHandLimb, FConstraintInstance*> FingersMap;
 		// Iterate constraints
 		for (FConstraintInstance* Constr : Constraints)
 		{
 			// Current constraint joint name
 			const FString ConstrName = Constr->JointName.ToString();
 			// Iterate hand limbs type
-			for (const ERCGHandLimb Type : FingerTypes)
+			for (const ERHandLimb Type : FingerTypes)
 			{
 				// Get the enum type as string
-				const FString TypeName = FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", Type);
+				const FString TypeName = FRUtils::GetEnumValueToString<ERHandLimb>("ERHandLimb", Type);
 				// Add to finger map if the constraint name matches the finger type (name)
 				if (ConstrName.Contains(TypeName))
 				{
@@ -280,7 +275,7 @@ void ARCGCharacter::BeginPlay()
 	RFingerBoneNameToBody = GetFingerCollisionBonesLambda(RightHand, RightCollisionBoneNames);
 	
 	// Add bone names to limb type Map
-	auto AddBoneNamesToLimbsLambda = [&](TArray<FName> BoneNames, TMap<FName, ERCGHandLimb>& NameToLimbMap)
+	auto AddBoneNamesToLimbsLambda = [&](TArray<FName> BoneNames, TMap<FName, ERHandLimb>& NameToLimbMap)
 	{
 		// Iterate the bone names
 		for (auto Name : BoneNames)
@@ -289,10 +284,10 @@ void ARCGCharacter::BeginPlay()
 			const FString NameStr = Name.ToString();
 
 			// Iterate hand limbs type
-			for (const ERCGHandLimb Type : FingerTypes)
+			for (const ERHandLimb Type : FingerTypes)
 			{
 				// Get the enum type as string
-				const FString TypeName = FRCGUtils::GetEnumValueToString<ERCGHandLimb>("ERCGHandLimb", Type);
+				const FString TypeName = FRUtils::GetEnumValueToString<ERHandLimb>("ERHandLimb", Type);
 				// Add to finger map if the constraint name matches the finger type (name)
 				if (NameStr.Contains(TypeName))
 				{
@@ -313,16 +308,16 @@ void ARCGCharacter::BeginPlay()
 	RightCurrQuat = RightHand->GetBoneQuaternion(RightControlBoneName);
 
 	// Initialize grasp type
-	LeftGrasp = new FRCGGrasp(LFingerTypeToConstrs);
-	RightGrasp = new FRCGGrasp(RFingerTypeToConstrs);
+	LeftGrasp = new FRGrasp(LFingerTypeToConstrs);
+	RightGrasp = new FRGrasp(RFingerTypeToConstrs);
 
 	// Set the grasp constraint instance
 	LeftGraspFixatingConstraint->ConstraintInstance = FixatingGraspConstraintInstance;
 	RightGraspFixatingConstraint->ConstraintInstance = FixatingGraspConstraintInstance;
 
 	// Collision callbacks for the hands
-	LeftHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitLeft);
-	RightHand->OnComponentHit.AddDynamic(this, &ARCGCharacter::OnHitRight);
+	LeftHand->OnComponentHit.AddDynamic(this, &ARCharacter::OnHitLeft);
+	RightHand->OnComponentHit.AddDynamic(this, &ARCharacter::OnHitRight);
 
 
 	/////////////////////////////////////////////////////////////////
@@ -377,12 +372,12 @@ void ARCGCharacter::BeginPlay()
 	//GraspHelperStaticMeshAct->GetStaticMeshComponent()->SetStaticMesh(MeshAsset);
 	/////////////////////////////////////////////////////////////////
 
-	PrintLong(TEXT("PhysicsConstraint between ASkeletalMeshActor <-> AStaticMeshActor"));
+	//PrintLong(TEXT("PhysicsConstraint between ASkeletalMeshActor <-> AStaticMeshActor"));
 
 }
 
 // Called every frame
-void ARCGCharacter::Tick( float DeltaTime )
+void ARCharacter::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
 
@@ -441,32 +436,32 @@ void ARCGCharacter::Tick( float DeltaTime )
 }
 
 // Called to bind functionality to input
-void ARCGCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void ARCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
 	// Set up gameplay key bindings
-	InputComponent->BindAxis("MoveForward", this, &ARCGCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &ARCGCharacter::MoveRight);
+	InputComponent->BindAxis("MoveForward", this, &ARCharacter::MoveForward);
+	InputComponent->BindAxis("MoveRight", this, &ARCharacter::MoveRight);
 	// Default Camera view bindings
-	InputComponent->BindAxis("CameraPitch", this, &ARCGCharacter::AddControllerPitchInput);
-	InputComponent->BindAxis("CameraYaw", this, &ARCGCharacter::AddControllerYawInput);
+	InputComponent->BindAxis("CameraPitch", this, &ARCharacter::AddControllerPitchInput);
+	InputComponent->BindAxis("CameraYaw", this, &ARCharacter::AddControllerYawInput);
 	// Set up hand bindings
-	InputComponent->BindAxis("OpenHandLeft", this, &ARCGCharacter::OpenHandLeft);
-	InputComponent->BindAxis("CloseHandLeft", this, &ARCGCharacter::CloseHandLeft);
-	InputComponent->BindAxis("OpenHandRight", this, &ARCGCharacter::OpenHandRight);
-	InputComponent->BindAxis("CloseHandRight", this, &ARCGCharacter::CloseHandRight);
+	InputComponent->BindAxis("OpenHandLeft", this, &ARCharacter::OpenHandLeft);
+	InputComponent->BindAxis("CloseHandLeft", this, &ARCharacter::CloseHandLeft);
+	InputComponent->BindAxis("OpenHandRight", this, &ARCharacter::OpenHandRight);
+	InputComponent->BindAxis("CloseHandRight", this, &ARCharacter::CloseHandRight);
 	// Bind hand attach
-	InputComponent->BindAction("AttachHandLeft", IE_Released, this, &ARCGCharacter::AttachHandLeft);
-	InputComponent->BindAction("AttachHandRight", IE_Released, this, &ARCGCharacter::AttachHandRight);
+	InputComponent->BindAction("AttachHandLeft", IE_Released, this, &ARCharacter::AttachHandLeft);
+	InputComponent->BindAction("AttachHandRight", IE_Released, this, &ARCharacter::AttachHandRight);
 	// TODO TEST
 	// Set up grasp switch
-	InputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &ARCGCharacter::OnSwitchGrasp);
-	InputComponent->BindAction("ConstraintTest", IE_Pressed, this, &ARCGCharacter::OnCreateConstraint);
+	InputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &ARCharacter::OnSwitchGrasp);
+	InputComponent->BindAction("ConstraintTest", IE_Pressed, this, &ARCharacter::OnCreateConstraint);
 }
 
 // Handles moving forward/backward
-void ARCGCharacter::MoveForward(const float Value)
+void ARCharacter::MoveForward(const float Value)
 {
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
@@ -484,7 +479,7 @@ void ARCGCharacter::MoveForward(const float Value)
 }
 
 // Handles moving right/left
-void ARCGCharacter::MoveRight(const float Value)
+void ARCharacter::MoveRight(const float Value)
 {
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
@@ -497,7 +492,7 @@ void ARCGCharacter::MoveRight(const float Value)
 }
 
 // Called to bind functionality to input
-void ARCGCharacter::CloseHandLeft(const float AxisValue)
+void ARCharacter::CloseHandLeft(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{		
@@ -530,7 +525,7 @@ void ARCGCharacter::CloseHandLeft(const float AxisValue)
 }
 
 // Called to bind functionality to input
-void ARCGCharacter::OpenHandLeft(const float AxisValue)
+void ARCharacter::OpenHandLeft(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
@@ -544,13 +539,13 @@ void ARCGCharacter::OpenHandLeft(const float AxisValue)
 	}
 
 	// Detach object if case
-	if (LeftGrasp->GetState() == ERCGGraspState::Attached)
+	if (LeftGrasp->GetState() == ERGraspState::Attached)
 	{
 		// Break constraint
 		LeftGraspFixatingConstraint->BreakConstraint();
 
 		// Set state to free
-		LeftGrasp->SetState(ERCGGraspState::Free);
+		LeftGrasp->SetState(ERGraspState::Free);
 	}
 
 	// Update grasping
@@ -558,10 +553,10 @@ void ARCGCharacter::OpenHandLeft(const float AxisValue)
 }
 
 // Attach grasped object to hand
-void ARCGCharacter::AttachHandLeft()
+void ARCharacter::AttachHandLeft()
 {
 	// Attach object only if the state is blocked
-	if (LeftGrasp->GetState() == ERCGGraspState::Blocked)
+	if (LeftGrasp->GetState() == ERGraspState::Blocked)
 	{
 		// Map colliding component with the number of appearance
 		TMap<AActor*, uint8> ActorToCount;
@@ -620,7 +615,7 @@ void ARCGCharacter::AttachHandLeft()
 		}
 		
 		// Set state to attached
-		LeftGrasp->SetState(ERCGGraspState::Attached);
+		LeftGrasp->SetState(ERGraspState::Attached);
 		
 		
 		// Free the finger collisions
@@ -629,7 +624,7 @@ void ARCGCharacter::AttachHandLeft()
 }
 
 // Called to bind functionality to input
-void ARCGCharacter::CloseHandRight(const float AxisValue)
+void ARCharacter::CloseHandRight(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
@@ -662,7 +657,7 @@ void ARCGCharacter::CloseHandRight(const float AxisValue)
 }
 
 // Called to bind functionality to input
-void ARCGCharacter::OpenHandRight(const float AxisValue)
+void ARCharacter::OpenHandRight(const float AxisValue)
 {
 	if (AxisValue == 0)
 	{
@@ -676,13 +671,13 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 	}
 
 	// Detach object if case
-	if (RightGrasp->GetState() == ERCGGraspState::Attached)
+	if (RightGrasp->GetState() == ERGraspState::Attached)
 	{
 		// Break constraint
 		RightGraspFixatingConstraint->BreakConstraint();
 
 		// Set state to free
-		RightGrasp->SetState(ERCGGraspState::Free);
+		RightGrasp->SetState(ERGraspState::Free);
 	}
 
 	// Update grasping
@@ -690,10 +685,10 @@ void ARCGCharacter::OpenHandRight(const float AxisValue)
 }
 
 // Attach grasped object to hand
-void ARCGCharacter::AttachHandRight()
+void ARCharacter::AttachHandRight()
 {
 	// Attach object only if the state is blocked
-	if (RightGrasp->GetState() == ERCGGraspState::Blocked)
+	if (RightGrasp->GetState() == ERGraspState::Blocked)
 	{
 		// Map colliding component with the number of appearance
 		TMap<AActor*, uint8> ActorToCount;
@@ -733,7 +728,7 @@ void ARCGCharacter::AttachHandRight()
 		}
 
 		// Set state to attached
-		RightGrasp->SetState(ERCGGraspState::Attached);
+		RightGrasp->SetState(ERGraspState::Attached);
 
 		// Free the finger collisions
 		RightHitActorToFingerMMap.Empty();
@@ -741,13 +736,13 @@ void ARCGCharacter::AttachHandRight()
 }
 
 // Hand collision callback
-void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ARCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {	
 	// Check collisions if grasp state is free, 
-	if (LeftGrasp->GetState() == ERCGGraspState::Free)
+	if (LeftGrasp->GetState() == ERGraspState::Free)
 	{		
 		// Get the finger in collision
-		const ERCGHandLimb* Finger = BoneNameToLimbMap.Find(Hit.BoneName);
+		const ERHandLimb* Finger = BoneNameToLimbMap.Find(Hit.BoneName);
 
 		// Block finger if free, and not colliding with self
 		if ((Finger != nullptr) && (!LeftGrasp->IsFingerBlocked(*Finger)) && (SelfComp != OtherComp))
@@ -762,13 +757,13 @@ void ARCGCharacter::OnHitLeft(UPrimitiveComponent* SelfComp, AActor* OtherActor,
 }
 
 // Hand collision callback
-void ARCGCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ARCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Check collisions if grasp state is free, 
-	if (RightGrasp->GetState() == ERCGGraspState::Free)
+	if (RightGrasp->GetState() == ERGraspState::Free)
 	{
 		// Get the finger in collision
-		const ERCGHandLimb* Finger = BoneNameToLimbMap.Find(Hit.BoneName);
+		const ERHandLimb* Finger = BoneNameToLimbMap.Find(Hit.BoneName);
 
 		// Block finger if free, and not colliding with self
 		if ((Finger != nullptr) && (!RightGrasp->IsFingerBlocked(*Finger)) && (SelfComp != OtherComp))
@@ -783,16 +778,16 @@ void ARCGCharacter::OnHitRight(UPrimitiveComponent* SelfComp, AActor* OtherActor
 }
 
 // Swith between grasping styles
-void ARCGCharacter::OnSwitchGrasp()
+void ARCharacter::OnSwitchGrasp()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Switch!"));
 
-	//LeftGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(LFingerTypeToConstrs));
-	//RightGrasp = dynamic_cast<FRCGGrasp*>(new FRCGGraspPiano(RFingerTypeToConstrs));
+	//LeftGrasp = dynamic_cast<FRGrasp*>(new FRGraspPiano(LFingerTypeToConstrs));
+	//RightGrasp = dynamic_cast<FRGrasp*>(new FRGraspPiano(RFingerTypeToConstrs));
 }
 
 // Swith between grasping styles
-void ARCGCharacter::OnCreateConstraint()
+void ARCharacter::OnCreateConstraint()
 {
 	// Action binding function
 	if (!bAttached)

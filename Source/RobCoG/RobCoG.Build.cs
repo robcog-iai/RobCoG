@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class RoCoG : ModuleRules
+public class RobCoG : ModuleRules
 {
-	public RoCoG(TargetInfo Target)
+	public RobCoG(TargetInfo Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] {
 			"Core",
@@ -20,7 +20,6 @@ public class RoCoG : ModuleRules
 			//"JsonUtilities"
         });
 
-		
 		PrivateDependencyModuleNames.AddRange(new string[] {
 			"HeadMountedDisplay",
 			"SteamVR"

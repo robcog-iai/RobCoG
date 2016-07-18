@@ -4,21 +4,21 @@
 
 #include "GameFramework/Character.h"
 #include "Animation/SkeletalMeshActor.h"
-#include "RCGPid3d.h"
-#include "RCGGrasp.h"
-#include "RCGUtils.h"
+#include "RPid3d.h"
+#include "RGrasp.h"
+#include "RUtils.h"
 #include "MotionControllerComponent.h"
-#include "RCGCharacter.generated.h"
+#include "RCharacter.generated.h"
 
 
 UCLASS()
-class ROCOG_API ARCGCharacter : public ACharacter
+class ROBCOG_API ARCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ARCGCharacter(const FObjectInitializer& ObjectInitializer);
+	ARCharacter(const FObjectInitializer& ObjectInitializer);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -83,7 +83,7 @@ public:
 	
 	// Finger types of the hand (make sure the skeletal bone name is part of the finger name)
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
-	TArray<ERCGHandLimb> FingerTypes;
+	TArray<ERHandLimb> FingerTypes;
 	
 	// Spring value to apply to the angular drive (Position strength)
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
@@ -174,10 +174,10 @@ private:
 	UArrowComponent* RightTargetArrow;
 	
 	// Left 3D PID controller for all axis
-	FRCGPid3d LeftPID3D;
+	FRPid3d LeftPID3D;
 	
 	// Right 3D PID controller for X axis
-	FRCGPid3d RightPID3D;
+	FRPid3d RightPID3D;
 	
 	// Current location of the left control body
 	FVector LeftCurrLoc;
@@ -198,10 +198,10 @@ private:
 	FBodyInstance* RightControlBody;
 	
 	// Left fingers type to constraints Map
-	TMultiMap<ERCGHandLimb, FConstraintInstance*> LFingerTypeToConstrs;
+	TMultiMap<ERHandLimb, FConstraintInstance*> LFingerTypeToConstrs;
 	
 	// Right fingers type to constraints Map
-	TMultiMap<ERCGHandLimb, FConstraintInstance*> RFingerTypeToConstrs;
+	TMultiMap<ERHandLimb, FConstraintInstance*> RFingerTypeToConstrs;
 	
 	// Left fingers type to collision sensor bone
 	TMap<FName, FBodyInstance*> LFingerBoneNameToBody;
@@ -210,13 +210,13 @@ private:
 	TMap<FName, FBodyInstance*> RFingerBoneNameToBody;
 	
 	// Grasp base class
-	FRCGGrasp* LeftGrasp;
+	FRGrasp* LeftGrasp;
 	
 	// Grasp base class
-	FRCGGrasp* RightGrasp;
+	FRGrasp* RightGrasp;
 	
 	// Bone name to hand limb Map
-	TMap<FName, ERCGHandLimb> BoneNameToLimbMap;
+	TMap<FName, ERHandLimb> BoneNameToLimbMap;
 
 	// Finger hit events enable flag
 	bool bLeftFingerHitEvents;
@@ -227,12 +227,12 @@ private:
 	// Store a map of components in contact with fingers,
 	// used for reasoning on what objects to attach to the hand
 	// (e.g. Cup : Index, Middle, Pinky, Thumb; Table : Palm; -> Attach Cup )
-	TMultiMap<AActor*, ERCGHandLimb> LeftHitActorToFingerMMap;
+	TMultiMap<AActor*, ERHandLimb> LeftHitActorToFingerMMap;
 
 	// Store a map of components in contact with fingers,
 	// used for reasoning on what objects to attach to the hand
 	// (e.g. Cup : Index, Middle, Pinky, Thumb; Table : Palm; -> Attach Cup )
-	TMultiMap<AActor*, ERCGHandLimb> RightHitActorToFingerMMap;
+	TMultiMap<AActor*, ERHandLimb> RightHitActorToFingerMMap;
 
 	// Left grasp physics constraint component (fixating grasp case)
 	UPhysicsConstraintComponent* LeftGraspFixatingConstraint;

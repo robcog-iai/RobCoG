@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "RoCoG.h"
-#include "RCGUtils.h"
+#include "RobCoG.h"
+#include "RUtils.h"
 #include "MotionControllerComponent.h"
-#include "RCGMotionControllerCharacter.h"
+#include "RMotionControllerCharacter.h"
 
 
 // Sets default values
-ARCGMotionControllerCharacter::ARCGMotionControllerCharacter(const FObjectInitializer& ObjectInitializer)
+ARMotionControllerCharacter::ARMotionControllerCharacter(const FObjectInitializer& ObjectInitializer)
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -37,7 +37,7 @@ ARCGMotionControllerCharacter::ARCGMotionControllerCharacter(const FObjectInitia
 	MCOriginComponent->SetupAttachment(RootComponent);
 	// Position of the mc origin
 	MCOriginComponent->RelativeLocation = FVector(
-		0.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+		20.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
 	// Create left/right motion controller
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
@@ -61,7 +61,7 @@ ARCGMotionControllerCharacter::ARCGMotionControllerCharacter(const FObjectInitia
 }
 
 // Called when the game starts or when spawned
-void ARCGMotionControllerCharacter::BeginPlay()
+void ARMotionControllerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -74,21 +74,21 @@ void ARCGMotionControllerCharacter::BeginPlay()
 }
 
 // Called to bind functionality to input
-void ARCGMotionControllerCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void ARMotionControllerCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 {
 	Super::SetupPlayerInputComponent(InputComponent);
 
 	// Set up gameplay key bindings
-	InputComponent->BindAxis("MoveForward", this, &ARCGMotionControllerCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &ARCGMotionControllerCharacter::MoveRight);
+	InputComponent->BindAxis("MoveForward", this, &ARMotionControllerCharacter::MoveForward);
+	InputComponent->BindAxis("MoveRight", this, &ARMotionControllerCharacter::MoveRight);
 	// Default Camera view bindings
-	InputComponent->BindAxis("CameraPitch", this, &ARCGMotionControllerCharacter::AddControllerPitchInput);
-	InputComponent->BindAxis("CameraYaw", this, &ARCGMotionControllerCharacter::AddControllerYawInput);
+	InputComponent->BindAxis("CameraPitch", this, &ARMotionControllerCharacter::AddControllerPitchInput);
+	InputComponent->BindAxis("CameraYaw", this, &ARMotionControllerCharacter::AddControllerYawInput);
 
 }
 
 // Get the Motion Controller Component
-UMotionControllerComponent* ARCGMotionControllerCharacter::GetMotionController(EControllerHand HandType)
+UMotionControllerComponent* ARMotionControllerCharacter::GetMotionController(EControllerHand HandType)
 {
 	if (HandType == EControllerHand::Left)
 	{
@@ -105,7 +105,7 @@ UMotionControllerComponent* ARCGMotionControllerCharacter::GetMotionController(E
 }
 
 // Get Motion Controller calibration offset location
-FVector ARCGMotionControllerCharacter::GetMCTrackingOffsetLoc(EControllerHand HandType)
+FVector ARMotionControllerCharacter::GetMCTrackingOffsetLoc(EControllerHand HandType)
 {
 	if (HandType == EControllerHand::Left)
 	{
@@ -122,7 +122,7 @@ FVector ARCGMotionControllerCharacter::GetMCTrackingOffsetLoc(EControllerHand Ha
 }
 
 // Get Motion Controller calibration offset orientation
-FQuat ARCGMotionControllerCharacter::GetMCTrackingOffsetRot(EControllerHand HandType)
+FQuat ARMotionControllerCharacter::GetMCTrackingOffsetRot(EControllerHand HandType)
 {
 	if (HandType == EControllerHand::Left)
 	{
@@ -139,7 +139,7 @@ FQuat ARCGMotionControllerCharacter::GetMCTrackingOffsetRot(EControllerHand Hand
 }
 
 // Handles moving forward/backward
-void ARCGMotionControllerCharacter::MoveForward(const float Value)
+void ARMotionControllerCharacter::MoveForward(const float Value)
 {
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
@@ -157,7 +157,7 @@ void ARCGMotionControllerCharacter::MoveForward(const float Value)
 }
 
 // Handles moving right/left
-void ARCGMotionControllerCharacter::MoveRight(const float Value)
+void ARMotionControllerCharacter::MoveRight(const float Value)
 {
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
