@@ -1,6 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RoCoG.h"
+#include "MotionControllerComponent.h"
+#include "RCGMotionControllerCharacter.h"
+#include "RCGMotionControllerCharacterVR.h"
 #include "RCGHand.h"
 
 // Sets default values
@@ -94,16 +97,21 @@ void ARCGHand::BeginPlay()
 	// Get the motion controller of the character
 	for (TActorIterator<ARCGMotionControllerCharacter> CharItr(GetWorld()); CharItr; ++CharItr)
 	{
-		// Pointer to the motion controller character
-		MCCharacter = *CharItr;
 		// Pointer to the motion controller component
 		MCComponent = CharItr->GetMotionController(HandType);
 		// Stop the loop since we only need the first character (there should be only one)
 		break;
 	}
+	//for (TActorIterator<ARCGMotionControllerCharacterVR> CharItr(GetWorld()); CharItr; ++CharItr)
+	//{
+	//	// Pointer to the motion controller component
+	//	MCComponent = CharItr->GetMotionController(HandType);
+	//	// Stop the loop since we only need the first character (there should be only one)
+	//	break;
+	//}
 
 	// Disable Tick if no motion controller component or character has been found
-	if ((!MCComponent) || (!MCCharacter))
+	if ((!MCComponent))
 	{
 		SetActorTickEnabled(false);
 		UE_LOG(LogTemp, Error, 

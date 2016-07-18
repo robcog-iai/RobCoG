@@ -3,7 +3,6 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "MotionControllerComponent.h"
 #include "RCGMotionControllerCharacter.generated.h"
 
 UCLASS()
@@ -18,9 +17,6 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// Called every frame
-	virtual void Tick(float DeltaSeconds) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
@@ -33,13 +29,11 @@ public:
 	// Get Motion Controller calibration offset orientation
 	FQuat GetMCTrackingOffsetRot(EControllerHand HandType);
 
+protected:
 	// Visualise or not target arrows
 	UPROPERTY(EditAnywhere, Category = "Motion Controller")
 	bool bVisTargetArrows;
 
-
-
-protected:
 	// Handles moving forward/backward
 	void MoveForward(const float Val);
 
@@ -50,8 +44,8 @@ private:
 	// Character camera
 	UCameraComponent* CharCamera;
 
-	// Motion controller offset parent
-	USceneComponent* MCOffsetComponent;
+	// Motion controller origin parent
+	USceneComponent* MCOriginComponent;
 
 	// Left hand motion controller
 	UMotionControllerComponent* LeftMC;

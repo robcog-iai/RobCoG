@@ -2,6 +2,7 @@
 
 #include "RoCoG.h"
 #include "RCGUtils.h"
+#include "MotionControllerComponent.h"
 #include "RCGMotionControllerCharacter.h"
 
 
@@ -31,19 +32,19 @@ ARCGMotionControllerCharacter::ARCGMotionControllerCharacter(const FObjectInitia
 	// Get root component
 	RootComponent = GetRootComponent();
 	// Create the motion controller offset (hands in front of the character)
-	MCOffsetComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOffsetComponent"));
+	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
 	// Attach Offset to root
-	MCOffsetComponent->SetupAttachment(RootComponent);
-	// Position of the offset
-	MCOffsetComponent->RelativeLocation = FVector(
+	MCOriginComponent->SetupAttachment(RootComponent);
+	// Position of the mc origin
+	MCOriginComponent->RelativeLocation = FVector(
 		0.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
 	// Create left/right motion controller
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
 	RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightMotionController"));
 	// Attach controllers to root component
-	LeftMC->SetupAttachment(MCOffsetComponent);
-	RightMC->SetupAttachment(MCOffsetComponent);
+	LeftMC->SetupAttachment(MCOriginComponent);
+	RightMC->SetupAttachment(MCOriginComponent);
 	// Set the mapped hand (from the Motion Controller)
 	LeftMC->Hand = EControllerHand::Left;
 	RightMC->Hand = EControllerHand::Right;
@@ -70,12 +71,6 @@ void ARCGMotionControllerCharacter::BeginPlay()
 		LeftTargetArrow->SetHiddenInGame(false);
 		RightTargetArrow->SetHiddenInGame(false);
 	}
-}
-
-// Called every frame
-void ARCGMotionControllerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 // Called to bind functionality to input

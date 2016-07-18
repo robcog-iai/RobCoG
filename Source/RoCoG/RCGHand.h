@@ -3,8 +3,6 @@
 #pragma once
 
 #include "Animation/SkeletalMeshActor.h"
-#include "MotionControllerComponent.h"
-#include "RCGMotionControllerCharacter.h"
 #include "RCGUtils.h"
 #include "RCGPid3d.h"
 #include "RCGGrasp.h"
@@ -27,7 +25,8 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
-
+	
+protected:
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "Motion Controller")
 	EControllerHand HandType;
@@ -87,8 +86,7 @@ public:
 	// Fixating grasp constraint instance
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
 	FConstraintInstance FixatingGraspConstraintInstance;
-	
-protected:
+
 	// Set the tracking offset of the motion controller
 	void SetMCTrackingOffset();
 
@@ -107,9 +105,6 @@ protected:
 		FVector NormalImpulse, const FHitResult& Hit);
 
 private:
-	// Pointer to the motion controller character
-	ARCGMotionControllerCharacter* MCCharacter;
-
 	// Motion controller component for the hand to follow
 	UMotionControllerComponent* MCComponent;
 

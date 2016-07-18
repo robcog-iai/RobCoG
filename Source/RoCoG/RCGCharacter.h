@@ -158,8 +158,8 @@ private:
 	// Character camera
 	UCameraComponent* CharCamera;
 
-	// Motion controller offset parent
-	USceneComponent* MCOffset;
+	// Motion controller origin
+	USceneComponent* MCOriginComponent;
 	
 	// Left hand motion controller
 	UMotionControllerComponent* LeftMC;

@@ -86,18 +86,18 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	// Get root component
 	RootComponent = GetRootComponent();
 	// Create the motion controller offset (hands in front of the character)
-	MCOffset = CreateDefaultSubobject<USceneComponent>(TEXT("MCOffsetComponent"));
+	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
 	// Attach Offset to root
-	MCOffset->SetupAttachment(RootComponent);
+	MCOriginComponent->SetupAttachment(RootComponent);
 	// Position of the offset
-	MCOffset->RelativeLocation = FVector(80.0f, 0.0f, 0.0f);
+	MCOriginComponent->RelativeLocation = FVector(80.0f, 0.0f, 0.0f);
 
 	// Create left/right motion controller
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
 	RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightMotionController"));
 	// Attach controllers to root component
-	LeftMC->SetupAttachment(MCOffset);
-	RightMC->SetupAttachment(MCOffset);
+	LeftMC->SetupAttachment(MCOriginComponent);
+	RightMC->SetupAttachment(MCOriginComponent);
 	// Set the mapped hand (from the Motion Controller)
 	LeftMC->Hand = EControllerHand::Left;
 	RightMC->Hand = EControllerHand::Right;
@@ -134,8 +134,8 @@ ARCGCharacter::ARCGCharacter(const FObjectInitializer& ObjectInitializer)
 	LeftHand->SetCollisionProfileName(TEXT("BLockAll"));
 	RightHand->SetCollisionProfileName(TEXT("BLockAll"));
 	// Attach hands to the motion controller offset parent
-	LeftHand->SetupAttachment(MCOffset);
-	RightHand->SetupAttachment(MCOffset);
+	LeftHand->SetupAttachment(MCOriginComponent);
+	RightHand->SetupAttachment(MCOriginComponent);
 
 	// Set default values for the constraint instance
 	FixatingGraspConstraintInstance.SetDisableCollision(true);

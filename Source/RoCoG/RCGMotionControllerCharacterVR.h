@@ -12,7 +12,7 @@ class ROCOG_API ARCGMotionControllerCharacterVR : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	ARCGMotionControllerCharacterVR();
+	ARCGMotionControllerCharacterVR(const FObjectInitializer& ObjectInitializer);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -23,6 +23,34 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-	
-	
+	// Get the Motion Controller Component
+	UMotionControllerComponent* GetMotionController(EControllerHand HandType);
+
+protected:
+	// Visualise or not target arrows
+	UPROPERTY(EditAnywhere, Category = "Motion Controller")
+	bool bVisTargetArrows;
+
+	// Enable HMD tracking
+	UPROPERTY(EditDefaultsOnly, Category = "Motion Controller")
+	bool bPositionalHeadTracking;
+
+private:
+	// Character camera
+	UCameraComponent* CharCamera;
+
+	// Motion controller origin
+	USceneComponent* MCOriginComponent;
+
+	// Left hand motion controller
+	UMotionControllerComponent* LeftMC;
+
+	// Right hand motion controller
+	UMotionControllerComponent* RightMC;
+
+	// Left target arrow visual
+	UArrowComponent* LeftTargetArrow;
+
+	// Right target arrow visual
+	UArrowComponent* RightTargetArrow;	
 };
