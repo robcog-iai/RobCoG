@@ -1,9 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class RobCoG : ModuleRules
 {
+	// PATH HELPERS
+    private string ThirdPartyPath
+    {
+        get { return Path.Combine( ModuleDirectory, "../../ThirdParty/" ); }
+    }
+
 	public RobCoG(TargetInfo Target)
 	{
 		PublicDependencyModuleNames.AddRange(new string[] {
@@ -37,5 +44,9 @@ public class RobCoG : ModuleRules
 		//			DynamicallyLoadedModuleNames.Add("OnlineSubsystemSteam");
 		//		}
 		// }
+
+		// THIRD PARTY
+        PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "RapidJson", "Includes"));
+        PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "RapidXml", "Includes"));
 	}
 }
