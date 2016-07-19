@@ -18,13 +18,13 @@ public class RobCoG : ModuleRules
 			"CoreUObject",
 			"Engine",
 			"InputCore",
+			"Json",
+			"JsonUtilities",
 			//"HydraPlugin",
 			//"HeadMountedDisplay",
 			//"XmlParser"
 			//"PhysX",
 			//"APEX",
-			//"Json",
-			//"JsonUtilities"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {
