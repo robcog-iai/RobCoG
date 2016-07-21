@@ -14,35 +14,30 @@ ARMotionControllerCharacterVR::ARMotionControllerCharacterVR(const FObjectInitia
 
 	// Visualize motion controller debug arrows
 	bVisTargetArrows = true;
-
 	// Positional head tracking
 	bPositionalHeadTracking = false;
-
 	// Make the capsule thin
 	GetCapsuleComponent()->SetCapsuleRadius(5);
-
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
-
 	// Get root component
 	RootComponent = GetRootComponent();
 
-	// Create the motion controller offset (hands in front of the character)
-	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
-	// Attach Offset to root
-	MCOriginComponent->SetupAttachment(RootComponent);
-	//// Position of the offset
-	//MCOriginComponent->RelativeLocation = FVector(
-	//	0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
-	// Create a CameraComponent, attach to the MC origin component
-	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("CharacterCamera"));
+	// Create VR origin component and attach it to the root component
+	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
+	MCOriginComponent->SetupAttachment(RootComponent);
+	// Position of the offset
+	MCOriginComponent->RelativeLocation = FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+
+	// Create a CameraComponent, attach to the VR origin component
+	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("VRCamera"));
 	CharCamera->SetupAttachment(MCOriginComponent);
 
 	// Position the camera
-	CharCamera->RelativeLocation = FVector(0.0f, 0.0f, BaseEyeHeight);
+	//CharCamera->RelativeLocation = FVector(0.0f);// BaseEyeHeight);
 	// Allow the pawn to control the camera rotation
-	CharCamera->bUsePawnControlRotation = true;
+	//CharCamera->bUsePawnControlRotation = true;
 
 	// Create left/right motion controller
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
@@ -86,7 +81,7 @@ void ARMotionControllerCharacterVR::BeginPlay()
 		// Remove any translation when disabling positional head tracking
 		if (!bPositionalHeadTracking)
 		{
-			CharCamera->SetRelativeLocation(FVector(0, 0, 0));
+			CharCamera->SetRelativeLocation(FVector(0.0f));
 		}
 	}
 }

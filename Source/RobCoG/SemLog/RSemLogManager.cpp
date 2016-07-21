@@ -56,11 +56,14 @@ void ARSemLogManager::BeginPlay()
 void ARSemLogManager::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
+
+	// Current time
+	const float Timestamp = GetWorld()->GetTimeSeconds();
 	
 	// Log raw data
 	if (RawDataExp)
 	{
-		RawDataExp->Update();
+		RawDataExp->Update(Timestamp);
 	}
 
 	//UE_LOG(LogTemp, Warning, TEXT("tIME:%f"), GetWorld()->GetTimeSeconds());

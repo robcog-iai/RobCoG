@@ -93,7 +93,7 @@ ARHand::ARHand()
 void ARHand::BeginPlay()
 {
 	Super::BeginPlay();
-	///////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////
 	// Get the motion controller of the character
 	for (TActorIterator<ARMotionControllerCharacter> CharItr(GetWorld()); CharItr; ++CharItr)
 	{
