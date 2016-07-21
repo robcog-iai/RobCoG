@@ -2,8 +2,6 @@
 
 #include "RobCoG.h"
 #include "RSemLogManager.h"
-#include "Json.h"
-
 
 // Sets default values
 ARSemLogManager::ARSemLogManager()
@@ -41,15 +39,18 @@ void ARSemLogManager::BeginPlay()
 	// Create the directory path
 	ARSemLogManager::CreateDirectoryPath(EpisodePath);
 
+	// Set items unique names
+	ARSemLogManager::SetUniqueNames();
+
 	// Init raw data logger
 	if (bLogRawData)
 	{
 		// Path to the json file
 		const FString RawFilePath = EpisodePath + "/RawData.json";
 		// Init raw data exporter
-		RawDataExp = new FRRawDataExporter(DistanceThresholdSquared, GetWorld(),
+		RawDataExporter = new FRRawDataExporter(DistanceThresholdSquared, GetWorld(),
 			MakeShareable(PlatformFile.OpenWrite(*RawFilePath, true, true)));
-	}	
+	}
 }
 
 // Called every frame
@@ -61,13 +62,52 @@ void ARSemLogManager::Tick( float DeltaTime )
 	const float Timestamp = GetWorld()->GetTimeSeconds();
 	
 	// Log raw data
-	if (RawDataExp)
+	if (RawDataExporter)
 	{
-		RawDataExp->Update(Timestamp);
+		RawDataExporter->Update(Timestamp);
 	}
 
 	//UE_LOG(LogTemp, Warning, TEXT("tIME:%f"), GetWorld()->GetTimeSeconds());
 
+}
+
+// Set items unique names
+void ARSemLogManager::SetUniqueNames()
+{
+	UE_LOG(LogTemp, Warning, TEXT("StaticMeshActors unique names:"));
+	for (TActorIterator<AStaticMeshActor> StaticMeshActItr(GetWorld()); StaticMeshActItr; ++StaticMeshActItr)
+	{
+		// Get SkeletalMeshComponent
+		UStaticMeshComponent* StaticMeshComp = StaticMeshActItr->GetStaticMeshComponent();
+		// Get object tags
+		const TArray<FName> Tags = StaticMeshComp->ComponentTags;
+		// Skip if object has no tags
+		if (Tags.Num() > 0)
+		{
+			// Get the first tag 
+			const FString Tag0 = Tags[0].ToString();
+
+			// check tag type and remove it if correct
+			if ((Tag0.Contains("Log")) || (Tag0.Contains("StaticMap")))
+			{
+				// Generate unique name and make sure there is an underscore before the unique hash
+				FString UniqueName = StaticMeshActItr->GetName();
+				UniqueName += (UniqueName.Contains("_"))
+					? ARSemLogManager::GenerateRandomString(4) 
+					: "_" + ARSemLogManager::GenerateRandomString(4);
+
+				// Add actor and its unique name to the map
+				SMActorToUniqueName.Add(*StaticMeshActItr, UniqueName);
+				UE_LOG(LogTemp, Warning, TEXT("\t %s -> %s"),
+					*StaticMeshActItr->GetName(), **SMActorToUniqueName.Find(*StaticMeshActItr));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("\t  !!! %s has no tags, NO unique names.. "),
+				*StaticMeshActItr->GetName());
+		}
+	}
 }
 
 // Create directory path for logging
@@ -144,4 +184,22 @@ uint32 ARSemLogManager::GetEpisodeNumber(FString Path)
 	PlatformFile.IterateDirectory(*CurrPath, Visitor);
 
 	return Visitor.FileTimes.Num();
+}
+
+// Generate a random string
+FString ARSemLogManager::GenerateRandomString(const int32 Length)
+{
+	auto RandChar = []() -> char
+	{
+		const char CharSet[] =
+			"0123456789"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+		const size_t MaxIndex = (sizeof(CharSet) - 1);
+		return CharSet[rand() % MaxIndex];
+	};
+	std::string RandString(Length, 0);
+	std::generate_n(RandString.begin(), Length, RandChar);
+	// Return as FString
+	return FString(RandString.c_str());
 }

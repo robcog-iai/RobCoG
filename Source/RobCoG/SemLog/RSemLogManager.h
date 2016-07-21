@@ -4,6 +4,8 @@
 
 #include "GameFramework/Actor.h"
 #include "RRawDataExporter.h"
+#include <string>
+#include <algorithm>
 #include "RSemLogManager.generated.h"
 
 UCLASS()
@@ -22,6 +24,9 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 private:
+	// Set unique names of items
+	void SetUniqueNames();
+
 	// Create directory path for logging
 	void CreateDirectoryPath(FString Path);
 
@@ -30,6 +35,9 @@ private:
 
 	// Calculates the episode number by counting the existing episode folders
 	uint32 GetEpisodeNumber(FString Path);
+
+	// Generate random string
+	FString GenerateRandomString(const int32 Length);
 
 	// Directory to save the logs
 	UPROPERTY(EditAnywhere, Category = "Semantic logger")
@@ -42,7 +50,11 @@ private:
 	// Distance threshold (squared) for raw data logging
 	UPROPERTY(EditAnywhere, Category = "Raw Data")
 	float DistanceThresholdSquared;
+	
+	// Map static mesh actor to unique name
+	TMap<AStaticMeshActor*, FString> SMActorToUniqueName;
 
 	// Raw data exporter
-	FRRawDataExporter* RawDataExp;	
+	FRRawDataExporter* RawDataExporter;
+
 };

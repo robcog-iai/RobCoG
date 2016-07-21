@@ -61,5 +61,8 @@ private:
 
 	// Array of static meshes with prev position and orientation
 	TArray<FRStaticMeshActWPrevPose> StaticMeshActorsWithPrevPose;
+
+	// Array of static meshes with prev position and orientation
+	TArray<AStaticMeshActor*> StaticMapActors;
 };
 

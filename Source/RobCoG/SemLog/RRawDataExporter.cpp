@@ -35,7 +35,6 @@ void FRRawDataExporter::Update(const float Timestamp)
 	// Json array of actors
 	TArray< TSharedPtr<FJsonValue> > JsonActorArr;
 
-
 	// Iterate through the skeletal mesh components
 	for (auto& SkMWPoseItr : SkelMeshComponentsWithPrevPose)
 	{
@@ -96,7 +95,7 @@ void FRRawDataExporter::Update(const float Timestamp)
 		// Save data if distance larger than threshold
 		if (DistSqr > DistanceThresholdSquared)
 		{
-			// Get a local pointer of the skeletal mesh
+			// Get a local pointer of the skeletal mesh actor
 			AStaticMeshActor* CurrStaticMeshAct = StMActWPoseItr.StaticMeshAct;
 			// Update previous location
 			StMActWPoseItr.PrevLoc = CurrActLocation;
@@ -108,6 +107,23 @@ void FRRawDataExporter::Update(const float Timestamp)
 			// Add actor to Json array
 			JsonActorArr.Add(MakeShareable(new FJsonValueObject(JsonActorObj)));
 		}
+	}
+
+	// Check if static map actors need to be logged
+	if (StaticMapActors.Num() > 0)
+	{
+		// Iterate the static map actors (done only once)
+		for (auto& StaticMapActItr : StaticMapActors)
+		{
+			// Json actor object with name location and rotation
+			TSharedPtr<FJsonObject> JsonActorObj = FRRawDataExporter::CreateNameLocRotJsonObject(
+				StaticMapActItr->GetName(), StaticMapActItr->GetActorLocation() * 0.01, StaticMapActItr->GetActorQuat());
+
+			// Add actor to Json array
+			JsonActorArr.Add(MakeShareable(new FJsonValueObject(JsonActorObj)));
+		}
+		// Empty array, only needs to be logged once;
+		StaticMapActors.Empty();
 	}
 
 	
@@ -166,9 +182,8 @@ inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateNameLocRotJsonObject(con
 // Update grasping
 void FRRawDataExporter::InitItemsToLog(UWorld* World)
 {
-	////////////////////////////////////////////////////////
-	// Iterate all characters to get the skeleton components
-	UE_LOG(LogTemp, Warning, TEXT("SkeletonComponents to be logged:"));
+	// Iterate all characters to get their skeleton components (if available)
+	UE_LOG(LogTemp, Warning, TEXT("Skeletal components to be logged:"));
 	for (TActorIterator<ACharacter> CharItr(World); CharItr; ++CharItr)
 	{
 		// Get the skeletal components from the character
@@ -186,22 +201,19 @@ void FRRawDataExporter::InitItemsToLog(UWorld* World)
 				// Skip if object has no tags
 				if (Tags.Num() > 0)
 				{
-					// Get the first tag 
-					FString Tag0 = Tags[0].ToString();
-					// Check tag type and remove it if correct
-					if (Tag0.RemoveFromStart("Log"))
+					// Check first tag type
+					if (Tags[0].ToString().Contains("Log"))
 					{
 						// Add component to the list of objects to be logged, initialize prev position and orientation
 						SkelMeshComponentsWithPrevPose.Add(FRSkelMeshWPrevPose(SkelComp));
+						UE_LOG(LogTemp, Warning, TEXT("\t %s"), *SkelCompItr->GetName());
 					}
 				}
 			}
 		}
 	}
 
-	////////////////////////////////////////////////////////
 	// Iterate world skeletal mesh actors
-	// In the current setup the skeletal meshes are loaded from the character
 	for (TActorIterator<ASkeletalMeshActor> SkelMeshItr(World); SkelMeshItr; ++SkelMeshItr)
 	{
 		// Get SkeletalMeshComponent
@@ -214,22 +226,19 @@ void FRRawDataExporter::InitItemsToLog(UWorld* World)
 			// Skip if object has no tags
 			if (Tags.Num() > 0)
 			{
-				// Get the first tag 
-				FString Tag0 = Tags[0].ToString();
-				// check tag type and remove it if correct
-				if (Tag0.RemoveFromStart("Log"))
+				// Check first tag type
+				if (Tags[0].ToString().Contains("Log"))
 				{
 					// Add component to the list of objects to be logged, initialize prev position and orientation
-					SkelMeshComponentsWithPrevPose.Add(FRSkelMeshWPrevPose(SkelComp));
+					SkelMeshComponentsWithPrevPose.Add(SkelComp);
 					UE_LOG(LogTemp, Warning, TEXT("\t %s"), *SkelMeshItr->GetName());
 				}
 			}
 		}
 	}
 
-	////////////////////////////////////////////////////////
 	// Iterate for object individuals and actors to log
-	UE_LOG(LogTemp, Warning, TEXT("StaticMeshActors to be logged:"));
+	UE_LOG(LogTemp, Warning, TEXT("Items to be logged:"));
 	for (TActorIterator<AStaticMeshActor> StaticMeshActItr(World); StaticMeshActItr; ++StaticMeshActItr)
 	{
 		// Get SkeletalMeshComponent
@@ -239,11 +248,8 @@ void FRRawDataExporter::InitItemsToLog(UWorld* World)
 		// Skip if object has no tags
 		if (Tags.Num() > 0)
 		{
-			// Get the first tag 
-			FString Tag0 = Tags[0].ToString();
-
-			// check tag type and remove it if correct
-			if (Tag0.RemoveFromStart("Log"))
+			// Check first tag type
+			if (Tags[0].ToString().Contains("Log"))
 			{
 				// Add actor to the list of objects to be logged, initialize prev position and orientation
 				StaticMeshActorsWithPrevPose.Add(*StaticMeshActItr);
@@ -254,6 +260,27 @@ void FRRawDataExporter::InitItemsToLog(UWorld* World)
 		{
 			UE_LOG(LogTemp, Error, TEXT("\t  !!! %s has no tags, NO raw data logging.. "),
 				*StaticMeshActItr->GetName());
+		}
+	}
+
+	// Iterate for object individuals and actors to log
+	UE_LOG(LogTemp, Warning, TEXT("Static map to be logged (only once):"));
+	for (TActorIterator<AStaticMeshActor> StaticMeshActItr(World); StaticMeshActItr; ++StaticMeshActItr)
+	{
+		// Get SkeletalMeshComponent
+		UStaticMeshComponent* StaticMeshComp = StaticMeshActItr->GetStaticMeshComponent();
+		// Get object tags
+		const TArray<FName> Tags = StaticMeshComp->ComponentTags;
+		// Skip if object has no tags
+		if (Tags.Num() > 0)
+		{
+			// Check first tag type
+			if (Tags[0].ToString().Contains("StaticMap"))
+			{
+				// Add actor to the list of objects to be logged, initialize prev position and orientation
+				StaticMapActors.Add(*StaticMeshActItr);
+				UE_LOG(LogTemp, Warning, TEXT("\t %s"), *StaticMeshActItr->GetName());
+			}
 		}
 	}
 }
