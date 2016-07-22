@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Animation/SkeletalMeshActor.h"
 #include "RRawDataExporter.h"
 #include <string>
 #include <algorithm>
@@ -24,17 +25,20 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 private:
-	// Set unique names of items
-	void SetUniqueNames();
-
 	// Create directory path for logging
 	void CreateDirectoryPath(FString Path);
 
-	// Create level meta data
-	void CreateLevelMetadata(FString Path);
+	// Set items to be loggeed (from tags)
+	void SetLogItems();
 
-	// Calculates the episode number by counting the existing episode folders
-	uint32 GetEpisodeNumber(FString Path);
+	// Set unique names of items
+	void GenerateUniqueNames();
+
+	// Read unique names from file
+	bool ReadUniqueNames(const FString Path);
+
+	// Write generated unique names to file
+	void WriteUniqueNames(const FString Path);
 
 	// Generate random string
 	FString GenerateRandomString(const int32 Length);
@@ -50,10 +54,25 @@ private:
 	// Distance threshold (squared) for raw data logging
 	UPROPERTY(EditAnywhere, Category = "Raw Data")
 	float DistanceThresholdSquared;
-	
-	// Map static mesh actor to unique name
-	TMap<AStaticMeshActor*, FString> SMActorToUniqueName;
 
+	// Map of skeletal component (to be logged) names to actor map 
+	TMap<FString, ASkeletalMeshActor*> SkelActNameToCompPtrMap;
+
+	// Map of dynamic actors (to be logged) names to actor map 
+	TMap<FString, AStaticMeshActor*> DynamicActNameToActPtrMap;
+
+	// Map of static actors (to be logged) names to actor map 
+	TMap<FString, AStaticMeshActor*> StaticActNameToActPtrMap;
+
+	// Map of skeletal component (to be logged) to unique name
+	TMap<ASkeletalMeshActor*, FString> SkelActPtrToUniqNameMap;
+
+	// Map of dynamic actors (to be logged) to unique name
+	TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap;
+
+	// Map of static map actors (to be logged) to unique name
+	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap;	
+	
 	// Raw data exporter
 	FRRawDataExporter* RawDataExporter;
 

@@ -27,29 +27,38 @@ void ARSemLogManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Get platform file
-	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-
 	// Level directory path
 	const FString LevelPath = LogRootDirectoryName + "/" +	GetWorld()->GetName();
-
 	// Episode directory path
 	const FString EpisodePath = LevelPath + "/" + "rcg_" + FDateTime::Now().ToString();
-
 	// Create the directory path
 	ARSemLogManager::CreateDirectoryPath(EpisodePath);
 
-	// Set items unique names
-	ARSemLogManager::SetUniqueNames();
+	// Check items tags to see which should be logged
+	ARSemLogManager::SetLogItems();
+	// Check if unique names already generated (past episodes)
+	if (!ARSemLogManager::ReadUniqueNames(LevelPath + "/meta.json"))
+	{
+		// Generate new unique names if not generated or out of sync
+		ARSemLogManager::GenerateUniqueNames();
+		// Save unique names to file (for future use)
+		ARSemLogManager::WriteUniqueNames(LevelPath + "/meta.json");
+	}
 
 	// Init raw data logger
 	if (bLogRawData)
 	{
+		// Get platform file
+		IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
 		// Path to the json file
 		const FString RawFilePath = EpisodePath + "/RawData.json";
 		// Init raw data exporter
-		RawDataExporter = new FRRawDataExporter(DistanceThresholdSquared, GetWorld(),
-			MakeShareable(PlatformFile.OpenWrite(*RawFilePath, true, true)));
+		RawDataExporter = new FRRawDataExporter(
+			DistanceThresholdSquared,
+			MakeShareable(PlatformFile.OpenWrite(*RawFilePath, true, true)),
+			SkelActPtrToUniqNameMap,
+			DynamicActPtrToUniqNameMap,
+			StaticActPtrToUniqNameMap);
 	}
 }
 
@@ -65,48 +74,6 @@ void ARSemLogManager::Tick( float DeltaTime )
 	if (RawDataExporter)
 	{
 		RawDataExporter->Update(Timestamp);
-	}
-
-	//UE_LOG(LogTemp, Warning, TEXT("tIME:%f"), GetWorld()->GetTimeSeconds());
-
-}
-
-// Set items unique names
-void ARSemLogManager::SetUniqueNames()
-{
-	UE_LOG(LogTemp, Warning, TEXT("StaticMeshActors unique names:"));
-	for (TActorIterator<AStaticMeshActor> StaticMeshActItr(GetWorld()); StaticMeshActItr; ++StaticMeshActItr)
-	{
-		// Get SkeletalMeshComponent
-		UStaticMeshComponent* StaticMeshComp = StaticMeshActItr->GetStaticMeshComponent();
-		// Get object tags
-		const TArray<FName> Tags = StaticMeshComp->ComponentTags;
-		// Skip if object has no tags
-		if (Tags.Num() > 0)
-		{
-			// Get the first tag 
-			const FString Tag0 = Tags[0].ToString();
-
-			// check tag type and remove it if correct
-			if ((Tag0.Contains("Log")) || (Tag0.Contains("StaticMap")))
-			{
-				// Generate unique name and make sure there is an underscore before the unique hash
-				FString UniqueName = StaticMeshActItr->GetName();
-				UniqueName += (UniqueName.Contains("_"))
-					? ARSemLogManager::GenerateRandomString(4) 
-					: "_" + ARSemLogManager::GenerateRandomString(4);
-
-				// Add actor and its unique name to the map
-				SMActorToUniqueName.Add(*StaticMeshActItr, UniqueName);
-				UE_LOG(LogTemp, Warning, TEXT("\t %s -> %s"),
-					*StaticMeshActItr->GetName(), **SMActorToUniqueName.Find(*StaticMeshActItr));
-			}
-		}
-		else
-		{
-			UE_LOG(LogTemp, Error, TEXT("\t  !!! %s has no tags, NO unique names.. "),
-				*StaticMeshActItr->GetName());
-		}
 	}
 }
 
@@ -136,54 +103,251 @@ void ARSemLogManager::CreateDirectoryPath(FString Path)
 	}
 }
 
-// Create directory path for logging
-void ARSemLogManager::CreateLevelMetadata(FString Path)
+// Set items to be logged (from tags)
+void ARSemLogManager::SetLogItems()
 {
-	// Path as string
-	FString CurrPath;
-	// Append current directory name to the path
-	for (const auto DirName : Path)
+	// Iterate through the static mesh actors and check tags to see which objects should be logged
+	for (TActorIterator<AStaticMeshActor> StaticMeshActItr(GetWorld()); StaticMeshActItr; ++StaticMeshActItr)
 	{
-		CurrPath.Append(DirName + "/");
+		// Get static mesh comp tags
+		const TArray<FName> Tags = StaticMeshActItr->GetStaticMeshComponent()->ComponentTags;
+		// Skip if object has no tags
+		if (Tags.Num() > 0)
+		{
+			// Get the first tag 
+			const FString Tag0 = Tags[0].ToString();
+
+			// Check tag type
+			if (Tag0.Contains("DynamicItem"))
+			{
+				// Add dynamic actor to be loggend
+				DynamicActNameToActPtrMap.Add(*StaticMeshActItr->GetName(), *StaticMeshActItr);
+			}
+			else if (Tag0.Contains("StaticMap"))
+			{
+				// Add static actor to be loggend
+				StaticActNameToActPtrMap.Add(*StaticMeshActItr->GetName(), *StaticMeshActItr);
+			}
+		}
 	}
-	CurrPath.Append("meta");
 
-	// Get platform file
-	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
+	//// Iterate through characters to check for skeletal components to be logged
+	//for (TActorIterator<ACharacter> CharItr(GetWorld()); CharItr; ++CharItr)
+	//{
+	//	// Get the skeletal components from the character
+	//	TArray<UActorComponent*> SkelComponents = (*CharItr)->GetComponentsByClass(USkeletalMeshComponent::StaticClass());
+	//	// Itrate through the skeletal components
+	//	for (const auto SkelCompItr : SkelComponents)
+	//	{
+	//		// Cast UActorComponent to USkeletalMeshComponent
+	//		USkeletalMeshComponent* SkelComp = Cast<USkeletalMeshComponent>(SkelCompItr);
+	//		// Check that the skel mesh is not empty
+	//		if (SkelComp->bHasValidBodies)
+	//		{
+	//			// Get component tags
+	//			const TArray<FName> Tags = SkelCompItr->ComponentTags;
+	//			// Skip if object has no tags
+	//			if (Tags.Num() > 0)
+	//			{
+	//				// Get the first tag 
+	//				const FString Tag0 = Tags[0].ToString();
+	//				// Check first tag type
+	//				if (Tag0.Contains("DynamicItem"))
+	//				{
+	//					// Add skel component to be loggend
+	//					SkelCompNameToCompPtrMap.Add(SkelComp->GetName(), SkelComp);
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 
-	// Check if meta file exists
-	if (!PlatformFile.FileExists(*CurrPath))
+	// Iterate the world directly for skeletal mesh actors to be logged
+	for (TActorIterator<ASkeletalMeshActor> SkelMeshActItr(GetWorld()); SkelMeshActItr; ++SkelMeshActItr)
 	{
-		// Create file, open for write / append / read
-		PlatformFile.OpenWrite(*CurrPath, true, true);
+		// Get component tags
+		const TArray<FName> Tags = SkelMeshActItr->Tags;
+		// Skip if object has no tags
+		if (Tags.Num() > 0)
+		{
+			// Get the first tag 
+			const FString Tag0 = Tags[0].ToString();
+			// Check first tag type
+			if (Tag0.Contains("DynamicItem"))
+			{
+				// Add skel component to be loggend
+				SkelActNameToCompPtrMap.Add(SkelMeshActItr->GetName(), *SkelMeshActItr);
+			}
+		}
 	}
-
-	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject);
-
-	JsonObject->SetStringField("SemanticMap", "MyMap");
-	JsonObject->SetStringField("EpisodeNr", "0");
-
 }
 
-// Get the episode number by counting the exising folders
-uint32 ARSemLogManager::GetEpisodeNumber(FString Path)
+// Generate items unique names
+void ARSemLogManager::GenerateUniqueNames()
 {
-	// Get platform file
-	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-
-	// Path as string
-	FString CurrPath;
-	// Append current directory name to the path
-	for (const auto DirName : Path)
+	// Iterate all dynamic items to be logged and generate unique names
+	for (auto& DynActNameToActPtrItr : DynamicActNameToActPtrMap)
 	{
-		CurrPath.Append(DirName + "/");
-	}
-	
-	// Episode number by counting the folders
-	FLocalTimestampDirectoryVisitor Visitor(PlatformFile, TArray<FString>(), TArray<FString>(), false);
-	PlatformFile.IterateDirectory(*CurrPath, Visitor);
+		// Generate unique name and make sure there is an underscore before the unique hash
+		FString UniqueName = DynActNameToActPtrItr.Key;
+		UniqueName += (UniqueName.Contains("_"))
+			? ARSemLogManager::GenerateRandomString(4) 
+			: "_" + ARSemLogManager::GenerateRandomString(4);
 
-	return Visitor.FileTimes.Num();
+		// Add generated unqique name to map
+		DynamicActPtrToUniqNameMap.Add(DynActNameToActPtrItr.Value, UniqueName);
+	}
+
+	// Iterate all static items to be logged and generate unique names
+	for (auto& StaActNameToActPtrItr : StaticActNameToActPtrMap)
+	{
+		// Generate unique name and make sure there is an underscore before the unique hash
+		FString UniqueName = StaActNameToActPtrItr.Key;
+		UniqueName += (UniqueName.Contains("_"))
+			? ARSemLogManager::GenerateRandomString(4)
+			: "_" + ARSemLogManager::GenerateRandomString(4);
+
+		// Add generated unqique name to map
+		StaticActPtrToUniqNameMap.Add(StaActNameToActPtrItr.Value, UniqueName);
+	}
+
+	// Iterate all skeletal actors to be logged and generate unique names
+	for (auto& SkelActNameToCompPtrItr : SkelActNameToCompPtrMap)
+	{
+		// Generate unique name and make sure there is an underscore before the unique hash
+		FString UniqueName = SkelActNameToCompPtrItr.Key;
+		UniqueName += (UniqueName.Contains("_"))
+			? ARSemLogManager::GenerateRandomString(4)
+			: "_" + ARSemLogManager::GenerateRandomString(4);
+
+		// Add generated unqique name to map
+		SkelActPtrToUniqNameMap.Add(SkelActNameToCompPtrItr.Value, UniqueName);
+	}
+}
+
+// Read unique names from file
+bool ARSemLogManager::ReadUniqueNames(const FString Path)
+{
+	// Check if file exists, and see if it is in sync with the level
+	if (IFileManager::Get().FileExists(*Path))
+	{
+		// Read string from file		
+		FString JsonString;
+		FFileHelper::LoadFileToString(JsonString, *Path);
+		
+		// Create json from string
+		TSharedRef< TJsonReader<> > Reader = TJsonReaderFactory<>::Create(JsonString);
+		TSharedPtr<FJsonObject> JsonObject;		
+		if (FJsonSerializer::Deserialize(Reader, JsonObject))
+		{
+			// Get the actor to unique name array
+			TArray< TSharedPtr<FJsonValue> > JsonArr = JsonObject->GetArrayField("level_unique_names");
+			
+			// Check if the items to be logged are in the json array
+			for (const auto JsonItr : JsonArr)
+			{
+				// Check if actor name is to be logged, and if the unique name is the same
+				const FString NameField = *JsonItr->AsObject()->GetStringField("name");
+				if (DynamicActNameToActPtrMap.Contains(NameField))
+				{
+					// Get unique name and add it to the map
+					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
+					// Add generated unqique name to map
+					DynamicActPtrToUniqNameMap.Add(DynamicActNameToActPtrMap[NameField], UniqueName);
+				}
+				else if(StaticActNameToActPtrMap.Contains(NameField))
+				{
+					// Get unique name and add it to the map
+					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
+					// Add generated unqique name to map
+					StaticActPtrToUniqNameMap.Add(StaticActNameToActPtrMap[NameField], UniqueName);
+				}
+				else if (SkelActNameToCompPtrMap.Contains(NameField))
+				{
+					// Get unique name and add it to the map
+					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
+					// Add generated unqique name to map
+					SkelActPtrToUniqNameMap.Add(SkelActNameToCompPtrMap[NameField], UniqueName);
+				}
+				else
+				{
+					UE_LOG(LogTemp, Error, TEXT("Unique names not in sync with older episode! %s not found!"), *NameField);
+					return false;
+				}
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Unique names cannot be read! Json string: %s"), *JsonString);
+			return false;
+		}
+
+		// Succesfully read all the unique values
+		return true;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, 
+			TEXT("No previous level unique names found at: %s, generating new ones!"), *Path);
+		return false;
+	}
+}
+
+// Write generated unique names to file
+void ARSemLogManager::WriteUniqueNames(const FString Path)
+{
+	// Json root object
+	TSharedPtr<FJsonObject> JsonRootObj = MakeShareable(new FJsonObject);
+
+	// Json array of actors
+	TArray< TSharedPtr<FJsonValue> > JsonUniqueNamesArr;
+
+	// Iterate through the dynamic items
+	for (const auto DynActPtrToUniqNameItr : DynamicActPtrToUniqNameMap)
+	{
+		// Json location object
+		TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
+		// Add fields
+		JsonObj->SetStringField("name", DynActPtrToUniqNameItr.Key->GetName());
+		JsonObj->SetStringField("unique_name", DynActPtrToUniqNameItr.Value);
+		// Add actor to Json array
+		JsonUniqueNamesArr.Add(MakeShareable(new FJsonValueObject(JsonObj)));
+	}
+
+	// Iterate through the static map items
+	for (const auto StaActPtrToUniqNameItr : StaticActPtrToUniqNameMap)
+	{
+		// Json location object
+		TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
+		// Add fields
+		JsonObj->SetStringField("name", StaActPtrToUniqNameItr.Key->GetName());
+		JsonObj->SetStringField("unique_name", StaActPtrToUniqNameItr.Value);
+		// Add actor to Json array
+		JsonUniqueNamesArr.Add(MakeShareable(new FJsonValueObject(JsonObj)));
+	}
+
+	// Iterate through the static map items
+	for (const auto SkelActPtrToUniqNameItr : SkelActPtrToUniqNameMap)
+	{
+		// Json location object
+		TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
+		// Add fields
+		JsonObj->SetStringField("name", SkelActPtrToUniqNameItr.Key->GetName());
+		JsonObj->SetStringField("unique_name", SkelActPtrToUniqNameItr.Value);
+		// Add actor to Json array
+		JsonUniqueNamesArr.Add(MakeShareable(new FJsonValueObject(JsonObj)));
+	}
+
+	// Add actors to Json root
+	JsonRootObj->SetArrayField("level_unique_names", JsonUniqueNamesArr);
+
+	// Transform to string
+	FString JsonOutputString;
+	TSharedRef< TJsonWriter<> > Writer = TJsonWriterFactory<>::Create(&JsonOutputString);
+	FJsonSerializer::Serialize(JsonRootObj.ToSharedRef(), Writer);
+
+	// Write string to file
+	FFileHelper::SaveStringToFile(JsonOutputString, *Path);
 }
 
 // Generate a random string

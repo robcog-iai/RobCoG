@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Animation/SkeletalMeshActor.h"
+
 /**
  * Base class exporting raw data during gameplay
  */
@@ -9,7 +11,11 @@ class ROBCOG_API FRRawDataExporter
 {
 public:
 	// Constructor
-	FRRawDataExporter(const float DistThreshSqr, UWorld* World, TSharedPtr<IFileHandle> FileHandle);
+	FRRawDataExporter(const float DistThreshSqr,
+		TSharedPtr<IFileHandle> FileHandle,
+		TMap<ASkeletalMeshActor*, FString> SkelActPtrToUniqNameMap,
+		TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap,
+		TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap);
 
 	// Destructor
 	~FRRawDataExporter();
@@ -17,22 +23,30 @@ public:
 	// Log step
 	void Update(const float Timestamp);
 
-	// Structure of skeletal mesh with its previous pose
-	struct FRSkelMeshWPrevPose
+	// Structure of skeletal mesh comp with its previous pose
+	struct FRSkelLogRawStruct
 	{
-		FRSkelMeshWPrevPose(USkeletalMeshComponent* SkMComp)
-			: SkelMeshComp(SkMComp), PrevLoc(FVector(0.0f)), PrevRot(FRotator(0.0f)) {};
-		USkeletalMeshComponent* SkelMeshComp;
+		FRSkelLogRawStruct(ASkeletalMeshActor* SkMComp, const FString UniqName) :
+			SkelMeshComp(SkMComp),
+			UniqueName(UniqName),
+			PrevLoc(FVector(0.0f)),
+			PrevRot(FRotator(0.0f)) {};
+		ASkeletalMeshActor* SkelMeshComp;
+		FString UniqueName;
 		FVector PrevLoc;
 		FRotator PrevRot;
 	};
 
-	// Structure of static mesh with its previous pose
-	struct FRStaticMeshActWPrevPose
+	// Structure of dyamic actors with prev pose and unique name
+	struct FRDynActLogRawStruct
 	{
-		FRStaticMeshActWPrevPose(AStaticMeshActor* StMAct)
-			: StaticMeshAct(StMAct), PrevLoc(FVector(0.0f)), PrevRot(FRotator(0.0f)) {};
+		FRDynActLogRawStruct(AStaticMeshActor* StMAct, const FString UniqName) : 
+			StaticMeshAct(StMAct),
+			UniqueName(UniqName),
+			PrevLoc(FVector(0.0f)),
+			PrevRot(FRotator(0.0f)) {};
 		AStaticMeshActor* StaticMeshAct;
+		FString UniqueName;
 		FVector PrevLoc;
 		FRotator PrevRot;
 	};
@@ -48,7 +62,9 @@ private:
 	TSharedPtr<FJsonObject> CreateNameLocRotJsonObject(const FString Name, const FVector Location, const FQuat Rotation);
 
 	// Init items to log from the level
-	void InitItemsToLog(UWorld* World);
+	void InitItemsToLog(TMap<ASkeletalMeshActor*, FString>& SkelActPtrToUniqNameMap,
+		TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
+		TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap);
 
 	// Distance threshold (squared) for raw data logging
 	float DistanceThresholdSquared;
@@ -57,12 +73,12 @@ private:
 	TSharedPtr<IFileHandle> RawFileHandle;
 
 	// Array of skeletal meshes with prev position and orientation
-	TArray<FRSkelMeshWPrevPose> SkelMeshComponentsWithPrevPose;
+	TArray<FRSkelLogRawStruct> SkelActStructArr;
 
 	// Array of static meshes with prev position and orientation
-	TArray<FRStaticMeshActWPrevPose> StaticMeshActorsWithPrevPose;
+	TArray<FRDynActLogRawStruct> DynamicActStructArr;
 
-	// Array of static meshes with prev position and orientation
-	TArray<AStaticMeshActor*> StaticMapActors;
+	// Map of static map actors  to unique name
+	TMap<AStaticMeshActor*, FString> StaticActToUniqName;
 };
 
