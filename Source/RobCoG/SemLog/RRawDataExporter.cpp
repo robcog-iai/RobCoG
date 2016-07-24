@@ -3,17 +3,19 @@
 #include "RobCoG.h"
 #include "RRawDataExporter.h"
 
-
 // Set default values
 FRRawDataExporter::FRRawDataExporter(
 	const float DistThreshSqr, 
-	TSharedPtr<IFileHandle> FileHandle,
+	const FString Path,
 	TMap<ASkeletalMeshActor*, FString> SkelActPtrToUniqNameMap,
 	TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap,
 	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap) :
-	DistanceThresholdSquared(DistThreshSqr),
-	RawFileHandle(FileHandle)
+	DistanceThresholdSquared(DistThreshSqr)
 {
+	// Get platform file and init file handle
+	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();	
+	RawFileHandle = MakeShareable(PlatformFile.OpenWrite(*Path, true, true));
+
 	// Init items we want to log
 	FRRawDataExporter::InitItemsToLog(SkelActPtrToUniqNameMap,
 		DynamicActPtrToUniqNameMap,
@@ -143,7 +145,7 @@ void FRRawDataExporter::Update(const float Timestamp)
 }
 
 // Create Json object with a 3d location
-inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateLocationJsonObject(const FVector Location)
+FORCEINLINE TSharedPtr<FJsonObject> FRRawDataExporter::CreateLocationJsonObject(const FVector Location)
 {
 	// Json location object
 	TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
@@ -156,7 +158,7 @@ inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateLocationJsonObject(const
 }
 
 // Create Json object with a 3d rotation as quaternion 
-inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateRotationJsonObject(const FQuat Rotation)
+FORCEINLINE TSharedPtr<FJsonObject> FRRawDataExporter::CreateRotationJsonObject(const FQuat Rotation)
 {
 	// Json rotation object
 	TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
@@ -170,7 +172,7 @@ inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateRotationJsonObject(const
 }
 
 // Create Json object with name location and rotation
-inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateNameLocRotJsonObject(const FString Name, const FVector Location, const FQuat Rotation)
+FORCEINLINE TSharedPtr<FJsonObject> FRRawDataExporter::CreateNameLocRotJsonObject(const FString Name, const FVector Location, const FQuat Rotation)
 {
 	// Json  actor object
 	TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
@@ -182,16 +184,19 @@ inline TSharedPtr<FJsonObject> FRRawDataExporter::CreateNameLocRotJsonObject(con
 	return JsonObj;
 }
 
-// Update grasping
-void FRRawDataExporter::InitItemsToLog(TMap<ASkeletalMeshActor*, FString>& SkelActPtrToUniqNameMap,
-	TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
-	TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap)
+// Initialize items to log
+void FRRawDataExporter::InitItemsToLog(
+	const TMap<ASkeletalMeshActor*, FString>& SkelActPtrToUniqNameMap,
+	const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
+	const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Skeletal components to be logged:"));
 	for (const auto SkelActPtrToUniqNameItr : SkelActPtrToUniqNameMap)
 	{
 		SkelActStructArr.Add(
 			FRSkelLogRawStruct(SkelActPtrToUniqNameItr.Key, SkelActPtrToUniqNameItr.Value));
+		UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"), 
+			*SkelActPtrToUniqNameItr.Key->GetName(), *SkelActPtrToUniqNameItr.Value);
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("Dynamic items to be logged:"));
@@ -199,7 +204,15 @@ void FRRawDataExporter::InitItemsToLog(TMap<ASkeletalMeshActor*, FString>& SkelA
 	{
 		DynamicActStructArr.Add(
 			FRDynActLogRawStruct(DynamicActPtrToUniqNameItr.Key, DynamicActPtrToUniqNameItr.Value));
+		UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"),
+			*DynamicActPtrToUniqNameItr.Key->GetName(), *DynamicActPtrToUniqNameItr.Value);
 	}
 
+	UE_LOG(LogTemp, Warning, TEXT("Static map items to be logged (once):"));
 	StaticActToUniqName = StaticActPtrToUniqNameMap;
+	for (const auto StaticActPtrToUniqNameItr : StaticActPtrToUniqNameMap)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"),
+			*StaticActPtrToUniqNameItr.Key->GetName(), *StaticActPtrToUniqNameItr.Value);
+	}
 }

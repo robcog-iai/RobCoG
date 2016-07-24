@@ -12,7 +12,7 @@ class ROBCOG_API FRRawDataExporter
 public:
 	// Constructor
 	FRRawDataExporter(const float DistThreshSqr,
-		TSharedPtr<IFileHandle> FileHandle,
+		const FString Path,
 		TMap<ASkeletalMeshActor*, FString> SkelActPtrToUniqNameMap,
 		TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap,
 		TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap);
@@ -59,12 +59,14 @@ private:
 	TSharedPtr<FJsonObject> CreateRotationJsonObject(const FQuat Rotation);
 
 	// Create Json object with name location and rotation
-	TSharedPtr<FJsonObject> CreateNameLocRotJsonObject(const FString Name, const FVector Location, const FQuat Rotation);
+	TSharedPtr<FJsonObject> CreateNameLocRotJsonObject(
+		const FString Name, const FVector Location, const FQuat Rotation);
 
 	// Init items to log from the level
-	void InitItemsToLog(TMap<ASkeletalMeshActor*, FString>& SkelActPtrToUniqNameMap,
-		TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
-		TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap);
+	void InitItemsToLog(
+		const TMap<ASkeletalMeshActor*, FString>& SkelActPtrToUniqNameMap,
+		const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
+		const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap);
 
 	// Distance threshold (squared) for raw data logging
 	float DistanceThresholdSquared;

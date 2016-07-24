@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RobCoG.h"
+#include "RUtils.h"
 #include "RSemLogManager.h"
 
 // Sets default values
@@ -17,6 +18,7 @@ ARSemLogManager::ARSemLogManager()
 
 	// Default flag values
 	bLogRawData = true;
+	bLogSemanticMap = true;
 
 	// Distance squared threshold for logging the raw data
 	DistanceThresholdSquared = 0.01;
@@ -37,12 +39,29 @@ void ARSemLogManager::BeginPlay()
 	// Check items tags to see which should be logged
 	ARSemLogManager::SetLogItems();
 	// Check if unique names already generated (past episodes)
-	if (!ARSemLogManager::ReadUniqueNames(LevelPath + "/meta.json"))
+	if (!ARSemLogManager::ReadUniqueNames(LevelPath + "/MetaData.json"))
 	{
 		// Generate new unique names if not generated or out of sync
 		ARSemLogManager::GenerateUniqueNames();
 		// Save unique names to file (for future use)
-		ARSemLogManager::WriteUniqueNames(LevelPath + "/meta.json");
+		ARSemLogManager::WriteUniqueNames(LevelPath + "/MetaData.json");
+	}
+
+	// Log Semantic map
+	if (bLogSemanticMap)
+	{
+		// Semantic map path
+		const FString SemMapPath = LevelPath + "/SemanticMap.owl";
+		// Chek if semantic map is not already created		
+
+		// Check if map is not already created for this level
+		if (true)//!IFileManager::Get().FileExists(*SemMapPath))
+		{
+			// Create sem map exporter
+			SemMapExporter = new FRSemMapExporter();
+			// Generate and write level semantic map
+			SemMapExporter->WriteSemanticMap(DynamicActPtrToUniqNameMap, StaticActPtrToUniqNameMap, SemMapPath);
+		}
 	}
 
 	// Init raw data logger
@@ -55,7 +74,7 @@ void ARSemLogManager::BeginPlay()
 		// Init raw data exporter
 		RawDataExporter = new FRRawDataExporter(
 			DistanceThresholdSquared,
-			MakeShareable(PlatformFile.OpenWrite(*RawFilePath, true, true)),
+			RawFilePath,
 			SkelActPtrToUniqNameMap,
 			DynamicActPtrToUniqNameMap,
 			StaticActPtrToUniqNameMap);
@@ -191,8 +210,8 @@ void ARSemLogManager::GenerateUniqueNames()
 		// Generate unique name and make sure there is an underscore before the unique hash
 		FString UniqueName = DynActNameToActPtrItr.Key;
 		UniqueName += (UniqueName.Contains("_"))
-			? ARSemLogManager::GenerateRandomString(4) 
-			: "_" + ARSemLogManager::GenerateRandomString(4);
+			? FRUtils::GenerateRandomFString(4)
+			: "_" + FRUtils::GenerateRandomFString(4);
 
 		// Add generated unqique name to map
 		DynamicActPtrToUniqNameMap.Add(DynActNameToActPtrItr.Value, UniqueName);
@@ -204,8 +223,8 @@ void ARSemLogManager::GenerateUniqueNames()
 		// Generate unique name and make sure there is an underscore before the unique hash
 		FString UniqueName = StaActNameToActPtrItr.Key;
 		UniqueName += (UniqueName.Contains("_"))
-			? ARSemLogManager::GenerateRandomString(4)
-			: "_" + ARSemLogManager::GenerateRandomString(4);
+			? FRUtils::GenerateRandomFString(4)
+			: "_" + FRUtils::GenerateRandomFString(4);
 
 		// Add generated unqique name to map
 		StaticActPtrToUniqNameMap.Add(StaActNameToActPtrItr.Value, UniqueName);
@@ -217,8 +236,8 @@ void ARSemLogManager::GenerateUniqueNames()
 		// Generate unique name and make sure there is an underscore before the unique hash
 		FString UniqueName = SkelActNameToCompPtrItr.Key;
 		UniqueName += (UniqueName.Contains("_"))
-			? ARSemLogManager::GenerateRandomString(4)
-			: "_" + ARSemLogManager::GenerateRandomString(4);
+			? FRUtils::GenerateRandomFString(4)
+			: "_" + FRUtils::GenerateRandomFString(4);
 
 		// Add generated unqique name to map
 		SkelActPtrToUniqNameMap.Add(SkelActNameToCompPtrItr.Value, UniqueName);
@@ -348,22 +367,4 @@ void ARSemLogManager::WriteUniqueNames(const FString Path)
 
 	// Write string to file
 	FFileHelper::SaveStringToFile(JsonOutputString, *Path);
-}
-
-// Generate a random string
-FString ARSemLogManager::GenerateRandomString(const int32 Length)
-{
-	auto RandChar = []() -> char
-	{
-		const char CharSet[] =
-			"0123456789"
-			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-			"abcdefghijklmnopqrstuvwxyz";
-		const size_t MaxIndex = (sizeof(CharSet) - 1);
-		return CharSet[rand() % MaxIndex];
-	};
-	std::string RandString(Length, 0);
-	std::generate_n(RandString.begin(), Length, RandChar);
-	// Return as FString
-	return FString(RandString.c_str());
 }

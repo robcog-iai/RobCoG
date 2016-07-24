@@ -1,12 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
 #include "GameFramework/Actor.h"
 #include "Animation/SkeletalMeshActor.h"
 #include "RRawDataExporter.h"
-#include <string>
-#include <algorithm>
+#include "RSemMapExporter.h"
+
 #include "RSemLogManager.generated.h"
 
 UCLASS()
@@ -40,20 +39,21 @@ private:
 	// Write generated unique names to file
 	void WriteUniqueNames(const FString Path);
 
-	// Generate random string
-	FString GenerateRandomString(const int32 Length);
-
 	// Directory to save the logs
 	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	FString LogRootDirectoryName;
 
 	// Raw data log flag
-	UPROPERTY(EditAnywhere, Category = "Raw Data")
+	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	bool bLogRawData;
 
 	// Distance threshold (squared) for raw data logging
-	UPROPERTY(EditAnywhere, Category = "Raw Data")
+	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	float DistanceThresholdSquared;
+
+	// Raw semantic map (if not already logged)
+	UPROPERTY(EditAnywhere, Category = "Semantic logger")
+	bool bLogSemanticMap;
 
 	// Map of skeletal component (to be logged) names to actor map 
 	TMap<FString, ASkeletalMeshActor*> SkelActNameToCompPtrMap;
@@ -75,5 +75,8 @@ private:
 	
 	// Raw data exporter
 	FRRawDataExporter* RawDataExporter;
+
+	// Semantic map exporter
+	FRSemMapExporter* SemMapExporter;
 
 };
