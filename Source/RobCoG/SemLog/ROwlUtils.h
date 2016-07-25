@@ -20,9 +20,9 @@ public:
 	};
 
 	// Node attribute as struct
-	struct NodeAttribute
+	struct RNodeAttribute
 	{
-		NodeAttribute(const char* Name, const char* Value)
+		RNodeAttribute(const char* Name, const char* Value)
 			: Name(Name), Value(Value)
 		{}
 		const char* Name;
@@ -30,9 +30,9 @@ public:
 	};
 
 	// Owl triple as struct
-	struct OwlTriple
+	struct ROwlTriple
 	{
-		OwlTriple(const char* Subj, const char* Pred, const char* Obj, const char* Val = "")
+		ROwlTriple(const char* Subj, const char* Pred, const char* Obj, const char* Val = "")
 			: Subject(Subj), Predicate(Pred), Object(Obj), Value(Val)
 		{}
 		const char* Subject;
@@ -56,7 +56,7 @@ public:
 	static FORCEINLINE void AddNodeAttributes(
 		rapidxml::xml_document<>* Doc,
 		rapidxml::xml_node<>* ParentNode,
-		TArray<NodeAttribute> Attributes)
+		TArray<RNodeAttribute> Attributes)
 	{
 		for(const auto AttributeItr : Attributes)
 		{
@@ -81,7 +81,7 @@ public:
 	static FORCEINLINE void AddNodeTriple(
 		rapidxml::xml_document<>* Doc,
 		rapidxml::xml_node<>* ParentNode,
-		const OwlTriple Triple)
+		const ROwlTriple Triple)
 	{
 		// Create Triple node
 		rapidxml::xml_node<> *TripleNode = Doc->allocate_node(rapidxml::node_element, Triple.Subject, Triple.Value);
@@ -95,7 +95,7 @@ public:
 	static FORCEINLINE void AddNodeTriples(
 		rapidxml::xml_document<>* Doc,
 		rapidxml::xml_node<>* ParentNode,
-		const TArray<OwlTriple>& Triples)
+		const TArray<ROwlTriple>& Triples)
 	{
 		for (const auto TripleItr : Triples)
 		{
@@ -107,8 +107,8 @@ public:
 	static FORCEINLINE void AddNodeEntityWithProperty(
 		rapidxml::xml_document<>* Doc,
 		rapidxml::xml_node<>* ParentNode,
-		const OwlTriple EntityTriple,
-		const OwlTriple PropertyTriple)
+		const ROwlTriple EntityTriple,
+		const ROwlTriple PropertyTriple)
 	{
 		// Create the entity node
 		rapidxml::xml_node<> *EntityNode = Doc->allocate_node(rapidxml::node_element, EntityTriple.Subject, EntityTriple.Value);
@@ -124,8 +124,8 @@ public:
 	static FORCEINLINE void AddNodeEntityWithProperties(
 		rapidxml::xml_document<>* Doc,
 		rapidxml::xml_node<>* ParentNode,
-		const OwlTriple EntityTriple,
-		const TArray<OwlTriple>& PropertyTriples)
+		const ROwlTriple EntityTriple,
+		const TArray<ROwlTriple>& PropertyTriples)
 	{
 		// Create the entity node
 		rapidxml::xml_node<> *EntityNode = Doc->allocate_node(rapidxml::node_element, EntityTriple.Subject, EntityTriple.Value);

@@ -18,6 +18,7 @@ public:
 	void WriteSemanticMap(
 		const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
 		const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap,
+		const TMap<FString, FString>& ActUniqNameToClassTypeMap,
 		const FString Path);
 
 	// Get semantic map unique name

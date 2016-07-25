@@ -5,7 +5,6 @@
 #include "Animation/SkeletalMeshActor.h"
 #include "RRawDataExporter.h"
 #include "RSemMapExporter.h"
-
 #include "RSemLogManager.generated.h"
 
 UCLASS()
@@ -19,6 +18,9 @@ public:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	// Called when the game is terminated
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
@@ -43,7 +45,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	FString LogRootDirectoryName;
 
-	// Raw data log flag
+	// Log raw data
 	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	bool bLogRawData;
 
@@ -51,9 +53,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	float DistanceThresholdSquared;
 
-	// Raw semantic map (if not already logged)
+	// Log semantic map (if not already logged)
 	UPROPERTY(EditAnywhere, Category = "Semantic logger")
 	bool bLogSemanticMap;
+
+	// Log semantic events
+	UPROPERTY(EditAnywhere, Category = "Semantic logger")
+	bool bLogSemanticEvents;
 
 	// Map of skeletal component (to be logged) names to actor map 
 	TMap<FString, ASkeletalMeshActor*> SkelActNameToCompPtrMap;
@@ -71,12 +77,25 @@ private:
 	TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap;
 
 	// Map of static map actors (to be logged) to unique name
-	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap;	
-	
+	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap;
+
+	// Map of actor uniqe names to their class type
+	TMap<FString, FString> ActUniqNameToClassTypeMap;
+
 	// Raw data exporter
 	FRRawDataExporter* RawDataExporter;
 
 	// Semantic map exporter
 	FRSemMapExporter* SemMapExporter;
+
+	// TODO singletone
+	// Semantic events exporter
+	//FRSemEventsExporter* SemEventsExporter;
+
+	// Level path
+	FString LevelPath;
+
+	// Episode path
+	FString EpisodePath;
 
 };

@@ -2,6 +2,7 @@
 
 #include "RobCoG.h"
 #include "RUtils.h"
+#include "RSemEventsExporterSingl.h"
 #include "RSemLogManager.h"
 
 // Sets default values
@@ -19,6 +20,7 @@ ARSemLogManager::ARSemLogManager()
 	// Default flag values
 	bLogRawData = true;
 	bLogSemanticMap = true;
+	bLogSemanticEvents = true;
 
 	// Distance squared threshold for logging the raw data
 	DistanceThresholdSquared = 0.01;
@@ -30,9 +32,9 @@ void ARSemLogManager::BeginPlay()
 	Super::BeginPlay();
 
 	// Level directory path
-	const FString LevelPath = LogRootDirectoryName + "/" +	GetWorld()->GetName();
+	LevelPath = LogRootDirectoryName + "/" +	GetWorld()->GetName();
 	// Episode directory path
-	const FString EpisodePath = LevelPath + "/" + "rcg_" + FDateTime::Now().ToString();
+	EpisodePath = LevelPath + "/" + "rcg_" + FDateTime::Now().ToString();
 	// Create the directory path
 	ARSemLogManager::CreateDirectoryPath(EpisodePath);
 
@@ -55,20 +57,22 @@ void ARSemLogManager::BeginPlay()
 		// Chek if semantic map is not already created		
 
 		// Check if map is not already created for this level
-		if (true)//!IFileManager::Get().FileExists(*SemMapPath))
+		if (!IFileManager::Get().FileExists(*SemMapPath))
 		{
 			// Create sem map exporter
 			SemMapExporter = new FRSemMapExporter();
 			// Generate and write level semantic map
-			SemMapExporter->WriteSemanticMap(DynamicActPtrToUniqNameMap, StaticActPtrToUniqNameMap, SemMapPath);
+			SemMapExporter->WriteSemanticMap(
+				DynamicActPtrToUniqNameMap,
+				StaticActPtrToUniqNameMap,
+				ActUniqNameToClassTypeMap,
+				SemMapPath);
 		}
 	}
 
 	// Init raw data logger
 	if (bLogRawData)
 	{
-		// Get platform file
-		IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
 		// Path to the json file
 		const FString RawFilePath = EpisodePath + "/RawData.json";
 		// Init raw data exporter
@@ -79,20 +83,35 @@ void ARSemLogManager::BeginPlay()
 			DynamicActPtrToUniqNameMap,
 			StaticActPtrToUniqNameMap);
 	}
+
+	// Init semantic events logger
+	if (bLogSemanticEvents)
+	{
+		FRSemEventsExporterSingl::Get().Init(GetWorld()->GetTimeSeconds());
+	}
+}
+
+// Called when the game is terminated
+void ARSemLogManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (FRSemEventsExporterSingl::Get().IsInit())
+	{
+		// Save logged events
+		FRSemEventsExporterSingl::Get().WriteEvents(
+			EpisodePath + "/EventData.owl", ActUniqNameToClassTypeMap,
+			GetWorld()->GetTimeSeconds());
+	}
 }
 
 // Called every frame
 void ARSemLogManager::Tick( float DeltaTime )
 {
 	Super::Tick( DeltaTime );
-
-	// Current time
-	const float Timestamp = GetWorld()->GetTimeSeconds();
 	
 	// Log raw data
 	if (RawDataExporter)
 	{
-		RawDataExporter->Update(Timestamp);
+		RawDataExporter->Update(GetWorld()->GetTimeSeconds());
 	}
 }
 
@@ -130,12 +149,11 @@ void ARSemLogManager::SetLogItems()
 	{
 		// Get static mesh comp tags
 		const TArray<FName> Tags = StaticMeshActItr->GetStaticMeshComponent()->ComponentTags;
-		// Skip if object has no tags
-		if (Tags.Num() > 0)
+		// Skip if object has less than 2 tags (type, class)
+		if (Tags.Num() > 1)
 		{
 			// Get the first tag 
 			const FString Tag0 = Tags[0].ToString();
-
 			// Check tag type
 			if (Tag0.Contains("DynamicItem"))
 			{
@@ -147,6 +165,11 @@ void ARSemLogManager::SetLogItems()
 				// Add static actor to be loggend
 				StaticActNameToActPtrMap.Add(*StaticMeshActItr->GetName(), *StaticMeshActItr);
 			}
+
+			// Get the second tag 
+			const FString Tag1 = Tags[1].ToString();
+			// Add class type to the map (unique name will be changed)
+			ActUniqNameToClassTypeMap.Add(*StaticMeshActItr->GetName(), Tag1);
 		}
 	}
 
@@ -204,34 +227,38 @@ void ARSemLogManager::SetLogItems()
 // Generate items unique names
 void ARSemLogManager::GenerateUniqueNames()
 {
-	// Iterate all dynamic items to be logged and generate unique names
-	for (auto& DynActNameToActPtrItr : DynamicActNameToActPtrMap)
+	// Lambda function to iterate through actor types and generate unique names
+	auto GenerateUniqueNamesLambda = [this](const TMap<FString,AStaticMeshActor*>& ActNameToActPtrMap)
 	{
-		// Generate unique name and make sure there is an underscore before the unique hash
-		FString UniqueName = DynActNameToActPtrItr.Key;
-		UniqueName += (UniqueName.Contains("_"))
-			? FRUtils::GenerateRandomFString(4)
-			: "_" + FRUtils::GenerateRandomFString(4);
+		// Iterate all dynamic items to be logged and generate unique names
+		for (const auto ActNameToActPtrItr : ActNameToActPtrMap)
+		{
+			// Actor name
+			const FString NameKey = ActNameToActPtrItr.Key;
 
-		// Add generated unqique name to map
-		DynamicActPtrToUniqNameMap.Add(DynActNameToActPtrItr.Value, UniqueName);
-	}
+			// Generate unique name and make sure there is an underscore before the unique hash
+			FString UniqueName = NameKey;
+			UniqueName += (UniqueName.Contains("_"))
+				? FRUtils::GenerateRandomFString(4)
+				: "_" + FRUtils::GenerateRandomFString(4);
 
-	// Iterate all static items to be logged and generate unique names
-	for (auto& StaActNameToActPtrItr : StaticActNameToActPtrMap)
-	{
-		// Generate unique name and make sure there is an underscore before the unique hash
-		FString UniqueName = StaActNameToActPtrItr.Key;
-		UniqueName += (UniqueName.Contains("_"))
-			? FRUtils::GenerateRandomFString(4)
-			: "_" + FRUtils::GenerateRandomFString(4);
+			// Add generated unqique name to map
+			DynamicActPtrToUniqNameMap.Add(ActNameToActPtrItr.Value, UniqueName);
 
-		// Add generated unqique name to map
-		StaticActPtrToUniqNameMap.Add(StaActNameToActPtrItr.Value, UniqueName);
-	}
+			// Switch name to unique name in map		
+			FString ClassType;
+			ActUniqNameToClassTypeMap.RemoveAndCopyValue(NameKey, ClassType);
+			// Add new map with unique name
+			ActUniqNameToClassTypeMap.Add(UniqueName, ClassType);
+		}
+	};
+
+	// Call lambda function to interate through actors and add them unique names
+	GenerateUniqueNamesLambda(DynamicActNameToActPtrMap);
+	GenerateUniqueNamesLambda(StaticActNameToActPtrMap);
 
 	// Iterate all skeletal actors to be logged and generate unique names
-	for (auto& SkelActNameToCompPtrItr : SkelActNameToCompPtrMap)
+	for (const auto SkelActNameToCompPtrItr : SkelActNameToCompPtrMap)
 	{
 		// Generate unique name and make sure there is an underscore before the unique hash
 		FString UniqueName = SkelActNameToCompPtrItr.Key;
@@ -273,6 +300,12 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
 					// Add generated unqique name to map
 					DynamicActPtrToUniqNameMap.Add(DynamicActNameToActPtrMap[NameField], UniqueName);
+
+					// Switch name to unique name in map		
+					FString ClassType;
+					ActUniqNameToClassTypeMap.RemoveAndCopyValue(NameField, ClassType);
+					// Add new map with unique name
+					ActUniqNameToClassTypeMap.Add(UniqueName, ClassType);
 				}
 				else if(StaticActNameToActPtrMap.Contains(NameField))
 				{
@@ -280,6 +313,12 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
 					// Add generated unqique name to map
 					StaticActPtrToUniqNameMap.Add(StaticActNameToActPtrMap[NameField], UniqueName);
+
+					// Switch name to unique name in map		
+					FString ClassType;
+					ActUniqNameToClassTypeMap.RemoveAndCopyValue(NameField, ClassType);
+					// Add new map with unique name
+					ActUniqNameToClassTypeMap.Add(UniqueName, ClassType);
 				}
 				else if (SkelActNameToCompPtrMap.Contains(NameField))
 				{

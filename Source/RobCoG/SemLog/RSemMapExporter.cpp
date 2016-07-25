@@ -21,6 +21,7 @@ FRSemMapExporter::~FRSemMapExporter()
 void FRSemMapExporter::WriteSemanticMap(
 	const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
 	const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap,
+	const TMap<FString, FString>& ActUniqNameToClassTypeMap,
 	const FString Path)
 {
 	///////// DOC
@@ -81,42 +82,42 @@ void FRSemMapExporter::WriteSemanticMap(
 	// Create entity node with property
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Ontologies");
 	FROwlUtils::AddNodeEntityWithProperty(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:Ontology", "rdf:about", "http://knowrob.org/kb/u_map.owl"),
-		FROwlUtils::OwlTriple("owl:imports", "rdf:resource", "package://knowrob_common/owl/knowrob.owl"));
+		FROwlUtils::ROwlTriple("owl:Ontology", "rdf:about", "http://knowrob.org/kb/u_map.owl"),
+		FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_common/owl/knowrob.owl"));
 
 	///////// GENERAL DEFINITIONS
 	// Object property definitions
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Property Definitions");
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:ObjectProperty", "rdf:about", "&knowrob;describedInMap"));
+		FROwlUtils::ROwlTriple("owl:ObjectProperty", "rdf:about", "&knowrob;describedInMap"));
 
 	// Datatype property definitions
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Datatype Definitions");
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;depthOfObject"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;depthOfObject"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;heightOfObject"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;heightOfObject"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;widthOfObject"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;widthOfObject"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;vectorX"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;vectorX"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;vectorY"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;vectorY"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;vectorZ"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;vectorZ"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;pathToCadModel"));
+		FROwlUtils::ROwlTriple("owl:DatatypeProperty", "rdf:about", "&knowrob;pathToCadModel"));
 
 	// Class definitions
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Class Definitions");
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:Class", "rdf:about", "&knowrob;SemanticEnvironmentMap"));
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob;SemanticEnvironmentMap"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:Class", "rdf:about", "&knowrob;SemanticMapPerception"));
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob;SemanticMapPerception"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:Class", "rdf:about", "&knowrob;TimePoint"));
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob;TimePoint"));
 	FROwlUtils::AddNodeTriple(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:Class", "rdf:about", "&knowrob;Vector"));
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob;Vector"));
 
 
 	///////// EVENT INDIVIDUALS
@@ -124,28 +125,29 @@ void FRSemMapExporter::WriteSemanticMap(
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Semantic Environment Map");
 	// Add semantic map instance
 	FROwlUtils::AddNodeEntityWithProperty(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("rdf:type", "rdf:resource", "&knowrob;SemanticEnvironmentMap"),
-		FROwlUtils::OwlTriple("owl:NamedIndividual", "rdf:about",
+		FROwlUtils::ROwlTriple("rdf:type", "rdf:resource", "&knowrob;SemanticEnvironmentMap"),
+		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
 			FRUtils::FStringToChar("&u-map;" + UniqueName)));
 
 	// Timepoint individual
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Timepoint");
 	// Add timepoint instance
 	FROwlUtils::AddNodeEntityWithProperty(SemMapDoc, RDFNode,
-		FROwlUtils::OwlTriple("owl:NamedIndividual", "rdf:about", "&u-map;timepoint_0"),
-		FROwlUtils::OwlTriple("rdf:type", "rdf:resource", "&knowrob;Timepoint"));
+		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about", "&u-map;timepoint_0"),
+		FROwlUtils::ROwlTriple("rdf:type", "rdf:resource", "&knowrob;Timepoint"));
 	
 	UE_LOG(LogTemp, Warning, TEXT(" *** "));
 	UE_LOG(LogTemp, Warning, TEXT("Semantic map components:"));
 
 	// Lambda to add actors to the semantic map as perception events
-	auto AddActorsToSemMapLambda = [SemMapDoc, RDFNode, this](const TMap<AStaticMeshActor*, FString>& ActPtrToUniqNameMap)
+	auto AddActorsToSemMapLambda = [SemMapDoc, RDFNode, this](const TMap<AStaticMeshActor*, FString>& ActPtrToUniqNameMap, const TMap<FString, FString>& ActUniqNameToClassTypeMap)
 	{
 		for (const auto ActPtrToUniqNameItr : ActPtrToUniqNameMap)
 		{
 			// Local copies of name and unique name
 			const FString ActName = ActPtrToUniqNameItr.Key->GetName();
 			const FString ActUniqueName = ActPtrToUniqNameItr.Value;
+			const FString ActClass = ActUniqNameToClassTypeMap[ActUniqueName];
 			UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"), *ActName, *ActUniqueName);
 
 			// Transf unique name
@@ -167,63 +169,63 @@ void FRSemMapExporter::WriteSemanticMap(
 			FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, FRUtils::FStringToChar("Object " + ActUniqueName));
 
 			// Array of object properties
-			TArray<FROwlUtils::OwlTriple> ObjProperties;
+			TArray<FROwlUtils::ROwlTriple> ObjProperties;
 			// Add obj event properties
-			ObjProperties.Add(FROwlUtils::OwlTriple(
-				"rdf:type", "rdf:resource", "&knowrob;TODO ADD CLASS"));
-			ObjProperties.Add(FROwlUtils::OwlTriple(
+			ObjProperties.Add(FROwlUtils::ROwlTriple(
+				"rdf:type", "rdf:resource", FRUtils::FStringToChar("&knowrob;" + ActClass)));
+			ObjProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:pathToCadModel", "rdf:datatype", "&xsd; string",
-				"package://sim/unreal/ TODO CLASS .dae"));
-			ObjProperties.Add(FROwlUtils::OwlTriple(
+				FRUtils::FStringToChar("package://sim/unreal/" + ActClass + ".dae")));
+			ObjProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:describedInMap", "rdf:resource",
 				FRUtils::FStringToChar(FRUtils::FStringToChar("&u-map;" + UniqueName))));
 			// Add instance with properties
 			FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
-				FROwlUtils::OwlTriple("owl:NamedIndividual", "rdf:about",
+				FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
 					FRUtils::FStringToChar("&log;" + ActUniqueName)), ObjProperties);
 
 			// Map perception unique name
 			const FString MapPerceptionUniqueName = "SemanticMapPerception_" + FRUtils::GenerateRandomFString(4);
 
 			// Map perception properties
-			TArray<FROwlUtils::OwlTriple> MapPerceptionProperties;
+			TArray<FROwlUtils::ROwlTriple> MapPerceptionProperties;
 			// Add obj event properties
-			MapPerceptionProperties.Add(FROwlUtils::OwlTriple(
+			MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
 				"rdf:type", "rdf:resource", "&knowrob;SemanticMapPerception"));
-			MapPerceptionProperties.Add(FROwlUtils::OwlTriple(
+			MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:eventOccursAt", "rdf:resource",
 				FRUtils::FStringToChar("&u-map;" + TransfUniqueName)));
-			MapPerceptionProperties.Add(FROwlUtils::OwlTriple(
+			MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:startTime", "rdf:resource", "&u-map;timepoint_0"));
-			MapPerceptionProperties.Add(FROwlUtils::OwlTriple(
+			MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:objectActedOn", "rdf:resource",
 				FRUtils::FStringToChar("&log;" + ActUniqueName)));
 			// Add instance with properties
 			FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
-				FROwlUtils::OwlTriple("owl:NamedIndividual", "rdf:about",
+				FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
 					FRUtils::FStringToChar(MapPerceptionUniqueName)),
 				MapPerceptionProperties);
 
 			// Transformation properties
-			TArray<FROwlUtils::OwlTriple> TransfProperties;
+			TArray<FROwlUtils::ROwlTriple> TransfProperties;
 			// Add obj event properties
-			TransfProperties.Add(FROwlUtils::OwlTriple(
+			TransfProperties.Add(FROwlUtils::ROwlTriple(
 				"rdf:type", "rdf:resource", "&knowrob;Transformation"));
-			TransfProperties.Add(FROwlUtils::OwlTriple(
+			TransfProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:quaternion", "rdf:datatype", "&xsd;string", FRUtils::FStringToChar(QuatStr)));
-			TransfProperties.Add(FROwlUtils::OwlTriple(
+			TransfProperties.Add(FROwlUtils::ROwlTriple(
 				"knowrob:translation", "rdf:datatype", "&xsd;string", FRUtils::FStringToChar(LocStr)));
 			// Add instance with properties
 			FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
-				FROwlUtils::OwlTriple("owl:NamedIndividual", "rdf:about",
+				FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
 					FRUtils::FStringToChar("&u-map;" + TransfUniqueName)),
 				TransfProperties);
 		}
 	};
 
 	// Add dynamic and static actors initial position to the map
-	AddActorsToSemMapLambda(DynamicActPtrToUniqNameMap);
-	AddActorsToSemMapLambda(StaticActPtrToUniqNameMap);
+	AddActorsToSemMapLambda(DynamicActPtrToUniqNameMap, ActUniqNameToClassTypeMap);
+	AddActorsToSemMapLambda(StaticActPtrToUniqNameMap, ActUniqNameToClassTypeMap);
 
 	///////// ADD RDF TO OWL DOC
 	SemMapDoc->append_node(RDFNode);

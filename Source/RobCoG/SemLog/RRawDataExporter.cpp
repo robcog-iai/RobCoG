@@ -190,7 +190,9 @@ void FRRawDataExporter::InitItemsToLog(
 	const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
 	const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Skeletal components to be logged:"));
+	UE_LOG(LogTemp, Warning, TEXT(" *** "));
+	UE_LOG(LogTemp, Warning, TEXT("Raw data logger: "));
+	UE_LOG(LogTemp, Warning, TEXT("  Skeletal components:"));
 	for (const auto SkelActPtrToUniqNameItr : SkelActPtrToUniqNameMap)
 	{
 		SkelActStructArr.Add(
@@ -199,7 +201,7 @@ void FRRawDataExporter::InitItemsToLog(
 			*SkelActPtrToUniqNameItr.Key->GetName(), *SkelActPtrToUniqNameItr.Value);
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Dynamic items to be logged:"));
+	UE_LOG(LogTemp, Warning, TEXT("  Dynamic items:"));
 	for (const auto DynamicActPtrToUniqNameItr : DynamicActPtrToUniqNameMap)
 	{
 		DynamicActStructArr.Add(
@@ -208,7 +210,7 @@ void FRRawDataExporter::InitItemsToLog(
 			*DynamicActPtrToUniqNameItr.Key->GetName(), *DynamicActPtrToUniqNameItr.Value);
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Static map items to be logged (once):"));
+	UE_LOG(LogTemp, Warning, TEXT("  Static map items (logged once):"));
 	StaticActToUniqName = StaticActPtrToUniqNameMap;
 	for (const auto StaticActPtrToUniqNameItr : StaticActPtrToUniqNameMap)
 	{

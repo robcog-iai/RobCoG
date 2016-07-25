@@ -4,6 +4,7 @@
 #include "MotionControllerComponent.h"
 #include "RMotionControllerCharacter.h"
 #include "RMotionControllerCharacterVR.h"
+#include "SemLog/RSemEventsExporterSingl.h"
 #include "RHand.h"
 
 // Sets default values
@@ -327,15 +328,12 @@ void ARHand::AttachToHand()
 		}
 
 		// Sort the map (most frequent actor first)
-		ActorToCount.ValueSort([](const uint8 A, const uint8 B)
-		{
-			return A > B;
-		});
+		ActorToCount.ValueSort([](const uint8 A, const uint8 B){return A > B;});
 
 		// If the count is enough, attach actor to hand
 		for (const auto ActToCountItr : ActorToCount)
 		{
-			//TODO make sure hand to hand attachment is avoided
+			// TODO make sure hand to hand attachment is avoided
 			if (ActToCountItr.Value > 2)
 			{
 				// Set the grasped component
@@ -353,6 +351,13 @@ void ARHand::AttachToHand()
 
 				// Set state to attached
 				Grasp->SetState(ERGraspState::Attached);
+
+				// Check if semantic event logger is initialized
+				if (FRSemEventsExporterSingl::Get().IsInit())
+				{
+					FRSemEventsExporterSingl::Get().BeginGraspingEvent(
+						this, ActToCountItr.Key, GetWorld()->GetTimeSeconds());
+				}
 
 				// Attachment constroller feedback
 				FLatentActionInfo ActionInfo;
@@ -400,6 +405,13 @@ void ARHand::OpenHand(const float AxisValue)
 			GraspedComponent->SetLinearDamping(0.1f);
 			// Break constraint
 			GraspFixatingConstraint->BreakConstraint();
+
+			// Check if semantic event logger is initialized
+			if (FRSemEventsExporterSingl::Get().IsInit())
+			{
+				FRSemEventsExporterSingl::Get().EndGraspingEvent(
+					this, GraspedComponent->GetAttachmentRootActor(), GetWorld()->GetTimeSeconds());
+			}
 
 			FLatentActionInfo ActionInfo;
 			ActionInfo.CallbackTarget = this;

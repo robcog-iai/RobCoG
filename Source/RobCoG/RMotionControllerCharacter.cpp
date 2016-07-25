@@ -37,7 +37,7 @@ ARMotionControllerCharacter::ARMotionControllerCharacter(const FObjectInitialize
 	MCOriginComponent->SetupAttachment(RootComponent);
 	// Position of the mc origin
 	MCOriginComponent->RelativeLocation = FVector(
-		20.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+		0.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
 	// Create left/right motion controller
 	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("LeftMotionController"));
