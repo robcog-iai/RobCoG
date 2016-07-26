@@ -62,7 +62,7 @@ private:
 	bool bLogSemanticEvents;
 
 	// Map of skeletal component (to be logged) names to actor map 
-	TMap<FString, ASkeletalMeshActor*> SkelActNameToCompPtrMap;
+	TMap<FString, ASkeletalMeshActor*> SkelActNameToActPtrMap;
 
 	// Map of dynamic actors (to be logged) names to actor map 
 	TMap<FString, AStaticMeshActor*> DynamicActNameToActPtrMap;
@@ -78,9 +78,12 @@ private:
 
 	// Map of static map actors (to be logged) to unique name
 	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap;
+	
+	// Map of actors to their unique name
+	TMap<AActor*, FString> ActorToUniqueNameMap;
 
-	// Map of actor uniqe names to their class type
-	TMap<FString, FString> ActUniqNameToClassTypeMap;
+	// Map of actors to their class type
+	TMap<AActor*, FString> ActorToClassTypeMap;
 
 	// Raw data exporter
 	FRRawDataExporter* RawDataExporter;
@@ -88,14 +91,9 @@ private:
 	// Semantic map exporter
 	FRSemMapExporter* SemMapExporter;
 
-	// TODO singletone
-	// Semantic events exporter
-	//FRSemEventsExporter* SemEventsExporter;
-
 	// Level path
 	FString LevelPath;
 
 	// Episode path
 	FString EpisodePath;
-
 };

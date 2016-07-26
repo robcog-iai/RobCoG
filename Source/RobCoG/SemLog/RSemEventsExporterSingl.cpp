@@ -18,8 +18,15 @@ FRSemEventsExporterSingl::~FRSemEventsExporterSingl()
 }
 
 // Init exporter
-void FRSemEventsExporterSingl::Init(const float Timestamp)
+void FRSemEventsExporterSingl::Init(
+	const TMap<AActor*, FString>& ActorToUniqueName,
+	const TMap<AActor*, FString>& ActorToClassType,
+	const float Timestamp)
 {
+	// Set the map references to the member maps
+	EvActorToUniqueName = ActorToUniqueName;
+	EvActorToClassType = ActorToClassType;
+
 	// Init metadata
 	Metadata = new RSemEvent("&log;",
 		"UnrealExperiment_" + FRUtils::GenerateRandomFString(4), Timestamp);
@@ -29,8 +36,8 @@ void FRSemEventsExporterSingl::Init(const float Timestamp)
 	// Add startTime property
 	Metadata->Properties.Add(
 		FROwlUtils::ROwlTriple("knowrob:startTime", "rdf:resource",
-			FRUtils::FStringToChar("&log;timepoint_" + FString::SanitizeFloat(Timestamp))));
-
+			FRUtils::FStringToChar("&log;" + 
+				FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
 
 	// Set init flag to true
 	bInit = true;
@@ -43,19 +50,17 @@ bool FRSemEventsExporterSingl::IsInit()
 }
 
 // Write events to file
-void FRSemEventsExporterSingl::WriteEvents(const FString Path,
-	const TMap<FString, FString>& ActUniqNameToClassTypeMap,
-	const float Timestamp)
+void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Timestamp)
 {
 	// End all opened events
 	FRSemEventsExporterSingl::TerminateEvents(Timestamp);
-
 	// Set metadata as finished
 	Metadata->End = Timestamp;
 	// Add endTime property
 	Metadata->Properties.Add(
 		FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
-			FRUtils::FStringToChar("&log;timepoint_" + FString::SanitizeFloat(Timestamp))));
+			FRUtils::FStringToChar("&log;" + 
+				FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
 
 	///////// DOC
 	rapidxml::xml_document<>* EventsDoc = new rapidxml::xml_document<>();
@@ -145,7 +150,6 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path,
 	FROwlUtils::AddNodeTriple(EventsDoc, RDFNode,
 		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;ParticleTranslation"));
 
-
 	///////// EVENT INDIVIDUALS
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Event Individuals");
 	// Add event individuals to RDF node
@@ -160,13 +164,22 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path,
 	///////// OBJECT INDIVIDUALS
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Object Individuals");
 	// Add event individuals to RDF node
-	for (const auto ActUniqNameToClassTypeItr : ActUniqNameToClassTypeMap)
+	for (const auto ObjIndividualItr : ObjectIndividuals)
 	{
-		FROwlUtils::AddNodeEntityWithProperty(EventsDoc, RDFNode,
-			FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
-				FRUtils::FStringToChar("&log;" + ActUniqNameToClassTypeItr.Key)),
-			FROwlUtils::ROwlTriple("rdf:type", "rdf:resource",
-				FRUtils::FStringToChar("&knowrob;" + ActUniqNameToClassTypeItr.Value)));
+		// Check that both unique name and class is available
+		if ((EvActorToUniqueName.Contains(ObjIndividualItr)) &&
+			(EvActorToClassType.Contains(ObjIndividualItr)))
+		{
+			FROwlUtils::AddNodeEntityWithProperty(EventsDoc, RDFNode,
+				FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
+					FRUtils::FStringToChar("&log;" + EvActorToUniqueName[ObjIndividualItr])),
+				FROwlUtils::ROwlTriple("rdf:type", "rdf:resource",
+					FRUtils::FStringToChar("&knowrob;" + EvActorToClassType[ObjIndividualItr])));
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("%s 's unique name is not set! Writing object individual skipped!"), *ObjIndividualItr->GetName());
+		}
 	}
 
 	///////// TIMEPOINT INDIVIDUALS
@@ -206,9 +219,24 @@ void FRSemEventsExporterSingl::BeginGraspingEvent(
 	AActor* Self, AActor* Other, const float Timestamp)
 {
 	const FString HandName = Self->GetName();
-	const FString GraspedActName = Other->GetName();
+	const FString GraspedActorName = Other->GetName();
 
-	UE_LOG(LogTemp, Warning, TEXT("Grasp Start: %s %s %f"), *HandName, *GraspedActName,
+	// Skip saving the event if one of the actor is not registered with unique name
+	if (!(EvActorToUniqueName.Contains(Self) && EvActorToUniqueName.Contains(Other)))
+	{
+		UE_LOG(LogTemp, Error, TEXT(" %s or %s's unique name is not set! Begin grasp event skipped!"), *HandName, *GraspedActorName);
+		return;
+	}
+	// Get unique name of the hand and object
+	const FString HandUniqueName = EvActorToUniqueName[Self];
+	const FString GraspedActorUniqueName = EvActorToUniqueName[Other];
+	
+	// Add hand and object to the object individuals array
+	ObjectIndividuals.AddUnique(Self);
+	ObjectIndividuals.AddUnique(Other);
+
+	// TODO rm
+	UE_LOG(LogTemp, Warning, TEXT("Grasp Start: %s %s %f"), *HandUniqueName, *GraspedActorUniqueName,
 		Timestamp);
 	
 	// Init grasp event
@@ -216,25 +244,23 @@ void FRSemEventsExporterSingl::BeginGraspingEvent(
 		"GraspingSomething_" + FRUtils::GenerateRandomFString(4), Timestamp);
 	// Add class property
 	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
-		"rdf:type", "rdf:resource", "&knowrob; GraspingSomething"));
+		"rdf:type", "rdf:resource", "&knowrob;GraspingSomething"));
 	// Add taskContext
 	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
-		"knowrob:taskContext", "rdf:datatype", "&xsd;string", "TODO obj unique name"));
-	// KnowRob Timepoint
-	const FString TimepointStr = "timepoint_" + FString::SanitizeFloat(Timestamp);
-	// Add to timepoints array
-	TimepointIndividuals.Add(TimepointStr);
+		"knowrob:taskContext", "rdf:datatype", "&xsd;string", 
+		FRUtils::FStringToChar("Grasp-" + HandUniqueName + "-" + GraspedActorUniqueName)));
 	// Add startTime
 	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
 		"knowrob:startTime", "rdf:resource", 
-		FRUtils::FStringToChar("&log;" + TimepointStr)));
+		FRUtils::FStringToChar("&log;" + 
+			FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
 	// Add objectActedOn
 	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
 		"knowrob:objectActedOn", "rdf:resource", 
-		FRUtils::FStringToChar("&log;" + GraspedActName + "TODO")));
+		FRUtils::FStringToChar("&log;" + GraspedActorUniqueName)));
 
 	// Add events to the map
-	NameToEventsMap.Add("Grasp" + HandName + GraspedActName, GraspEvent);
+	NameToEventsMap.Add("Grasp" + HandName + GraspedActorName, GraspEvent);
 }
 
 // Add ending of grasping event
@@ -242,33 +268,127 @@ void FRSemEventsExporterSingl::EndGraspingEvent(
 	AActor* Self, AActor* Other, const float Timestamp)
 {
 	const FString HandName = Self->GetName();
-	const FString GraspedActName = Other->GetName();
+	const FString GraspedActorName = Other->GetName();
 
-	UE_LOG(LogTemp, Warning, TEXT("Grasp End: %s %s %f"), *HandName, *GraspedActName,
+	// TODO rm
+	UE_LOG(LogTemp, Warning, TEXT("Grasp End: %s %s %f"), *HandName, *GraspedActorName,
 		Timestamp);
 
 	// Check if grasp is started
-	if (NameToEventsMap.Contains("Grasp" + HandName + GraspedActName))
+	if (NameToEventsMap.Contains("Grasp" + HandName + GraspedActorName))
 	{
 		// Get the grasp event and finish it
-		RSemEvent* CurrGraspEv = NameToEventsMap["Grasp" + HandName + GraspedActName];
+		RSemEvent* CurrGraspEv = NameToEventsMap["Grasp" + HandName + GraspedActorName];
 
 		// Add finishing time
 		CurrGraspEv->End = Timestamp;
-		// KnowRob Timepoint
-		const FString TimepointStr = "timepoint_" + FString::SanitizeFloat(Timestamp);
-		// Add to timepoints array
-		TimepointIndividuals.Add(TimepointStr);
 
 		// Add endTime property
 		CurrGraspEv->Properties.Add(
 			FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
-				FRUtils::FStringToChar("&log;" + TimepointStr)));
+				FRUtils::FStringToChar("&log;" + 
+					FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
 
 		// Add as subAction property to Metadata
 		Metadata->Properties.Add(
 			FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
 				FRUtils::FStringToChar(CurrGraspEv->Ns + CurrGraspEv->Name)));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT(" Trying to end grasp which did not start: %s !"), *FString("Grasp" + HandName + GraspedActorName));
+	}
+}
+
+// Add beginning of touching event
+void FRSemEventsExporterSingl::BeginTouchingEvent(
+	AActor* TriggerParent, AActor* OtherActor, const float Timestamp)
+{
+	const FString TriggerParentName = TriggerParent->GetName();
+	const FString OtherActorName = OtherActor->GetName();
+
+	// TODO rm
+	UE_LOG(LogTemp, Warning, TEXT("%s %s begin contact."),
+		*TriggerParentName, *OtherActorName);
+
+	// Skip saving the event if one of the actor is not registered with unique name
+	if (!(EvActorToUniqueName.Contains(TriggerParent) && EvActorToUniqueName.Contains(OtherActor)))
+	{
+		UE_LOG(LogTemp, Error, TEXT(" %s or %s's unique name is not set! Begin touch event skipped!"), *TriggerParent->GetName(), *OtherActor->GetName());
+		return;
+	}
+	// Get unique names of the objects in contact
+	const FString TriggerUniqueName = EvActorToUniqueName[TriggerParent];
+	const FString OtherActorUniqueName = EvActorToUniqueName[OtherActor];
+
+	// Add objects to the object individuals array
+	ObjectIndividuals.AddUnique(TriggerParent);	
+	ObjectIndividuals.AddUnique(OtherActor);
+
+	// Init grasp event
+	RSemEvent* ContactEvent = new RSemEvent("&log;",
+		"TouchingSituation_" + FRUtils::GenerateRandomFString(4), Timestamp);
+	// Add class property
+	ContactEvent->Properties.Add(FROwlUtils::ROwlTriple(
+		"rdf:type", "rdf:resource", "&knowrob_u;TouchingSituation"));
+	// Add taskContext
+	ContactEvent->Properties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:taskContext", "rdf:datatype", "&xsd;string",
+		FRUtils::FStringToChar("Contact-" + TriggerUniqueName + "-" + OtherActorUniqueName)));
+	// Add startTime
+	ContactEvent->Properties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:startTime", "rdf:resource",
+		FRUtils::FStringToChar("&log;" +
+			FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
+	// Add in contact 1
+	ContactEvent->Properties.Add(FROwlUtils::ROwlTriple(
+		"knowrob_u:inContact", "rdf:resource",
+		FRUtils::FStringToChar("&log;" + TriggerUniqueName)));
+	// Add in contact 2
+	ContactEvent->Properties.Add(FROwlUtils::ROwlTriple(
+		"knowrob_u:inContact", "rdf:resource",
+		FRUtils::FStringToChar("&log;" + OtherActorUniqueName)));
+
+	// Add events to the map
+	NameToEventsMap.Add("Contact" + TriggerParentName + OtherActorName, ContactEvent);
+}
+
+// Add end of touching event
+void FRSemEventsExporterSingl::EndTouchingEvent(
+	AActor* TriggerParent, AActor* OtherActor, const float Timestamp)
+{
+	const FString TriggerParentName = TriggerParent->GetName();
+	const FString OtherActorName = OtherActor->GetName();
+
+	// TODO rm
+	UE_LOG(LogTemp, Warning,
+		TEXT("%s %s end contact"), *TriggerParentName, *OtherActorName);
+
+	// Check if grasp is started
+	if (NameToEventsMap.Contains("Contact" + TriggerParent->GetName() + OtherActor->GetName()))
+	{
+		// Get the grasp event and finish it
+		RSemEvent* CurrContactEv = NameToEventsMap[
+			"Contact" + TriggerParentName + OtherActorName];
+
+		// Add finishing time
+		CurrContactEv->End = Timestamp;
+
+		// Add endTime property
+		CurrContactEv->Properties.Add(
+			FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
+				FRUtils::FStringToChar("&log;" +
+					FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
+
+		// Add as subAction property to Metadata
+		Metadata->Properties.Add(
+			FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
+				FRUtils::FStringToChar(CurrContactEv->Ns + CurrContactEv->Name)));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT(" Trying to end a contact event which did not start: %s !"),
+			*FString("Contact" + TriggerParent->GetName() + OtherActor->GetName()));
 	}
 }
 
@@ -283,15 +403,12 @@ void FRSemEventsExporterSingl::TerminateEvents(const float Timestamp)
 		{
 			// Add finishing time
 			NameToEvItr.Value->End = Timestamp;
-			// KnowRob Timepoint
-			const FString TimepointStr = "timepoint_" + FString::SanitizeFloat(Timestamp);
-			// Add to timepoints array
-			TimepointIndividuals.Add(TimepointStr);
 
 			// Add endTime property
 			NameToEvItr.Value->Properties.Add(
 				FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
-					FRUtils::FStringToChar("&log;" + TimepointStr)));
+					FRUtils::FStringToChar("&log;" + 
+						FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
 
 			// Add as subAction property to Metadata
 			Metadata->Properties.Add(
@@ -302,41 +419,12 @@ void FRSemEventsExporterSingl::TerminateEvents(const float Timestamp)
 }
 
 // Add timepoint to array, and return Knowrob specific timestamp
-FString FRSemEventsExporterSingl::AddTimestamp(const float Timestamp) const
+inline const FString FRSemEventsExporterSingl::AddTimestamp(const float Timestamp)
 {
 	// KnowRob Timepoint
 	const FString TimepointStr = "timepoint_" + FString::SanitizeFloat(Timestamp);
-	//// Add to timepoints array
-	//TimepointIndividuals.Add(TimepointStr);
-	// Return string
+	// Add to timepoints array
+	TimepointIndividuals.AddUnique(TimepointStr);
+	// Return string ts
 	return TimepointStr;
 }
-
-//// Start touching event
-//FOwlEvent ARSemLogManager::StartTouchingSituation(AActor* Trigger, AActor* OtherActor)
-//{
-//	// Create touch situation at the current time
-//	FOwlEvent TouchEvent("&log;", "TouchingSituation", ARSemLogManager::RandStringUnderscore(4), ElapsedTime);
-//
-//	// Add event type property
-//	TouchEvent.AddProperty("rdf:type", "rdf:resource", "&knowrob_u;TouchingSituation");
-//
-//	// Set task context
-//	const FString TaskContext("Contact-" + ActorToUniqueName[Trigger->GetAttachParentActor()] + "-" + ActorToUniqueName[OtherActor]);
-//	// Add context to the event, and as property
-//	TouchEvent.SetContext(TaskContext);
-//	TouchEvent.AddProperty("knowrob:taskContext", "rdf:datatype", "&xsd;string", TaskContext);
-//
-//	// Set event StartTime and add it as property
-//	const FString StartTime = "&log;timepoint_" + FString::SanitizeFloat(TouchEvent.StartTime);
-//	TouchEvent.AddProperty("knowrob:startTime", "rdf:resource", StartTime);
-//
-//	// Make sure the time individual is not repeating
-//	TimepointIndividuals.AddUnique(StartTime);
-//
-//	// Add objects in contact
-//	TouchEvent.AddProperty("knowrob_u:inContact", "rdf:resource", FString("&log;") + ActorToUniqueName[Trigger->GetAttachParentActor()]);
-//	TouchEvent.AddProperty("knowrob_u:inContact", "rdf:resource", FString("&log;") + ActorToUniqueName[OtherActor]);
-//
-//	return TouchEvent;
-//}

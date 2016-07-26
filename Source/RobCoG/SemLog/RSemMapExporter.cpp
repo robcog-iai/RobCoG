@@ -21,7 +21,7 @@ FRSemMapExporter::~FRSemMapExporter()
 void FRSemMapExporter::WriteSemanticMap(
 	const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
 	const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap,
-	const TMap<FString, FString>& ActUniqNameToClassTypeMap,
+	const TMap<AActor*, FString>& ActorToClassTypeMap,
 	const FString Path)
 {
 	///////// DOC
@@ -140,15 +140,17 @@ void FRSemMapExporter::WriteSemanticMap(
 	UE_LOG(LogTemp, Warning, TEXT("Semantic map components:"));
 
 	// Lambda to add actors to the semantic map as perception events
-	auto AddActorsToSemMapLambda = [SemMapDoc, RDFNode, this](const TMap<AStaticMeshActor*, FString>& ActPtrToUniqNameMap, const TMap<FString, FString>& ActUniqNameToClassTypeMap)
+	auto AddActorsToSemMapLambda = [SemMapDoc, RDFNode, this](
+		const TMap<AStaticMeshActor*, FString>& ActPtrToUniqNameMap,
+		const TMap<AActor*, FString>& ActorToClassTypeMap)
 	{
 		for (const auto ActPtrToUniqNameItr : ActPtrToUniqNameMap)
 		{
 			// Local copies of name and unique name
 			const FString ActName = ActPtrToUniqNameItr.Key->GetName();
 			const FString ActUniqueName = ActPtrToUniqNameItr.Value;
-			const FString ActClass = ActUniqNameToClassTypeMap[ActUniqueName];
-			UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"), *ActName, *ActUniqueName);
+			const FString ActClass = ActorToClassTypeMap[ActPtrToUniqNameItr.Key];
+			UE_LOG(LogTemp, Warning, TEXT("\t%s [%s] -> %s "), *ActName, *ActClass, *ActUniqueName);
 
 			// Transf unique name
 			const FString TransfUniqueName = "Transformation_" + FRUtils::GenerateRandomFString(4);
@@ -224,8 +226,8 @@ void FRSemMapExporter::WriteSemanticMap(
 	};
 
 	// Add dynamic and static actors initial position to the map
-	AddActorsToSemMapLambda(DynamicActPtrToUniqNameMap, ActUniqNameToClassTypeMap);
-	AddActorsToSemMapLambda(StaticActPtrToUniqNameMap, ActUniqNameToClassTypeMap);
+	AddActorsToSemMapLambda(DynamicActPtrToUniqNameMap, ActorToClassTypeMap);
+	AddActorsToSemMapLambda(StaticActPtrToUniqNameMap, ActorToClassTypeMap);
 
 	///////// ADD RDF TO OWL DOC
 	SemMapDoc->append_node(RDFNode);

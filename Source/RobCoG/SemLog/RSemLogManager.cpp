@@ -65,7 +65,7 @@ void ARSemLogManager::BeginPlay()
 			SemMapExporter->WriteSemanticMap(
 				DynamicActPtrToUniqNameMap,
 				StaticActPtrToUniqNameMap,
-				ActUniqNameToClassTypeMap,
+				ActorToClassTypeMap,
 				SemMapPath);
 		}
 	}
@@ -87,7 +87,10 @@ void ARSemLogManager::BeginPlay()
 	// Init semantic events logger
 	if (bLogSemanticEvents)
 	{
-		FRSemEventsExporterSingl::Get().Init(GetWorld()->GetTimeSeconds());
+		FRSemEventsExporterSingl::Get().Init(
+			ActorToUniqueNameMap, 
+			ActorToClassTypeMap, 
+			GetWorld()->GetTimeSeconds());
 	}
 }
 
@@ -98,7 +101,7 @@ void ARSemLogManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		// Save logged events
 		FRSemEventsExporterSingl::Get().WriteEvents(
-			EpisodePath + "/EventData.owl", ActUniqNameToClassTypeMap,
+			EpisodePath + "/EventData.owl",
 			GetWorld()->GetTimeSeconds());
 	}
 }
@@ -169,7 +172,7 @@ void ARSemLogManager::SetLogItems()
 			// Get the second tag 
 			const FString Tag1 = Tags[1].ToString();
 			// Add class type to the map (unique name will be changed)
-			ActUniqNameToClassTypeMap.Add(*StaticMeshActItr->GetName(), Tag1);
+			ActorToClassTypeMap.Add(*StaticMeshActItr, Tag1);
 		}
 	}
 
@@ -210,7 +213,7 @@ void ARSemLogManager::SetLogItems()
 		// Get component tags
 		const TArray<FName> Tags = SkelMeshActItr->Tags;
 		// Skip if object has no tags
-		if (Tags.Num() > 0)
+		if (Tags.Num() > 1)
 		{
 			// Get the first tag 
 			const FString Tag0 = Tags[0].ToString();
@@ -218,8 +221,13 @@ void ARSemLogManager::SetLogItems()
 			if (Tag0.Contains("DynamicItem"))
 			{
 				// Add skel component to be loggend
-				SkelActNameToCompPtrMap.Add(SkelMeshActItr->GetName(), *SkelMeshActItr);
+				SkelActNameToActPtrMap.Add(SkelMeshActItr->GetName(), *SkelMeshActItr);
 			}
+
+			// Get the second tag 
+			const FString Tag1 = Tags[1].ToString();
+			// Add class type to the map (unique name will be changed)
+			ActorToClassTypeMap.Add(*SkelMeshActItr, Tag1);
 		}
 	}
 }
@@ -242,14 +250,11 @@ void ARSemLogManager::GenerateUniqueNames()
 				? FRUtils::GenerateRandomFString(4)
 				: "_" + FRUtils::GenerateRandomFString(4);
 
-			// Add generated unqique name to map
+			// Add generated unqique name to the dynamic actors map
 			DynamicActPtrToUniqNameMap.Add(ActNameToActPtrItr.Value, UniqueName);
 
-			// Switch name to unique name in map		
-			FString ClassType;
-			ActUniqNameToClassTypeMap.RemoveAndCopyValue(NameKey, ClassType);
-			// Add new map with unique name
-			ActUniqNameToClassTypeMap.Add(UniqueName, ClassType);
+			// Add actor to unique name
+			ActorToUniqueNameMap.Add(ActNameToActPtrItr.Value, UniqueName);
 		}
 	};
 
@@ -258,7 +263,7 @@ void ARSemLogManager::GenerateUniqueNames()
 	GenerateUniqueNamesLambda(StaticActNameToActPtrMap);
 
 	// Iterate all skeletal actors to be logged and generate unique names
-	for (const auto SkelActNameToCompPtrItr : SkelActNameToCompPtrMap)
+	for (const auto SkelActNameToCompPtrItr : SkelActNameToActPtrMap)
 	{
 		// Generate unique name and make sure there is an underscore before the unique hash
 		FString UniqueName = SkelActNameToCompPtrItr.Key;
@@ -268,6 +273,9 @@ void ARSemLogManager::GenerateUniqueNames()
 
 		// Add generated unqique name to map
 		SkelActPtrToUniqNameMap.Add(SkelActNameToCompPtrItr.Value, UniqueName);
+
+		// Add actor to unique name
+		ActorToUniqueNameMap.Add(SkelActNameToCompPtrItr.Value, UniqueName);
 	}
 }
 
@@ -301,11 +309,9 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 					// Add generated unqique name to map
 					DynamicActPtrToUniqNameMap.Add(DynamicActNameToActPtrMap[NameField], UniqueName);
 
-					// Switch name to unique name in map		
-					FString ClassType;
-					ActUniqNameToClassTypeMap.RemoveAndCopyValue(NameField, ClassType);
-					// Add new map with unique name
-					ActUniqNameToClassTypeMap.Add(UniqueName, ClassType);
+					// Add actor to unique name
+					ActorToUniqueNameMap.Add(DynamicActNameToActPtrMap[NameField], UniqueName);
+
 				}
 				else if(StaticActNameToActPtrMap.Contains(NameField))
 				{
@@ -314,18 +320,18 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 					// Add generated unqique name to map
 					StaticActPtrToUniqNameMap.Add(StaticActNameToActPtrMap[NameField], UniqueName);
 
-					// Switch name to unique name in map		
-					FString ClassType;
-					ActUniqNameToClassTypeMap.RemoveAndCopyValue(NameField, ClassType);
-					// Add new map with unique name
-					ActUniqNameToClassTypeMap.Add(UniqueName, ClassType);
+					// Add actor to unique name
+					ActorToUniqueNameMap.Add(StaticActNameToActPtrMap[NameField], UniqueName);
 				}
-				else if (SkelActNameToCompPtrMap.Contains(NameField))
+				else if (SkelActNameToActPtrMap.Contains(NameField))
 				{
 					// Get unique name and add it to the map
 					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
 					// Add generated unqique name to map
-					SkelActPtrToUniqNameMap.Add(SkelActNameToCompPtrMap[NameField], UniqueName);
+					SkelActPtrToUniqNameMap.Add(SkelActNameToActPtrMap[NameField], UniqueName);
+
+					// Add actor to unique name
+					ActorToUniqueNameMap.Add(SkelActNameToActPtrMap[NameField], UniqueName);
 				}
 				else
 				{

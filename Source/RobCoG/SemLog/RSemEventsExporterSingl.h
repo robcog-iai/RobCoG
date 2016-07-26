@@ -20,16 +20,18 @@ public:
 	void operator=(FRSemEventsExporterSingl const&) = delete;
 
 	// Initialize
-	void Init(const float Timestamp);
+	void Init(const TMap<AActor*, FString>& ActorToUniqueName, 
+		const TMap<AActor*, FString>& ActorToClassType,
+		const float Timestamp);
 
 	// Check if init
 	bool IsInit();
 
 	// Add beginning of touching event
-	void BeginTouchingEvent();
+	void BeginTouchingEvent(AActor* TriggerParent, AActor* OtherActor, const float Timestamp);
 
 	// Add end of touching event
-	void EndTouchingEvent();
+	void EndTouchingEvent(AActor* TriggerParent, AActor* OtherActor, const float Timestamp);
 
 	// Add beginning of grasping event
 	void BeginGraspingEvent(AActor* Self, AActor* Other, const float Timestamp);
@@ -38,9 +40,7 @@ public:
 	void EndGraspingEvent(AActor* Self, AActor* Other, const float Timestamp);
 	
 	// Write events to file
-	void WriteEvents(const FString Path,
-		const TMap<FString, FString>& ActUniqNameToClassTypeMap,
-		const float Timestamp);
+	void WriteEvents(const FString Path, const float Timestamp);
 
 	// Event struct
 	struct RSemEvent
@@ -66,16 +66,22 @@ private:
 	void TerminateEvents(const float Timestamp);
 
 	// Add timepoint to array, and return Knowrob specific timestamp
-	FString AddTimestamp(const float Timestamp) const;
+	const FString AddTimestamp(const float Timestamp);
 
 	// Flag showing if the exportert is init
 	bool bInit;
 
+	// Reference map of actors to their unique name
+	TMap<AActor*, FString> EvActorToUniqueName;
+
+	// Reference map of actors to their class type
+	TMap<AActor*, FString> EvActorToClassType;
+
 	// Event name to event individuals map
 	TMap<FString, RSemEvent*> NameToEventsMap;
 
-	// Objects unique name to class map
-	TMap<FString, FString> ObjUNameToClassMap;
+	// Array of object individuals
+	TArray<AActor*> ObjectIndividuals;
 
 	// Timepoint individuals
 	TArray<FString> TimepointIndividuals;
