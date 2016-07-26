@@ -2,20 +2,20 @@
 
 #include "RobCoG.h"
 #include "SemLog/RSemEventsExporterSingl.h"
-#include "SemanticContactTriggerBox.h"
+#include "RSemanticContactTriggerBox.h"
 
 // Set default values
-ASemanticContactTriggerBox::ASemanticContactTriggerBox()
+ARSemanticContactTriggerBox::ARSemanticContactTriggerBox()
 {
 }
 
 // Destructor
-ASemanticContactTriggerBox::~ASemanticContactTriggerBox()
+ARSemanticContactTriggerBox::~ARSemanticContactTriggerBox()
 {
 }
 
 // Called when the games starts or when spawned
-void ASemanticContactTriggerBox::BeginPlay()
+void ARSemanticContactTriggerBox::BeginPlay()
 {
 	Super::BeginPlay();
 	
@@ -23,8 +23,8 @@ void ASemanticContactTriggerBox::BeginPlay()
 	if (Parent)
 	{
 		// Bind overlap events
-		OnActorBeginOverlap.AddDynamic(this, &ASemanticContactTriggerBox::BeginSemanticContact);
-		OnActorEndOverlap.AddDynamic(this, &ASemanticContactTriggerBox::EndSemanticContact);
+		OnActorBeginOverlap.AddDynamic(this, &ARSemanticContactTriggerBox::BeginSemanticContact);
+		OnActorEndOverlap.AddDynamic(this, &ARSemanticContactTriggerBox::EndSemanticContact);
 	}
 	else
 	{
@@ -33,7 +33,7 @@ void ASemanticContactTriggerBox::BeginPlay()
 }
 
 // Callback on start overlap, end the semantic contact
-void ASemanticContactTriggerBox::BeginSemanticContact(
+void ARSemanticContactTriggerBox::BeginSemanticContact(
 	AActor* Self, AActor* OtherActor)
 {
 	if (FRSemEventsExporterSingl::Get().IsInit())
@@ -44,7 +44,7 @@ void ASemanticContactTriggerBox::BeginSemanticContact(
 }
 
 // Callback on end overlap, end the semantic contact
-void ASemanticContactTriggerBox::EndSemanticContact(
+void ARSemanticContactTriggerBox::EndSemanticContact(
 	AActor* Self, AActor* OtherActor)
 {
 	if (FRSemEventsExporterSingl::Get().IsInit())

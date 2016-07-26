@@ -3,21 +3,21 @@
 #pragma once
 
 #include "Engine/TriggerBox.h"
-#include "SemanticContactTriggerBox.generated.h"
+#include "RSemanticContactTriggerBox.generated.h"
 
 /**
  *  Trigger box sending contact information to the semantic events exporter
  */
 UCLASS()
-class ROBCOG_API ASemanticContactTriggerBox : public ATriggerBox
+class ROBCOG_API ARSemanticContactTriggerBox : public ATriggerBox
 {
 	GENERATED_BODY()
 
 	// Constructor
-	ASemanticContactTriggerBox();
+	ARSemanticContactTriggerBox();
 	
 	// Destructor
-	~ASemanticContactTriggerBox();
+	~ARSemanticContactTriggerBox();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
