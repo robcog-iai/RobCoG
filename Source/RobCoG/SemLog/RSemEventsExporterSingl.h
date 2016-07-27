@@ -27,6 +27,9 @@ public:
 	// Check if init
 	bool IsInit();
 
+	// Reset singleton
+	void Reset();
+
 	// Add beginning of touching event
 	void BeginTouchingEvent(AActor* TriggerParent, AActor* OtherActor, const float Timestamp);
 

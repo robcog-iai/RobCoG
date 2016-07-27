@@ -97,13 +97,17 @@ void ARSemLogManager::BeginPlay()
 // Called when the game is terminated
 void ARSemLogManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
+	// Write events and terminate the singleton
 	if (FRSemEventsExporterSingl::Get().IsInit())
 	{
 		// Save logged events
 		FRSemEventsExporterSingl::Get().WriteEvents(
 			EpisodePath + "/EventData.owl",
 			GetWorld()->GetTimeSeconds());
-	}
+
+		// Reset the singleton (if we run it in editor it does not get deleted)
+		FRSemEventsExporterSingl::Get().Reset();
+	}	
 }
 
 // Called every frame

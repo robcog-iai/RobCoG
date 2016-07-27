@@ -49,6 +49,21 @@ bool FRSemEventsExporterSingl::IsInit()
 	return bInit;
 }
 
+// Reset singleton
+void FRSemEventsExporterSingl::Reset()
+{
+	// Set init to false
+	bInit = false;
+	// Empty containers
+	EvActorToUniqueName.Empty();
+	EvActorToClassType.Empty();
+	NameToEventsMap.Empty();
+	ObjectIndividuals.Empty();
+	TimepointIndividuals.Empty();
+	// Empty metadata
+	delete Metadata;
+}
+
 // Write events to file
 void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Timestamp)
 {
@@ -163,9 +178,11 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 
 	///////// OBJECT INDIVIDUALS
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Object Individuals");
+
+
 	// Add event individuals to RDF node
 	for (const auto ObjIndividualItr : ObjectIndividuals)
-	{
+	{		
 		// Check that both unique name and class is available
 		if ((EvActorToUniqueName.Contains(ObjIndividualItr)) &&
 			(EvActorToClassType.Contains(ObjIndividualItr)))
