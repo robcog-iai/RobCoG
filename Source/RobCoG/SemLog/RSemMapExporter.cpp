@@ -124,10 +124,10 @@ void FRSemMapExporter::WriteSemanticMap(
 	// Semantic map individual
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Semantic Environment Map");
 	// Add semantic map instance
-	FROwlUtils::AddNodeEntityWithProperty(SemMapDoc, RDFNode,
-		FROwlUtils::ROwlTriple("rdf:type", "rdf:resource", "&knowrob;SemanticEnvironmentMap"),
-		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
-			FRUtils::FStringToChar("&u-map;" + UniqueName)));
+	FROwlUtils::AddNodeEntityWithProperty(SemMapDoc, RDFNode, 
+		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about", 
+			FRUtils::FStringToChar("&u-map;" + UniqueName)), 
+		FROwlUtils::ROwlTriple("rdf:type", "rdf:resource", "&knowrob;SemanticEnvironmentMap"));
 
 	// Timepoint individual
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Timepoint");

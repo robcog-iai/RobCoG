@@ -19,18 +19,26 @@ FRSemEventsExporterSingl::~FRSemEventsExporterSingl()
 
 // Init exporter
 void FRSemEventsExporterSingl::Init(
+	const FString UniqueTag,
 	const TMap<AActor*, FString>& ActorToUniqueName,
 	const TMap<AActor*, FString>& ActorToClassType,
 	const float Timestamp)
 {
+	// Set episode unique tag
+	EpisodeUniqueTag = UniqueTag;
+
 	// Set the map references to the member maps
 	EvActorToUniqueName = ActorToUniqueName;
 	EvActorToClassType = ActorToClassType;
 
 	// Init metadata
 	Metadata = new RSemEvent("&log;",
-		"UnrealExperiment_" + FRUtils::GenerateRandomFString(4), Timestamp);
+		"UnrealExperiment_" + EpisodeUniqueTag, Timestamp);
 	// Add class property
+	Metadata->Properties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:experiment", "rdf:datatype", "&xsd;string", 
+		FRUtils::FStringToChar(EpisodeUniqueTag)));
+	// Add experiment unique name tag
 	Metadata->Properties.Add(FROwlUtils::ROwlTriple(
 		"rdf:type", "rdf:resource", "&knowrob;UnrealExperiment"));
 	// Add startTime property
@@ -60,12 +68,13 @@ void FRSemEventsExporterSingl::Reset()
 	NameToEventsMap.Empty();
 	ObjectIndividuals.Empty();
 	TimepointIndividuals.Empty();
+	EpisodeUniqueTag.Empty();
 	// Empty metadata
 	delete Metadata;
 }
 
 // Write events to file
-void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Timestamp)
+void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Timestamp, bool bWriteTimelines)
 {
 	// End all opened events
 	FRSemEventsExporterSingl::TerminateEvents(Timestamp);
@@ -211,7 +220,7 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 	};
 
 	///////// METADATA INDIVIDUAL
-	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Metadata Individuals");
+	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Metadata Individual");
 	// Add metadata to RDF node
 	FROwlUtils::AddNodeEntityWithProperties(EventsDoc, RDFNode,
 		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
@@ -228,7 +237,13 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 	FString OwlString = UTF8_TO_TCHAR(RapidXmlString.c_str());
 
 	// Write string to file
-	FFileHelper::SaveStringToFile(OwlString, *Path);
+	const FString FilePath = Path + "/EventData_" + EpisodeUniqueTag + ".owl";
+	FFileHelper::SaveStringToFile(OwlString, *FilePath);
+
+	if (bWriteTimelines)
+	{
+		FRSemEventsExporterSingl::WriteTimelines();
+	}
 }
 
 // Add beginning of grasping event
@@ -433,6 +448,12 @@ void FRSemEventsExporterSingl::TerminateEvents(const float Timestamp)
 					FRUtils::FStringToChar(NameToEvItr.Value->Ns + NameToEvItr.Value->Name)));
 		}
 	}
+}
+
+// Write events as timelines
+void FRSemEventsExporterSingl::WriteTimelines()
+{
+
 }
 
 // Add timepoint to array, and return Knowrob specific timestamp

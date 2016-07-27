@@ -20,7 +20,9 @@ public:
 	void operator=(FRSemEventsExporterSingl const&) = delete;
 
 	// Initialize
-	void Init(const TMap<AActor*, FString>& ActorToUniqueName, 
+	void Init(
+		const FString EpisodeUniqueTag,
+		const TMap<AActor*, FString>& ActorToUniqueName, 
 		const TMap<AActor*, FString>& ActorToClassType,
 		const float Timestamp);
 
@@ -43,7 +45,7 @@ public:
 	void EndGraspingEvent(AActor* Self, AActor* Other, const float Timestamp);
 	
 	// Write events to file
-	void WriteEvents(const FString Path, const float Timestamp);
+	void WriteEvents(const FString Path, const float Timestamp, bool bWriteTimelines = true);
 
 	// Event struct
 	struct RSemEvent
@@ -68,11 +70,17 @@ private:
 	// Add finish time to all events
 	void TerminateEvents(const float Timestamp);
 
+	// Write events as timelines
+	void WriteTimelines();
+
 	// Add timepoint to array, and return Knowrob specific timestamp
 	const FString AddTimestamp(const float Timestamp);
 
 	// Flag showing if the exportert is init
 	bool bInit;
+
+	// Episode unique tag
+	FString EpisodeUniqueTag;
 
 	// Reference map of actors to their unique name
 	TMap<AActor*, FString> EvActorToUniqueName;

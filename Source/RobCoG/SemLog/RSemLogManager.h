@@ -96,4 +96,7 @@ private:
 
 	// Episode path
 	FString EpisodePath;
+
+	// Episode unique tag
+	FString EpisodeUniqueTag;
 };

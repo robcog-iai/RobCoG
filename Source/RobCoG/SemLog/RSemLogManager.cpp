@@ -15,7 +15,10 @@ ARSemLogManager::ARSemLogManager()
 	SetActorHiddenInGame(true);
 
 	// Log directory name
-	LogRootDirectoryName = "MyLogs";	
+	LogRootDirectoryName = "MyLogs";
+
+	// Episode unique tag
+	EpisodeUniqueTag = FRUtils::GenerateRandomFString(4);
 
 	// Default flag values
 	bLogRawData = true;
@@ -74,7 +77,7 @@ void ARSemLogManager::BeginPlay()
 	if (bLogRawData)
 	{
 		// Path to the json file
-		const FString RawFilePath = EpisodePath + "/RawData.json";
+		const FString RawFilePath = EpisodePath + "/RawData_" + EpisodeUniqueTag + ".json";
 		// Init raw data exporter
 		RawDataExporter = new FRRawDataExporter(
 			DistanceThresholdSquared,
@@ -88,6 +91,7 @@ void ARSemLogManager::BeginPlay()
 	if (bLogSemanticEvents)
 	{
 		FRSemEventsExporterSingl::Get().Init(
+			EpisodeUniqueTag,
 			ActorToUniqueNameMap, 
 			ActorToClassTypeMap, 
 			GetWorld()->GetTimeSeconds());
@@ -102,7 +106,7 @@ void ARSemLogManager::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	{
 		// Save logged events
 		FRSemEventsExporterSingl::Get().WriteEvents(
-			EpisodePath + "/EventData.owl",
+			EpisodePath,
 			GetWorld()->GetTimeSeconds());
 
 		// Reset the singleton (if we run it in editor it does not get deleted)
