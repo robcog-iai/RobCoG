@@ -71,7 +71,7 @@ private:
 	void TerminateEvents(const float Timestamp);
 
 	// Write events as timelines
-	void WriteTimelines();
+	void WriteTimelines(const FString FilePath);
 
 	// Add timepoint to array, and return Knowrob specific timestamp
 	const FString AddTimestamp(const float Timestamp);
@@ -89,7 +89,10 @@ private:
 	TMap<AActor*, FString> EvActorToClassType;
 
 	// Event name to event individuals map
-	TMap<FString, RSemEvent*> NameToEventsMap;
+	TMap<FString, RSemEvent*> NameToOpenedEventsMap;
+
+	// Array of all the finished events
+	TArray<RSemEvent*> FinishedEvents;
 
 	// Array of object individuals
 	TArray<AActor*> ObjectIndividuals;

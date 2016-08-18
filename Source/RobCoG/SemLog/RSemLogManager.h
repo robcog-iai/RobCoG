@@ -97,6 +97,9 @@ private:
 	// Episode path
 	FString EpisodePath;
 
+	// Raw data path
+	FString RawDataPath;
+
 	// Episode unique tag
 	FString EpisodeUniqueTag;
 };

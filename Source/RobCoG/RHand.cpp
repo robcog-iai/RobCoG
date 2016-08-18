@@ -5,6 +5,7 @@
 #include "RMotionControllerCharacter.h"
 #include "RMotionControllerCharacterVR.h"
 #include "SemLog/RSemEventsExporterSingl.h"
+#include "HeadMountedDisplay.h"
 #include "RHand.h"
 
 // Sets default values
@@ -27,6 +28,8 @@ ARHand::ARHand()
 	GetSkeletalMeshComponent()->SetEnableGravity(false);
 	// Collision default
 	GetSkeletalMeshComponent()->SetCollisionProfileName(TEXT("BLockAll"));
+	// Generate overlap events
+	GetSkeletalMeshComponent()->bGenerateOverlapEvents = true;
 	
 	// Control bone name
 	ControlBoneName = FName("palm_l");
@@ -87,29 +90,38 @@ ARHand::ARHand()
 	// Disable mesh collision
 	DummyStaticMesh->SetCollisionProfileName(TEXT("NoCollision"));
 	DummyStaticMesh->SetWorldScale3D(FVector(0.01f));
-	DummyStaticMesh->SetupAttachment(RootComponent);
+	DummyStaticMesh->SetupAttachment(RootComponent);	
 }
 
 // Called when the game starts or when spawned
 void ARHand::BeginPlay()
 {
 	Super::BeginPlay();
-	/////////////////////////////////////////////////////////////////////
-	// Get the motion controller of the character
-	for (TActorIterator<ARMotionControllerCharacter> CharItr(GetWorld()); CharItr; ++CharItr)
+
+	//TODO check for the character type not the play mode (e.g. stereo eabled)
+	IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
+	if (HMD && HMD->IsStereoEnabled())
 	{
-		// Pointer to the motion controller component
-		MCComponent = CharItr->GetMotionController(HandType);
-		// Stop the loop since we only need the first character (there should be only one)
-		break;
+		// Get the motion controller of the character
+		for (TActorIterator<ARMotionControllerCharacterVR> CharItr(GetWorld()); CharItr; ++CharItr)
+		{
+			// Pointer to the motion controller component
+			MCComponent = CharItr->GetMotionController(HandType);
+			// Stop the loop since we only need the first character (there should be only one)
+			break;
+		}
 	}
-	//for (TActorIterator<ARMotionControllerCharacterVR> CharItr(GetWorld()); CharItr; ++CharItr)
-	//{
-	//	// Pointer to the motion controller component
-	//	MCComponent = CharItr->GetMotionController(HandType);
-	//	// Stop the loop since we only need the first character (there should be only one)
-	//	break;
-	//}
+	else
+	{
+		// Get the motion controller of the character
+		for (TActorIterator<ARMotionControllerCharacter> CharItr(GetWorld()); CharItr; ++CharItr)
+		{
+			// Pointer to the motion controller component
+			MCComponent = CharItr->GetMotionController(HandType);
+			// Stop the loop since we only need the first character (there should be only one)
+			break;
+		}
+	}
 
 	// Disable Tick if no motion controller component or character has been found
 	if ((!MCComponent))

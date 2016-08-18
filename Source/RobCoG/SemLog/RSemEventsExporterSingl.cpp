@@ -36,11 +36,11 @@ void FRSemEventsExporterSingl::Init(
 		"UnrealExperiment_" + EpisodeUniqueTag, Timestamp);
 	// Add class property
 	Metadata->Properties.Add(FROwlUtils::ROwlTriple(
-		"knowrob:experiment", "rdf:datatype", "&xsd;string", 
-		FRUtils::FStringToChar(EpisodeUniqueTag)));
+		"rdf:type", "rdf:resource", "&knowrob;UnrealExperiment"));
 	// Add experiment unique name tag
 	Metadata->Properties.Add(FROwlUtils::ROwlTriple(
-		"rdf:type", "rdf:resource", "&knowrob;UnrealExperiment"));
+		"knowrob:experiment", "rdf:datatype", "&xsd;string", 
+		FRUtils::FStringToChar(EpisodeUniqueTag)));
 	// Add startTime property
 	Metadata->Properties.Add(
 		FROwlUtils::ROwlTriple("knowrob:startTime", "rdf:resource",
@@ -65,10 +65,11 @@ void FRSemEventsExporterSingl::Reset()
 	// Empty containers
 	EvActorToUniqueName.Empty();
 	EvActorToClassType.Empty();
-	NameToEventsMap.Empty();
+	NameToOpenedEventsMap.Empty();
 	ObjectIndividuals.Empty();
 	TimepointIndividuals.Empty();
 	EpisodeUniqueTag.Empty();
+	FinishedEvents.Empty();
 	// Empty metadata
 	delete Metadata;
 }
@@ -177,12 +178,12 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 	///////// EVENT INDIVIDUALS
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Event Individuals");
 	// Add event individuals to RDF node
-	for (const auto EventMapItr : NameToEventsMap)
+	for (const auto FinishedEventItr : FinishedEvents)
 	{
 		FROwlUtils::AddNodeEntityWithProperties(EventsDoc, RDFNode,
 			FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
-				FRUtils::FStringToChar(EventMapItr.Value->Name)),
-			EventMapItr.Value->Properties);
+				FRUtils::FStringToChar(FinishedEventItr->Name)),
+			FinishedEventItr->Properties);
 	}
 
 	///////// OBJECT INDIVIDUALS
@@ -240,9 +241,10 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 	const FString FilePath = Path + "/EventData_" + EpisodeUniqueTag + ".owl";
 	FFileHelper::SaveStringToFile(OwlString, *FilePath);
 
+	// Write the events as timelines
 	if (bWriteTimelines)
 	{
-		FRSemEventsExporterSingl::WriteTimelines();
+		FRSemEventsExporterSingl::WriteTimelines(Path + "/Timelines_" + EpisodeUniqueTag + ".html");
 	}
 }
 
@@ -268,12 +270,12 @@ void FRSemEventsExporterSingl::BeginGraspingEvent(
 	ObjectIndividuals.AddUnique(Other);
 
 	// TODO rm
-	UE_LOG(LogTemp, Warning, TEXT("Grasp Start: %s %s %f"), *HandUniqueName, *GraspedActorUniqueName,
-		Timestamp);
+	UE_LOG(LogTemp, Warning, TEXT("Begin Grasp[%s --> %s]"), *HandUniqueName, *GraspedActorUniqueName);
 	
+	// Create unique name of the event
+	const FString EventUniqueName = "GraspingSomething_" + FRUtils::GenerateRandomFString(4);
 	// Init grasp event
-	RSemEvent* GraspEvent = new RSemEvent("&log;",
-		"GraspingSomething_" + FRUtils::GenerateRandomFString(4), Timestamp);
+	RSemEvent* GraspEvent = new RSemEvent("&log;", EventUniqueName, Timestamp);
 	// Add class property
 	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
 		"rdf:type", "rdf:resource", "&knowrob;GraspingSomething"));
@@ -292,7 +294,7 @@ void FRSemEventsExporterSingl::BeginGraspingEvent(
 		FRUtils::FStringToChar("&log;" + GraspedActorUniqueName)));
 
 	// Add events to the map
-	NameToEventsMap.Add("Grasp" + HandName + GraspedActorName, GraspEvent);
+	NameToOpenedEventsMap.Add("Grasp" + HandName + GraspedActorName, GraspEvent);
 }
 
 // Add ending of grasping event
@@ -302,15 +304,15 @@ void FRSemEventsExporterSingl::EndGraspingEvent(
 	const FString HandName = Self->GetName();
 	const FString GraspedActorName = Other->GetName();
 
-	// TODO rm
-	UE_LOG(LogTemp, Warning, TEXT("Grasp End: %s %s %f"), *HandName, *GraspedActorName,
-		Timestamp);
+	// TODO rm? debug
+	UE_LOG(LogTemp, Warning, TEXT("End Grasp[%s --> %s]"), *HandName, *GraspedActorName);
 
 	// Check if grasp is started
-	if (NameToEventsMap.Contains("Grasp" + HandName + GraspedActorName))
+	if (NameToOpenedEventsMap.Contains("Grasp" + HandName + GraspedActorName))
 	{
-		// Get the grasp event and finish it
-		RSemEvent* CurrGraspEv = NameToEventsMap["Grasp" + HandName + GraspedActorName];
+		// Get and remove the event from the opened events map
+		RSemEvent* CurrGraspEv;
+		NameToOpenedEventsMap.RemoveAndCopyValue("Grasp" + HandName + GraspedActorName, CurrGraspEv);
 
 		// Add finishing time
 		CurrGraspEv->End = Timestamp;
@@ -325,6 +327,9 @@ void FRSemEventsExporterSingl::EndGraspingEvent(
 		Metadata->Properties.Add(
 			FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
 				FRUtils::FStringToChar(CurrGraspEv->Ns + CurrGraspEv->Name)));
+
+		// Add event to the finished events array
+		FinishedEvents.Add(CurrGraspEv);
 	}
 	else
 	{
@@ -338,10 +343,6 @@ void FRSemEventsExporterSingl::BeginTouchingEvent(
 {
 	const FString TriggerParentName = TriggerParent->GetName();
 	const FString OtherActorName = OtherActor->GetName();
-
-	// TODO rm
-	UE_LOG(LogTemp, Warning, TEXT("%s %s begin contact."),
-		*TriggerParentName, *OtherActorName);
 
 	// Skip saving the event if one of the actor is not registered with unique name
 	if (!(EvActorToUniqueName.Contains(TriggerParent) && EvActorToUniqueName.Contains(OtherActor)))
@@ -357,9 +358,13 @@ void FRSemEventsExporterSingl::BeginTouchingEvent(
 	ObjectIndividuals.AddUnique(TriggerParent);	
 	ObjectIndividuals.AddUnique(OtherActor);
 
-	// Init grasp event
-	RSemEvent* ContactEvent = new RSemEvent("&log;",
-		"TouchingSituation_" + FRUtils::GenerateRandomFString(4), Timestamp);
+	// TODO rm
+	UE_LOG(LogTemp, Warning, TEXT("Begin Contact[%s <--> %s]"),	*TriggerParentName, *OtherActorName);
+
+	// Create unique name of the event
+	const FString EventUniqueName = "TouchingSituation_" + FRUtils::GenerateRandomFString(4);
+	// Init contact event
+	RSemEvent* ContactEvent = new RSemEvent("&log;", EventUniqueName, Timestamp);
 	// Add class property
 	ContactEvent->Properties.Add(FROwlUtils::ROwlTriple(
 		"rdf:type", "rdf:resource", "&knowrob_u;TouchingSituation"));
@@ -382,7 +387,7 @@ void FRSemEventsExporterSingl::BeginTouchingEvent(
 		FRUtils::FStringToChar("&log;" + OtherActorUniqueName)));
 
 	// Add events to the map
-	NameToEventsMap.Add("Contact" + TriggerParentName + OtherActorName, ContactEvent);
+	NameToOpenedEventsMap.Add("Contact" + TriggerParentName + OtherActorName, ContactEvent);
 }
 
 // Add end of touching event
@@ -392,16 +397,17 @@ void FRSemEventsExporterSingl::EndTouchingEvent(
 	const FString TriggerParentName = TriggerParent->GetName();
 	const FString OtherActorName = OtherActor->GetName();
 
-	// TODO rm
+	// TODO rm? debug
 	UE_LOG(LogTemp, Warning,
-		TEXT("%s %s end contact"), *TriggerParentName, *OtherActorName);
+		TEXT("End Contact[%s <--> %s]"), *TriggerParentName, *OtherActorName);
 
 	// Check if grasp is started
-	if (NameToEventsMap.Contains("Contact" + TriggerParent->GetName() + OtherActor->GetName()))
+	if (NameToOpenedEventsMap.Contains("Contact" + TriggerParent->GetName() + OtherActor->GetName()))
 	{
-		// Get the grasp event and finish it
-		RSemEvent* CurrContactEv = NameToEventsMap[
-			"Contact" + TriggerParentName + OtherActorName];
+		// Get and remove the event from the opened events map
+		RSemEvent* CurrContactEv;
+		NameToOpenedEventsMap.RemoveAndCopyValue("Contact" + TriggerParentName + OtherActorName,
+			CurrContactEv);
 
 		// Add finishing time
 		CurrContactEv->End = Timestamp;
@@ -416,6 +422,9 @@ void FRSemEventsExporterSingl::EndTouchingEvent(
 		Metadata->Properties.Add(
 			FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
 				FRUtils::FStringToChar(CurrContactEv->Ns + CurrContactEv->Name)));
+
+		// Add event to the finished events array
+		FinishedEvents.Add(CurrContactEv);
 	}
 	else
 	{
@@ -424,36 +433,77 @@ void FRSemEventsExporterSingl::EndTouchingEvent(
 	}
 }
 
-// Add finish time to all events
+// Terminate all dangling events
 void FRSemEventsExporterSingl::TerminateEvents(const float Timestamp)
 {
-	// Iterate all events
-	for (const auto NameToEvItr : NameToEventsMap)
+	// Iterate all opened events
+	for (const auto NameToEvItr : NameToOpenedEventsMap)
 	{
-		// Check if event is still open
-		if (NameToEvItr.Value->End < 0)
-		{
-			// Add finishing time
-			NameToEvItr.Value->End = Timestamp;
+		// Add finishing time
+		NameToEvItr.Value->End = Timestamp;
 
-			// Add endTime property
-			NameToEvItr.Value->Properties.Add(
-				FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
-					FRUtils::FStringToChar("&log;" + 
-						FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
+		// Add endTime property
+		NameToEvItr.Value->Properties.Add(
+			FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
+				FRUtils::FStringToChar("&log;" + 
+					FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
 
-			// Add as subAction property to Metadata
-			Metadata->Properties.Add(
-				FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
-					FRUtils::FStringToChar(NameToEvItr.Value->Ns + NameToEvItr.Value->Name)));
-		}
+		// Add as subAction property to Metadata
+		Metadata->Properties.Add(
+			FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
+				FRUtils::FStringToChar(NameToEvItr.Value->Ns + NameToEvItr.Value->Name)));
+
+		// Add event to the finished events array
+		FinishedEvents.Add(NameToEvItr.Value);
+
+		// TODO rm? debug
+		UE_LOG(LogTemp, Warning,
+			TEXT("Terminate [%s]"), *NameToEvItr.Key);
 	}
+
+	// Empty the open events map
+	NameToOpenedEventsMap.Empty();
 }
 
 // Write events as timelines
-void FRSemEventsExporterSingl::WriteTimelines()
+void FRSemEventsExporterSingl::WriteTimelines(const FString FilePath)
 {
+	FString TimelineStr = "<html>\n"
+		"<script type=\"text/javascript\" src=\"https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',\n"
+		"\t'version':'1','packages':['timeline']}]}\"></script>\n"
+		"<script type=\"text/javascript\">\n"
+		"google.setOnLoadCallback(drawChart);\n"
+		"\n"
+		"function drawChart() {\n"
+		"  var container = document.getElementById('EventsTimelines');\n\n"
+		"  var chart = new google.visualization.Timeline(container);\n\n"
+		"  var dataTable = new google.visualization.DataTable();\n\n"
 
+		"  dataTable.addColumn({ type: 'string', id: 'Event' });\n"
+		"  dataTable.addColumn({ type: 'number', id: 'Start' });\n"
+		"  dataTable.addColumn({ type: 'number', id: 'End' });\n\n"
+		"  dataTable.addRows([\n";
+
+	// Add events to the timelines
+	for (const auto FinishedEventItr : FinishedEvents)
+	{
+		TimelineStr.Append("    [ '" + FinishedEventItr->Name + "', "
+			+ FString::SanitizeFloat(FinishedEventItr->Start) + ", "
+			+ FString::SanitizeFloat(FinishedEventItr->End) + "],\n");
+	}
+
+
+	TimelineStr.Append(
+		"  ]); \n\n"
+		"  chart.draw(dataTable);\n"
+		"}\n"
+		"</script>\n"
+		"<div id=\"sim_timeline_ex\" style=\"width: 1300px; height: 900px;\"></div>\n\n"
+		"</html>"
+	);
+
+	// Write timeline string to file
+	FFileHelper::SaveStringToFile(TimelineStr, *FilePath);
 }
 
 // Add timepoint to array, and return Knowrob specific timestamp

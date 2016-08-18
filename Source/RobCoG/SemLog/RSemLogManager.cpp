@@ -37,9 +37,12 @@ void ARSemLogManager::BeginPlay()
 	// Level directory path
 	LevelPath = LogRootDirectoryName + "/" +	GetWorld()->GetName();
 	// Episode directory path
-	EpisodePath = LevelPath + "/" + "rcg_" + FDateTime::Now().ToString();
-	// Create the directory path
+	EpisodePath = LevelPath + "/Episodes/" + "rcg_" + FDateTime::Now().ToString();
+	// Raw data directory path
+	RawDataPath = LevelPath + "/RawData/";
+	// Create the directory paths
 	ARSemLogManager::CreateDirectoryPath(EpisodePath);
+	ARSemLogManager::CreateDirectoryPath(RawDataPath);
 
 	// Check items tags to see which should be logged
 	ARSemLogManager::SetLogItems();
@@ -77,7 +80,7 @@ void ARSemLogManager::BeginPlay()
 	if (bLogRawData)
 	{
 		// Path to the json file
-		const FString RawFilePath = EpisodePath + "/RawData_" + EpisodeUniqueTag + ".json";
+		const FString RawFilePath = RawDataPath + "/RawData_" + EpisodeUniqueTag + ".json";
 		// Init raw data exporter
 		RawDataExporter = new FRRawDataExporter(
 			DistanceThresholdSquared,
