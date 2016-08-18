@@ -182,7 +182,7 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 	{
 		FROwlUtils::AddNodeEntityWithProperties(EventsDoc, RDFNode,
 			FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
-				FRUtils::FStringToChar(FinishedEventItr->Name)),
+				FRUtils::FStringToChar(FinishedEventItr->Ns + FinishedEventItr->Name)),
 			FinishedEventItr->Properties);
 	}
 
