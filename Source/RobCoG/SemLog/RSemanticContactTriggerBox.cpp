@@ -7,6 +7,13 @@
 // Set default values
 ARSemanticContactTriggerBox::ARSemanticContactTriggerBox()
 {
+	GetCollisionComponent()->bFlexEnableParticleCounter = true;
+
+
+	BC = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComponent"));
+	BC->SetupAttachment(RootComponent);
+	BC->InitBoxExtent(FVector(100, 100, 1));
+
 }
 
 // Destructor
@@ -18,7 +25,7 @@ ARSemanticContactTriggerBox::~ARSemanticContactTriggerBox()
 void ARSemanticContactTriggerBox::BeginPlay()
 {
 	Super::BeginPlay();
-	
+		
 	// Check if parent is set
 	if (Parent)
 	{
@@ -30,6 +37,12 @@ void ARSemanticContactTriggerBox::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT(" %s's parent is not set!"), *GetName());
 	}
+
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &ARSemanticContactTriggerBox::CheckParticleCount, 1.0f, true);
+
+	//GetWorldTimerManager().SetTimer(FTimerDelegate::CreateUObject(this, &ARSemanticContactTriggerBox::CheckParticleCount), 5.f, false);
+
+	BC->bFlexEnableParticleCounter = true;
 }
 
 // Callback on start overlap, end the semantic contact
@@ -52,4 +65,10 @@ void ARSemanticContactTriggerBox::EndSemanticContact(
 		FRSemEventsExporterSingl::Get().EndTouchingEvent(
 			Parent, OtherActor, GetWorld()->GetTimeSeconds());
 	}
+}
+
+// Check the number of flex particle collisions
+void ARSemanticContactTriggerBox::CheckParticleCount()
+{
+	UE_LOG(LogTemp, Warning, TEXT(" **** FlexParticleCount: %i BC: %i"), GetCollisionComponent()->FlexParticleCount, BC->FlexParticleCount);
 }

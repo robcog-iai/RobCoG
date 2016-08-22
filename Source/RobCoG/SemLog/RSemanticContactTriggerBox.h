@@ -31,7 +31,16 @@ private:
 	UFUNCTION()
 	void EndSemanticContact(AActor* Self, AActor* OtherActor);
 
+	// Check the number of flex particle collisions
+	UFUNCTION()
+	void CheckParticleCount();
+
+	// Timer handle
+	FTimerHandle TimerHandle;
+
 	// Static mesh actor parent for the trigger
 	UPROPERTY(EditAnywhere, Category = "Semantic Contact")
 	AStaticMeshActor* Parent;
+
+	UBoxComponent* BC;
 };
