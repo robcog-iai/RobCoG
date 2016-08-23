@@ -31,7 +31,39 @@ private:
 	UFUNCTION()
 	void EndSemanticContact(AActor* Self, AActor* OtherActor);
 
+	// Create raster
+	void CreateRaster();
+
+	// Check particle cound on raster
+	void CheckParticleCount();
+
 	// Static mesh actor parent for the trigger
-	UPROPERTY(EditAnywhere, Category = "Semantic Contact")
+	UPROPERTY(EditAnywhere, Category = "Semantic TriggerBox")
 	AStaticMeshActor* Parent;
+
+	// Create raster for particle collisions
+	UPROPERTY(EditAnywhere, Category = "Semantic TriggerBox")
+	bool bCreateRaster;
+
+	// Number of rows in the raster
+	UPROPERTY(EditAnywhere, Category = "Semantic TriggerBox")
+	uint32 RasterNrRows;
+
+	// Number of columns in the raster
+	UPROPERTY(EditAnywhere, Category = "Semantic TriggerBox")
+	uint32 RasterNrColumns;
+
+	// Particle collision update rate
+	UPROPERTY(EditAnywhere, Category = "Semantic TriggerBox")
+	float RasterUpdateRate;
+
+	// Raster visibility
+	UPROPERTY(EditAnywhere, Category = "Semantic TriggerBox")
+	bool bRasterHiddenInGame;
+
+	// Array of trigger boxes from the raster
+	TArray<UBoxComponent*> RasterTriggerBoxes;
+
+	// Timer handle
+	FTimerHandle TimerHandle;
 };

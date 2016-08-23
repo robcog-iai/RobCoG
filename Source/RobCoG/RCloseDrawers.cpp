@@ -39,7 +39,7 @@ void ARCloseDrawers::BeginPlay()
 					{
 						if (!ActorIt->GetName().Contains("Door"))
 						{
-							CurrObjectMesh->AddImpulse(FVector(-6000) * ActorIt->GetActorForwardVector());
+							CurrObjectMesh->AddImpulse(FVector(6000) * ActorIt->GetActorForwardVector());
 						}
 					}
 					break;

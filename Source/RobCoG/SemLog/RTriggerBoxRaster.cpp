@@ -56,17 +56,17 @@ void ARTriggerBoxRaster::BeginPlay()
 		// Trigger box initial offset
 		FVector TriggerBoxOffset = FVector(TriggerBoxExtentX, TriggerBoxExtentY, 2 * ParentExtent.Z);
 
-		UE_LOG(LogTemp, Warning, 
-			TEXT(" ******* \n TriggerBoxExtentX: %f \n, TriggerBoxExtentY %f\n, FIRSTTriggerBoxOffset %s"),
-			TriggerBoxExtentX, TriggerBoxExtentY, *TriggerBoxOffset.ToString());
-
 		// Create the trigger box rasters
 		for (uint32 i = 1; i <= NrRows; ++i)
 		{
 			for (uint32 j = 1; j <= NrColumns; ++j)
 			{
+				
+				const FString TBName = GetName() + "_M_" + FString::FromInt(i) + "_" + FString::FromInt(j);
+
 				// Create trigger box component
-				UBoxComponent* CurrTB = NewObject<UBoxComponent>(this, UBoxComponent::StaticClass());
+				UBoxComponent* CurrTB = NewObject<UBoxComponent>(this, *TBName);
+					//UBoxComponent::StaticClass());
 
 				// Attach to the root component
 				CurrTB->SetupAttachment(RootComponent);
@@ -85,8 +85,7 @@ void ARTriggerBoxRaster::BeginPlay()
 
 				// Count particle collisions
 				CurrTB->bFlexEnableParticleCounter = true;
-				//CurrTB->bFlexParticleDrain = true;
-				//CurrTB->SetCollisionProfileName("OverlapAll");
+				CurrTB->SetCollisionProfileName("UI");
 
 				// Register component
 				CurrTB->RegisterComponent();
@@ -120,6 +119,7 @@ void ARTriggerBoxRaster::BeginPlay()
 // Check particle collisions
 void ARTriggerBoxRaster::CheckParticleCount()
 {
+	UE_LOG(LogTemp, Warning, TEXT(" **** < ---  "));
 	for (const auto TriggerBoxItr : TriggerBoxes)
 	{
 		if (TriggerBoxItr->FlexParticleCount > 0)
@@ -127,7 +127,7 @@ void ARTriggerBoxRaster::CheckParticleCount()
 			UE_LOG(LogTemp, Warning, TEXT(" **** TriggerBox: %s, FlexParticleCount: %i"),
 				*TriggerBoxItr->GetName(), TriggerBoxItr->FlexParticleCount);
 		}
-	}
 
-	UE_LOG(LogTemp, Warning, TEXT(" **** "));
+	}
+	UE_LOG(LogTemp, Warning, TEXT(" --- > **** "));
 }
