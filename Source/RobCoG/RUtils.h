@@ -10,6 +10,18 @@
 #define PrintGreen(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::Green,text)
 #define PrintDur(text, duration) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, duration, FColor::White,text)
 
+
+
+/** Enum indicating the drawer states */
+UENUM(BlueprintType)
+enum class ERDrawerState : uint8
+{
+	Closed			UMETA(DisplayName = "Closed"),
+	HalfClosed		UMETA(DisplayName = "HalfClosed"),
+	Opened			UMETA(DisplayName = "Opened"),
+	HalfOpened		UMETA(DisplayName = "HalfOpened"),
+};
+
 /** Enum indicating the hand type */
 UENUM(BlueprintType)
 enum class ERHandType : uint8

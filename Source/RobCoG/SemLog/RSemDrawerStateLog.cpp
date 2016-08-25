@@ -40,17 +40,33 @@ void ARSemDrawerStateLog::CloseDrawers()
 {
 	for (const auto ConstrItr : Constraints)
 	{
+		// Cast to static mesh actor
 		AStaticMeshActor* SMAct = Cast<AStaticMeshActor>(ConstrItr->ConstraintActor2);
 		
 		if (SMAct)
 		{
-			UE_LOG(LogTemp, Warning, TEXT(" Closing: %s %s"),
-				*SMAct->GetName(), 
-				*SMAct->GetActorLocation().ToString());
+			// Copy of the constraint instance
+			const FConstraintInstance& CurrConstr = ConstrItr->ConstraintInstance;
+
+			if (CurrConstr.LinearXMotion == ELinearConstraintMotion::LCM_Limited)
+			{
+				// Add the drawer and it's initial position to the map
+				DrawerToInitLocMap.Add(SMAct, SMAct->GetActorLocation());
+			}
+			else if (CurrConstr.AngularSwing1Motion == EAngularConstraintMotion::ACM_Limited)
+			{
+				DoorToInitLocMap.Add(SMAct, CurrConstr.GetCurrentSwing1());
+			}
+			else if (CurrConstr.AngularSwing2Motion == EAngularConstraintMotion::ACM_Limited)
+			{
+				DoorToInitLocMap.Add(SMAct, CurrConstr.GetCurrentSwing2());
+			}
+
+			// Get the static mesh component of the drawer
 			UStaticMeshComponent* SMComp = SMAct->GetStaticMeshComponent();
 			
 			// Add impule to static mesh in order to close the drawer/door
-			SMAct->GetStaticMeshComponent()->AddImpulse(FVector(-6000) * SMComp->GetForwardVector());
+			SMAct->GetStaticMeshComponent()->AddImpulse(FVector(-6000) * SMAct->GetActorForwardVector());
 		}
 	}
 }
@@ -61,20 +77,46 @@ void ARSemDrawerStateLog::CheckDrawerStates()
 	UE_LOG(LogTemp, Warning, TEXT(" !! ------- !! --------"));
 	for (const auto ConstrItr : Constraints)
 	{
-		if (ConstrItr->ConstraintInstance.LinearXMotion == ELinearConstraintMotion::LCM_Free)
-		{
-			UE_LOG(LogTemp, Warning, TEXT(" Update: %s %s %s"),
-				*ConstrItr->ConstraintActor2->GetName(),
-				*ConstrItr->ConstraintActor2->GetActorLocation().ToString(),
-				*ConstrItr->ConstraintActor2->GetActorForwardVector().ToString());
-		}
-		else
-		{
+		AActor* Drawer = ConstrItr->ConstraintActor2;
 
-		}
+		if (ConstrItr->ConstraintInstance.LinearXMotion == ELinearConstraintMotion::LCM_Limited)
+		{
+			const FVector CurrPos = Drawer->GetActorLocation();
+			const FVector InitPos = *DrawerToInitLocMap.Find(Drawer);
 
-		//UE_LOG(LogTemp, Warning, TEXT(" !! ------- !! -------- Actor name : %s, LinPosTarget: %s"),
-		//	*ConstrItr->ConstraintActor2->GetName(),
-		//	*ConstrItr->ConstraintActor2->GetActorLocation().ToString());
+			const float Dist = (CurrPos.X - InitPos.X) * Drawer->GetActorForwardVector().X;
+
+			if (Dist < -20)
+			{
+				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : Closed"), *Drawer->GetName());
+			}
+			else if (Dist < 0 && Dist > -20)
+			{
+				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : HalfClosed"), *Drawer->GetName());
+			}
+			else if (Dist > 20)
+			{
+				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : Opened"), *Drawer->GetName());
+			}
+			else if (Dist > 0 && Dist < 20)
+			{
+				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : HalfOpened"), *Drawer->GetName());
+			}
+		}
+		else if(ConstrItr->ConstraintInstance.AngularSwing1Motion == EAngularConstraintMotion::ACM_Limited)
+		{
+			const float InitPos = *DoorToInitLocMap.Find(Drawer);
+
+			UE_LOG(LogTemp, Warning, TEXT(" AngularSwing1Motion: %s %f"), 
+				*Drawer->GetName(), ConstrItr->ConstraintInstance.GetCurrentSwing1());
+			
+		}
+		else if (ConstrItr->ConstraintInstance.AngularSwing2Motion == EAngularConstraintMotion::ACM_Limited)
+		{
+			const float InitPos = *DoorToInitLocMap.Find(Drawer);
+
+			UE_LOG(LogTemp, Warning, TEXT(" AngularSwing2Motion: %s %f"),
+				*Drawer->GetName(), ConstrItr->ConstraintInstance.GetCurrentSwing2());
+		}
 	}
 }
