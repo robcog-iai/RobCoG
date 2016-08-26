@@ -433,6 +433,98 @@ void FRSemEventsExporterSingl::EndTouchingEvent(
 	}
 }
 
+// Add furniture state event
+void FRSemEventsExporterSingl::FurnitureStateEvent(
+	AActor* Furniture, const FString State, const float Timestamp)
+{
+	const FString FurnitureName = Furniture->GetName();
+
+	// Skip saving the event if the furniture is not registered with a unique name
+	if (!(EvActorToUniqueName.Contains(Furniture)))
+	{
+		UE_LOG(LogTemp, Error, TEXT(" %s's unique name is not set! Furniture state event skipped!"), *Furniture->GetName());
+		return;
+	}
+	// Get unique names of the objects in contact
+	const FString FurnitureUniqueName = EvActorToUniqueName[Furniture];
+	
+	// Check if the furniture has any opened events
+	RSemEvent* FurnitureEvent = *NameToOpenedEventsMap.Find("FurnitureState" + FurnitureUniqueName);
+
+	if (FurnitureEvent == nullptr)
+	{
+		// Create first event
+		UE_LOG(LogTemp, Warning, TEXT("*Init*FurnitureState[%s <--> %s]"), *FurnitureName, *State);
+		// Create unique name of the event
+		const FString EventUniqueName = "FurnitureState" + State + FRUtils::GenerateRandomFString(4);
+		// Create the event
+		FurnitureEvent = new RSemEvent("&log;", EventUniqueName, Timestamp);
+		// Add class property
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"rdf:type", "rdf:resource", 
+			FRUtils::FStringToChar("&knowrob_u;FurnitureState" + State)));
+		// Add taskContext
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"knowrob:taskContext", "rdf:datatype", "&xsd;string",
+			FRUtils::FStringToChar("FurnitureState" + State + "-" + FurnitureUniqueName)));
+		// Add startTime
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"knowrob:startTime", "rdf:resource",
+			FRUtils::FStringToChar("&log;" +
+				FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
+		// Add object acted on
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"knowrob:objectActedOn", "rdf:resource",
+			FRUtils::FStringToChar("&log;" + FurnitureUniqueName)));
+	}
+	else
+	{
+		// Terminate previous furniture event
+		UE_LOG(LogTemp, Warning, TEXT("*Update*FurnitureState[%s <--> %s]"), *FurnitureName, *State);
+		// Add finishing time
+		FurnitureEvent->End = Timestamp;
+
+		// Add endTime property
+		FurnitureEvent->Properties.Add(
+			FROwlUtils::ROwlTriple("knowrob:endTime", "rdf:resource",
+				FRUtils::FStringToChar("&log;" +
+					FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
+
+		// Add as subAction property to Metadata
+		Metadata->Properties.Add(
+			FROwlUtils::ROwlTriple("knowrob:subAction", "rdf:resource",
+				FRUtils::FStringToChar(FurnitureEvent->Ns + FurnitureEvent->Name)));
+
+		// Add event to the finished events array
+		FinishedEvents.Add(FurnitureEvent);
+
+		// Create unique name of the event
+		const FString EventUniqueName = "FurnitureState" + State + FRUtils::GenerateRandomFString(4);
+		// Create the event
+		FurnitureEvent = new RSemEvent("&log;", EventUniqueName, Timestamp);
+		// Add class property
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"rdf:type", "rdf:resource",
+			FRUtils::FStringToChar("&knowrob_u;FurnitureState" + State)));
+		// Add taskContext
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"knowrob:taskContext", "rdf:datatype", "&xsd;string",
+			FRUtils::FStringToChar("FurnitureState" + State + "-" + FurnitureUniqueName)));
+		// Add startTime
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"knowrob:startTime", "rdf:resource",
+			FRUtils::FStringToChar("&log;" +
+				FRSemEventsExporterSingl::AddTimestamp(Timestamp))));
+		// Add object acted on
+		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
+			"knowrob:objectActedOn", "rdf:resource",
+			FRUtils::FStringToChar("&log;" + FurnitureUniqueName)));
+
+		// Add new opened event to the map
+		NameToOpenedEventsMap.Add("FurnitureState" + FurnitureUniqueName, FurnitureEvent);
+	}
+}
+
 // Terminate all dangling events
 void FRSemEventsExporterSingl::TerminateEvents(const float Timestamp)
 {

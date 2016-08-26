@@ -24,6 +24,9 @@ private:
 	// Check drawer states
 	void CheckDrawerStates();
 
+	// Log state
+	void LogState(AActor* Furniture, const FString State);
+
 	// Drawer state check update rate (seconds)
 	UPROPERTY(EditAnywhere, Category = "Drawer State Logger")
 	float UpdateRate;
@@ -33,4 +36,13 @@ private:
 
 	// Timer handle
 	FTimerHandle TimerHandle;
+
+	// Drawer actor initial position
+	TMap<AActor*, FVector> DrawerToInitLocMap;
+
+	// Door actor min and max position
+	TMap<AActor*, TPair<float, float> > DoorToMinMaxMap;
+
+	// Actor to state map
+	TMap<AActor*, FString> FurnitureToStateMap;
 };

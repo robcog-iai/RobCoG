@@ -11,8 +11,8 @@ ARSemDrawerStateLog::ARSemDrawerStateLog()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	// Set default update rate
-	UpdateRate = 1.0f;
+	// Set default update rate (sec)
+	UpdateRate = 0.25f;
 }
 
 // Called when the game starts or when spawned
@@ -29,11 +29,10 @@ void ARSemDrawerStateLog::BeginPlay()
 	// Close all drawers
 	ARSemDrawerStateLog::CloseDrawers();
 
-	// Check drawer states
+	// Check drawer states with the given update rate
 	GetWorldTimerManager().SetTimer(
 		TimerHandle, this, &ARSemDrawerStateLog::CheckDrawerStates, UpdateRate, true);
 }
-
 
 // Close drawers
 void ARSemDrawerStateLog::CloseDrawers()
@@ -50,19 +49,29 @@ void ARSemDrawerStateLog::CloseDrawers()
 
 			if (CurrConstr.LinearXMotion == ELinearConstraintMotion::LCM_Limited)
 			{
-				// Add the drawer and it's initial position to the map
+				// Add the drawer and its initial position to the map
 				DrawerToInitLocMap.Add(SMAct, SMAct->GetActorLocation());
 			}
 			else if (CurrConstr.AngularSwing1Motion == EAngularConstraintMotion::ACM_Limited)
 			{
-				DoorToInitLocMap.Add(SMAct, CurrConstr.GetCurrentSwing1());
+				// Compute the min and max value of the joint
+				TPair<float, float> MinMax;
+				MinMax.Key = CurrConstr.GetCurrentSwing1();
+				MinMax.Value = MinMax.Key + FMath::DegreesToRadians(CurrConstr.Swing1LimitAngle + CurrConstr.AngularRotationOffset.Yaw);
+				// Add the doors minmax pos
+				DoorToMinMaxMap.Add(SMAct, MinMax);
 			}
 			else if (CurrConstr.AngularSwing2Motion == EAngularConstraintMotion::ACM_Limited)
 			{
-				DoorToInitLocMap.Add(SMAct, CurrConstr.GetCurrentSwing2());
+				// Compute the min and max value of the joint
+				TPair<float, float> MinMax;
+				MinMax.Key = CurrConstr.GetCurrentSwing2();
+				MinMax.Value = MinMax.Key - FMath::DegreesToRadians(CurrConstr.Swing2LimitAngle + CurrConstr.AngularRotationOffset.Pitch);
+				// Add the doors minmax pos
+				DoorToMinMaxMap.Add(SMAct, MinMax);
 			}
 
-			// Get the static mesh component of the drawer
+			// Get the static mesh component of the actor
 			UStaticMeshComponent* SMComp = SMAct->GetStaticMeshComponent();
 			
 			// Add impule to static mesh in order to close the drawer/door
@@ -74,49 +83,120 @@ void ARSemDrawerStateLog::CloseDrawers()
 // Check drawer states
 void ARSemDrawerStateLog::CheckDrawerStates()
 {
-	UE_LOG(LogTemp, Warning, TEXT(" !! ------- !! --------"));
+	// Iterate all constraints
 	for (const auto ConstrItr : Constraints)
 	{
-		AActor* Drawer = ConstrItr->ConstraintActor2;
+		// Get actor2
+		AActor* FurnitureAct = ConstrItr->ConstraintActor2;
 
+		// Check if it's type drawer or door (all drawers have linear X motion)
 		if (ConstrItr->ConstraintInstance.LinearXMotion == ELinearConstraintMotion::LCM_Limited)
 		{
-			const FVector CurrPos = Drawer->GetActorLocation();
-			const FVector InitPos = *DrawerToInitLocMap.Find(Drawer);
+			const FVector CurrPos = FurnitureAct->GetActorLocation();
+			const FVector InitPos = *DrawerToInitLocMap.Find(FurnitureAct);
+			const float Dist = (CurrPos.X - InitPos.X) * FurnitureAct->GetActorForwardVector().X;
 
-			const float Dist = (CurrPos.X - InitPos.X) * Drawer->GetActorForwardVector().X;
-
-			if (Dist < -20)
+			if (Dist < -20.0f)
 			{
-				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : Closed"), *Drawer->GetName());
+				ARSemDrawerStateLog::LogState(FurnitureAct, "Closed");
 			}
-			else if (Dist < 0 && Dist > -20)
+			else if (Dist < 0.0f && Dist > -20.0f)
 			{
-				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : HalfClosed"), *Drawer->GetName());
+				ARSemDrawerStateLog::LogState(FurnitureAct, "HalfClosed");
 			}
-			else if (Dist > 20)
+			else if (Dist > 20.0f)
 			{
-				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : Opened"), *Drawer->GetName());
+				ARSemDrawerStateLog::LogState(FurnitureAct, "Opened");
 			}
-			else if (Dist > 0 && Dist < 20)
+			else if (Dist > 0.0f && Dist < 20.0f)
 			{
-				//UE_LOG(LogTemp, Warning, TEXT(" Update: %s : HalfOpened"), *Drawer->GetName());
+				ARSemDrawerStateLog::LogState(FurnitureAct, "HalfOpened");
 			}
 		}
 		else if(ConstrItr->ConstraintInstance.AngularSwing1Motion == EAngularConstraintMotion::ACM_Limited)
 		{
-			const float InitPos = *DoorToInitLocMap.Find(Drawer);
+			const float CurrPos = ConstrItr->ConstraintInstance.GetCurrentSwing1();
+			TPair<float, float> MinMax = *DoorToMinMaxMap.Find(FurnitureAct);
 
-			UE_LOG(LogTemp, Warning, TEXT(" AngularSwing1Motion: %s %f"), 
-				*Drawer->GetName(), ConstrItr->ConstraintInstance.GetCurrentSwing1());
-			
+			const float ClosedVal = MinMax.Key + 0.15f;
+			const float HalfVal = (MinMax.Value + MinMax.Key) - 0.5f;
+			const float OpenedVal = MinMax.Value * 0.5;
+
+			if (CurrPos < ClosedVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "Closed");
+			}
+			else if (CurrPos < HalfVal && CurrPos > ClosedVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "HalfClosed");
+			}
+			else if (CurrPos > OpenedVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "Opened");
+			}
+			else if (CurrPos < OpenedVal && CurrPos > HalfVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "HalfOpened");
+			}			
 		}
 		else if (ConstrItr->ConstraintInstance.AngularSwing2Motion == EAngularConstraintMotion::ACM_Limited)
 		{
-			const float InitPos = *DoorToInitLocMap.Find(Drawer);
+			const float CurrPos = ConstrItr->ConstraintInstance.GetCurrentSwing2();
+			TPair<float, float> MinMax = *DoorToMinMaxMap.Find(FurnitureAct);
 
-			UE_LOG(LogTemp, Warning, TEXT(" AngularSwing2Motion: %s %f"),
-				*Drawer->GetName(), ConstrItr->ConstraintInstance.GetCurrentSwing2());
+			const float ClosedVal = MinMax.Key - 0.1f;
+			const float HalfVal = ClosedVal * 0.5f;
+			const float OpenedVal = MinMax.Value + 0.1f;
+
+			if (CurrPos > ClosedVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "Closed");
+			}
+			else if (CurrPos > HalfVal && CurrPos < ClosedVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "HalfClosed");
+			}
+			else if (CurrPos < OpenedVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "Opened");
+			}
+			else if (CurrPos > OpenedVal && CurrPos < HalfVal)
+			{
+				ARSemDrawerStateLog::LogState(FurnitureAct, "HalfOpened");
+			}
+		}
+	}
+}
+
+// Log state
+void ARSemDrawerStateLog::LogState(AActor* Furniture, const FString State)
+{
+	// Get the previous state of the furniture
+	FString PrevState = FurnitureToStateMap.FindRef(Furniture);
+
+	// Create state if it the first
+	if(PrevState.IsEmpty())
+	{
+		// Add to map
+		FurnitureToStateMap.Add(Furniture, State);
+		// Log first state, init the semantic event
+		FRSemEventsExporterSingl::Get().FurnitureStateEvent
+			(Furniture, State, GetWorld()->GetTimeSeconds());
+	}
+	else
+	{
+		if (PrevState.Equals(State))
+		{
+			// Skip if the current state is the same with the previous one
+			return;
+		}
+		else
+		{
+			// Update map state
+			FurnitureToStateMap.Add(Furniture, State);
+			// Log state
+			FRSemEventsExporterSingl::Get().FurnitureStateEvent
+				(Furniture, State, GetWorld()->GetTimeSeconds());
 		}
 	}
 }

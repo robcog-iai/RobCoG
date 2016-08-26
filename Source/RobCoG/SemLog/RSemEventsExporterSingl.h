@@ -43,6 +43,9 @@ public:
 
 	// Add end of grasping event
 	void EndGraspingEvent(AActor* Self, AActor* Other, const float Timestamp);
+
+	// Add furniture state event
+	void FurnitureStateEvent(AActor* Furniture, const FString State, const float Timestamp);
 	
 	// Write events to file
 	void WriteEvents(const FString Path, const float Timestamp, bool bWriteTimelines = true);
