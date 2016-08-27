@@ -174,6 +174,14 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;KitchenEpisode"));
 	FROwlUtils::AddNodeTriple(EventsDoc, RDFNode,
 		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;ParticleTranslation"));
+	FROwlUtils::AddNodeTriple(EventsDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;FurnitureStateClosed"));
+	FROwlUtils::AddNodeTriple(EventsDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;FurnitureStateHalfClosed"));
+	FROwlUtils::AddNodeTriple(EventsDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;FurnitureStateOpened"));
+	FROwlUtils::AddNodeTriple(EventsDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:Class", "rdf:about", "&knowrob_u;FurnitureStateHalfOpened"));
 
 	///////// EVENT INDIVIDUALS
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Event Individuals");
@@ -449,14 +457,14 @@ void FRSemEventsExporterSingl::FurnitureStateEvent(
 	const FString FurnitureUniqueName = EvActorToUniqueName[Furniture];
 	
 	// Check if the furniture has any opened events
-	RSemEvent* FurnitureEvent = *NameToOpenedEventsMap.Find("FurnitureState" + FurnitureUniqueName);
+	RSemEvent* FurnitureEvent = NameToOpenedEventsMap.FindRef("FurnitureState" + FurnitureUniqueName);
 
-	if (FurnitureEvent == nullptr)
+	if (!FurnitureEvent)
 	{
 		// Create first event
 		UE_LOG(LogTemp, Warning, TEXT("*Init*FurnitureState[%s <--> %s]"), *FurnitureName, *State);
 		// Create unique name of the event
-		const FString EventUniqueName = "FurnitureState" + State + FRUtils::GenerateRandomFString(4);
+		const FString EventUniqueName = "FurnitureState" + State + "_" + FRUtils::GenerateRandomFString(4);
 		// Create the event
 		FurnitureEvent = new RSemEvent("&log;", EventUniqueName, Timestamp);
 		// Add class property
@@ -476,6 +484,9 @@ void FRSemEventsExporterSingl::FurnitureStateEvent(
 		FurnitureEvent->Properties.Add(FROwlUtils::ROwlTriple(
 			"knowrob:objectActedOn", "rdf:resource",
 			FRUtils::FStringToChar("&log;" + FurnitureUniqueName)));
+
+		// Add init furniture event to map
+		NameToOpenedEventsMap.Add("FurnitureState" + FurnitureUniqueName, FurnitureEvent);
 	}
 	else
 	{
@@ -499,7 +510,7 @@ void FRSemEventsExporterSingl::FurnitureStateEvent(
 		FinishedEvents.Add(FurnitureEvent);
 
 		// Create unique name of the event
-		const FString EventUniqueName = "FurnitureState" + State + FRUtils::GenerateRandomFString(4);
+		const FString EventUniqueName = "FurnitureState" + State + "_" + FRUtils::GenerateRandomFString(4);
 		// Create the event
 		FurnitureEvent = new RSemEvent("&log;", EventUniqueName, Timestamp);
 		// Add class property
