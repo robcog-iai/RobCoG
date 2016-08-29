@@ -18,6 +18,7 @@ ARMotionControllerCharacterVR::ARMotionControllerCharacterVR(const FObjectInitia
 	bPositionalHeadTracking = false;
 	// Make the capsule thin
 	GetCapsuleComponent()->SetCapsuleRadius(5);
+	GetCapsuleComponent()->SetCapsuleHalfHeight(80);
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 	// Get root component

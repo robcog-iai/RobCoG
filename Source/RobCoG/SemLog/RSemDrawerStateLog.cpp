@@ -26,17 +26,15 @@ void ARSemDrawerStateLog::BeginPlay()
 		Constraints.Add(ActorItr->GetConstraintComp());
 	}
 
-	// Close all drawers
-	ARSemDrawerStateLog::CloseDrawers();
-
-	// Check drawer states with the given update rate
+	// Apply force to close the drawers (after a delay until the objects fall on the surfaces)
 	GetWorldTimerManager().SetTimer(
-		TimerHandle, this, &ARSemDrawerStateLog::CheckDrawerStates, UpdateRate, true);
+		CloseFurnitureTimerHandle, this, &ARSemDrawerStateLog::CloseDrawers, UpdateRate, true, 1);
 }
 
 // Close drawers
 void ARSemDrawerStateLog::CloseDrawers()
 {
+	UE_LOG(LogTemp, Error, TEXT("Closing drawers"));
 	for (const auto ConstrItr : Constraints)
 	{
 		// Cast to static mesh actor
@@ -75,9 +73,16 @@ void ARSemDrawerStateLog::CloseDrawers()
 			UStaticMeshComponent* SMComp = SMAct->GetStaticMeshComponent();
 			
 			// Add impule to static mesh in order to close the drawer/door
-			SMAct->GetStaticMeshComponent()->AddImpulse(FVector(-6000) * SMAct->GetActorForwardVector());
+			SMAct->GetStaticMeshComponent()->AddImpulse(FVector(-500) * SMAct->GetActorForwardVector());
 		}
 	}
+
+	// Clear timer
+	GetWorldTimerManager().ClearTimer(CloseFurnitureTimerHandle);
+
+	// Check drawer states with the given update rate (add delay until the drawers are closed)
+	GetWorldTimerManager().SetTimer(
+		FurnitureStateTimerHandle, this, &ARSemDrawerStateLog::CheckDrawerStates, UpdateRate, true, 3);
 }
 
 // Check drawer states

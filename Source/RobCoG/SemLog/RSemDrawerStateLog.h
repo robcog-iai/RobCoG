@@ -34,8 +34,11 @@ private:
 	// Array of constraints to watch
 	TArray<UPhysicsConstraintComponent*> Constraints;
 
-	// Timer handle
-	FTimerHandle TimerHandle;
+	// Furniture state timer handle
+	FTimerHandle FurnitureStateTimerHandle;
+
+	// Close furniture timer handle (call after a delay, apply impulse to close drawers)
+	FTimerHandle CloseFurnitureTimerHandle;
 
 	// Drawer actor initial position
 	TMap<AActor*, FVector> DrawerToInitLocMap;

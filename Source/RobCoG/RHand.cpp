@@ -346,10 +346,16 @@ void ARHand::AttachToHand()
 		for (const auto ActToCountItr : ActorToCount)
 		{
 			// TODO make sure hand to hand attachment is avoided
-			if (ActToCountItr.Value > 2)
+			if (ActToCountItr.Value > 2
+				&& !ActToCountItr.Key->GetName().Contains("Hand")
+				&& !ActToCountItr.Key->GetName().Contains("Drawer")
+				&& !ActToCountItr.Key->GetName().Contains("Area"))
 			{
+
+
 				// Set the grasped component
 				GraspedComponent = Cast<AStaticMeshActor>(ActToCountItr.Key)->GetStaticMeshComponent();
+
 				// Disable gravity on the grasped model
 				GraspedComponent->SetEnableGravity(false);
 				// Set a very small mass scale
