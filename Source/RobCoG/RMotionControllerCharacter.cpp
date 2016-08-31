@@ -16,7 +16,7 @@ ARMotionControllerCharacter::ARMotionControllerCharacter(const FObjectInitialize
 	bVisTargetArrows = true;
 
 	// Make the capsule thin
-	GetCapsuleComponent()->SetCapsuleRadius(5);	
+	GetCapsuleComponent()->SetCapsuleRadius(1);	
 
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;

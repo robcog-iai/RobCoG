@@ -85,6 +85,9 @@ private:
 	// Map of actors to their class type
 	TMap<AActor*, FString> ActorToClassTypeMap;
 
+	// User camera to unique name
+	TPair<USceneComponent*, FString> CameraToUniqueName;
+
 	// Raw data exporter
 	FRRawDataExporter* RawDataExporter;
 

@@ -17,7 +17,7 @@ ARMotionControllerCharacterVR::ARMotionControllerCharacterVR(const FObjectInitia
 	// Positional head tracking
 	bPositionalHeadTracking = false;
 	// Make the capsule thin
-	GetCapsuleComponent()->SetCapsuleRadius(5);
+	GetCapsuleComponent()->SetCapsuleRadius(1);
 	GetCapsuleComponent()->SetCapsuleHalfHeight(80);
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -32,7 +32,7 @@ ARMotionControllerCharacterVR::ARMotionControllerCharacterVR(const FObjectInitia
 	MCOriginComponent->RelativeLocation = FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
 	// Create a CameraComponent, attach to the VR origin component
-	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("VRCamera"));
+	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("CharacterCamera"));
 	CharCamera->SetupAttachment(MCOriginComponent);
 
 	// Position the camera

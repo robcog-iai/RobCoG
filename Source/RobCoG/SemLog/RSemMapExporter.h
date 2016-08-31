@@ -19,6 +19,7 @@ public:
 		const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
 		const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap,
 		const TMap<AActor*, FString>& ActorToClassTypeMap,
+		const TPair<USceneComponent*, FString> CameraToUniqueName,
 		const FString Path);
 
 	// Get semantic map unique name

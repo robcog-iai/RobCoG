@@ -72,6 +72,7 @@ void ARSemLogManager::BeginPlay()
 				DynamicActPtrToUniqNameMap,
 				StaticActPtrToUniqNameMap,
 				ActorToClassTypeMap,
+				CameraToUniqueName,
 				SemMapPath);
 		}
 	}
@@ -87,7 +88,8 @@ void ARSemLogManager::BeginPlay()
 			RawFilePath,
 			SkelActPtrToUniqNameMap,
 			DynamicActPtrToUniqNameMap,
-			StaticActPtrToUniqNameMap);
+			StaticActPtrToUniqNameMap,
+			CameraToUniqueName);
 	}
 
 	// Init semantic events logger
@@ -241,6 +243,23 @@ void ARSemLogManager::SetLogItems()
 			ActorToClassTypeMap.Add(*SkelMeshActItr, Tag1);
 		}
 	}
+
+	// Iterate characters to get the the camera component
+	for (TActorIterator<ACharacter> CharactItr(GetWorld()); CharactItr; ++CharactItr)
+	{
+		// Get children components and check for UCameraComponent
+		TArray<USceneComponent*> ChildrenArr;
+		CharactItr->GetCapsuleComponent()->GetChildrenComponents(true, ChildrenArr);
+		for (const auto ChildItr : ChildrenArr)
+		{
+			if (ChildItr->IsA(UCameraComponent::StaticClass()))
+			{
+				CameraToUniqueName.Key = ChildItr;
+				CameraToUniqueName.Value = ""; // mockup unique name
+				UE_LOG(LogTemp, Error, TEXT("Class: %s"), *CameraToUniqueName.Key->GetName());
+			}
+		}
+	}
 }
 
 // Generate items unique names
@@ -288,6 +307,23 @@ void ARSemLogManager::GenerateUniqueNames()
 		// Add actor to unique name
 		ActorToUniqueNameMap.Add(SkelActNameToCompPtrItr.Value, UniqueName);
 	}
+
+	// Iterate characters to get the the camera component
+	for (TActorIterator<ACharacter> CharactItr(GetWorld()); CharactItr; ++CharactItr)
+	{
+		// Get children components and check for UCameraComponent
+		TArray<USceneComponent*> ChildrenArr;
+		CharactItr->GetCapsuleComponent()->GetChildrenComponents(true, ChildrenArr);
+		for (const auto ChildItr : ChildrenArr)
+		{
+			if (ChildItr->IsA(UCameraComponent::StaticClass()))
+			{
+				CameraToUniqueName.Key = ChildItr;
+				CameraToUniqueName.Value = ChildItr->GetName() + "_" + FRUtils::GenerateRandomFString(4);
+				UE_LOG(LogTemp, Error, TEXT("Generated Unique Name: %s"), *CameraToUniqueName.Value);
+			}
+		}
+	}
 }
 
 // Read unique names from file
@@ -317,7 +353,7 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 				{
 					// Get unique name and add it to the map
 					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
-					// Add generated unqique name to map
+					// Add generated unique name to map
 					DynamicActPtrToUniqNameMap.Add(DynamicActNameToActPtrMap[NameField], UniqueName);
 
 					// Add actor to unique name
@@ -328,7 +364,7 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 				{
 					// Get unique name and add it to the map
 					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
-					// Add generated unqique name to map
+					// Add generated unique name to map
 					StaticActPtrToUniqNameMap.Add(StaticActNameToActPtrMap[NameField], UniqueName);
 
 					// Add actor to unique name
@@ -338,11 +374,19 @@ bool ARSemLogManager::ReadUniqueNames(const FString Path)
 				{
 					// Get unique name and add it to the map
 					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
-					// Add generated unqique name to map
+					// Add generated unique name to map
 					SkelActPtrToUniqNameMap.Add(SkelActNameToActPtrMap[NameField], UniqueName);
 
 					// Add actor to unique name
 					ActorToUniqueNameMap.Add(SkelActNameToActPtrMap[NameField], UniqueName);
+				}
+				else if (CameraToUniqueName.Key->GetName().Equals(NameField))
+				{
+					// Get unique name and add it to the map
+					const FString UniqueName = *JsonItr->AsObject()->GetStringField("unique_name");
+					// Add generated unique name to map
+					CameraToUniqueName.Value = UniqueName;
+					UE_LOG(LogTemp, Error, TEXT("Stored Json Unique Name: %s"), *CameraToUniqueName.Value);
 				}
 				else
 				{
@@ -409,6 +453,17 @@ void ARSemLogManager::WriteUniqueNames(const FString Path)
 		// Add fields
 		JsonObj->SetStringField("name", SkelActPtrToUniqNameItr.Key->GetName());
 		JsonObj->SetStringField("unique_name", SkelActPtrToUniqNameItr.Value);
+		// Add actor to Json array
+		JsonUniqueNamesArr.Add(MakeShareable(new FJsonValueObject(JsonObj)));
+	}
+
+	// Write character camera unique name
+	{
+		// Json location object
+		TSharedPtr<FJsonObject> JsonObj = MakeShareable(new FJsonObject);
+		// Add fields
+		JsonObj->SetStringField("name", CameraToUniqueName.Key->GetName());
+		JsonObj->SetStringField("unique_name", CameraToUniqueName.Value);
 		// Add actor to Json array
 		JsonUniqueNamesArr.Add(MakeShareable(new FJsonValueObject(JsonObj)));
 	}

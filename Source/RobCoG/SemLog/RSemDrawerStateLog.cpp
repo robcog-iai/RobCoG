@@ -28,7 +28,7 @@ void ARSemDrawerStateLog::BeginPlay()
 
 	// Apply force to close the drawers (after a delay until the objects fall on the surfaces)
 	GetWorldTimerManager().SetTimer(
-		CloseFurnitureTimerHandle, this, &ARSemDrawerStateLog::CloseDrawers, UpdateRate, true, 1);
+		CloseFurnitureTimerHandle, this, &ARSemDrawerStateLog::CloseDrawers, UpdateRate, true, 2);
 }
 
 // Close drawers
@@ -73,7 +73,7 @@ void ARSemDrawerStateLog::CloseDrawers()
 			UStaticMeshComponent* SMComp = SMAct->GetStaticMeshComponent();
 			
 			// Add impule to static mesh in order to close the drawer/door
-			SMAct->GetStaticMeshComponent()->AddImpulse(FVector(-500) * SMAct->GetActorForwardVector());
+			SMAct->GetStaticMeshComponent()->AddImpulse(FVector(-900) * SMAct->GetActorForwardVector());
 		}
 	}
 

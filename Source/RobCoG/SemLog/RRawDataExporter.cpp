@@ -9,12 +9,17 @@ FRRawDataExporter::FRRawDataExporter(
 	const FString Path,
 	TMap<ASkeletalMeshActor*, FString> SkelActPtrToUniqNameMap,
 	TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap,
-	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap) :
+	TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap,
+	TPair<USceneComponent*, FString> CamToUniqName) :
 	DistanceThresholdSquared(DistThreshSqr)
 {
 	// Get platform file and init file handle
 	IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();	
 	RawFileHandle = MakeShareable(PlatformFile.OpenWrite(*Path, true, true));
+
+	// Set the camera to be loggeds
+	CameraToUniqueName = CamToUniqName;
+	CameraPrevLoc = FVector(0);
 
 	// Init items we want to log
 	FRRawDataExporter::InitItemsToLog(SkelActPtrToUniqNameMap,
@@ -114,6 +119,29 @@ void FRRawDataExporter::Update(const float Timestamp)
 		}
 	}
 
+	// Log the camera component
+	{
+		// Get component current location
+		const FVector CurrCameraLocation = CameraToUniqueName.Key->GetComponentLocation();
+
+		// Squared distance between the current and the previous pose
+		const float DistSqr = FVector::DistSquared(CurrCameraLocation, CameraPrevLoc);
+
+		// Save data if distance larger than threshold
+		if (DistSqr > DistanceThresholdSquared)
+		{
+			// Update previous location
+			CameraPrevLoc = CurrCameraLocation;
+
+			// Json actor object with name location and rotation
+			TSharedPtr<FJsonObject> JsonActorObj = FRRawDataExporter::CreateNameLocRotJsonObject(
+				CameraToUniqueName.Value, CurrCameraLocation * 0.01, CameraToUniqueName.Key->GetComponentQuat());
+			// Add actor to Json array
+			JsonActorArr.Add(MakeShareable(new FJsonValueObject(JsonActorObj)));
+		}
+	}
+
+
 	// Check if static map actors need to be logged
 	if (StaticActToUniqName.Num() > 0)
 	{
@@ -209,6 +237,10 @@ void FRRawDataExporter::InitItemsToLog(
 		UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"),
 			*DynamicActPtrToUniqNameItr.Key->GetName(), *DynamicActPtrToUniqNameItr.Value);
 	}
+
+	// Camera component
+	UE_LOG(LogTemp, Warning, TEXT("\t%s -> %s"),
+		*CameraToUniqueName.Key->GetName(), *CameraToUniqueName.Value);
 
 	UE_LOG(LogTemp, Warning, TEXT("  Static map items (logged once):"));
 	StaticActToUniqName = StaticActPtrToUniqNameMap;

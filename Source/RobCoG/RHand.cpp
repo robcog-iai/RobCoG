@@ -98,7 +98,7 @@ void ARHand::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//TODO check for the character type not the play mode (e.g. stereo eabled)
+	// TODO check for the character type not the play mode (e.g. stereo eabled)
 	IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
 	if (HMD && HMD->IsStereoEnabled())
 	{

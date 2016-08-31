@@ -138,10 +138,13 @@ void FRSemEventsExporterSingl::WriteEvents(const FString Path, const float Times
 
 	///////// ONTOLOGY IMPORT
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Ontologies");
-	// Create entity node with property
-	FROwlUtils::AddNodeEntityWithProperty(EventsDoc, RDFNode,
+	// Create entity node with ontologies as properties
+	TArray<FROwlUtils::ROwlTriple> Ontologies;
+	Ontologies.Add(FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_common/owl/knowrob.owl"));
+	Ontologies.Add(FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_robcog/owl/knowrob_u.owl"));
+	FROwlUtils::AddNodeEntityWithProperties(EventsDoc, RDFNode,
 		FROwlUtils::ROwlTriple("owl:Ontology", "rdf:about", "http://knowrob.org/kb/unreal_log.owl"),
-		FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_common/owl/knowrob.owl"));
+		Ontologies);
 
 	///////// GENERAL DEFINITIONS
 	FROwlUtils::AddNodeComment(EventsDoc, RDFNode, "Property Definitions");

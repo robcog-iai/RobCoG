@@ -22,6 +22,7 @@ void FRSemMapExporter::WriteSemanticMap(
 	const TMap<AStaticMeshActor*, FString>& DynamicActPtrToUniqNameMap,
 	const TMap<AStaticMeshActor*, FString>& StaticActPtrToUniqNameMap,
 	const TMap<AActor*, FString>& ActorToClassTypeMap,
+	const TPair<USceneComponent*, FString> CameraToUniqueName,
 	const FString Path)
 {
 	///////// DOC
@@ -79,11 +80,14 @@ void FRSemMapExporter::WriteSemanticMap(
 		"xml:base", "http://knowrob.org/kb/u_map.owl#");
 
 	///////// ONTOLOGY IMPORT
-	// Create entity node with property
 	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, "Ontologies");
-	FROwlUtils::AddNodeEntityWithProperty(SemMapDoc, RDFNode,
+	// Create entity node with ontologies as properties
+	TArray<FROwlUtils::ROwlTriple> Ontologies;
+	Ontologies.Add(FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_common/owl/knowrob.owl"));
+	Ontologies.Add(FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_robcog/owl/knowrob_u.owl"));
+	FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
 		FROwlUtils::ROwlTriple("owl:Ontology", "rdf:about", "http://knowrob.org/kb/u_map.owl"),
-		FROwlUtils::ROwlTriple("owl:imports", "rdf:resource", "package://knowrob_common/owl/knowrob.owl"));
+		Ontologies);
 
 	///////// GENERAL DEFINITIONS
 	// Object property definitions
@@ -228,6 +232,84 @@ void FRSemMapExporter::WriteSemanticMap(
 	// Add dynamic and static actors initial position to the map
 	AddActorsToSemMapLambda(DynamicActPtrToUniqNameMap, ActorToClassTypeMap);
 	AddActorsToSemMapLambda(StaticActPtrToUniqNameMap, ActorToClassTypeMap);
+
+	// Add camera to the map
+	const FString CameraName = CameraToUniqueName.Key->GetName();
+	const FString CameraUniqueName = CameraToUniqueName.Value;
+	const FString CameraClass = CameraToUniqueName.Key->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("\t%s [%s] -> %s "), *CameraName, *CameraUniqueName, *CameraClass);
+
+	// Transf unique name
+	const FString TransfUniqueName = "Transformation_" + FRUtils::GenerateRandomFString(4);
+
+	// Loc and rotation as quat of the objects as strings, change from left hand to right hand coord
+	const FVector Loc = CameraToUniqueName.Key->GetComponentLocation() / 100;
+	const FString LocStr = FString::SanitizeFloat(Loc.X) + " "
+		+ FString::SanitizeFloat(-Loc.Y) + " "
+		+ FString::SanitizeFloat(Loc.Z);
+
+	const FQuat Quat = CameraToUniqueName.Key->GetComponentQuat();
+	const FString QuatStr = FString::SanitizeFloat(Quat.W) + " "
+		+ FString::SanitizeFloat(-Quat.X) + " "
+		+ FString::SanitizeFloat(Quat.Y) + " "
+		+ FString::SanitizeFloat(-Quat.Z);
+
+	// Camera Object instance
+	FROwlUtils::AddNodeComment(SemMapDoc, RDFNode, FRUtils::FStringToChar("Object " + CameraUniqueName));
+
+	// Array of object properties
+	TArray<FROwlUtils::ROwlTriple> ObjProperties;
+	// Add obj event properties
+	ObjProperties.Add(FROwlUtils::ROwlTriple(
+		"rdf:type", "rdf:resource", FRUtils::FStringToChar("&knowrob;" + CameraClass)));
+	ObjProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:pathToCadModel", "rdf:datatype", "&xsd; string",
+		FRUtils::FStringToChar("package://sim/unreal/" + CameraClass + ".dae")));
+	ObjProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:describedInMap", "rdf:resource",
+		FRUtils::FStringToChar(FRUtils::FStringToChar("&u-map;" + UniqueName))));
+	// Add instance with properties
+	FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
+			FRUtils::FStringToChar("&log;" + CameraUniqueName)), ObjProperties);
+
+	// Map perception unique name
+	const FString MapPerceptionUniqueName = "SemanticMapPerception_" + FRUtils::GenerateRandomFString(4);
+
+	// Map perception properties
+	TArray<FROwlUtils::ROwlTriple> MapPerceptionProperties;
+	// Add obj event properties
+	MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
+		"rdf:type", "rdf:resource", "&knowrob;SemanticMapPerception"));
+	MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:eventOccursAt", "rdf:resource",
+		FRUtils::FStringToChar("&u-map;" + TransfUniqueName)));
+	MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:startTime", "rdf:resource", "&u-map;timepoint_0"));
+	MapPerceptionProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:objectActedOn", "rdf:resource",
+		FRUtils::FStringToChar("&log;" + CameraUniqueName)));
+	// Add instance with properties
+	FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
+			FRUtils::FStringToChar(MapPerceptionUniqueName)),
+		MapPerceptionProperties);
+
+	// Camera Transformation properties
+	TArray<FROwlUtils::ROwlTriple> TransfProperties;
+	// Add obj event properties
+	TransfProperties.Add(FROwlUtils::ROwlTriple(
+		"rdf:type", "rdf:resource", "&knowrob;Transformation"));
+	TransfProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:quaternion", "rdf:datatype", "&xsd;string", FRUtils::FStringToChar(QuatStr)));
+	TransfProperties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:translation", "rdf:datatype", "&xsd;string", FRUtils::FStringToChar(LocStr)));
+	// Add instance with properties
+	FROwlUtils::AddNodeEntityWithProperties(SemMapDoc, RDFNode,
+		FROwlUtils::ROwlTriple("owl:NamedIndividual", "rdf:about",
+			FRUtils::FStringToChar("&u-map;" + TransfUniqueName)),
+		TransfProperties);
+
 
 	///////// ADD RDF TO OWL DOC
 	SemMapDoc->append_node(RDFNode);

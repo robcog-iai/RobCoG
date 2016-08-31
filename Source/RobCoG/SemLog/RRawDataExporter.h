@@ -15,7 +15,8 @@ public:
 		const FString Path,
 		TMap<ASkeletalMeshActor*, FString> SkelActPtrToUniqNameMap,
 		TMap<AStaticMeshActor*, FString> DynamicActPtrToUniqNameMap,
-		TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap);
+		TMap<AStaticMeshActor*, FString> StaticActPtrToUniqNameMap,
+		TPair<USceneComponent*, FString> CamToUniqName);
 
 	// Destructor
 	~FRRawDataExporter();
@@ -82,5 +83,11 @@ private:
 
 	// Map of static map actors  to unique name
 	TMap<AStaticMeshActor*, FString> StaticActToUniqName;
+
+	// User camera to unique name
+	TPair<USceneComponent*, FString> CameraToUniqueName;
+	
+	// Camera previous location
+	FVector CameraPrevLoc;
 };
 
