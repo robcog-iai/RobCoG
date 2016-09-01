@@ -303,6 +303,10 @@ void FRSemEventsExporterSingl::BeginGraspingEvent(
 	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
 		"knowrob:objectActedOn", "rdf:resource", 
 		FRUtils::FStringToChar("&log;" + GraspedActorUniqueName)));
+	// Add objectActedOn
+	GraspEvent->Properties.Add(FROwlUtils::ROwlTriple(
+		"knowrob:performedBy", "rdf:resource",
+		FRUtils::FStringToChar("&log;" + HandUniqueName)));
 
 	// Add events to the map
 	NameToOpenedEventsMap.Add("Grasp" + HandName + GraspedActorName, GraspEvent);
