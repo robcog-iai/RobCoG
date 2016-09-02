@@ -349,6 +349,7 @@ void ARHand::AttachToHand()
 			if (ActToCountItr.Value > 2
 				&& !ActToCountItr.Key->GetName().Contains("Hand")
 				&& !ActToCountItr.Key->GetName().Contains("Drawer")
+				&& !ActToCountItr.Key->GetName().Contains("Door")
 				&& !ActToCountItr.Key->GetName().Contains("Area"))
 			{
 
