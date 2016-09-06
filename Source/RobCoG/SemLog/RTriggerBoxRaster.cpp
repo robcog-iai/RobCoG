@@ -84,7 +84,7 @@ void ARTriggerBoxRaster::BeginPlay()
 				CurrTB->bGenerateOverlapEvents = true;
 
 				// Count particle collisions
-				CurrTB->bFlexEnableParticleCounter = true;
+				//CurrTB->bFlexEnableParticleCounter = true;
 				CurrTB->SetCollisionProfileName("UI");
 
 				// Register component
@@ -122,11 +122,11 @@ void ARTriggerBoxRaster::CheckParticleCount()
 	UE_LOG(LogTemp, Warning, TEXT(" **** < ---  "));
 	for (const auto TriggerBoxItr : TriggerBoxes)
 	{
-		if (TriggerBoxItr->FlexParticleCount > 0)
-		{
-			UE_LOG(LogTemp, Warning, TEXT(" **** TriggerBox: %s, FlexParticleCount: %i"),
-				*TriggerBoxItr->GetName(), TriggerBoxItr->FlexParticleCount);
-		}
+		//if (TriggerBoxItr->FlexParticleCount > 0)
+		//{
+		//	UE_LOG(LogTemp, Warning, TEXT(" **** TriggerBox: %s, FlexParticleCount: %i"),
+		//		*TriggerBoxItr->GetName(), TriggerBoxItr->FlexParticleCount);
+		//}
 
 	}
 	UE_LOG(LogTemp, Warning, TEXT(" --- > **** "));

@@ -121,7 +121,7 @@ void ARSemanticContactTriggerBox::CreateRaster()
 			CurrTB->bGenerateOverlapEvents = true;
 
 			// Count particle collisions
-			CurrTB->bFlexEnableParticleCounter = true;
+			//CurrTB->bFlexEnableParticleCounter = true;
 			CurrTB->SetCollisionProfileName("Trigger");
 
 			// Register component
