@@ -5,21 +5,10 @@ using System.Collections.Generic;
 
 public class RobCoGTarget : TargetRules
 {
-	public RobCoGTarget(TargetInfo Target)
+	public RobCoGTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-	}
 
-	//
-	// TargetRules interface.
-	//
-
-	public override void SetupBinaries(
-		TargetInfo Target,
-		ref List<UEBuildBinaryConfiguration> OutBuildBinaryConfigurations,
-		ref List<string> OutExtraModuleNames
-		)
-	{
-		OutExtraModuleNames.AddRange( new string[] { "RobCoG" } );
+		ExtraModuleNames.AddRange( new string[] { "RobCoG" } );
 	}
 }
