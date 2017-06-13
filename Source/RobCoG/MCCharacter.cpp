@@ -14,21 +14,17 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	// Set this pawn to be controlled by the lowest-numbered player
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
+	// Make the capsule thin
+	GetCapsuleComponent()->SetCapsuleRadius(1);
 
 	// Set flag default values
 	bShowTargetArrows = true;
 
-	// Make the capsule thin
-	GetCapsuleComponent()->SetCapsuleRadius(1);
-
-	// Set this pawn to be controlled by the lowest-numbered player
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
-
 	// Create the motion controller offset (hands in front of the character), attach to root component
 	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
 	MCOriginComponent->SetupAttachment(GetRootComponent());
-	//MCOriginComponent->RelativeLocation = FVector(
-	//	0.0f, 0.0f, - GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
 
 	// Create a CameraComponent, attach to capsule
 	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("MCCharacterCamera"));
@@ -51,6 +47,12 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 	RightTargetArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("MCRightTargetArrow"));
 	RightTargetArrow->ArrowSize = 0.1;
 	RightTargetArrow->SetupAttachment(RightMC);
+
+	// PID params
+	PGain = 140.0f;
+	IGain = 0.0f;
+	DGain = 20.0f;
+	PIDMaxAbsOutput = 1500.0f;
 }
 
 // Called when the game starts or when spawned
@@ -62,6 +64,10 @@ void AMCCharacter::BeginPlay()
 	LeftTargetArrow->SetHiddenInGame(!bShowTargetArrows);
 	RightTargetArrow->SetHiddenInGame(!bShowTargetArrows);
 
+	// Set the hand PID controller values
+	LeftHandPIDController.SetValues(PGain, IGain, DGain, PIDMaxAbsOutput, -PIDMaxAbsOutput);
+	RightHandPIDController.SetValues(PGain, IGain, DGain, PIDMaxAbsOutput, -PIDMaxAbsOutput);
+
 	// Check if VR is enabled
 	IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
 	if (HMD && HMD->IsStereoEnabled())
@@ -71,6 +77,13 @@ void AMCCharacter::BeginPlay()
 	else
 	{
 		UE_LOG(LogTemp, Error, TEXT(" !! !! vr disabled !! !! !! "));
+	}
+
+	// Disable Tick if hands have not been set
+	if ((!LeftHand) || (!RightHand))
+	{
+		SetActorTickEnabled(false);
+		UE_LOG(LogTemp, Error, TEXT("MCCharacter: Left or Right Hand are not set, disabling Tick"));
 	}
 }
 

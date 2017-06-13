@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "MotionControllerComponent.h"
 #include "Camera/CameraComponent.h"
+#include "MCHand.h"
+#include "PIDController3D.h"
 #include "MCCharacter.generated.h"
 
 UCLASS()
@@ -31,6 +33,30 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC")
 	bool bShowTargetArrows;
 
+	// Left hand skeletal mesh
+	UPROPERTY(EditAnywhere, Category = "MC")
+	AMCHand* LeftHand;
+
+	// Right hand skeletal mesh
+	UPROPERTY(EditAnywhere, Category = "MC")
+	AMCHand* RightHand;
+
+	// PID controller proportional argument
+	UPROPERTY(EditAnywhere, Category = "MC")
+	float PGain;
+	
+	// PID controller integral argument
+	UPROPERTY(EditAnywhere, Category = "MC")
+	float IGain;
+	
+	// PID controller derivative argument
+	UPROPERTY(EditAnywhere, Category = "MC")
+	float DGain;
+	
+	// PID controller maximum output (absolute value)
+	UPROPERTY(EditAnywhere, Category = "MC")
+	float PIDMaxAbsOutput;
+	
 	// Handles moving forward/backward
 	void MoveForward(const float Val);
 
@@ -54,5 +80,10 @@ protected:
 
 	// Right target arrow visual
 	UArrowComponent* RightTargetArrow;
-	
+
+	// Left hand controller
+	PIDController3D LeftHandPIDController;
+
+	// Right hand controller
+	PIDController3D RightHandPIDController;
 };
