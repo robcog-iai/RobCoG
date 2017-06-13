@@ -8,6 +8,7 @@
 /.vs
 /Plugins/hydra-ue4/Binaries/
 *.sln
+*_BuiltData.uasset
 
 # Compiled Object files
 *.slo
