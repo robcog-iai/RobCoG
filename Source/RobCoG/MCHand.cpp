@@ -2,7 +2,7 @@
 // Author: Andrei Haidu (http://haidu.eu)
 
 #include "MCHand.h"
-#include "ConstructorHelpers.h"
+#include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
 AMCHand::AMCHand()
@@ -10,33 +10,20 @@ AMCHand::AMCHand()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//// Set default as left hand
-	//HandType = EControllerHand::Left;
+	// Set default as left hand
+	HandType = EHandType::Left;
 
-	//// Set the default skeletal mesh of the hand
-	//static ConstructorHelpers::FObjectFinder<USkeletalMesh> LeftSkelMesh(TEXT(
-	//	"SkeletalMesh'/Game/Models/Hands/LeftHand/LeftHand.LeftHand'"));
-	//// Add skeletal mesh to component
-	//GetSkeletalMeshComponent()->SetSkeletalMesh(LeftSkelMesh.Object);
-	//// Simulate physics
-	//GetSkeletalMeshComponent()->SetSimulatePhysics(true);
-	//// Disable gravity
-	//GetSkeletalMeshComponent()->SetEnableGravity(false);
-	//// Collision default
-	//GetSkeletalMeshComponent()->SetCollisionProfileName(TEXT("BLockAll"));
-	//// Generate overlap events
-	//GetSkeletalMeshComponent()->bGenerateOverlapEvents = true;
+	// Set up fingers and their bone names
+	AMCHand::SetupHandDefaultValues(HandType);
 
-	//// Control bone name
-	//ControlBoneName = FName("palm_l");
-	//// PID params
-	//PGain = 140.0f;
-	//IGain = 0.0f;
-	//DGain = 20.0f;
-	//PIDMaxOutput = 1500.0f;
-	//PIDMinOutput = -1500.0f;
-	//// Rotation control param (angular movement strength)
-	//RotOutStrength = 1000.0f;
+	// Simulate physics
+	GetSkeletalMeshComponent()->SetSimulatePhysics(true);
+	// Disable gravity
+	GetSkeletalMeshComponent()->SetEnableGravity(false);
+	// Collision default
+	GetSkeletalMeshComponent()->SetCollisionProfileName(TEXT("BlockAll"));
+	// Generate overlap events
+	GetSkeletalMeshComponent()->bGenerateOverlapEvents = true;
 
 	//// Flag showing if the finger collisions events are enabled or disabled
 	//bFingerHitEvents = false;
@@ -55,11 +42,11 @@ AMCHand::AMCHand()
 	//CollisionBoneNames.Add(FName("pinky_03_l"));
 	//CollisionBoneNames.Add(FName("thumb_03_l"));
 
-	//// Joint control params
-	//Spring = 59950000.0f;
-	//Damping = 59950000.0f;
-	//ForceLimit = 0.0f;
-	//Velocity = 0.1f;
+	// Joint control params
+	Spring = 59950000.0f;
+	Damping = 59950000.0f;
+	ForceLimit = 0.0f;
+	Velocity = 0.1f;
 }
 
 // Called when the game starts or when spawned
@@ -67,62 +54,10 @@ void AMCHand::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//// TODO check for the character type not the play mode (e.g. stereo eabled)
-	//IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
-	//if (HMD && HMD->IsStereoEnabled())
-	//{
-	//	// Get the motion controller of the character
-	//	for (TActorIterator<ARMotionControllerCharacterVR> CharItr(GetWorld()); CharItr; ++CharItr)
-	//	{
-	//		// Pointer to the motion controller component
-	//		MCComponent = CharItr->GetMotionController(HandType);
-	//		// Stop the loop since we only need the first character (there should be only one)
-	//		break;
-	//	}
-	//}
-	//else
-	//{
-	//	// Get the motion controller of the character
-	//	for (TActorIterator<ARMotionControllerCharacter> CharItr(GetWorld()); CharItr; ++CharItr)
-	//	{
-	//		// Pointer to the motion controller component
-	//		MCComponent = CharItr->GetMotionController(HandType);
-	//		// Stop the loop since we only need the first character (there should be only one)
-	//		break;
-	//	}
-	//}
-
-	//// Disable Tick if no motion controller component or character has been found
-	//if ((!MCComponent))
-	//{
-	//	SetActorTickEnabled(false);
-	//	UE_LOG(LogTemp, Error,
-	//		TEXT("No motion controller (character or component)! Tick disabled for: %s "), *GetName());
-	//}
-
-	//// Get the body to apply forces on for pose control
-	//ControlBody = GetSkeletalMeshComponent()->GetBodyInstance(ControlBoneName);
-	//// Check if control body is available
-	//if (ControlBody)
-	//{
-	//	// Linear movement PIDs
-	//	HandPID3D = FRPid3d(PGain, IGain, DGain, PIDMaxOutput, PIDMinOutput);
-	//	// Init location of the control body
-	//	CurrLoc = GetSkeletalMeshComponent()->GetBoneLocation(ControlBoneName);
-	//	CurrQuat = GetSkeletalMeshComponent()->GetBoneQuaternion(ControlBoneName);
-	//}
-	//else
-	//{
-	//	SetActorTickEnabled(false);
-	//	UE_LOG(LogTemp, Error, TEXT("No control body was found! Tick disabled for: %s "),
-	//		*GetName());
-	//}
-
-	/////////////////////////////////////////////////////////////////////////
-	//// Hand joint velocity drive
-	//GetSkeletalMeshComponent()->SetAllMotorsAngularPositionDrive(true, true);
-	//// Set drive parameters
-	//GetSkeletalMeshComponent()->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
+	// Hand joint velocity drive
+	GetSkeletalMeshComponent()->SetAllMotorsAngularPositionDrive(true, true);
+	// Set drive parameters
+	GetSkeletalMeshComponent()->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
 
 	//// Set finger types to constraints map
 	//for (FConstraintInstance* Constr : GetSkeletalMeshComponent()->Constraints)
@@ -196,37 +131,75 @@ void AMCHand::BeginPlay()
 void AMCHand::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
 
-	//// Get the target (motion controller) location and rotation
-	//const FVector TargetLoc = MCComponent->GetComponentLocation();
-	//const FQuat TargetQuat = MCComponent->GetComponentQuat();
+#if WITH_EDITOR  
+void AMCHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	// Call the base class version  
+	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	////// Location
-	//// Get the pos errors
-	//const FVector LocError = TargetLoc - CurrLoc;
-	//// Compute the pos output
-	//const FVector LocOutput = HandPID3D.Update(LocError, DeltaTime);
-	//// Apply force to the hands control body 
-	//ControlBody->AddForce(LocOutput);
-	//// Set the current location of the control bodies
-	//CurrLoc = GetSkeletalMeshComponent()->GetBoneLocation(ControlBoneName);
+	AMCHand::SetupHandDefaultValues(HandType);
+}
+#endif  
 
-	////// Rotation
-	//// Dot product to get costheta
-	//const float CosTheta = TargetQuat | CurrQuat;
-	//// Avoid taking the long path around the sphere
-	//if (CosTheta < 0)
-	//{
-	//	CurrQuat = CurrQuat * (-1.0f);
-	//}
-	//// Use the xyz part of the quat as the rotation velocity
-	//const FQuat OutputAsQuat = TargetQuat * CurrQuat.Inverse();
-	//// Get the rotation output
-	//FVector RotOutput = FVector(OutputAsQuat.X, OutputAsQuat.Y, OutputAsQuat.Z) * RotOutStrength;
-	//// Apply torque/angularvel to the hands control body 
-	//ControlBody->SetAngularVelocity(RotOutput, false);
-	//// Set the current rotation of the control bodies
-	//CurrQuat = GetSkeletalMeshComponent()->GetBoneQuaternion(ControlBoneName);
+// Setup hand default values
+FORCEINLINE void AMCHand::SetupHandDefaultValues(EHandType InHandType)
+{
+	if (InHandType == EHandType::Left)
+	{
+		Thumb.FingerType = EFingerType::Thumb;
+		Thumb.FingerPartBoneNames.Add(EFingerPart::Proximal, "thumb_01_l");
+		Thumb.FingerPartBoneNames.Add(EFingerPart::Intermediate, "thumb_02_l");
+		Thumb.FingerPartBoneNames.Add(EFingerPart::Distal, "thumb_03_l");
+
+		Index.FingerType = EFingerType::Index;
+		Index.FingerPartBoneNames.Add(EFingerPart::Proximal, "index_01_l");
+		Index.FingerPartBoneNames.Add(EFingerPart::Intermediate, "index_02_l");
+		Index.FingerPartBoneNames.Add(EFingerPart::Distal, "index_03_l");
+
+		Middle.FingerType = EFingerType::Middle;
+		Middle.FingerPartBoneNames.Add(EFingerPart::Proximal, "middle_01_l");
+		Middle.FingerPartBoneNames.Add(EFingerPart::Intermediate, "middle_02_l");
+		Middle.FingerPartBoneNames.Add(EFingerPart::Distal, "middle_03_l");
+
+		Ring.FingerType = EFingerType::Ring;
+		Ring.FingerPartBoneNames.Add(EFingerPart::Proximal, "ring_01_l");
+		Ring.FingerPartBoneNames.Add(EFingerPart::Intermediate, "ring_02_l");
+		Ring.FingerPartBoneNames.Add(EFingerPart::Distal, "ring_03_l");
+
+		Pinky.FingerType = EFingerType::Ring;
+		Pinky.FingerPartBoneNames.Add(EFingerPart::Proximal, "pinky_01_l");
+		Pinky.FingerPartBoneNames.Add(EFingerPart::Intermediate, "pinky_02_l");
+		Pinky.FingerPartBoneNames.Add(EFingerPart::Distal, "pinky_03_l");
+	}
+	else if (InHandType == EHandType::Right)
+	{
+		Thumb.FingerType = EFingerType::Thumb;
+		Thumb.FingerPartBoneNames.Add(EFingerPart::Proximal, "thumb_01_r");
+		Thumb.FingerPartBoneNames.Add(EFingerPart::Intermediate, "thumb_02_r");
+		Thumb.FingerPartBoneNames.Add(EFingerPart::Distal, "thumb_03_r");
+
+		Index.FingerType = EFingerType::Index;
+		Index.FingerPartBoneNames.Add(EFingerPart::Proximal, "index_01_r");
+		Index.FingerPartBoneNames.Add(EFingerPart::Intermediate, "index_02_r");
+		Index.FingerPartBoneNames.Add(EFingerPart::Distal, "index_03_r");
+
+		Middle.FingerType = EFingerType::Middle;
+		Middle.FingerPartBoneNames.Add(EFingerPart::Proximal, "middle_01_r");
+		Middle.FingerPartBoneNames.Add(EFingerPart::Intermediate, "middle_02_r");
+		Middle.FingerPartBoneNames.Add(EFingerPart::Distal, "middle_03_r");
+
+		Ring.FingerType = EFingerType::Ring;
+		Ring.FingerPartBoneNames.Add(EFingerPart::Proximal, "ring_01_r");
+		Ring.FingerPartBoneNames.Add(EFingerPart::Intermediate, "ring_02_r");
+		Ring.FingerPartBoneNames.Add(EFingerPart::Distal, "ring_03_r");
+
+		Pinky.FingerType = EFingerType::Ring;
+		Pinky.FingerPartBoneNames.Add(EFingerPart::Proximal, "pinky_01_r");
+		Pinky.FingerPartBoneNames.Add(EFingerPart::Intermediate, "pinky_02_r");
+		Pinky.FingerPartBoneNames.Add(EFingerPart::Distal, "pinky_03_r");
+	}
 }
 
 //// Close hand fingers

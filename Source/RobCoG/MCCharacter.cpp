@@ -1,11 +1,11 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
 #include "MCCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Controller.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/InputComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/Controller.h"
 #include "HeadMountedDisplay.h"
 #include "IHeadMountedDisplay.h"
 
@@ -33,26 +33,27 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 	CharCamera->bUsePawnControlRotation = true;
 
 	// Create left/right motion controller
-	LeftMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCLeft"));
-	LeftMC->SetupAttachment(MCOriginComponent);
-	LeftMC->Hand = EControllerHand::Left;
-	RightMC = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCRight"));
-	RightMC->SetupAttachment(MCOriginComponent);
-	RightMC->Hand = EControllerHand::Right;
+	MCLeft = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCLeft"));
+	MCLeft->SetupAttachment(MCOriginComponent);
+	MCLeft->Hand = EControllerHand::Left;
+	MCRight = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCRight"));
+	MCRight->SetupAttachment(MCOriginComponent);
+	MCRight->Hand = EControllerHand::Right;
 
 	// Create left/right target vis arrows, attached to the MC
 	LeftTargetArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("MCLeftTargetArrow"));
 	LeftTargetArrow->ArrowSize = 0.1;
-	LeftTargetArrow->SetupAttachment(LeftMC);
+	LeftTargetArrow->SetupAttachment(MCLeft);
 	RightTargetArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("MCRightTargetArrow"));
 	RightTargetArrow->ArrowSize = 0.1;
-	RightTargetArrow->SetupAttachment(RightMC);
+	RightTargetArrow->SetupAttachment(MCRight);
 
 	// PID params
-	PGain = 140.0f;
+	PGain = 15.0f;
 	IGain = 0.0f;
-	DGain = 20.0f;
-	PIDMaxAbsOutput = 1500.0f;
+	DGain = 0.0f;
+	PIDMaxAbsOutput = 150.0f;
+	RotationBoost = 10000.f;
 }
 
 // Called when the game starts or when spawned
@@ -65,8 +66,8 @@ void AMCCharacter::BeginPlay()
 	RightTargetArrow->SetHiddenInGame(!bShowTargetArrows);
 
 	// Set the hand PID controller values
-	LeftHandPIDController.SetValues(PGain, IGain, DGain, PIDMaxAbsOutput, -PIDMaxAbsOutput);
-	RightHandPIDController.SetValues(PGain, IGain, DGain, PIDMaxAbsOutput, -PIDMaxAbsOutput);
+	LeftPIDController.SetValues(PGain, IGain, DGain, PIDMaxAbsOutput, -PIDMaxAbsOutput);
+	RightPIDController.SetValues(PGain, IGain, DGain, PIDMaxAbsOutput, -PIDMaxAbsOutput);
 
 	// Check if VR is enabled
 	IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
@@ -78,13 +79,6 @@ void AMCCharacter::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT(" !! !! vr disabled !! !! !! "));
 	}
-
-	// Disable Tick if hands have not been set
-	if ((!LeftHand) || (!RightHand))
-	{
-		SetActorTickEnabled(false);
-		UE_LOG(LogTemp, Error, TEXT("MCCharacter: Left or Right Hand are not set, disabling Tick"));
-	}
 }
 
 // Called every frame
@@ -92,6 +86,17 @@ void AMCCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Move hands to target location and rotation
+	if (LeftHand)
+	{
+		AMCCharacter::UpdateHandLocationAndRotation(
+			MCLeft, LeftHand->GetSkeletalMeshComponent(), LeftPIDController, DeltaTime);
+	}
+	if (RightHand)
+	{
+		AMCCharacter::UpdateHandLocationAndRotation(
+			MCRight, RightHand->GetSkeletalMeshComponent(), RightPIDController, DeltaTime);
+	}
 }
 
 // Called to bind functionality to input
@@ -138,3 +143,33 @@ void AMCCharacter::MoveRight(const float Value)
 	}
 }
 
+// Update hand positions
+FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
+	UMotionControllerComponent* MC,
+	USkeletalMeshComponent* SkelMesh,
+	PIDController3D& PIDController,
+	const float DeltaTime)
+{
+	//// Location
+	const FVector Error = MC->GetComponentLocation() - SkelMesh->GetComponentLocation();
+	const FVector LocOutput = PIDController.UpdateAsP(Error, DeltaTime);
+	SkelMesh->SetPhysicsLinearVelocity(LocOutput);
+
+	//// Rotation
+	const FQuat TargetQuat = MC->GetComponentQuat();
+	FQuat CurrQuat = SkelMesh->GetComponentQuat();
+
+	// Dot product to get cos theta
+	const float CosTheta = TargetQuat | CurrQuat;
+	// Avoid taking the long path around the sphere
+	if (CosTheta < 0)
+	{
+		CurrQuat *= -1.f;
+	}
+	// Use the xyz part of the quat as the rotation velocity
+	const FQuat OutputFromQuat = TargetQuat * CurrQuat.Inverse();
+	// Get the rotation output
+	const FVector RotOutput = FVector(OutputFromQuat.X, OutputFromQuat.Y, OutputFromQuat.Z) * RotationBoost;
+	// Apply torque/angularvel to the hands control body 
+	SkelMesh->SetPhysicsAngularVelocity(RotOutput);
+}
