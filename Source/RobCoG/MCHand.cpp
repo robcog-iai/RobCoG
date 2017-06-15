@@ -13,118 +13,31 @@ AMCHand::AMCHand()
 	// Set default as left hand
 	HandType = EHandType::Left;
 
-	// Set up fingers and their bone names
-	AMCHand::SetupHandDefaultValues(HandType);
-
-	// Simulate physics
+	// Set skeletal mesh default physics related values
 	GetSkeletalMeshComponent()->SetSimulatePhysics(true);
-	// Disable gravity
 	GetSkeletalMeshComponent()->SetEnableGravity(false);
-	// Collision default
 	GetSkeletalMeshComponent()->SetCollisionProfileName(TEXT("BlockAll"));
-	// Generate overlap events
 	GetSkeletalMeshComponent()->bGenerateOverlapEvents = true;
-
-	//// Flag showing if the finger collisions events are enabled or disabled
-	//bFingerHitEvents = false;
-
-	//// Finger types
-	//FingerTypes.Add(ERHandLimb::Index);
-	//FingerTypes.Add(ERHandLimb::Middle);
-	//FingerTypes.Add(ERHandLimb::Ring);
-	//FingerTypes.Add(ERHandLimb::Pinky);
-	//FingerTypes.Add(ERHandLimb::Thumb);
-
-	//// Finger collision bone names (used for collision detection)
-	//CollisionBoneNames.Add(FName("index_03_l"));
-	//CollisionBoneNames.Add(FName("middle_03_l"));
-	//CollisionBoneNames.Add(FName("ring_03_l"));
-	//CollisionBoneNames.Add(FName("pinky_03_l"));
-	//CollisionBoneNames.Add(FName("thumb_03_l"));
 
 	// Joint control params
 	Spring = 59950000.0f;
 	Damping = 59950000.0f;
 	ForceLimit = 0.0f;
 	Velocity = 0.1f;
+
+	// Set fingers and their bone names default values
+	AMCHand::SetupHandDefaultValues(HandType);
+
+	// Set skeletal default values
+	AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
 }
+
+
 
 // Called when the game starts or when spawned
 void AMCHand::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Hand joint velocity drive
-	GetSkeletalMeshComponent()->SetAllMotorsAngularPositionDrive(true, true);
-	// Set drive parameters
-	GetSkeletalMeshComponent()->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
-
-	//// Set finger types to constraints map
-	//for (FConstraintInstance* Constr : GetSkeletalMeshComponent()->Constraints)
-	//{
-	//	// Current constraint joint name
-	//	const FString ConstrName = Constr->JointName.ToString();
-	//	// Iterate hand limbs type
-	//	for (const ERHandLimb Type : FingerTypes)
-	//	{
-	//		// Get the enum type as string
-	//		const FString TypeName = FRUtils::GetEnumValueToString<ERHandLimb>("ERHandLimb", Type);
-	//		// Add to finger map if the constraint name matches the finger type (name)
-	//		if (ConstrName.Contains(TypeName))
-	//		{
-	//			FingerTypeToConstrs.Add(Type, Constr);
-	//		}
-	//	}
-	//}
-
-	//// Get the hands finger collisions map, disable hit events,
-	//// create finger bone names to finger type Map
-	//for (const auto BoneName : CollisionBoneNames)
-	//{
-	//	// Get the body instance
-	//	FBodyInstance* BoneBody = GetSkeletalMeshComponent()->GetBodyInstance(BoneName);
-	//	// Disable collision notification for now (active only during grasping)
-	//	BoneBody->SetInstanceNotifyRBCollision(false);
-	//	// Add the body instance to the map
-	//	FingerBoneNameToBody.Add(BoneName, GetSkeletalMeshComponent()->GetBodyInstance(BoneName));
-
-	//	// Get bone name as string
-	//	const FString NameStr = BoneName.ToString();
-	//	// Iterate hand limbs type
-	//	for (const ERHandLimb Type : FingerTypes)
-	//	{
-	//		// Get the enum type as string
-	//		const FString TypeName = FRUtils::GetEnumValueToString<ERHandLimb>("ERHandLimb", Type);
-	//		// Add to finger map if the constraint name matches the finger type (name)
-	//		if (NameStr.Contains(TypeName))
-	//		{
-	//			BoneNameToFingerTypeMap.Add(BoneName, Type);
-	//		}
-	//	}
-	//}
-
-
-	//// Collision callbacks for the hands
-	//GetSkeletalMeshComponent()->OnComponentHit.AddDynamic(this, &AMCHand::OnFingerHit);
-
-	//// Get the player controller, enable and bind inputs
-	//PC = GetWorld()->GetFirstPlayerController();
-	//// Enable input
-	//EnableInput(PC);
-	//// Set up hand bindings
-	//if (HandType == EControllerHand::Left)
-	//{
-	//	PC->InputComponent->BindAxis("OpenHandLeft", this, &ARHand::OpenHand);
-	//	PC->InputComponent->BindAxis("CloseHandLeft", this, &ARHand::CloseHand);
-	//	PC->InputComponent->BindAction("AttachHandLeft", IE_Released, this, &ARHand::AttachToHand);
-	//}
-	//else if (HandType == EControllerHand::Right)
-	//{
-	//	PC->InputComponent->BindAxis("OpenHandRight", this, &ARHand::OpenHand);
-	//	PC->InputComponent->BindAxis("CloseHandRight", this, &ARHand::CloseHand);
-	//	PC->InputComponent->BindAction("AttachHandRight", IE_Released, this, &ARHand::AttachToHand);
-	//}
-	//PC->InputComponent->BindAction("SetTrackingOffset", IE_Pressed, this, &ARHand::SetMCTrackingOffset);
 }
 
 // Called every frame, used for motion control
@@ -139,7 +52,22 @@ void AMCHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChang
 	// Call the base class version  
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	AMCHand::SetupHandDefaultValues(HandType);
+	// Get the name of the property that was changed  
+	FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
+
+	// If hand type has been changed
+	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AMCHand, HandType)))
+	{
+		AMCHand::SetupHandDefaultValues(HandType);
+	}
+
+	// If the skeletal mesh has been changed
+	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AMCHand, SkeletalMeshComponent)))
+	{
+		AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Selected property name: %s"), *PropertyName.ToString());
 }
 #endif  
 
@@ -202,46 +130,52 @@ FORCEINLINE void AMCHand::SetupHandDefaultValues(EHandType InHandType)
 	}
 }
 
-//// Close hand fingers
-//void AMCHand::CloseHand(const float AxisValue)
-//{
-//	if (AxisValue == 0)
-//	{
-//		// Disable finger hit events
-//		if (bFingerHitEvents)
-//		{
-//			for (auto BoneName : CollisionBoneNames)
-//			{
-//				GetSkeletalMeshComponent()->GetBodyInstance(BoneName)->SetInstanceNotifyRBCollision(false);
-//			}
-//			// Set finger notification flag
-//			bFingerHitEvents = false;
-//		}
-//		return;
-//	}
-//
-//	// Enable finger hit events
-//	if (!bFingerHitEvents)
-//	{
-//		for (auto BoneName : CollisionBoneNames)
-//		{
-//			GetSkeletalMeshComponent()->GetBodyInstance(BoneName)->SetInstanceNotifyRBCollision(true);
-//		}
-//		// Set finger notification flag
-//		bFingerHitEvents = true;
-//	}
-//}
-//
-//// Attach grasped object to hand
-//void AMCHand::AttachToHand()
-//{
-//
-//}
-//
-//// Open hand fingers
-//void AMCHand::OpenHand(const float AxisValue)
-//{
-//
-//}
-//
+// Setup skeletal mesh default values
+FORCEINLINE void AMCHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent)
+{
+	if (InSkeletalMeshComponent->GetPhysicsAsset())
+	{
+		// Hand joint velocity drive
+		InSkeletalMeshComponent->SetAllMotorsAngularPositionDrive(true, true);
 
+		// Set drive parameters
+		InSkeletalMeshComponent->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
+
+		UE_LOG(LogTemp, Error, TEXT("AMCHand: SkeletalMeshComponent's angular motors set!"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("AMCHand: SkeletalMeshComponent's has no PhysicsAsset set!"));
+	}
+}
+
+// Close hand
+void AMCHand::CloseHand(const float Goal)
+{
+
+}
+
+// Open hand fingers
+void AMCHand::OpenHand(const float Goal)
+{
+
+}
+
+// Attach grasped object to hand
+void AMCHand::AttachToHand()
+{
+	//if (Grasped != nullptr) {
+	//	Grasped->SetSimulatePhysics(false);
+	//	Grasped->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
+	//}
+}
+
+// Detach grasped object from hand
+void AMCHand::DetachFromHand()
+{
+	//if (Grasped != nullptr) {
+	//	Grasped->SetSimulatePhysics(true);
+	//	Grasped->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
+	//	Grasped = nullptr;
+	//}
+}

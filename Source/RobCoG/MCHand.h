@@ -47,13 +47,21 @@ struct FFinger
 {
 	GENERATED_USTRUCT_BODY()
 
+	// Constructor
+	FFinger() : bInCollision(false)
+	{
+	}
+
 	// Finger type
 	UPROPERTY(EditAnywhere, Category = "Finger")
 	EFingerType FingerType;
 
-	// Finger part skeletal bone names
+	// Map of finger part to skeletal bone name
 	UPROPERTY(EditAnywhere, Category = "Finger")
 	TMap<EFingerPart, FString> FingerPartBoneNames;
+
+	// Finger in collision
+	bool bInCollision;
 };
 
 /**
@@ -73,10 +81,28 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+
+	// Close hand
+	void CloseHand(const float Goal);
+
+	// Open hand
+	void OpenHand(const float Goal);
+
+	// Attach to hand
+	void AttachToHand();
+
+	// Detach from hand
+	void DetachFromHand();
 	
 protected:
 	// Post edit change property callback
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
+
+	//	// Callback on collision
+	//	UFUNCTION()
+	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	//		FVector NormalImpulse, const FHitResult& Hit);
+
 
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
@@ -118,26 +144,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Joint Controller")
 	float Velocity;
 
-//	// Handles closing the hand
-//	void CloseHand(const float Val);
-//
-//	// Attach grasped object to hand
-//	void AttachToHand();
-//
-//	// Handles opening the left hand
-//	void OpenHand(const float Val);
-//
-//	// Callback on collision
-//	UFUNCTION()
-//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-//		FVector NormalImpulse, const FHitResult& Hit);
-
-	//// Control body
-	//FBodyInstance* ControlBody;
-
 private:
 	// Setup hand default values
 	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
+
+	// Setup skeletal mesh default values
+	FORCEINLINE void SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent);
 
 //	// Fingers type to constraints Map
 //	TMultiMap<ERHandLimb, FConstraintInstance*> FingerTypeToConstrs;

@@ -8,6 +8,7 @@
 #include "Animation/SkeletalMeshActor.h"
 #include "MotionControllerComponent.h"
 #include "PIDController3D.h"
+#include "MCHand.h"
 #include "MCCharacter.generated.h"
 
 UCLASS()
@@ -74,6 +75,18 @@ protected:
 		PIDController3D& PIDController,
 		const float DeltaTime);
 
+	// Close left hand
+	void CloseLeftHand(const float Val);
+
+	// Close right hand
+	void CloseRightHand(const float Val);
+
+	// Attach to left hand
+	void AttachToLeftHand();
+
+	// Attach to right hand
+	void AttachToRightHand();
+
 	// Character camera
 	UCameraComponent* CharCamera;
 
@@ -103,4 +116,11 @@ protected:
 
 	// Right hand control body
 	FBodyInstance* RightControlBody;
+
+	// Left MC hand // TODO look into delegates to avoid dynamic casting
+	AMCHand* MCLeftHand;
+
+	// Right MC hand
+	AMCHand* MCRightHand;
+
 };

@@ -79,6 +79,10 @@ void AMCCharacter::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT(" !! !! vr disabled !! !! !! "));
 	}
+
+	// Cast the hands to MCHand
+	MCLeftHand = Cast<AMCHand>(LeftHand);
+	MCRightHand = Cast<AMCHand>(RightHand);
 }
 
 // Called every frame
@@ -110,6 +114,13 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// Default Camera view bindings
 	PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
+	// Hand control binding
+	PlayerInputComponent->BindAxis("CloseLeftHand", this, &AMCCharacter::CloseLeftHand);
+	PlayerInputComponent->BindAxis("CloseRightHand", this, &AMCCharacter::CloseRightHand);
+
+	// Hand action binding
+	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::AttachToLeftHand);
+	PlayerInputComponent->BindAction("AttachToRightHand", IE_Pressed, this, &AMCCharacter::AttachToRightHand);
 }
 
 // Handles moving forward/backward
@@ -172,4 +183,37 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	const FVector RotOutput = FVector(OutputFromQuat.X, OutputFromQuat.Y, OutputFromQuat.Z) * RotationBoost;
 	// Apply torque/angularvel to the hands control body 
 	SkelMesh->SetPhysicsAngularVelocity(RotOutput);
+}
+
+// Close left hand
+void AMCCharacter::CloseLeftHand(const float Val)
+{
+	if (MCLeftHand)
+	{
+	}
+}
+
+// Close right hand
+void AMCCharacter::CloseRightHand(const float Val)
+{
+	if (MCRightHand)
+	{
+	}
+}
+
+
+// Attach to left hand
+void AMCCharacter::AttachToLeftHand()
+{
+	if (MCLeftHand)
+	{
+	}
+}
+
+// Attach to right hand
+void AMCCharacter::AttachToRightHand()
+{
+	if (MCRightHand)
+	{
+	}
 }
