@@ -2,6 +2,7 @@
 // Author: Andrei Haidu (http://haidu.eu)
 
 #include "MCHand.h"
+#include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
@@ -82,56 +83,56 @@ FORCEINLINE void AMCHand::SetupHandDefaultValues(EHandType InHandType)
 	if (InHandType == EHandType::Left)
 	{
 		Thumb.FingerType = EFingerType::Thumb;
-		Thumb.FingerPartBoneNames.Add(EFingerPart::Proximal, "thumb_01_l");
-		Thumb.FingerPartBoneNames.Add(EFingerPart::Intermediate, "thumb_02_l");
-		Thumb.FingerPartBoneNames.Add(EFingerPart::Distal, "thumb_03_l");
+		Thumb.FingerPartToBoneName.Add(EFingerPart::Proximal, "thumb_01_l");
+		Thumb.FingerPartToBoneName.Add(EFingerPart::Intermediate, "thumb_02_l");
+		Thumb.FingerPartToBoneName.Add(EFingerPart::Distal, "thumb_03_l");
 
 		Index.FingerType = EFingerType::Index;
-		Index.FingerPartBoneNames.Add(EFingerPart::Proximal, "index_01_l");
-		Index.FingerPartBoneNames.Add(EFingerPart::Intermediate, "index_02_l");
-		Index.FingerPartBoneNames.Add(EFingerPart::Distal, "index_03_l");
+		Index.FingerPartToBoneName.Add(EFingerPart::Proximal, "index_01_l");
+		Index.FingerPartToBoneName.Add(EFingerPart::Intermediate, "index_02_l");
+		Index.FingerPartToBoneName.Add(EFingerPart::Distal, "index_03_l");
 
 		Middle.FingerType = EFingerType::Middle;
-		Middle.FingerPartBoneNames.Add(EFingerPart::Proximal, "middle_01_l");
-		Middle.FingerPartBoneNames.Add(EFingerPart::Intermediate, "middle_02_l");
-		Middle.FingerPartBoneNames.Add(EFingerPart::Distal, "middle_03_l");
+		Middle.FingerPartToBoneName.Add(EFingerPart::Proximal, "middle_01_l");
+		Middle.FingerPartToBoneName.Add(EFingerPart::Intermediate, "middle_02_l");
+		Middle.FingerPartToBoneName.Add(EFingerPart::Distal, "middle_03_l");
 
 		Ring.FingerType = EFingerType::Ring;
-		Ring.FingerPartBoneNames.Add(EFingerPart::Proximal, "ring_01_l");
-		Ring.FingerPartBoneNames.Add(EFingerPart::Intermediate, "ring_02_l");
-		Ring.FingerPartBoneNames.Add(EFingerPart::Distal, "ring_03_l");
+		Ring.FingerPartToBoneName.Add(EFingerPart::Proximal, "ring_01_l");
+		Ring.FingerPartToBoneName.Add(EFingerPart::Intermediate, "ring_02_l");
+		Ring.FingerPartToBoneName.Add(EFingerPart::Distal, "ring_03_l");
 
 		Pinky.FingerType = EFingerType::Ring;
-		Pinky.FingerPartBoneNames.Add(EFingerPart::Proximal, "pinky_01_l");
-		Pinky.FingerPartBoneNames.Add(EFingerPart::Intermediate, "pinky_02_l");
-		Pinky.FingerPartBoneNames.Add(EFingerPart::Distal, "pinky_03_l");
+		Pinky.FingerPartToBoneName.Add(EFingerPart::Proximal, "pinky_01_l");
+		Pinky.FingerPartToBoneName.Add(EFingerPart::Intermediate, "pinky_02_l");
+		Pinky.FingerPartToBoneName.Add(EFingerPart::Distal, "pinky_03_l");
 	}
 	else if (InHandType == EHandType::Right)
 	{
 		Thumb.FingerType = EFingerType::Thumb;
-		Thumb.FingerPartBoneNames.Add(EFingerPart::Proximal, "thumb_01_r");
-		Thumb.FingerPartBoneNames.Add(EFingerPart::Intermediate, "thumb_02_r");
-		Thumb.FingerPartBoneNames.Add(EFingerPart::Distal, "thumb_03_r");
+		Thumb.FingerPartToBoneName.Add(EFingerPart::Proximal, "thumb_01_r");
+		Thumb.FingerPartToBoneName.Add(EFingerPart::Intermediate, "thumb_02_r");
+		Thumb.FingerPartToBoneName.Add(EFingerPart::Distal, "thumb_03_r");
 
 		Index.FingerType = EFingerType::Index;
-		Index.FingerPartBoneNames.Add(EFingerPart::Proximal, "index_01_r");
-		Index.FingerPartBoneNames.Add(EFingerPart::Intermediate, "index_02_r");
-		Index.FingerPartBoneNames.Add(EFingerPart::Distal, "index_03_r");
+		Index.FingerPartToBoneName.Add(EFingerPart::Proximal, "index_01_r");
+		Index.FingerPartToBoneName.Add(EFingerPart::Intermediate, "index_02_r");
+		Index.FingerPartToBoneName.Add(EFingerPart::Distal, "index_03_r");
 
 		Middle.FingerType = EFingerType::Middle;
-		Middle.FingerPartBoneNames.Add(EFingerPart::Proximal, "middle_01_r");
-		Middle.FingerPartBoneNames.Add(EFingerPart::Intermediate, "middle_02_r");
-		Middle.FingerPartBoneNames.Add(EFingerPart::Distal, "middle_03_r");
+		Middle.FingerPartToBoneName.Add(EFingerPart::Proximal, "middle_01_r");
+		Middle.FingerPartToBoneName.Add(EFingerPart::Intermediate, "middle_02_r");
+		Middle.FingerPartToBoneName.Add(EFingerPart::Distal, "middle_03_r");
 
 		Ring.FingerType = EFingerType::Ring;
-		Ring.FingerPartBoneNames.Add(EFingerPart::Proximal, "ring_01_r");
-		Ring.FingerPartBoneNames.Add(EFingerPart::Intermediate, "ring_02_r");
-		Ring.FingerPartBoneNames.Add(EFingerPart::Distal, "ring_03_r");
+		Ring.FingerPartToBoneName.Add(EFingerPart::Proximal, "ring_01_r");
+		Ring.FingerPartToBoneName.Add(EFingerPart::Intermediate, "ring_02_r");
+		Ring.FingerPartToBoneName.Add(EFingerPart::Distal, "ring_03_r");
 
 		Pinky.FingerType = EFingerType::Ring;
-		Pinky.FingerPartBoneNames.Add(EFingerPart::Proximal, "pinky_01_r");
-		Pinky.FingerPartBoneNames.Add(EFingerPart::Intermediate, "pinky_02_r");
-		Pinky.FingerPartBoneNames.Add(EFingerPart::Distal, "pinky_03_r");
+		Pinky.FingerPartToBoneName.Add(EFingerPart::Proximal, "pinky_01_r");
+		Pinky.FingerPartToBoneName.Add(EFingerPart::Intermediate, "pinky_02_r");
+		Pinky.FingerPartToBoneName.Add(EFingerPart::Distal, "pinky_03_r");
 	}
 }
 

@@ -5,6 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/SkeletalMeshActor.h"
+#include "PhysicsEngine/ConstraintInstance.h"
 #include "MCGrasp.h"
 #include "MCHand.generated.h"
 
@@ -59,10 +60,42 @@ struct FFinger
 
 	// Map of finger part to skeletal bone name
 	UPROPERTY(EditAnywhere, Category = "Finger")
-	TMap<EFingerPart, FString> FingerPartBoneNames;
+	TMap<EFingerPart, FString> FingerPartToBoneName;
+
+	// Map of finger part to constraint
+	TMap<EFingerPart, FConstraintInstance*> FingerPartToConstraint;
 
 	// Finger in collision
 	bool bInCollision;
+
+	// Set finger part to constraint from bone names
+	bool MapConstraints(TArray<FConstraintInstance*>& Constraints)
+	{
+		// Iterate the bone names
+		for (const auto& MapItr : FingerPartToBoneName)
+		{
+			// Check if bone name match with the constraint joint name
+			FConstraintInstance* FingerPartConstraint = *Constraints.FindByPredicate(
+				[&MapItr](FConstraintInstance* ConstrInst)
+				{return ConstrInst->JointName.ToString() == MapItr.Value;}
+			);
+			// If constraint has been found, add to map
+			if (FingerPartConstraint)
+			{
+				FingerPartToConstraint.Add(MapItr.Key, FingerPartConstraint);
+			}
+		}
+		return true;
+	}
+
+	// Set constraint drive mode
+	void SetDriveMode(EAngularDriveMode::Type DriveMode)
+	{
+		for (const auto& MapItr : FingerPartToConstraint)
+		{
+			MapItr.Value->SetAngularDriveMode(DriveMode);
+		}
+	}
 };
 
 /**
