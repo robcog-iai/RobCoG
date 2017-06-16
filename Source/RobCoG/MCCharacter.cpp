@@ -1,4 +1,5 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
+// Author: Andrei Haidu (http://haidu.eu)
 
 #include "MCCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -115,8 +116,8 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
 	// Hand control binding
-	PlayerInputComponent->BindAxis("CloseLeftHand", this, &AMCCharacter::CloseLeftHand);
-	PlayerInputComponent->BindAxis("CloseRightHand", this, &AMCCharacter::CloseRightHand);
+	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
+	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
 	// Hand action binding
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::AttachToLeftHand);
@@ -186,7 +187,7 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 }
 
 // Close left hand
-void AMCCharacter::CloseLeftHand(const float Val)
+void AMCCharacter::GraspWithLeftHand(const float Val)
 {
 	if (MCLeftHand)
 	{
@@ -194,7 +195,7 @@ void AMCCharacter::CloseLeftHand(const float Val)
 }
 
 // Close right hand
-void AMCCharacter::CloseRightHand(const float Val)
+void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (MCRightHand)
 	{

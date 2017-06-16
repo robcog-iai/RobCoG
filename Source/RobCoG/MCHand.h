@@ -5,6 +5,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/SkeletalMeshActor.h"
+#include "MCGrasp.h"
 #include "MCHand.generated.h"
 
 /** Enum indicating the hand type */
@@ -82,11 +83,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
-	// Close hand
-	void CloseHand(const float Goal);
-
-	// Open hand
-	void OpenHand(const float Goal);
+	// Update the grasp //TODO state, power, step
+	void UpdateGrasp(const float Goal);
 
 	// Attach to hand
 	void AttachToHand();
@@ -105,51 +103,50 @@ protected:
 
 
 	// Hand type
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	EHandType HandType;
 
 	// Thumb finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Thumb;
 
 	// Index finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Index;
 
 	// Middle finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Middle;
 
 	// Ring finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Ring;
 
 	// Pinky finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Pinky;
 
 	// Spring value to apply to the angular drive (Position strength)
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
 	float Spring;
 
 	// Damping value to apply to the angular drive (Velocity strength) 
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
 	float Damping;
 
 	// Limit of the force that the angular drive can apply
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
 	float ForceLimit;
-
-	// Initial velocity
-	UPROPERTY(EditAnywhere, Category = "Joint Controller")
-	float Velocity;
-
+	
 private:
 	// Setup hand default values
 	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
 
 	// Setup skeletal mesh default values
 	FORCEINLINE void SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent);
+
+	// Grasp
+	MCGrasp Grasp;
 
 //	// Fingers type to constraints Map
 //	TMultiMap<ERHandLimb, FConstraintInstance*> FingerTypeToConstrs;
@@ -170,7 +167,4 @@ private:
 //
 //	// Currently grasped component (to enable/disable gravity when grasped)
 //	UStaticMeshComponent* GraspedComponent;
-//
-//	// Player controller to apply force feedback and enable input
-//	APlayerController* PC;
 };

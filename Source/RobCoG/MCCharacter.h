@@ -1,4 +1,5 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
+// Author: Andrei Haidu (http://haidu.eu)
 
 #pragma once
 
@@ -30,36 +31,36 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	// Show motion controller pose arrows
-	UPROPERTY(EditAnywhere, Category = "MC")
-	bool bShowTargetArrows;
-
 	// Left hand skeletal mesh
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Hands")
 	ASkeletalMeshActor* LeftHand;
 
 	// Right hand skeletal mesh
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Hands")
 	ASkeletalMeshActor* RightHand;
 
+	// Show motion controller pose arrows
+	UPROPERTY(EditAnywhere, Category = "MC|Hands")
+	bool bShowTargetArrows;
+
 	// PID controller proportional argument
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float PGain;
 	
 	// PID controller integral argument
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float IGain;
 	
 	// PID controller derivative argument
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float DGain;
 	
 	// PID controller maximum output (absolute value)
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float PIDMaxAbsOutput;
 
 	// Hand rotation controller boost
-	UPROPERTY(EditAnywhere, Category = "MC")
+	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float RotationBoost;
 	
 	// Handles moving forward/backward
@@ -75,11 +76,11 @@ protected:
 		PIDController3D& PIDController,
 		const float DeltaTime);
 
-	// Close left hand
-	void CloseLeftHand(const float Val);
+	// Update left hand grasp
+	void GraspWithLeftHand(const float Val);
 
-	// Close right hand
-	void CloseRightHand(const float Val);
+	// Update right hand grasp
+	void GraspWithRightHand(const float Val);
 
 	// Attach to left hand
 	void AttachToLeftHand();

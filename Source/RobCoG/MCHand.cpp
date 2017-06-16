@@ -14,30 +14,34 @@ AMCHand::AMCHand()
 	HandType = EHandType::Left;
 
 	// Set skeletal mesh default physics related values
-	GetSkeletalMeshComponent()->SetSimulatePhysics(true);
-	GetSkeletalMeshComponent()->SetEnableGravity(false);
-	GetSkeletalMeshComponent()->SetCollisionProfileName(TEXT("BlockAll"));
-	GetSkeletalMeshComponent()->bGenerateOverlapEvents = true;
+	USkeletalMeshComponent* const SkelComp = GetSkeletalMeshComponent();
+	SkelComp->SetSimulatePhysics(true);
+	SkelComp->SetEnableGravity(false);
+	SkelComp->SetCollisionProfileName(TEXT("BlockAll"));
+	SkelComp->bGenerateOverlapEvents = true;
 
-	// Joint control params
+	// Drive parameters
 	Spring = 59950000.0f;
 	Damping = 59950000.0f;
 	ForceLimit = 0.0f;
-	Velocity = 0.1f;
 
 	// Set fingers and their bone names default values
 	AMCHand::SetupHandDefaultValues(HandType);
 
 	// Set skeletal default values
-	AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+	//AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
 }
-
-
 
 // Called when the game starts or when spawned
 void AMCHand::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Hand joint velocity drive
+	GetSkeletalMeshComponent()->SetAllMotorsAngularPositionDrive(true, true);
+
+	// Set drive parameters
+	GetSkeletalMeshComponent()->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
 }
 
 // Called every frame, used for motion control
@@ -46,7 +50,8 @@ void AMCHand::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-#if WITH_EDITOR  
+// Update default values if properties have been changed in the editor
+#if WITH_EDITOR
 void AMCHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {
 	// Call the base class version  
@@ -62,9 +67,9 @@ void AMCHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChang
 	}
 
 	// If the skeletal mesh has been changed
-	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AMCHand, SkeletalMeshComponent)))
+	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AMCHand, GetSkeletalMeshComponent())))
 	{
-		AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+		//AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("Selected property name: %s"), *PropertyName.ToString());
@@ -149,16 +154,10 @@ FORCEINLINE void AMCHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InS
 	}
 }
 
-// Close hand
-void AMCHand::CloseHand(const float Goal)
+// Update the grasp pose
+void AMCHand::UpdateGrasp(const float Goal)
 {
-
-}
-
-// Open hand fingers
-void AMCHand::OpenHand(const float Goal)
-{
-
+	Grasp.Update(Goal);
 }
 
 // Attach grasped object to hand
