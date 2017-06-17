@@ -38,11 +38,8 @@ void AMCHand::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Hand joint velocity drive
-	GetSkeletalMeshComponent()->SetAllMotorsAngularPositionDrive(true, true);
-
-	// Set drive parameters
-	GetSkeletalMeshComponent()->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
+	// Setup the values for controlling the hand fingers
+	AMCHand::SetupAngularDriveValues(EAngularDriveMode::SLERP);
 }
 
 // Called every frame, used for motion control
@@ -136,6 +133,32 @@ FORCEINLINE void AMCHand::SetupHandDefaultValues(EHandType InHandType)
 	}
 }
 
+// Setup fingers angular drive values
+FORCEINLINE void AMCHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode)
+{
+	USkeletalMeshComponent* const SkelMeshComp = GetSkeletalMeshComponent();
+	if (Thumb.SetFingerPartsConstraints(SkelMeshComp->Constraints))
+	{
+		Thumb.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+	}
+	if (Index.SetFingerPartsConstraints(SkelMeshComp->Constraints))
+	{
+		Index.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+	}
+	if (Middle.SetFingerPartsConstraints(SkelMeshComp->Constraints))
+	{
+		Middle.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+	}
+	if (Ring.SetFingerPartsConstraints(SkelMeshComp->Constraints))
+	{
+		Ring.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+	}
+	if (Pinky.SetFingerPartsConstraints(SkelMeshComp->Constraints))
+	{
+		Pinky.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+	}
+}
+
 // Setup skeletal mesh default values
 FORCEINLINE void AMCHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent)
 {
@@ -158,7 +181,11 @@ FORCEINLINE void AMCHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InS
 // Update the grasp pose
 void AMCHand::UpdateGrasp(const float Goal)
 {
-	Grasp.Update(Goal);
+	for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal*42.f)));
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Grasp update: %f"), Goal);
 }
 
 // Attach grasped object to hand

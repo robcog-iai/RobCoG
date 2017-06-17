@@ -26,11 +26,12 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 	// Create the motion controller offset (hands in front of the character), attach to root component
 	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
 	MCOriginComponent->SetupAttachment(GetRootComponent());
+	MCOriginComponent->SetRelativeLocation(FVector(50.f, 0.f, -20.f));
 
 	// Create a CameraComponent, attach to capsule
 	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("MCCharacterCamera"));
 	CharCamera->SetupAttachment(MCOriginComponent);
-	CharCamera->RelativeLocation = FVector(0.0f, 0.0f, BaseEyeHeight);
+	CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
 	CharCamera->bUsePawnControlRotation = true;
 
 	// Create left/right motion controller
@@ -165,7 +166,8 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	//// Location
 	const FVector Error = MC->GetComponentLocation() - SkelMesh->GetComponentLocation();
 	const FVector LocOutput = PIDController.UpdateAsP(Error, DeltaTime);
-	SkelMesh->SetPhysicsLinearVelocity(LocOutput);
+	//SkelMesh->SetPhysicsLinearVelocity(LocOutput);
+	SkelMesh->SetAllPhysicsLinearVelocity(LocOutput);
 
 	//// Rotation
 	const FQuat TargetQuat = MC->GetComponentQuat();
@@ -183,22 +185,25 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	// Get the rotation output
 	const FVector RotOutput = FVector(OutputFromQuat.X, OutputFromQuat.Y, OutputFromQuat.Z) * RotationBoost;
 	// Apply torque/angularvel to the hands control body 
-	SkelMesh->SetPhysicsAngularVelocity(RotOutput);
+	//SkelMesh->SetPhysicsAngularVelocity(RotOutput);
+	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
-// Close left hand
+// Update left hand grasp
 void AMCCharacter::GraspWithLeftHand(const float Val)
 {
 	if (MCLeftHand)
 	{
+		MCLeftHand->UpdateGrasp(Val);
 	}
 }
 
-// Close right hand
+// Update right hand grasp
 void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (MCRightHand)
 	{
+		MCRightHand->UpdateGrasp(Val);
 	}
 }
 
