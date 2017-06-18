@@ -22,6 +22,7 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Set flag default values
 	bShowTargetArrows = true;
+	bUseHandsInitialRotationForOffset = true;
 
 	// Create the motion controller offset (hands in front of the character), attach to root component
 	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
@@ -56,6 +57,10 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 	DGain = 0.0f;
 	PIDMaxAbsOutput = 150.0f;
 	RotationBoost = 10000.f;
+
+	// Init rotation offset
+	LeftHandRotationOffset = FQuat::Identity;
+	RightHandRotationOffset = FQuat::Identity;
 }
 
 // Called when the game starts or when spawned
@@ -85,6 +90,19 @@ void AMCCharacter::BeginPlay()
 	// Cast the hands to MCHand
 	MCLeftHand = Cast<AMCHand>(LeftHand);
 	MCRightHand = Cast<AMCHand>(RightHand);
+
+	// Set hand offsets
+	if (bUseHandsInitialRotationForOffset)
+	{
+		if (LeftHand)
+		{
+			LeftHandRotationOffset = LeftHand->GetSkeletalMeshComponent()->GetComponentQuat();
+		}
+		if (RightHand)
+		{
+			RightHandRotationOffset = RightHand->GetSkeletalMeshComponent()->GetComponentQuat();
+		}
+	}
 }
 
 // Called every frame
@@ -96,12 +114,12 @@ void AMCCharacter::Tick(float DeltaTime)
 	if (LeftHand)
 	{
 		AMCCharacter::UpdateHandLocationAndRotation(
-			MCLeft, LeftHand->GetSkeletalMeshComponent(), LeftPIDController, DeltaTime);
+			MCLeft, LeftHandRotationOffset, LeftHand->GetSkeletalMeshComponent(), LeftPIDController, DeltaTime);
 	}
 	if (RightHand)
 	{
 		AMCCharacter::UpdateHandLocationAndRotation(
-			MCRight, RightHand->GetSkeletalMeshComponent(), RightPIDController, DeltaTime);
+			MCRight, RightHandRotationOffset, RightHand->GetSkeletalMeshComponent(), RightPIDController, DeltaTime);
 	}
 }
 
@@ -159,6 +177,7 @@ void AMCCharacter::MoveRight(const float Value)
 // Update hand positions
 FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	UMotionControllerComponent* MC,
+	const FQuat& RotOffset,
 	USkeletalMeshComponent* SkelMesh,
 	PIDController3D& PIDController,
 	const float DeltaTime)
@@ -170,7 +189,7 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsLinearVelocity(LocOutput);
 
 	//// Rotation
-	const FQuat TargetQuat = MC->GetComponentQuat();
+	const FQuat TargetQuat = MC->GetComponentQuat() * RotOffset;
 	FQuat CurrQuat = SkelMesh->GetComponentQuat();
 
 	// Dot product to get cos theta

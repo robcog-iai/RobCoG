@@ -38,6 +38,10 @@ protected:
 	// Right hand skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
 	ASkeletalMeshActor* RightHand;
+	
+	// Flag to apply rotation offset to hands
+	UPROPERTY(EditAnywhere, Category = "MC|Hands")
+	bool bUseHandsInitialRotationForOffset;
 
 	// Show motion controller pose arrows
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
@@ -72,6 +76,7 @@ protected:
 	// Update hand positions
 	FORCEINLINE void UpdateHandLocationAndRotation(
 		UMotionControllerComponent* MC,
+		const FQuat& RotOffset,
 		USkeletalMeshComponent* SkelMesh,
 		PIDController3D& PIDController,
 		const float DeltaTime);
@@ -112,16 +117,16 @@ protected:
 	// Right hand controller
 	PIDController3D RightPIDController;
 
-	// Left hand control body
-	FBodyInstance* LeftControlBody;
-
-	// Right hand control body
-	FBodyInstance* RightControlBody;
-
 	// Left MC hand // TODO look into delegates to avoid dynamic casting
 	AMCHand* MCLeftHand;
 
 	// Right MC hand
 	AMCHand* MCRightHand;
+
+	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
+	FQuat LeftHandRotationOffset;
+
+	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
+	FQuat RightHandRotationOffset;
 
 };

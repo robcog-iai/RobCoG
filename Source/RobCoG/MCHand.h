@@ -6,7 +6,6 @@
 #include "CoreMinimal.h"
 #include "Animation/SkeletalMeshActor.h"
 #include "PhysicsEngine/ConstraintInstance.h"
-#include "MCGrasp.h"
 #include "MCHand.generated.h"
 
 /** Enum indicating the hand type */
@@ -70,6 +69,7 @@ struct FFinger
 		// Iterate the bone names
 		for (const auto& MapItr : FingerPartToBoneName)
 		{
+			// TODO null ptr exeption if the names do not match
 			// Check if bone name match with the constraint joint name
 			FConstraintInstance* FingerPartConstraint = *Constraints.FindByPredicate(
 				[&MapItr](FConstraintInstance* ConstrInst)
@@ -148,7 +148,6 @@ protected:
 	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	//		FVector NormalImpulse, const FHitResult& Hit);
 
-
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	EHandType HandType;
@@ -184,7 +183,7 @@ protected:
 	// Limit of the force that the angular drive can apply
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
 	float ForceLimit;
-	
+
 private:
 	// Setup hand default values
 	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
@@ -194,7 +193,7 @@ private:
 
 	// Setup fingers angular drive values
 	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
-
+	
 	//// Grasp
 	//MCGrasp Grasp;
 };
