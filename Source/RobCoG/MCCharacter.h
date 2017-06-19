@@ -50,7 +50,7 @@ protected:
 	// PID controller proportional argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float PGain;
-	
+
 	// PID controller integral argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float IGain;
@@ -61,7 +61,7 @@ protected:
 	
 	// PID controller maximum output (absolute value)
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
-	float PIDMaxAbsOutput;
+	float MaxOutput;
 
 	// Hand rotation controller boost
 	UPROPERTY(EditAnywhere, Category = "MC|Control")

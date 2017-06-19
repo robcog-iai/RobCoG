@@ -22,8 +22,8 @@ AMCHand::AMCHand()
 	SkelComp->bGenerateOverlapEvents = true;
 
 	// Drive parameters
-	Spring = 59950000.0f;
-	Damping = 59950000.0f;
+	Spring = 950000.0f;
+	Damping = 950000.0f;
 	ForceLimit = 0.0f;
 
 	// Set fingers and their bone names default values
@@ -183,23 +183,23 @@ void AMCHand::UpdateGrasp(const float Goal)
 {
 	for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 	}
 	for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 	}
 	for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 	}
 	for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 	}
 	for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Grasp update: %f"), Goal);
 }

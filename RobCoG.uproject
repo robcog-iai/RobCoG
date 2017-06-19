@@ -12,5 +12,7 @@
 				"Engine"
 			]
 		}
+	],
+	"Plugins": [
 	]
 }
