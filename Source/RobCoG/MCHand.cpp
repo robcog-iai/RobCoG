@@ -181,9 +181,25 @@ FORCEINLINE void AMCHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InS
 // Update the grasp pose
 void AMCHand::UpdateGrasp(const float Goal)
 {
+	for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+	}
 	for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal*42.f)));
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+	}
+	for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+	}
+	for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
+	}
+	for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 45.f)));
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Grasp update: %f"), Goal);
 }
@@ -195,6 +211,7 @@ void AMCHand::AttachToHand()
 	//	Grasped->SetSimulatePhysics(false);
 	//	Grasped->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
 	//}
+	UE_LOG(LogTemp, Warning, TEXT("Attach to hand"));
 }
 
 // Detach grasped object from hand
@@ -205,4 +222,5 @@ void AMCHand::DetachFromHand()
 	//	Grasped->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
 	//	Grasped = nullptr;
 	//}
+	UE_LOG(LogTemp, Warning, TEXT("Detach from hand"));
 }

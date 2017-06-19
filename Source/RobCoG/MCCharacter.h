@@ -41,7 +41,7 @@ protected:
 	
 	// Flag to apply rotation offset to hands
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	bool bUseHandsInitialRotationForOffset;
+	bool bUseHandsInitialRotationAsOffset;
 
 	// Show motion controller pose arrows
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")

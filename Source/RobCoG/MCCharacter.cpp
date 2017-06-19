@@ -22,7 +22,7 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 
 	// Set flag default values
 	bShowTargetArrows = true;
-	bUseHandsInitialRotationForOffset = true;
+	bUseHandsInitialRotationAsOffset = true;
 
 	// Create the motion controller offset (hands in front of the character), attach to root component
 	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
@@ -92,7 +92,7 @@ void AMCCharacter::BeginPlay()
 	MCRightHand = Cast<AMCHand>(RightHand);
 
 	// Set hand offsets
-	if (bUseHandsInitialRotationForOffset)
+	if (bUseHandsInitialRotationAsOffset)
 	{
 		if (LeftHand)
 		{
@@ -201,9 +201,7 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	}
 	// Use the xyz part of the quat as the rotation velocity
 	const FQuat OutputFromQuat = TargetQuat * CurrQuat.Inverse();
-	// Get the rotation output
 	const FVector RotOutput = FVector(OutputFromQuat.X, OutputFromQuat.Y, OutputFromQuat.Z) * RotationBoost;
-	// Apply torque/angularvel to the hands control body 
 	//SkelMesh->SetPhysicsAngularVelocity(RotOutput);
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
@@ -226,12 +224,12 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 	}
 }
 
-
 // Attach to left hand
 void AMCCharacter::AttachToLeftHand()
 {
 	if (MCLeftHand)
 	{
+		MCLeftHand->AttachToHand();
 	}
 }
 
@@ -240,5 +238,6 @@ void AMCCharacter::AttachToRightHand()
 {
 	if (MCRightHand)
 	{
+		MCRightHand->AttachToHand();
 	}
 }

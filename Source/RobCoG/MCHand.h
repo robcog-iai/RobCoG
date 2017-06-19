@@ -69,7 +69,7 @@ struct FFinger
 		// Iterate the bone names
 		for (const auto& MapItr : FingerPartToBoneName)
 		{
-			// TODO null ptr exeption if the names do not match
+			// TODO null ptr exception if the names do not match
 			// Check if bone name match with the constraint joint name
 			FConstraintInstance* FingerPartConstraint = *Constraints.FindByPredicate(
 				[&MapItr](FConstraintInstance* ConstrInst)
