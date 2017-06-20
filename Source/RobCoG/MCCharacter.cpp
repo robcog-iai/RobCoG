@@ -96,19 +96,19 @@ void AMCCharacter::BeginPlay()
 	}
 
 	// Cast the hands to Hand
-	MCLeftHand = Cast<AHand>(LeftHand);
-	MCRightHand = Cast<AHand>(RightHand);
+	LeftHand = Cast<AHand>(LeftSkelActor);
+	RightHand = Cast<AHand>(RightSkelActor);
 
 	// Set hand offsets
 	if (bUseHandsInitialRotationAsOffset)
 	{
-		if (LeftHand)
+		if (LeftSkelActor)
 		{
-			LeftHandRotationOffset = LeftHand->GetSkeletalMeshComponent()->GetComponentQuat();
+			LeftHandRotationOffset = LeftSkelActor->GetSkeletalMeshComponent()->GetComponentQuat();
 		}
-		if (RightHand)
+		if (RightSkelActor)
 		{
-			RightHandRotationOffset = RightHand->GetSkeletalMeshComponent()->GetComponentQuat();
+			RightHandRotationOffset = RightSkelActor->GetSkeletalMeshComponent()->GetComponentQuat();
 		}
 	}
 }
@@ -119,15 +119,15 @@ void AMCCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// Move hands to target location and rotation
-	if (LeftHand)
+	if (LeftSkelActor)
 	{
 		AMCCharacter::UpdateHandLocationAndRotation(
-			MCLeft, LeftHandRotationOffset, LeftHand->GetSkeletalMeshComponent(), LeftPIDController, DeltaTime);
+			MCLeft, LeftHandRotationOffset, LeftSkelActor->GetSkeletalMeshComponent(), LeftPIDController, DeltaTime);
 	}
-	if (RightHand)
+	if (RightSkelActor)
 	{
 		AMCCharacter::UpdateHandLocationAndRotation(
-			MCRight, RightHandRotationOffset, RightHand->GetSkeletalMeshComponent(), RightPIDController, DeltaTime);
+			MCRight, RightHandRotationOffset, RightSkelActor->GetSkeletalMeshComponent(), RightPIDController, DeltaTime);
 	}
 }
 
@@ -149,6 +149,8 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// Hand action binding
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::AttachToLeftHand);
 	PlayerInputComponent->BindAction("AttachToRightHand", IE_Pressed, this, &AMCCharacter::AttachToRightHand);
+	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Released, this, &AMCCharacter::DetachFromLeftHand);
+	PlayerInputComponent->BindAction("AttachToRightHand", IE_Released, this, &AMCCharacter::DetachFromRightHand);
 }
 
 // Handles moving forward/backward
@@ -218,35 +220,53 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 // Update left hand grasp
 void AMCCharacter::GraspWithLeftHand(const float Val)
 {
-	if (MCLeftHand)
+	if (LeftHand)
 	{
-		MCLeftHand->UpdateGrasp(Val);
+		LeftHand->UpdateGrasp(Val);
 	}
 }
 
 // Update right hand grasp
 void AMCCharacter::GraspWithRightHand(const float Val)
 {
-	if (MCRightHand)
+	if (RightHand)
 	{
-		MCRightHand->UpdateGrasp(Val);
+		RightHand->UpdateGrasp(Val);
 	}
 }
 
 // Attach to left hand
 void AMCCharacter::AttachToLeftHand()
 {
-	if (MCLeftHand)
+	if (LeftHand)
 	{
-		MCLeftHand->AttachToHand();
+		LeftHand->AttachToHand();
 	}
 }
 
 // Attach to right hand
 void AMCCharacter::AttachToRightHand()
 {
-	if (MCRightHand)
+	if (RightHand)
 	{
-		MCRightHand->AttachToHand();
+		RightHand->AttachToHand();
+	}
+}
+
+// Detach from left hand
+void AMCCharacter::DetachFromLeftHand()
+{
+	if (LeftHand)
+	{
+		LeftHand->DetachFromHand();
+	}
+}
+
+// Detach from right hand
+void AMCCharacter::DetachFromRightHand()
+{
+	if (RightHand)
+	{
+		RightHand->DetachFromHand();
 	}
 }

@@ -20,10 +20,11 @@ enum class EGraspType : uint8
  USTRUCT()
 struct  FGrasp
 {
-	GENERATED_USTRUCT_BODY()
-	
+	 GENERATED_USTRUCT_BODY()
+
 	// Default constructor
-	FGrasp();
+	FGrasp() 
+	{}
 
 	// Grasp type
 	EGraspType GraspType;

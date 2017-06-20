@@ -33,11 +33,11 @@ public:
 protected:
 	// Left hand skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	ASkeletalMeshActor* LeftHand;
+	ASkeletalMeshActor* LeftSkelActor;
 
 	// Right hand skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	ASkeletalMeshActor* RightHand;
+	ASkeletalMeshActor* RightSkelActor;
 	
 	// Flag to apply rotation offset to hands
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
@@ -93,6 +93,12 @@ protected:
 	// Attach to right hand
 	void AttachToRightHand();
 
+	// Detach from left hand
+	void DetachFromLeftHand();
+
+	// Detach from right hand
+	void DetachFromRightHand();
+
 	// Character camera
 	UCameraComponent* CharCamera;
 
@@ -118,10 +124,10 @@ protected:
 	PIDController3D RightPIDController;
 
 	// Left MC hand // TODO look into delegates to avoid dynamic casting
-	AHand* MCLeftHand;
+	AHand* LeftHand;
 
 	// Right MC hand
-	AHand* MCRightHand;
+	AHand* RightHand;
 
 	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
 	FQuat LeftHandRotationOffset;
