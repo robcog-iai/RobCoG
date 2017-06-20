@@ -4,7 +4,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MCHand.h"
+#include "Grasp.generated.h"
 
 /** Enum indicating the grasp movement type */
 UENUM(BlueprintType)
@@ -17,33 +17,14 @@ enum class EGraspType : uint8
 /**
  * 
  */
-class ROBCOG_API MCGrasp
+ USTRUCT()
+struct  FGrasp
 {
-public:
-	// Default constructor
-	MCGrasp();
+	GENERATED_USTRUCT_BODY()
 	
-	// Destructor
-	~MCGrasp();
+	// Default constructor
+	FGrasp();
 
-	//// Set grasp fingers
-	//void SetFingers(
-	//	const FFinger& InThumb,
-	//	const FFinger& InIndex,
-	//	const FFinger& InMiddle,
-	//	const FFinger& InRing,
-	//	const FFinger& InPinky);
-
-	// Set grasp type
-	void SetGraspType(const EGraspType InGraspType);
-
-	//Get grasp type
-	EGraspType GetGraspType() const { return GraspType; };
-
-	// Update grasp
-	void Update(const float Goal);
-
-protected:
 	// Grasp type
 	EGraspType GraspType;
 
@@ -60,5 +41,22 @@ protected:
 	//FFinger Ring;
 
 	//// Pinky finger
-	//FFinger Pinky;
+	//FFinger Pinky;	
+
+	//// Set grasp fingers
+	//void SetFingers(
+	//	const FFinger& InThumb,
+	//	const FFinger& InIndex,
+	//	const FFinger& InMiddle,
+	//	const FFinger& InRing,
+	//	const FFinger& InPinky);
+
+	//// Set grasp type
+	//void SetGraspType(const EGraspType InGraspType);
+
+	////Get grasp type
+	//EGraspType GetGraspType() const { return GraspType; };
+
+	//// Update grasp
+	//void Update(const float Goal);	
 };

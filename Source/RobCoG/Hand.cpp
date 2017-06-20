@@ -1,15 +1,20 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 // Author: Andrei Haidu (http://haidu.eu)
 
-#include "MCHand.h"
+#include "Hand.h"
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
 
 // Sets default values
-AMCHand::AMCHand()
+AHand::AHand()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	// Set attachement collision component
+	AttachmentCollision = CreateDefaultSubobject<USphereComponent>(TEXT("AttachmentCollision"));
+	AttachmentCollision->SetupAttachment(GetRootComponent());
+	AttachmentCollision->InitSphereRadius(5.f);
 
 	// Set default as left hand
 	HandType = EHandType::Left;
@@ -27,30 +32,33 @@ AMCHand::AMCHand()
 	ForceLimit = 0.0f;
 
 	// Set fingers and their bone names default values
-	AMCHand::SetupHandDefaultValues(HandType);
+	AHand::SetupHandDefaultValues(HandType);
 
 	// Set skeletal default values
-	//AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+	//AHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
 }
 
 // Called when the game starts or when spawned
-void AMCHand::BeginPlay()
+void AHand::BeginPlay()
 {
 	Super::BeginPlay();
 
+	AttachmentCollision->OnComponentBeginOverlap.AddDynamic(this, &AHand::OnAttachmentCollisionBeginOverlap);
+	AttachmentCollision->OnComponentEndOverlap.AddDynamic(this, &AHand::OnAttachmentCollisionEndOverlap);
+
 	// Setup the values for controlling the hand fingers
-	AMCHand::SetupAngularDriveValues(EAngularDriveMode::SLERP);
+	AHand::SetupAngularDriveValues(EAngularDriveMode::SLERP);
 }
 
 // Called every frame, used for motion control
-void AMCHand::Tick(float DeltaTime)
+void AHand::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
 // Update default values if properties have been changed in the editor
 #if WITH_EDITOR
-void AMCHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+void AHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {
 	// Call the base class version  
 	Super::PostEditChangeProperty(PropertyChangedEvent);
@@ -59,23 +67,54 @@ void AMCHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChang
 	FName PropertyName = (PropertyChangedEvent.Property != nullptr) ? PropertyChangedEvent.Property->GetFName() : NAME_None;
 
 	// If hand type has been changed
-	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AMCHand, HandType)))
+	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AHand, HandType)))
 	{
-		AMCHand::SetupHandDefaultValues(HandType);
+		AHand::SetupHandDefaultValues(HandType);
 	}
 
 	// If the skeletal mesh has been changed
-	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AMCHand, GetSkeletalMeshComponent())))
+	if ((PropertyName == GET_MEMBER_NAME_CHECKED(AHand, GetSkeletalMeshComponent())))
 	{
-		//AMCHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+		//AHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("Selected property name: %s"), *PropertyName.ToString());
 }
 #endif  
 
+// Object in reach for grasping
+void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+{
+	// Object in reach
+	if (!GraspedObject)
+	{
+		// Hand is free, check if object is graspable
+		if (IsGraspable(OtherActor))
+		{
+			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));		
+		}
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Overlap begin: %s | GraspableObjects size: %i"),
+		*OtherActor->GetName(), GraspableObjects.Num());
+}
+
+// Object out of reach for grasping
+void AHand::OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{	
+	// Object out of reach
+	if (!GraspedObject)
+	{
+		// If present, remove from the graspable objects
+		GraspableObjects.Remove(Cast<AStaticMeshActor>(OtherActor));
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"), 
+		*OtherActor->GetName(), GraspableObjects.Num());
+}
+
 // Setup hand default values
-FORCEINLINE void AMCHand::SetupHandDefaultValues(EHandType InHandType)
+FORCEINLINE void AHand::SetupHandDefaultValues(EHandType InHandType)
 {
 	if (InHandType == EHandType::Left)
 	{
@@ -133,8 +172,27 @@ FORCEINLINE void AMCHand::SetupHandDefaultValues(EHandType InHandType)
 	}
 }
 
+// Setup skeletal mesh default values
+FORCEINLINE void AHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent)
+{
+	if (InSkeletalMeshComponent->GetPhysicsAsset())
+	{
+		// Hand joint velocity drive
+		InSkeletalMeshComponent->SetAllMotorsAngularPositionDrive(true, true);
+
+		// Set drive parameters
+		InSkeletalMeshComponent->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
+
+		UE_LOG(LogTemp, Error, TEXT("AHand: SkeletalMeshComponent's angular motors set!"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("AHand: SkeletalMeshComponent's has no PhysicsAsset set!"));
+	}
+}
+
 // Setup fingers angular drive values
-FORCEINLINE void AMCHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode)
+FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode)
 {
 	USkeletalMeshComponent* const SkelMeshComp = GetSkeletalMeshComponent();
 	if (Thumb.SetFingerPartsConstraints(SkelMeshComp->Constraints))
@@ -159,27 +217,18 @@ FORCEINLINE void AMCHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveM
 	}
 }
 
-// Setup skeletal mesh default values
-FORCEINLINE void AMCHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent)
+// Check if object is graspable
+bool AHand::IsGraspable(AActor* InActor)
 {
-	if (InSkeletalMeshComponent->GetPhysicsAsset())
+	if (InActor->GetClass()->IsChildOf(AStaticMeshActor::StaticClass()))
 	{
-		// Hand joint velocity drive
-		InSkeletalMeshComponent->SetAllMotorsAngularPositionDrive(true, true);
-
-		// Set drive parameters
-		InSkeletalMeshComponent->SetAllMotorsAngularDriveParams(Spring, Damping, ForceLimit);
-
-		UE_LOG(LogTemp, Error, TEXT("AMCHand: SkeletalMeshComponent's angular motors set!"));
+		return true;
 	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("AMCHand: SkeletalMeshComponent's has no PhysicsAsset set!"));
-	}
+	return false;
 }
 
 // Update the grasp pose
-void AMCHand::UpdateGrasp(const float Goal)
+void AHand::UpdateGrasp(const float Goal)
 {
 	for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
 	{
@@ -201,26 +250,31 @@ void AMCHand::UpdateGrasp(const float Goal)
 	{
 		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Grasp update: %f"), Goal);
+	//UE_LOG(LogTemp, Warning, TEXT("Grasp update: %f"), Goal);
 }
 
 // Attach grasped object to hand
-void AMCHand::AttachToHand()
+void AHand::AttachToHand()
 {
-	//if (Grasped != nullptr) {
-	//	Grasped->SetSimulatePhysics(false);
-	//	Grasped->AttachToComponent(RootComponent, FAttachmentTransformRules(EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
-	//}
-	UE_LOG(LogTemp, Warning, TEXT("Attach to hand"));
+	if ((!GraspedObject) && (GraspableObjects.Num() > 0))
+	{		
+		GraspedObject = GraspableObjects.Pop();
+		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(false);
+		GraspedObject->AttachToComponent(GetRootComponent(), FAttachmentTransformRules(
+			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Attached to hand"));
 }
 
 // Detach grasped object from hand
-void AMCHand::DetachFromHand()
+void AHand::DetachFromHand()
 {
-	//if (Grasped != nullptr) {
-	//	Grasped->SetSimulatePhysics(true);
-	//	Grasped->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
-	//	Grasped = nullptr;
-	//}
+	if (GraspedObject)
+	{
+		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
+		GraspedObject->GetStaticMeshComponent()->DetachFromComponent(FDetachmentTransformRules(
+			EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
+		GraspedObject = nullptr;
+	}
 	UE_LOG(LogTemp, Warning, TEXT("Detach from hand"));
 }

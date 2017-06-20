@@ -9,7 +9,7 @@
 #include "Animation/SkeletalMeshActor.h"
 #include "MotionControllerComponent.h"
 #include "PIDController3D.h"
-#include "MCHand.h"
+#include "Hand.h"
 #include "MCCharacter.generated.h"
 
 UCLASS()
@@ -19,7 +19,7 @@ class ROBCOG_API AMCCharacter : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	AMCCharacter(const FObjectInitializer& ObjectInitializer);
+	AMCCharacter();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -118,10 +118,10 @@ protected:
 	PIDController3D RightPIDController;
 
 	// Left MC hand // TODO look into delegates to avoid dynamic casting
-	AMCHand* MCLeftHand;
+	AHand* MCLeftHand;
 
 	// Right MC hand
-	AMCHand* MCRightHand;
+	AHand* MCRightHand;
 
 	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
 	FQuat LeftHandRotationOffset;

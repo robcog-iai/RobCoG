@@ -11,7 +11,7 @@
 #include "IHeadMountedDisplay.h"
 
 // Sets default values
-AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
+AMCCharacter::AMCCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -31,7 +31,7 @@ AMCCharacter::AMCCharacter(const FObjectInitializer& ObjectInitializer)
 	MCOriginComponent->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
 
 	// Create a CameraComponent, attach to capsule
-	CharCamera = ObjectInitializer.CreateDefaultSubobject<UCameraComponent>(this, TEXT("MCCharacterCamera"));
+	CharCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("MCCharacterCamera"));
 	CharCamera->SetupAttachment(MCOriginComponent);
 	// Default camera for VR use -- relative location at the floor 
 	//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
@@ -95,9 +95,9 @@ void AMCCharacter::BeginPlay()
 		MCRight->SetRelativeLocation(FVector(0.f, 30.f, 0.f));
 	}
 
-	// Cast the hands to MCHand
-	MCLeftHand = Cast<AMCHand>(LeftHand);
-	MCRightHand = Cast<AMCHand>(RightHand);
+	// Cast the hands to Hand
+	MCLeftHand = Cast<AHand>(LeftHand);
+	MCRightHand = Cast<AHand>(RightHand);
 
 	// Set hand offsets
 	if (bUseHandsInitialRotationAsOffset)
