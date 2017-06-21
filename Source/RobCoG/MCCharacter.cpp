@@ -91,8 +91,8 @@ void AMCCharacter::BeginPlay()
 		CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
 		CharCamera->bUsePawnControlRotation = true;
 		MCOriginComponent->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
-		MCLeft->SetRelativeLocation(FVector(100.f, -30.f, -30.f));
-		MCRight->SetRelativeLocation(FVector(100.f, 30.f, -30.f));
+		MCLeft->SetRelativeLocation(FVector(75.f, -30.f, 30.f));
+		MCRight->SetRelativeLocation(FVector(75.f, 30.f, 30.f));
 	}
 
 	// Cast the hands to Hand
@@ -139,6 +139,7 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// Set up gameplay key bindings
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMCCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMCCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("MoveHandsOnZ", this, &AMCCharacter::MoveHandsOnZ);
 	// Default Camera view bindings
 	PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
@@ -183,7 +184,21 @@ void AMCCharacter::MoveRight(const float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+// Move hands when not in VR up and down
+void AMCCharacter::MoveHandsOnZ(const float Value)
+{
+	if (Value != 0)
+	{
+		// Check if VR is enabled
+		IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
+		if (!(HMD && HMD->IsStereoEnabled()))
+		{
+			MCLeft->AddLocalOffset(FVector(0.f, 0.f, Value));
+			MCRight->AddLocalOffset(FVector(0.f, 0.f, Value));
+		}
 
+	}
+}
 // Update hand positions
 FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	UMotionControllerComponent* MC,

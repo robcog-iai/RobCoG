@@ -120,6 +120,9 @@ private:
 	// Check if object is graspable
 	FORCEINLINE bool IsGraspable(AActor* InActor);
 
+	// Hold grasp in the current position
+	FORCEINLINE void HoldGrasp();
+
 	// Setup hand default values
 	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
 
@@ -128,12 +131,15 @@ private:
 
 	// Setup fingers angular drive values
 	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
-	
+
 	// Pointer to objects in reach for grasping
 	TArray<AStaticMeshActor*> GraspableObjects;
 
 	// Pointer to the grasped object
 	AStaticMeshActor* GraspedObject;
+
+	// Mark that the grasp has been held, avoid reinitializing the finger drivers
+	bool bGraspHeld;
 
 	//// Grasp
 	//MCGrasp Grasp;

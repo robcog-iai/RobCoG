@@ -73,6 +73,9 @@ protected:
 	// Handles strafing Left/Right
 	void MoveRight(const float Val);
 
+	// Move hands when not in VR up and down
+	void MoveHandsOnZ(const float Value);
+
 	// Update hand positions
 	FORCEINLINE void UpdateHandLocationAndRotation(
 		UMotionControllerComponent* MC,

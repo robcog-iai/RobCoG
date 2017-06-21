@@ -11,8 +11,9 @@ AHand::AHand()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Fixation grasp parameters
+	// Fixation grasp parameters	
 	bEnableFixationGrasp = true;
+	bGraspHeld = false;
 	MaxAttachMass = 4.5f;
 	// Set attachement collision component
 	AttachmentCollision = CreateDefaultSubobject<USphereComponent>(TEXT("AttachmentCollision"));
@@ -51,7 +52,7 @@ void AHand::BeginPlay()
 	AttachmentCollision->OnComponentEndOverlap.AddDynamic(this, &AHand::OnAttachmentCollisionEndOverlap);
 
 	// Setup the values for controlling the hand fingers
-	AHand::SetupAngularDriveValues(EAngularDriveMode::SLERP);
+	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
 }
 
 // Called every frame, used for motion control
@@ -140,6 +141,48 @@ bool AHand::IsGraspable(AActor* InActor)
 	return false;
 }
 
+// Hold grasp in the current position
+FORCEINLINE void AHand::HoldGrasp()
+{
+	for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+			ConstrMapItr.Value->GetCurrentSwing2(),
+			ConstrMapItr.Value->GetCurrentSwing1(),
+			ConstrMapItr.Value->GetCurrentTwist())));
+	}
+	for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+			ConstrMapItr.Value->GetCurrentSwing2(),
+			ConstrMapItr.Value->GetCurrentSwing1(),
+			ConstrMapItr.Value->GetCurrentTwist())));
+	}
+	for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+			ConstrMapItr.Value->GetCurrentSwing2(),
+			ConstrMapItr.Value->GetCurrentSwing1(),
+			ConstrMapItr.Value->GetCurrentTwist())));
+	}
+	for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+			ConstrMapItr.Value->GetCurrentSwing2(),
+			ConstrMapItr.Value->GetCurrentSwing1(),
+			ConstrMapItr.Value->GetCurrentTwist())));
+	}
+	for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+	{
+		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+			ConstrMapItr.Value->GetCurrentSwing2(),
+			ConstrMapItr.Value->GetCurrentSwing1(),
+			ConstrMapItr.Value->GetCurrentTwist())));
+	}
+
+	bGraspHeld = true;
+}
+
 // Setup hand default values
 FORCEINLINE void AHand::SetupHandDefaultValues(EHandType InHandType)
 {
@@ -165,7 +208,7 @@ FORCEINLINE void AHand::SetupHandDefaultValues(EHandType InHandType)
 		Ring.FingerPartToBoneName.Add(EFingerPart::Intermediate, "ring_02_l");
 		Ring.FingerPartToBoneName.Add(EFingerPart::Distal, "ring_03_l");
 
-		Pinky.FingerType = EFingerType::Ring;
+		Pinky.FingerType = EFingerType::Pinky;
 		Pinky.FingerPartToBoneName.Add(EFingerPart::Proximal, "pinky_01_l");
 		Pinky.FingerPartToBoneName.Add(EFingerPart::Intermediate, "pinky_02_l");
 		Pinky.FingerPartToBoneName.Add(EFingerPart::Distal, "pinky_03_l");
@@ -192,7 +235,7 @@ FORCEINLINE void AHand::SetupHandDefaultValues(EHandType InHandType)
 		Ring.FingerPartToBoneName.Add(EFingerPart::Intermediate, "ring_02_r");
 		Ring.FingerPartToBoneName.Add(EFingerPart::Distal, "ring_03_r");
 
-		Pinky.FingerType = EFingerType::Ring;
+		Pinky.FingerType = EFingerType::Pinky;
 		Pinky.FingerPartToBoneName.Add(EFingerPart::Proximal, "pinky_01_r");
 		Pinky.FingerPartToBoneName.Add(EFingerPart::Intermediate, "pinky_02_r");
 		Pinky.FingerPartToBoneName.Add(EFingerPart::Distal, "pinky_03_r");
@@ -247,27 +290,33 @@ FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMod
 // Update the grasp pose
 void AHand::UpdateGrasp(const float Goal)
 {
-	for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+	if (!GraspedObject)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
 	}
-	for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+	else if(!bGraspHeld)
 	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		AHand::HoldGrasp();
 	}
-	for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-	}
-	for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-	}
-	for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-	}
-	//UE_LOG(LogTemp, Warning, TEXT("Grasp update: %f"), Goal);
 }
 
 // Attach grasped object to hand
@@ -292,6 +341,7 @@ void AHand::DetachFromHand()
 		GraspedObject->GetStaticMeshComponent()->DetachFromComponent(FDetachmentTransformRules(
 			EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
 		GraspedObject = nullptr;
+		bGraspHeld = false;
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Detach from hand"));
 }
