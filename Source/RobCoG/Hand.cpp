@@ -11,6 +11,9 @@ AHand::AHand()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Fixation grasp parameters
+	bEnableFixationGrasp = true;
+	MaxAttachMass = 4.5f;
 	// Set attachement collision component
 	AttachmentCollision = CreateDefaultSubobject<USphereComponent>(TEXT("AttachmentCollision"));
 	AttachmentCollision->SetupAttachment(GetRootComponent());
@@ -26,11 +29,12 @@ AHand::AHand()
 	SkelComp->SetCollisionProfileName(TEXT("BlockAll"));
 	SkelComp->bGenerateOverlapEvents = true;
 
-	// Drive parameters
+	// Angular drive default values
+	//AngularDriveMode = EAngularDriveMode::SLERP;
 	Spring = 950000.0f;
 	Damping = 950000.0f;
 	ForceLimit = 0.0f;
-
+	
 	// Set fingers and their bone names default values
 	AHand::SetupHandDefaultValues(HandType);
 
@@ -111,6 +115,29 @@ void AHand::OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, 
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"), 
 		*OtherActor->GetName(), GraspableObjects.Num());
+}
+
+// Check if object is graspable
+bool AHand::IsGraspable(AActor* InActor)
+{
+	// Check if the static mesh actor can be grasped
+	AStaticMeshActor* const SMActor = Cast<AStaticMeshActor>(InActor);
+	if (SMActor)
+	{
+		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
+		if (!SMComp)
+		{
+			// Actor has no static mesh
+			return false;
+		}
+		if (!SMActor->IsRootComponentMovable())
+		{
+			// Actor is not movable
+			return false;
+		}
+		return true;
+	}
+	return false;
 }
 
 // Setup hand default values
@@ -215,16 +242,6 @@ FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMod
 	{
 		Pinky.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
 	}
-}
-
-// Check if object is graspable
-bool AHand::IsGraspable(AActor* InActor)
-{
-	if (InActor->GetClass()->IsChildOf(AStaticMeshActor::StaticClass()))
-	{
-		return true;
-	}
-	return false;
 }
 
 // Update the grasp pose

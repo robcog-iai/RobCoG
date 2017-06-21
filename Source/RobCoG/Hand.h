@@ -88,9 +88,21 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Pinky;
 
+	// Enable grasping with fixation
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
+	bool bEnableFixationGrasp;
+
 	// Collision component used for attaching grasped objects
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
 	USphereComponent* AttachmentCollision;
+
+	// Maximum mass (kg) that can be attached to the hand
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
+	float MaxAttachMass;
+
+	//// Spring value to apply to the angular drive (Position strength)
+	//UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	//EAngularDriveMode::Type AngularDriveMode;
 
 	// Spring value to apply to the angular drive (Position strength)
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
@@ -105,6 +117,9 @@ protected:
 	float ForceLimit;
 
 private:
+	// Check if object is graspable
+	FORCEINLINE bool IsGraspable(AActor* InActor);
+
 	// Setup hand default values
 	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
 
@@ -113,9 +128,6 @@ private:
 
 	// Setup fingers angular drive values
 	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
-
-	// Check if object is graspable
-	FORCEINLINE bool IsGraspable(AActor* InActor);
 	
 	// Pointer to objects in reach for grasping
 	TArray<AStaticMeshActor*> GraspableObjects;
