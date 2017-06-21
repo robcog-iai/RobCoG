@@ -15,6 +15,7 @@ AHand::AHand()
 	bEnableFixationGrasp = true;
 	bGraspHeld = false;
 	MaxAttachMass = 4.5f;
+	MaxAttachLength = 50.f;
 	// Set attachement collision component
 	AttachmentCollision = CreateDefaultSubobject<USphereComponent>(TEXT("AttachmentCollision"));
 	AttachmentCollision->SetupAttachment(GetRootComponent());
@@ -126,18 +127,20 @@ bool AHand::IsGraspable(AActor* InActor)
 	if (SMActor)
 	{
 		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
-		if (!SMComp)
+		if ((SMActor->IsRootComponentMovable()) && 
+			(SMComp) &&
+			(SMComp->GetMass() < MaxAttachMass) &&
+			(SMActor->GetComponentsBoundingBox().GetSize().Size() < MaxAttachLength))
 		{
-			// Actor has no static mesh
-			return false;
+			// Actor is movable
+			// Actor has a static mesh component
+			// Actor is not too heavy
+			// Actor is not too large
+			// Object can be attached
+			return true;
 		}
-		if (!SMActor->IsRootComponentMovable())
-		{
-			// Actor is not movable
-			return false;
-		}
-		return true;
 	}
+	// Actor cannot be attached
 	return false;
 }
 

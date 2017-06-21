@@ -96,9 +96,13 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
 	USphereComponent* AttachmentCollision;
 
-	// Maximum mass (kg) that can be attached to the hand
+	// Maximum mass (kg) of an object that can be attached to the hand
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
 	float MaxAttachMass;
+
+	// Maximum length of an object that can be attached to the hand
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
+	float MaxAttachLength;
 
 	//// Spring value to apply to the angular drive (Position strength)
 	//UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
