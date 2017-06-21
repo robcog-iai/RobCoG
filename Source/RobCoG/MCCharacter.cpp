@@ -90,9 +90,9 @@ void AMCCharacter::BeginPlay()
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
 		CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
 		CharCamera->bUsePawnControlRotation = true;
-		MCOriginComponent->SetRelativeLocation(FVector(70.f, 0.f, -10.f));
-		MCLeft->SetRelativeLocation(FVector(0.f, -30.f, 0.f));
-		MCRight->SetRelativeLocation(FVector(0.f, 30.f, 0.f));
+		MCOriginComponent->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
+		MCLeft->SetRelativeLocation(FVector(100.f, -30.f, -30.f));
+		MCRight->SetRelativeLocation(FVector(100.f, 30.f, -30.f));
 	}
 
 	// Cast the hands to Hand
