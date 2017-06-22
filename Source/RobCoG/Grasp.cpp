@@ -14,3 +14,8 @@ Grasp::~Grasp()
 void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation, const AHand& Hand)
 {
 }
+
+void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger& Finger)
+{
+	
+}

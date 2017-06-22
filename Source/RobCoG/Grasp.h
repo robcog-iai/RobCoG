@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 
+#include "Structs/Finger.h"
 #include "Structs/HandOrientation.h"
 
 class AHand;
@@ -27,7 +28,9 @@ public:
 
 	~Grasp();
 
-	void DriveToHandOrientation(const FHandOrientation & HandOrientation,const AHand& Hand);
+	void DriveToHandOrientation(const FHandOrientation & HandOrientation, const AHand& Hand);
+
+	void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger& Finger);
 
 	// Set grasp type
 	void SetCurrentGraspType(const EGraspType InGraspType);
