@@ -56,6 +56,12 @@ void AHand::BeginPlay()
 
 	// Setup the values for controlling the hand fingers
 	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
+
+	FHandOrientation HandOrient;
+	GraspPtr->DriveToHandOrientation(HandOrient, this);
+
+	FFingerOrientation FingerOrient;
+	GraspPtr->DriveToFingerOrientation(FingerOrient, Pinky);
 }
 
 // Called every frame, used for motion control

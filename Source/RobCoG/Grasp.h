@@ -28,9 +28,9 @@ public:
 
 	~Grasp();
 
-	void DriveToHandOrientation(const FHandOrientation & HandOrientation, const AHand& Hand);
+	void DriveToHandOrientation(const FHandOrientation & HandOrientation, AHand* const Hand);
 
-	void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger& Finger);
+	void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
 	// Set grasp type
 	void SetCurrentGraspType(const EGraspType InGraspType);

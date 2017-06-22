@@ -11,11 +11,11 @@ Grasp::~Grasp()
 {
 }
 
-void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation, const AHand& Hand)
+void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation, AHand * const Hand)
 {
 }
 
-void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger& Finger)
+void Grasp::DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger & Finger)
 {
 	
 }
