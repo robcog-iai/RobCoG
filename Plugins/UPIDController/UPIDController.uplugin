@@ -1,0 +1,23 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "PID Controller",
+	"Description": "PID Controller classes",
+	"Category": "RobCoG",
+	"CreatedBy": "Andrei Haidu",
+	"CreatedByURL": "http://haidu.eu/",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "http://robcog.org/",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "UPIDController",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
