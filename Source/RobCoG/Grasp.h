@@ -1,63 +1,43 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
-// Author: Andrei Haidu (http://haidu.eu)
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Grasp.generated.h"
+
+#include "Structs/HandOrientation.h"
+
+class AHand;
 
 /** Enum indicating the grasp movement type */
 UENUM(BlueprintType)
 enum class EGraspType : uint8
 {
-	AllFingers		UMETA(DisplayName = "AllFingers"),
-	Pinch			UMETA(DisplayName = "Pinch"),
+	FullGrasp			UMETA(DisplayName = "FullGrasp"),
+	PinchGrasp			UMETA(DisplayName = "PinchGrasp"),
+	PinchThreeGrasp		UMETA(DisplayName = "PinchThreeGrasp"),
 };
 
 /**
  * 
  */
- USTRUCT()
-struct  FGrasp
+class ROBCOG_API Grasp
 {
-	 GENERATED_USTRUCT_BODY()
+public:
+	Grasp();
 
-	// Default constructor
-	FGrasp() 
-	{}
+	~Grasp();
 
-	// Grasp type
-	EGraspType GraspType;
+	void DriveToHandOrientation(const FHandOrientation & HandOrientation,const AHand& Hand);
 
-	//// Thumb finger
-	//FFinger Thumb;
+	// Set grasp type
+	void SetCurrentGraspType(const EGraspType InGraspType);
 
-	//// Index finger 
-	//FFinger Index;
+	//Get grasp type
+	EGraspType GetCurrentGraspType() const { return CurrentGraspType; };
 
-	//// Middle finger
-	//FFinger Middle;
+private: 
 
-	//// Ring finger
-	//FFinger Ring;
+	EGraspType CurrentGraspType;
 
-	//// Pinky finger
-	//FFinger Pinky;	
 
-	//// Set grasp fingers
-	//void SetFingers(
-	//	const FFinger& InThumb,
-	//	const FFinger& InIndex,
-	//	const FFinger& InMiddle,
-	//	const FFinger& InRing,
-	//	const FFinger& InPinky);
-
-	//// Set grasp type
-	//void SetGraspType(const EGraspType InGraspType);
-
-	////Get grasp type
-	//EGraspType GetGraspType() const { return GraspType; };
-
-	//// Update grasp
-	//void Update(const float Goal);	
 };

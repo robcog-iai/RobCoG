@@ -42,6 +42,8 @@ AHand::AHand()
 
 	// Set skeletal default values
 	//AHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+
+	GraspPtr = MakeShareable(new Grasp());
 }
 
 // Called when the game starts or when spawned
