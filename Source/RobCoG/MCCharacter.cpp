@@ -111,6 +111,20 @@ void AMCCharacter::BeginPlay()
 			RightHandRotationOffset = RightSkelActor->GetSkeletalMeshComponent()->GetComponentQuat();
 		}
 	}
+
+	// Teleport hands to the current position of the motion controllers
+	if (LeftSkelActor)
+	{	
+		LeftSkelActor->SetActorLocationAndRotation(MCLeft->GetComponentLocation(),
+			MCLeft->GetComponentQuat() * LeftHandRotationOffset,
+			false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
+	}
+	if (RightSkelActor)
+	{
+		RightSkelActor->SetActorLocationAndRotation(MCRight->GetComponentLocation(),
+			MCRight->GetComponentQuat() * RightHandRotationOffset,
+			false, (FHitResult*)nullptr,ETeleportType::TeleportPhysics);
+	}
 }
 
 // Called every frame
@@ -118,7 +132,7 @@ void AMCCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Move hands to target location and rotation
+	// Force based movement of the hands to target location and rotation
 	if (LeftSkelActor)
 	{
 		AMCCharacter::UpdateHandLocationAndRotation(

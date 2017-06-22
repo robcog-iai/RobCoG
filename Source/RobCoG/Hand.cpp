@@ -129,12 +129,13 @@ bool AHand::IsGraspable(AActor* InActor)
 		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
 		if ((SMActor->IsRootComponentMovable()) && 
 			(SMComp) &&
+			(SMComp->IsSimulatingPhysics()) &&
 			(SMComp->GetMass() < MaxAttachMass) &&
 			(SMActor->GetComponentsBoundingBox().GetSize().Size() < MaxAttachLength))
 		{
 			// Actor is movable
 			// Actor has a static mesh component
-			// Actor is not too heavy
+			// Actor is simulating physics and is not too heavy
 			// Actor is not too large
 			// Object can be attached
 			return true;
@@ -331,6 +332,8 @@ void AHand::AttachToHand()
 		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(false);
 		GraspedObject->AttachToComponent(GetRootComponent(), FAttachmentTransformRules(
 			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
+		//GraspedObject->AttachToActor(this, FAttachmentTransformRules(
+		//	EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Attached to hand"));
 }
