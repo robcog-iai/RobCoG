@@ -4,6 +4,8 @@
 #include "Hand.h"
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "HandOrientationParser.h"
+#include "Engine/Engine.h"
 
 // Sets default values
 AHand::AHand()
@@ -33,10 +35,10 @@ AHand::AHand()
 
 	// Angular drive default values
 	//AngularDriveMode = EAngularDriveMode::SLERP;
-	Spring = 950000.0f;
-	Damping = 950000.0f;
+	Spring = 100.0f;
+	Damping = 100.0f;
 	ForceLimit = 0.0f;
-	
+
 	// Set fingers and their bone names default values
 	AHand::SetupHandDefaultValues(HandType);
 
@@ -44,6 +46,8 @@ AHand::AHand()
 	//AHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
 
 	GraspPtr = MakeShareable(new Grasp());
+
+	HandOrientationParser = CreateDefaultSubobject<UHandOrientationParser>(TEXT("HandOrientationParser"));
 }
 
 // Called when the game starts or when spawned
@@ -56,12 +60,6 @@ void AHand::BeginPlay()
 
 	// Setup the values for controlling the hand fingers
 	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
-
-	FHandOrientation HandOrient;
-	GraspPtr->DriveToHandOrientation(HandOrient, this);
-
-	FFingerOrientation FingerOrient;
-	GraspPtr->DriveToFingerOrientation(FingerOrient, Pinky);
 }
 
 // Called every frame, used for motion control
@@ -106,7 +104,7 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 		// Hand is free, check if object is graspable
 		if (IsGraspable(OtherActor))
 		{
-			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));		
+			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
 		}
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Overlap begin: %s | GraspableObjects size: %i"),
@@ -116,14 +114,14 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 // Object out of reach for grasping
 void AHand::OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
 	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{	
+{
 	// Object out of reach
 	if (!GraspedObject)
 	{
 		// If present, remove from the graspable objects
 		GraspableObjects.Remove(Cast<AStaticMeshActor>(OtherActor));
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"), 
+	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"),
 		*OtherActor->GetName(), GraspableObjects.Num());
 }
 
@@ -135,7 +133,7 @@ bool AHand::IsGraspable(AActor* InActor)
 	if (SMActor)
 	{
 		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
-		if ((SMActor->IsRootComponentMovable()) && 
+		if ((SMActor->IsRootComponentMovable()) &&
 			(SMComp) &&
 			(SMComp->GetMass() < MaxAttachMass) &&
 			(SMActor->GetComponentsBoundingBox().GetSize().Size() < MaxAttachLength))
@@ -298,43 +296,98 @@ FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMod
 	}
 }
 
+// Switch the grasp pose
+void AHand::SwitchGrasp()
+{
+	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandOrientationParser);
+	if (GraspPtr.IsValid() && HandOrientationParser)
+	{
+		if (CurrentGraspType == EGraspType::FullGrasp)
+		{
+			CurrentGraspType = EGraspType::PinchGrasp;
+			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: PinchGrasp");
+
+			InitialHandOrientation = HandOrientationParser->GetInitialHandOrientationForGraspType(EGraspType::PinchGrasp);
+			ClosedHandOrientation = HandOrientationParser->GetClosedHandOrientationForGraspType(EGraspType::PinchGrasp);
+
+			GraspPtr->DriveToHandOrientation(InitialHandOrientation, this);
+		}
+		else if (CurrentGraspType == EGraspType::PinchGrasp)
+		{
+			CurrentGraspType = EGraspType::PinchThreeGrasp;
+			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: PinchThreeGrasp");
+
+			InitialHandOrientation = HandOrientationParser->GetInitialHandOrientationForGraspType(EGraspType::PinchThreeGrasp);
+			ClosedHandOrientation = HandOrientationParser->GetClosedHandOrientationForGraspType(EGraspType::PinchThreeGrasp);
+
+			GraspPtr->DriveToHandOrientation(InitialHandOrientation, this);
+		}
+		else if (CurrentGraspType == EGraspType::PinchThreeGrasp)
+		{
+			CurrentGraspType = EGraspType::FullGrasp;
+			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: FullGrasp");
+
+			InitialHandOrientation = HandOrientationParser->GetInitialHandOrientationForGraspType(EGraspType::FullGrasp);
+			ClosedHandOrientation = HandOrientationParser->GetClosedHandOrientationForGraspType(EGraspType::FullGrasp);
+
+			GraspPtr->DriveToHandOrientation(InitialHandOrientation, this);
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("HandOrientationParser does not implement the IHandOrientationReadable interface!"));
+	}
+}
+
 // Update the grasp pose
 void AHand::UpdateGrasp(const float Goal)
 {
-	if (!GraspedObject)
+	//TODO: Change for Normal Hand
+
+	UE_LOG(LogTemp, Warning, TEXT("Goal: %f"),Goal);
+
+	if (HandType == EHandType::Left)
 	{
-		for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+		if (!GraspedObject)
 		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FRotator(0.f, 0.f, Goal * 100.f).Quaternion());
+			}
+			for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FRotator(0.f, 0.f, Goal * 100.f).Quaternion());
+			}
+			for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FRotator(0.f, 0.f, Goal * 100.f).Quaternion());
+			}
+			for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FRotator(0.f, 0.f, Goal * 100.f).Quaternion());
+			}
+			for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FRotator(0.f, 0.f, Goal * 100.f).Quaternion());
+			}
 		}
-		for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+		else if (!bGraspHeld)
 		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-		}
-		for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
-		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-		}
-		for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
-		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-		}
-		for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
-		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			AHand::HoldGrasp();
 		}
 	}
-	else if(!bGraspHeld)
+	else if (HandType == EHandType::Right)
 	{
-		AHand::HoldGrasp();
+		GraspPtr->DriveToHandOrientation(GraspPtr->LerpHandOrientation(InitialHandOrientation,ClosedHandOrientation, Goal), this);	
 	}
+
 }
 
 // Attach grasped object to hand
 void AHand::AttachToHand()
 {
 	if ((!GraspedObject) && (GraspableObjects.Num() > 0))
-	{		
+	{
 		GraspedObject = GraspableObjects.Pop();
 		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(false);
 		GraspedObject->AttachToComponent(GetRootComponent(), FAttachmentTransformRules(

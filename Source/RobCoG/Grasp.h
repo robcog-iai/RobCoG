@@ -32,15 +32,7 @@ public:
 
 	void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
-	// Set grasp type
-	void SetCurrentGraspType(const EGraspType InGraspType);
-
-	//Get grasp type
-	EGraspType GetCurrentGraspType() const { return CurrentGraspType; };
-
-private: 
-
-	EGraspType CurrentGraspType;
-
+	FHandOrientation LerpHandOrientation(FHandOrientation InitialHandOrientation, FHandOrientation ClosedHandOrientation, float Alpha);
+	FFingerOrientation LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha);
 
 };

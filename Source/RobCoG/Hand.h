@@ -9,6 +9,7 @@
 #include "Components/SphereComponent.h"
 #include "Engine/StaticMeshActor.h"
 #include "Structs/Finger.h"
+#include "HandOrientationParser.h"
 
 #include "Hand.generated.h"
 
@@ -41,6 +42,8 @@ public:
 
 	// Update the grasp //TODO state, power, step
 	void UpdateGrasp(const float Goal);
+
+	void SwitchGrasp();
 
 	// Attach to hand
 	void AttachToHand();
@@ -148,6 +151,13 @@ private:
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
 
+	EGraspType CurrentGraspType;
+
 	// Grasp
 	TSharedPtr<Grasp> GraspPtr;
+
+	UHandOrientationParser* HandOrientationParser;
+
+	FHandOrientation InitialHandOrientation;
+	FHandOrientation ClosedHandOrientation;
 };

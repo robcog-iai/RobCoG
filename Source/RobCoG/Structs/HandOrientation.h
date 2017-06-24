@@ -68,4 +68,7 @@ public:
 	UPROPERTY(EditAnywhere)
 		FFingerOrientation PinkyOrientation;
 
+	UPROPERTY(EditAnywhere)
+		FFingerOrientation ThumbOrientation;
+
 };
