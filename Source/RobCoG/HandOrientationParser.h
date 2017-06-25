@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-
 #include "GraspType.h"
 #include "Structs/HandOrientation.h"
 
@@ -20,6 +18,8 @@ public:
 
 	FHandOrientation GetInitialHandOrientationForGraspType(EGraspType GraspType);
 	FHandOrientation GetClosedHandOrientationForGraspType(EGraspType GraspType);
+
+	void WriteIni();
 
 	/*
 	 TODO: Implement an Interface for this

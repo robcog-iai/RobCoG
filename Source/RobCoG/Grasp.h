@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-
 #include "GraspType.h"
 #include "HandOrientationParser.h"
 #include "Structs/Finger.h"
@@ -46,7 +44,7 @@ private:
 	// The Current Grasp Position
 	EGraspType CurrentGraspType;
 
-
+	// Parser of the ini files
 	TSharedPtr<HandOrientationParser> HandOrientationParserPtr;
 	
 	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1

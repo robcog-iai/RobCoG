@@ -43,8 +43,10 @@ public:
 	// Update the grasp //TODO state, power, step
 	void UpdateGrasp(const float Goal);
 
+	// Update the grasp with the mannequin hand
 	void UpdateMannequinGrasp(const float Alpha);
 
+	// Switch the grasping style
 	void SwitchGrasp();
 
 	// Attach to hand
@@ -153,8 +155,6 @@ private:
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
 
-
 	// Grasp
 	TSharedPtr<Grasp> GraspPtr;
-
 };

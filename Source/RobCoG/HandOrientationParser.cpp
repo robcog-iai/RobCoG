@@ -141,3 +141,13 @@ FHandOrientation HandOrientationParser::GetClosedHandOrientationForGraspType(EGr
 
 	return HandOrientation;
 }
+
+void HandOrientationParser::WriteIni()
+{
+	if (!GConfig) return;
+
+	FString GameSettingsFile = FPaths::GeneratedConfigDir().Append(TEXT("GameSettings.ini"));
+	FString Value = TEXT("");
+
+	GConfig->GetString(TEXT("Profile"), TEXT("pAccountName"), Value, GameSettingsFile);
+}

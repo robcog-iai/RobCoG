@@ -8,6 +8,8 @@ Grasp::Grasp()
 {
 	HandOrientationParserPtr = MakeShareable(new HandOrientationParser());
 	CurrentGraspType = EGraspType::FullGrasp;
+
+	HandOrientationParserPtr->WriteIni();
 }
 
 Grasp::~Grasp()
