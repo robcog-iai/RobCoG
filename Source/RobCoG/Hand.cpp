@@ -96,7 +96,6 @@ void AHand::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChanged
 void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
 	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
-	// Object in reach
 	if (!GraspedObject)
 	{
 		// Hand is free, check if object is graspable
@@ -105,8 +104,6 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
 		}
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Overlap begin: %s | GraspableObjects size: %i"),
-		*OtherActor->GetName(), GraspableObjects.Num());
 }
 
 // Object out of reach for grasping
@@ -121,6 +118,7 @@ void AHand::OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, 
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"),
 		*OtherActor->GetName(), GraspableObjects.Num());
+
 }
 
 // Check if object is graspable
@@ -133,12 +131,13 @@ bool AHand::IsGraspable(AActor* InActor)
 		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
 		if ((SMActor->IsRootComponentMovable()) &&
 			(SMComp) &&
+			(SMComp->IsSimulatingPhysics()) &&
 			(SMComp->GetMass() < MaxAttachMass) &&
 			(SMActor->GetComponentsBoundingBox().GetSize().Size() < MaxAttachLength))
 		{
 			// Actor is movable
 			// Actor has a static mesh component
-			// Actor is not too heavy
+			// Actor is simulating physics and is not too heavy
 			// Actor is not too large
 			// Object can be attached
 			return true;
@@ -151,41 +150,41 @@ bool AHand::IsGraspable(AActor* InActor)
 // Hold grasp in the current position
 FORCEINLINE void AHand::HoldGrasp()
 {
-	for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
-			ConstrMapItr.Value->GetCurrentSwing2(),
-			ConstrMapItr.Value->GetCurrentSwing1(),
-			ConstrMapItr.Value->GetCurrentTwist())));
-	}
-	for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
-			ConstrMapItr.Value->GetCurrentSwing2(),
-			ConstrMapItr.Value->GetCurrentSwing1(),
-			ConstrMapItr.Value->GetCurrentTwist())));
-	}
-	for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
-			ConstrMapItr.Value->GetCurrentSwing2(),
-			ConstrMapItr.Value->GetCurrentSwing1(),
-			ConstrMapItr.Value->GetCurrentTwist())));
-	}
-	for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
-			ConstrMapItr.Value->GetCurrentSwing2(),
-			ConstrMapItr.Value->GetCurrentSwing1(),
-			ConstrMapItr.Value->GetCurrentTwist())));
-	}
-	for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
-	{
-		ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
-			ConstrMapItr.Value->GetCurrentSwing2(),
-			ConstrMapItr.Value->GetCurrentSwing1(),
-			ConstrMapItr.Value->GetCurrentTwist())));
-	}
+	//for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+	//{
+	//	ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+	//		ConstrMapItr.Value->GetCurrentSwing2(),
+	//		ConstrMapItr.Value->GetCurrentSwing1(),
+	//		ConstrMapItr.Value->GetCurrentTwist())));
+	//}
+	//for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+	//{
+	//	ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+	//		ConstrMapItr.Value->GetCurrentSwing2(),
+	//		ConstrMapItr.Value->GetCurrentSwing1(),
+	//		ConstrMapItr.Value->GetCurrentTwist())));
+	//}
+	//for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+	//{
+	//	ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+	//		ConstrMapItr.Value->GetCurrentSwing2(),
+	//		ConstrMapItr.Value->GetCurrentSwing1(),
+	//		ConstrMapItr.Value->GetCurrentTwist())));
+	//}
+	//for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+	//{
+	//	ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+	//		ConstrMapItr.Value->GetCurrentSwing2(),
+	//		ConstrMapItr.Value->GetCurrentSwing1(),
+	//		ConstrMapItr.Value->GetCurrentTwist())));
+	//}
+	//for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+	//{
+	//	ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(
+	//		ConstrMapItr.Value->GetCurrentSwing2(),
+	//		ConstrMapItr.Value->GetCurrentSwing1(),
+	//		ConstrMapItr.Value->GetCurrentTwist())));
+	//}
 
 	bGraspHeld = true;
 }
@@ -355,11 +354,21 @@ void AHand::AttachToHand()
 	if ((!GraspedObject) && (GraspableObjects.Num() > 0))
 	{
 		GraspedObject = GraspableObjects.Pop();
+		
+		// Check if the other hand is currently grasping the object
+		if (GraspedObject->GetAttachParentActor() && GraspedObject->GetAttachParentActor()->IsA(AHand::StaticClass()))
+		{
+			AHand* OtherHand = Cast<AHand>(GraspedObject->GetAttachParentActor());			
+			UE_LOG(LogTemp, Warning, TEXT("AHand: Attached %s to %s from %s"), *GraspedObject->GetName(), *GetName(), *OtherHand->GetName());
+			OtherHand->DetachFromHand();
+		}
 		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(false);
 		GraspedObject->AttachToComponent(GetRootComponent(), FAttachmentTransformRules(
 			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
-	}
-	UE_LOG(LogTemp, Warning, TEXT("Attached to hand"));
+		//GraspedObject->AttachToActor(this, FAttachmentTransformRules(
+		//	EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
+		UE_LOG(LogTemp, Warning, TEXT("AHand: Attached %s to %s"), *GraspedObject->GetName(), *GetName());
+	}	
 }
 
 // Detach grasped object from hand
@@ -367,11 +376,12 @@ void AHand::DetachFromHand()
 {
 	if (GraspedObject)
 	{
-		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
 		GraspedObject->GetStaticMeshComponent()->DetachFromComponent(FDetachmentTransformRules(
 			EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
+		UE_LOG(LogTemp, Warning, TEXT("AHand: Detached %s from %s"), *GraspedObject->GetName(), *GetName());
+		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
+		GraspedObject->GetStaticMeshComponent()->SetPhysicsLinearVelocity(GetVelocity());
 		GraspedObject = nullptr;
-		bGraspHeld = false;
+		bGraspHeld = false;		
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Detach from hand"));
 }
