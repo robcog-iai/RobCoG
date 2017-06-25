@@ -2,13 +2,17 @@
 
 #include "HandOrientationParser.h"
 
-UHandOrientationParser::UHandOrientationParser()
+HandOrientationParser::HandOrientationParser()
+{
+}
+
+HandOrientationParser::~HandOrientationParser()
 {
 }
 
 //FHandOrientation UHandOrientationParser::GetHandOrientationForGraspType_Implementation(EGraspType GraspType)
 
-FHandOrientation UHandOrientationParser::GetInitialHandOrientationForGraspType(EGraspType GraspType)
+FHandOrientation HandOrientationParser::GetInitialHandOrientationForGraspType(EGraspType GraspType)
 {
 
 	// TODO: Parse the Initial HandOrientation
@@ -101,7 +105,7 @@ FHandOrientation UHandOrientationParser::GetInitialHandOrientationForGraspType(E
 	return HandOrientation;
 }
 
-FHandOrientation UHandOrientationParser::GetClosedHandOrientationForGraspType(EGraspType GraspType)
+FHandOrientation HandOrientationParser::GetClosedHandOrientationForGraspType(EGraspType GraspType)
 {
 
 	// TODO: Parse the closed HandOrientation

@@ -43,6 +43,8 @@ public:
 	// Update the grasp //TODO state, power, step
 	void UpdateGrasp(const float Goal);
 
+	void UpdateMannequinGrasp(const float Alpha);
+
 	void SwitchGrasp();
 
 	// Attach to hand
@@ -151,13 +153,8 @@ private:
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
 
-	EGraspType CurrentGraspType;
 
 	// Grasp
 	TSharedPtr<Grasp> GraspPtr;
 
-	UHandOrientationParser* HandOrientationParser;
-
-	FHandOrientation InitialHandOrientation;
-	FHandOrientation ClosedHandOrientation;
 };

@@ -3,22 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-//#include "Interfaces/HandOrientationReadable.h"
-#include "Structs/HandOrientation.h"
-#include "Grasp.h"
 
-#include "HandOrientationParser.generated.h"
+#include "GraspType.h"
+#include "Structs/HandOrientation.h"
+
 
 /**
  * 
  */
-UCLASS()
-class ROBCOG_API UHandOrientationParser : public UObject //, public IHandOrientationReadable
+class ROBCOG_API HandOrientationParser
 {
-	GENERATED_BODY()
 
 public:
-	UHandOrientationParser();
+	HandOrientationParser();
+	~HandOrientationParser();
 
 	FHandOrientation GetInitialHandOrientationForGraspType(EGraspType GraspType);
 	FHandOrientation GetClosedHandOrientationForGraspType(EGraspType GraspType);

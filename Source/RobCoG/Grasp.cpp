@@ -2,16 +2,29 @@
 
 #include "Grasp.h"
 #include "Hand.h"
+#include "Engine/Engine.h"
 
 Grasp::Grasp()
 {
+	HandOrientationParserPtr = MakeShareable(new HandOrientationParser());
+	CurrentGraspType = EGraspType::FullGrasp;
 }
 
 Grasp::~Grasp()
 {
 }
 
-void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation, AHand * const Hand)
+void Grasp::SetInitialHandOrientation(FHandOrientation InitialHandOrientation)
+{
+	this->InitialHandOrientation = InitialHandOrientation;
+}
+
+void Grasp::SetClosedHandOrientation(FHandOrientation ClosedHandOrientation)
+{
+	this->ClosedHandOrientation = ClosedHandOrientation;
+}
+
+void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation,const AHand * const Hand)
 {
 	DriveToFingerOrientation(HandOrientation.ThumbOrientation, Hand->Thumb);
 	DriveToFingerOrientation(HandOrientation.IndexOrientation, Hand->Index);
@@ -27,12 +40,15 @@ void Grasp::DriveToFingerOrientation(const FFingerOrientation & FingerOrientatio
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
 	if (Constraint)
 		Constraint->SetAngularOrientationTarget(FingerOrientation.DistalOrientation.Orientation.Quaternion());
+
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
 	if (Constraint)
 		Constraint->SetAngularOrientationTarget(FingerOrientation.IntermediateOrientation.Orientation.Quaternion());
+
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
 	if (Constraint)
 		Constraint->SetAngularOrientationTarget(FingerOrientation.ProximalOrientation.Orientation.Quaternion());
+
 	/* Not Implemented
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
 	if (Constraint)
@@ -54,7 +70,7 @@ FHandOrientation Grasp::LerpHandOrientation(FHandOrientation InitialHandOrientat
 }
 
 FFingerOrientation Grasp::LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha)
-{	
+{
 	FFingerOrientation LerpedFingerOrientation;
 
 	LerpedFingerOrientation.DistalOrientation.Orientation = FMath::LerpRange(
@@ -71,4 +87,55 @@ FFingerOrientation Grasp::LerpFingerOrientation(FFingerOrientation InitialFinger
 		ClosedFingerOrientation.IntermediateOrientation.Orientation, Alpha);
 
 	return LerpedFingerOrientation;
+}
+
+void Grasp::DriveToInitialOrientation(const AHand * const Hand)
+{
+	DriveToHandOrientation(InitialHandOrientation, Hand);
+}
+
+void Grasp::UpdateGrasp(const float Alpha,const AHand * const Hand)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Alpha: %f"), Alpha);
+
+	DriveToHandOrientation(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
+
+}
+
+void Grasp::SwitchGrasp(const AHand * const Hand)
+{
+	if (HandOrientationParserPtr.IsValid())
+	{
+		if (CurrentGraspType == EGraspType::FullGrasp)
+		{
+			CurrentGraspType = EGraspType::PinchGrasp;
+			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: PinchGrasp");
+
+			SetInitialHandOrientation(HandOrientationParserPtr->GetInitialHandOrientationForGraspType(EGraspType::PinchGrasp));
+			SetClosedHandOrientation(HandOrientationParserPtr->GetClosedHandOrientationForGraspType(EGraspType::PinchGrasp));
+
+			DriveToInitialOrientation(Hand);
+		}
+		else if (CurrentGraspType == EGraspType::PinchGrasp)
+		{
+			CurrentGraspType = EGraspType::PinchThreeGrasp;
+			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: PinchThreeGrasp");
+
+			SetInitialHandOrientation(HandOrientationParserPtr->GetInitialHandOrientationForGraspType(EGraspType::PinchThreeGrasp));
+			SetClosedHandOrientation(HandOrientationParserPtr->GetClosedHandOrientationForGraspType(EGraspType::PinchThreeGrasp));
+
+			DriveToInitialOrientation(Hand);
+		}
+		else if (CurrentGraspType == EGraspType::PinchThreeGrasp)
+		{
+			CurrentGraspType = EGraspType::FullGrasp;
+			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: FullGrasp");
+
+			
+			SetInitialHandOrientation(HandOrientationParserPtr->GetInitialHandOrientationForGraspType(EGraspType::FullGrasp));
+			SetClosedHandOrientation(HandOrientationParserPtr->GetClosedHandOrientationForGraspType(EGraspType::FullGrasp));
+
+			DriveToInitialOrientation(Hand);
+		}
+	}
 }

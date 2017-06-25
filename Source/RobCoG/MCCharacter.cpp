@@ -262,7 +262,8 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (RightHand)
 	{
-		RightHand->UpdateGrasp(Val);
+		//RightHand->UpdateGrasp(Val);
+		RightHand->UpdateMannequinGrasp(Val);
 	}
 }
 
