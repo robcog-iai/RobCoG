@@ -36,6 +36,7 @@ public:
 
 	void SwitchGrasp(const AHand * const Hand);
 
+
 private:
 	// The initial HandOrientation
 	FHandOrientation InitialHandOrientation;

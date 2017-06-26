@@ -16,16 +16,13 @@ public:
 	HandOrientationParser();
 	~HandOrientationParser();
 
-	FHandOrientation GetInitialHandOrientationForGraspType(EGraspType GraspType);
-	FHandOrientation GetClosedHandOrientationForGraspType(EGraspType GraspType);
+	void GetHandOrientationsForGraspType(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrietation, EGraspType GraspType);
 
-	void WriteIni();
+	void WriteGraspTypeIni(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrientation, EGraspType GraspType);
+	void ReadGraspTypeIni(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrientation, EGraspType GraspType);
 
-	/*
-	 TODO: Implement an Interface for this
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "HandOrientationParser")
-		FHandOrientation GetHandOrientationForGraspType(EGraspType GraspType);
-	virtual FHandOrientation GetHandOrientationForGraspType_Implementation(EGraspType GraspType) override;
-	*/
+private:
+		TSharedPtr<FConfigCacheIni> ConfigFileHandler;
+	
 };

@@ -1,6 +1,7 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
 #pragma once
+#include "ObjectMacros.h"
 
 UENUM(BlueprintType)
 enum class EGraspType : uint8

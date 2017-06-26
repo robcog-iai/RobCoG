@@ -14,7 +14,7 @@ struct FJointOrientation
 
 public:
 	// Default constructor
-	FJointOrientation()
+	FJointOrientation() : Orientation(FRotator(0,0,0))
 	{}
 
 	UPROPERTY(EditAnywhere)

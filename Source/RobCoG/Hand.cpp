@@ -58,6 +58,7 @@ void AHand::BeginPlay()
 
 	// Setup the values for controlling the hand fingers
 	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
+
 }
 
 // Called every frame, used for motion control

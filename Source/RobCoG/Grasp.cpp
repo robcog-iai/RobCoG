@@ -8,8 +8,6 @@ Grasp::Grasp()
 {
 	HandOrientationParserPtr = MakeShareable(new HandOrientationParser());
 	CurrentGraspType = EGraspType::FullGrasp;
-
-	HandOrientationParserPtr->WriteIni();
 }
 
 Grasp::~Grasp()
@@ -26,7 +24,7 @@ void Grasp::SetClosedHandOrientation(FHandOrientation ClosedHandOrientation)
 	this->ClosedHandOrientation = ClosedHandOrientation;
 }
 
-void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation,const AHand * const Hand)
+void Grasp::DriveToHandOrientation(const FHandOrientation & HandOrientation, const AHand * const Hand)
 {
 	DriveToFingerOrientation(HandOrientation.ThumbOrientation, Hand->Thumb);
 	DriveToFingerOrientation(HandOrientation.IndexOrientation, Hand->Index);
@@ -96,7 +94,7 @@ void Grasp::DriveToInitialOrientation(const AHand * const Hand)
 	DriveToHandOrientation(InitialHandOrientation, Hand);
 }
 
-void Grasp::UpdateGrasp(const float Alpha,const AHand * const Hand)
+void Grasp::UpdateGrasp(const float Alpha, const AHand * const Hand)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Alpha: %f"), Alpha);
 
@@ -108,36 +106,34 @@ void Grasp::SwitchGrasp(const AHand * const Hand)
 {
 	if (HandOrientationParserPtr.IsValid())
 	{
+		FHandOrientation InitialHandOrientation;
+		FHandOrientation ClosedHandOrientation;
+
 		if (CurrentGraspType == EGraspType::FullGrasp)
 		{
 			CurrentGraspType = EGraspType::PinchGrasp;
 			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: PinchGrasp");
 
-			SetInitialHandOrientation(HandOrientationParserPtr->GetInitialHandOrientationForGraspType(EGraspType::PinchGrasp));
-			SetClosedHandOrientation(HandOrientationParserPtr->GetClosedHandOrientationForGraspType(EGraspType::PinchGrasp));
+			HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, EGraspType::PinchGrasp);
 
-			DriveToInitialOrientation(Hand);
 		}
 		else if (CurrentGraspType == EGraspType::PinchGrasp)
 		{
 			CurrentGraspType = EGraspType::PinchThreeGrasp;
 			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: PinchThreeGrasp");
 
-			SetInitialHandOrientation(HandOrientationParserPtr->GetInitialHandOrientationForGraspType(EGraspType::PinchThreeGrasp));
-			SetClosedHandOrientation(HandOrientationParserPtr->GetClosedHandOrientationForGraspType(EGraspType::PinchThreeGrasp));
-
-			DriveToInitialOrientation(Hand);
+			HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, EGraspType::PinchThreeGrasp);
 		}
 		else if (CurrentGraspType == EGraspType::PinchThreeGrasp)
 		{
 			CurrentGraspType = EGraspType::FullGrasp;
 			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White, "GraspType changed to: FullGrasp");
 
-			
-			SetInitialHandOrientation(HandOrientationParserPtr->GetInitialHandOrientationForGraspType(EGraspType::FullGrasp));
-			SetClosedHandOrientation(HandOrientationParserPtr->GetClosedHandOrientationForGraspType(EGraspType::FullGrasp));
-
-			DriveToInitialOrientation(Hand);
+			HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, EGraspType::FullGrasp);
 		}
+
+		SetInitialHandOrientation(InitialHandOrientation);
+		SetClosedHandOrientation(ClosedHandOrientation);
+		DriveToInitialOrientation(Hand);
 	}
 }
