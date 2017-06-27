@@ -49,7 +49,7 @@ void Grasp::DriveToFingerOrientation(const FFingerOrientation & FingerOrientatio
 	if (Constraint)
 		Constraint->SetAngularOrientationTarget(FingerOrientation.ProximalOrientation.Orientation.Quaternion());
 
-	/* Not Implemented
+	/* Not Implemented yet
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
 	if (Constraint)
 		Constraint->SetAngularOrientationTarget(FingerOrientation.MetacarpalOrientation.Orientation.Quaternion());

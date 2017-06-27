@@ -6,7 +6,9 @@
 #include "CoreMinimal.h"
 #include "HandOrientation.generated.h"
 
-
+/*
+ * Orientation of a joint
+ */
 USTRUCT()
 struct FJointOrientation
 {
@@ -14,7 +16,7 @@ struct FJointOrientation
 
 public:
 	// Default constructor
-	FJointOrientation() : Orientation(FRotator(0,0,0))
+	FJointOrientation() : Orientation(FRotator(0, 0, 0))
 	{}
 
 	UPROPERTY(EditAnywhere)
@@ -22,6 +24,9 @@ public:
 
 };
 
+/*
+ * Orientation of all Joints of a finger
+ */
 USTRUCT()
 struct FFingerOrientation
 {
@@ -46,6 +51,9 @@ public:
 
 };
 
+/*
+ * Orientation of all fingers of a hand
+ */
 USTRUCT()
 struct FHandOrientation
 {

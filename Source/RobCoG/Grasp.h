@@ -10,7 +10,7 @@
 class AHand;
 
 /**
- * 
+ * This class deals with the grasping of a hand
  */
 class ROBCOG_API Grasp
 {

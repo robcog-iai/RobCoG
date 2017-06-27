@@ -3,6 +3,9 @@
 #pragma once
 #include "ObjectMacros.h"
 
+/*
+ * This enum defines several grasp types
+ */
 UENUM(BlueprintType)
 enum class EGraspType : uint8
 {
