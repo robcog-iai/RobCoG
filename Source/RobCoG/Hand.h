@@ -44,7 +44,7 @@ public:
 	void UpdateGrasp(const float Goal);
 
 	// Update the grasp with the mannequin hand
-	void UpdateMannequinGrasp(const float Alpha);
+	void UpdateGrasp2(const float Alpha);
 
 	// Switch the grasping style
 	void SwitchGrasp();

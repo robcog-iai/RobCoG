@@ -342,7 +342,7 @@ void AHand::UpdateGrasp(const float Goal)
 		}
 }
 
-void AHand::UpdateMannequinGrasp(const float Alpha)
+void AHand::UpdateGrasp2(const float Alpha)
 {
 	GraspPtr->UpdateGrasp(Alpha, this);
 }
