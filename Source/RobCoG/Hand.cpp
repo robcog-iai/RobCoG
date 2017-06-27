@@ -304,11 +304,9 @@ void AHand::SwitchGrasp()
 	{
 		GraspPtr->SwitchGrasp(this);
 	}
-
-	
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("HandOrientationParser does not implement the IHandOrientationReadable interface!"));
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
 	}
 }
 

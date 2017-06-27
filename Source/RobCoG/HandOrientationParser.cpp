@@ -60,6 +60,11 @@ void HandOrientationParser::WriteGraspTypeIni(FHandOrientation & InitialHandOrie
 	ConfigFileHandler->SetRotator(*InitSection, TEXT("PinkyMetacarpalOrientation"), InitialHandOrientation.PinkyOrientation.MetacarpalOrientation.Orientation, ConfigName);
 
 
+	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("ThumbDistalOrientation"), ClosedHandOrientation.ThumbOrientation.DistalOrientation.Orientation, ConfigName);
+	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("ThumbItermediateOrientation"), ClosedHandOrientation.ThumbOrientation.IntermediateOrientation.Orientation, ConfigName);
+	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("ThumbProximalOrientation"), ClosedHandOrientation.ThumbOrientation.ProximalOrientation.Orientation, ConfigName);
+	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("ThumbMetacarpalOrientation"), ClosedHandOrientation.ThumbOrientation.MetacarpalOrientation.Orientation, ConfigName);
+
 	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("IndexDistalOrientation"), ClosedHandOrientation.IndexOrientation.DistalOrientation.Orientation, ConfigName);
 	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("IndexItermediateOrientation"), ClosedHandOrientation.IndexOrientation.IntermediateOrientation.Orientation, ConfigName);
 	ConfigFileHandler->SetRotator(*ClosedSection, TEXT("IndexProximalOrientation"), ClosedHandOrientation.IndexOrientation.ProximalOrientation.Orientation, ConfigName);
@@ -126,6 +131,11 @@ void HandOrientationParser::ReadGraspTypeIni(FHandOrientation & InitialHandOrien
 	ConfigFileHandler->GetRotator(*InitSection, TEXT("PinkyProximalOrientation"), InitialHandOrientation.PinkyOrientation.ProximalOrientation.Orientation, ConfigName);
 	ConfigFileHandler->GetRotator(*InitSection, TEXT("PinkyMetacarpalOrientation"), InitialHandOrientation.PinkyOrientation.MetacarpalOrientation.Orientation, ConfigName);
 
+
+	ConfigFileHandler->GetRotator(*ClosedSection, TEXT("ThumbDistalOrientation"), ClosedHandOrientation.ThumbOrientation.DistalOrientation.Orientation, ConfigName);
+	ConfigFileHandler->GetRotator(*ClosedSection, TEXT("ThumbItermediateOrientation"), ClosedHandOrientation.ThumbOrientation.IntermediateOrientation.Orientation, ConfigName);
+	ConfigFileHandler->GetRotator(*ClosedSection, TEXT("ThumbProximalOrientation"), ClosedHandOrientation.ThumbOrientation.ProximalOrientation.Orientation, ConfigName);
+	ConfigFileHandler->GetRotator(*ClosedSection, TEXT("ThumbMetacarpalOrientation"), ClosedHandOrientation.ThumbOrientation.MetacarpalOrientation.Orientation, ConfigName);
 
 	ConfigFileHandler->GetRotator(*ClosedSection, TEXT("IndexDistalOrientation"), ClosedHandOrientation.IndexOrientation.DistalOrientation.Orientation, ConfigName);
 	ConfigFileHandler->GetRotator(*ClosedSection, TEXT("IndexItermediateOrientation"), ClosedHandOrientation.IndexOrientation.IntermediateOrientation.Orientation, ConfigName);
