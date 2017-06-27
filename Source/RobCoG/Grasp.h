@@ -1,63 +1,56 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
-// Author: Andrei Haidu (http://haidu.eu)
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Grasp.generated.h"
+#include "GraspType.h"
+#include "HandOrientationParser.h"
+#include "Structs/Finger.h"
+#include "Structs/HandOrientation.h"
 
-/** Enum indicating the grasp movement type */
-UENUM(BlueprintType)
-enum class EGraspType : uint8
-{
-	AllFingers		UMETA(DisplayName = "AllFingers"),
-	Pinch			UMETA(DisplayName = "Pinch"),
-};
+class AHand;
 
 /**
- * 
+ * This class deals with the grasping of a hand
  */
- USTRUCT()
-struct  FGrasp
+class ROBCOG_API Grasp
 {
-	 GENERATED_USTRUCT_BODY()
+public:
+	Grasp();
+	~Grasp();
 
-	// Default constructor
-	FGrasp() 
-	{}
+	// Sets the InitialHandOrientation
+	void SetInitialHandOrientation(FHandOrientation InitialHandOrientation);
+	// Sets the ClosedHandOrientation
+	void SetClosedHandOrientation(FHandOrientation ClosedHandOrientation);
 
-	// Grasp type
-	EGraspType GraspType;
+	// Moves the given Hand to the given HandOrientation
+	void DriveToHandOrientation(const FHandOrientation & HandOrientation,const AHand* const Hand);
+	// Moves the given Finger to the given FingerOrientation
+	void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
-	//// Thumb finger
-	//FFinger Thumb;
+	// Drives the given Hand to the InitialHandOrientation
+	void DriveToInitialOrientation(const AHand * const Hand);
 
-	//// Index finger 
-	//FFinger Index;
+	// Updates the Grasp Orientation of the gven Hand
+	void UpdateGrasp(const float Alpha,const AHand * const Hand);
 
-	//// Middle finger
-	//FFinger Middle;
+	void SwitchGrasp(const AHand * const Hand);
 
-	//// Ring finger
-	//FFinger Ring;
 
-	//// Pinky finger
-	//FFinger Pinky;	
+private:
+	// The initial HandOrientation
+	FHandOrientation InitialHandOrientation;
+	// The closed HandOrientation
+	FHandOrientation ClosedHandOrientation;
+	// The Current Grasp Position
+	EGraspType CurrentGraspType;
 
-	//// Set grasp fingers
-	//void SetFingers(
-	//	const FFinger& InThumb,
-	//	const FFinger& InIndex,
-	//	const FFinger& InMiddle,
-	//	const FFinger& InRing,
-	//	const FFinger& InPinky);
+	// Parser of the ini files
+	TSharedPtr<HandOrientationParser> HandOrientationParserPtr;
+	
+	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
+	FHandOrientation LerpHandOrientation(FHandOrientation InitialHandOrientation, FHandOrientation ClosedHandOrientation, float Alpha);
+	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
+	FFingerOrientation LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha);
 
-	//// Set grasp type
-	//void SetGraspType(const EGraspType InGraspType);
-
-	////Get grasp type
-	//EGraspType GetGraspType() const { return GraspType; };
-
-	//// Update grasp
-	//void Update(const float Goal);	
 };

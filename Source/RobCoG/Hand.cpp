@@ -4,6 +4,8 @@
 #include "Hand.h"
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "HandOrientationParser.h"
+#include "Engine/Engine.h"
 
 // Sets default values
 AHand::AHand()
@@ -33,15 +35,17 @@ AHand::AHand()
 
 	// Angular drive default values
 	//AngularDriveMode = EAngularDriveMode::SLERP;
-	Spring = 950000.0f;
-	Damping = 950000.0f;
+	Spring = 100.0f;
+	Damping = 100.0f;
 	ForceLimit = 0.0f;
-	
+
 	// Set fingers and their bone names default values
 	AHand::SetupHandDefaultValues(HandType);
 
 	// Set skeletal default values
 	//AHand::SetupSkeletalDefaultValues(GetSkeletalMeshComponent());
+
+	GraspPtr = MakeShareable(new Grasp());
 }
 
 // Called when the game starts or when spawned
@@ -54,6 +58,7 @@ void AHand::BeginPlay()
 
 	// Setup the values for controlling the hand fingers
 	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
+
 }
 
 // Called every frame, used for motion control
@@ -97,7 +102,7 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 		// Hand is free, check if object is graspable
 		if (IsGraspable(OtherActor))
 		{
-			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));		
+			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
 		}
 	}
 }
@@ -106,11 +111,15 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 void AHand::OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
 	class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	// Object out of reach
 	if (!GraspedObject)
 	{
 		// If present, remove from the graspable objects
 		GraspableObjects.Remove(Cast<AStaticMeshActor>(OtherActor));
 	}
+	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"),
+		*OtherActor->GetName(), GraspableObjects.Num());
+
 }
 
 // Check if object is graspable
@@ -121,7 +130,7 @@ bool AHand::IsGraspable(AActor* InActor)
 	if (SMActor)
 	{
 		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
-		if ((SMActor->IsRootComponentMovable()) && 
+		if ((SMActor->IsRootComponentMovable()) &&
 			(SMComp) &&
 			(SMComp->IsSimulatingPhysics()) &&
 			(SMComp->GetMass() < MaxAttachMass) &&
@@ -285,43 +294,64 @@ FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMod
 	}
 }
 
+// Switch the grasp pose
+void AHand::SwitchGrasp()
+{
+	//TODO: Dynamically Switching, not hardcoded
+
+	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandOrientationParser);
+	if (GraspPtr.IsValid())
+	{
+		GraspPtr->SwitchGrasp(this);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
+	}
+}
+
 // Update the grasp pose
 void AHand::UpdateGrasp(const float Goal)
 {
-	if (!GraspedObject)
-	{
-		for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+		if (!GraspedObject)
 		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			}
+			for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			}
+			for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			}
+			for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			}
+			for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+			{
+				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			}
 		}
-		for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
+		else if (!bGraspHeld)
 		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+			AHand::HoldGrasp();
 		}
-		for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
-		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-		}
-		for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
-		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-		}
-		for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
-		{
-			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-		}
-	}
-	else if(!bGraspHeld)
-	{
-		AHand::HoldGrasp();
-	}
+}
+
+void AHand::UpdateGrasp2(const float Alpha)
+{
+	GraspPtr->UpdateGrasp(Alpha, this);
 }
 
 // Attach grasped object to hand
 void AHand::AttachToHand()
 {
 	if ((!GraspedObject) && (GraspableObjects.Num() > 0))
-	{		
+	{
 		GraspedObject = GraspableObjects.Pop();
 		
 		// Check if the other hand is currently grasping the object

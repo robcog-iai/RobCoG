@@ -4,11 +4,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Grasp.h"
 #include "Animation/SkeletalMeshActor.h"
 #include "Components/SphereComponent.h"
 #include "Engine/StaticMeshActor.h"
-#include "Finger.h"
+#include "Structs/Finger.h"
+#include "HandOrientationParser.h"
+
 #include "Hand.generated.h"
+
 
 /** Enum indicating the hand type */
 UENUM(BlueprintType)
@@ -39,31 +43,18 @@ public:
 	// Update the grasp //TODO state, power, step
 	void UpdateGrasp(const float Goal);
 
+	// Update the grasp with the mannequin hand
+	void UpdateGrasp2(const float Alpha);
+
+	// Switch the grasping style
+	void SwitchGrasp();
+
 	// Attach to hand
 	void AttachToHand();
 
 	// Detach from hand
 	void DetachFromHand();
 	
-protected:
-	// Post edit change property callback
-	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
-
-	// Object in reach for grasping
-	UFUNCTION()
-	void OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
-		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
-
-	// Object out of reach for grasping
-	UFUNCTION()
-	void OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
-		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-	//	// Callback on collision
-	//	UFUNCTION()
-	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	//		FVector NormalImpulse, const FHitResult& Hit);
-
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	EHandType HandType;
@@ -87,6 +78,25 @@ protected:
 	// Pinky finger skeletal bone names
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Pinky;
+
+protected:
+	// Post edit change property callback
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
+
+	// Object in reach for grasping
+	UFUNCTION()
+	void OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+
+	// Object out of reach for grasping
+	UFUNCTION()
+	void OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	//	// Callback on collision
+	//	UFUNCTION()
+	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	//		FVector NormalImpulse, const FHitResult& Hit);
 
 	// Enable grasping with fixation
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
@@ -145,6 +155,6 @@ private:
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
 
-	//// Grasp
-	//MCGrasp Grasp;
+	// Grasp
+	TSharedPtr<Grasp> GraspPtr;
 };

@@ -161,6 +161,8 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
+	PlayerInputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &AMCCharacter::SwitchGrasp);
+
 	// Hand action binding
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::AttachToLeftHand);
 	PlayerInputComponent->BindAction("AttachToRightHand", IE_Pressed, this, &AMCCharacter::AttachToRightHand);
@@ -246,6 +248,20 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
+// Switch Grasp
+void AMCCharacter::SwitchGrasp()
+{
+	if (RightHand)
+	{
+		RightHand->SwitchGrasp();
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchGrasp();
+	}
+}
+
 // Update left hand grasp
 void AMCCharacter::GraspWithLeftHand(const float Val)
 {
@@ -260,7 +276,9 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (RightHand)
 	{
-		RightHand->UpdateGrasp(Val);
+		// If you dont use the mannequin hand use updategrasp
+		//RightHand->UpdateGrasp(Val);
+		RightHand->UpdateGrasp2(Val);
 	}
 }
 

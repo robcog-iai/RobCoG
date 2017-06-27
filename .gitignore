@@ -43,6 +43,9 @@
 *.sdf
 *.VC.opendb
 
+# UPID Plugin
+Plugins/UPIDController/*
+
 # Precompiled Assets
 SourceArt/**/*.png
 SourceArt/**/*.tga

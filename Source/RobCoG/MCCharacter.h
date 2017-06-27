@@ -84,6 +84,9 @@ protected:
 		PIDController3D& PIDController,
 		const float DeltaTime);
 
+	// Switch the curent grasping style
+	void SwitchGrasp();
+
 	// Update left hand grasp
 	void GraspWithLeftHand(const float Val);
 
