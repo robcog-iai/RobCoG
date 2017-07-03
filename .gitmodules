@@ -4,4 +4,4 @@
 [submodule "Plugins/USemLog"]
 	path = Plugins/USemLog
 	url = https://github.com/robcog-iai/USemLog.git
-	branch = ed-dev
+	branch = dev-ed
