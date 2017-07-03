@@ -1,0 +1,7 @@
+[submodule "Plugins/UTags"]
+	path = Plugins/UTags
+	url = https://github.com/robcog-iai/UTags.git
+[submodule "Plugins/USemLog"]
+	path = Plugins/USemLog
+	url = https://github.com/robcog-iai/USemLog.git
+	branch = ed-dev
