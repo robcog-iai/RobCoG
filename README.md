@@ -2,4 +2,6 @@
 
 Equipping robots with commonsense and naive physics knowledge.
 
-# See branches for various versions.
+# Usage
+
+See repository branches for various versions.
