@@ -1,7 +1,12 @@
 [submodule "Plugins/UTags"]
 	path = Plugins/UTags
 	url = https://github.com/robcog-iai/UTags.git
+	branch = master
 [submodule "Plugins/USemLog"]
 	path = Plugins/USemLog
 	url = https://github.com/robcog-iai/USemLog.git
 	branch = dev-ed
+[submodule "Plugins/UPIDController"]
+	path = Plugins/UPIDController
+	url = https://github.com/robcog-iai/UPIDController.git
+	branch = master
