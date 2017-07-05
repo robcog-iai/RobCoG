@@ -381,6 +381,6 @@ void AHand::DetachFromHand()
 		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
 		GraspedObject->GetStaticMeshComponent()->SetPhysicsLinearVelocity(GetVelocity());
 		GraspedObject = nullptr;
-		bGraspHeld = false;		
+		bGraspHeld = false
 	}
 }

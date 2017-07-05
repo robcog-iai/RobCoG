@@ -277,8 +277,8 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 	if (RightHand)
 	{
 		// If you dont use the mannequin hand use updategrasp
-		//RightHand->UpdateGrasp(Val);
-		RightHand->UpdateGrasp2(Val);
+		RightHand->UpdateGrasp(Val);
+		//RightHand->UpdateGrasp2(Val);
 	}
 }
 
