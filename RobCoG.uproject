@@ -9,5 +9,12 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "USemLog",
+			"Enabled": true,
+			"MarketplaceURL": "http://robcog.org/"
+		}
 	]
 }
