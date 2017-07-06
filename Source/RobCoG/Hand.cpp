@@ -16,6 +16,7 @@ AHand::AHand()
 	// Fixation grasp parameters	
 	bEnableFixationGrasp = true;
 	bGraspHeld = false;
+	bTwoHandGraspActive = false;
 	OneHandFixationMaximumMass = 5.f;
 	OneHandFixationMaximumLength = 50.f;
 	TwoHandsFixationMaximumMass = 15.f;
@@ -111,7 +112,7 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 		}
 		else if (Graspable == HAND_TWO)
 		{
-			TwoHandsGraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
+			PossibleTwoHandGraspObject = Cast<AStaticMeshActor>(OtherActor);
 		}
 	}
 }
@@ -364,7 +365,7 @@ void AHand::UpdateGrasp2(const float Alpha)
 }
 
 // Attach grasped object to hand
-void AHand::AttachToHand()
+bool AHand::AttachToHand()
 {
 	if ((!GraspedObject) && (OneHandGraspableObjects.Num() > 0))
 	{
@@ -383,11 +384,14 @@ void AHand::AttachToHand()
 		//GraspedObject->AttachToActor(this, FAttachmentTransformRules(
 		//	EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
 		UE_LOG(LogTemp, Warning, TEXT("AHand: Attached %s to %s"), *GraspedObject->GetName(), *GetName());
-	}	
+
+		return true;
+	}
+	return false;
 }
 
 // Detach grasped object from hand
-void AHand::DetachFromHand()
+bool AHand::DetachFromHand()
 {
 	if (GraspedObject)
 	{
@@ -397,6 +401,34 @@ void AHand::DetachFromHand()
 		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
 		GraspedObject->GetStaticMeshComponent()->SetPhysicsLinearVelocity(GetVelocity());
 		GraspedObject = nullptr;
-		bGraspHeld = false;		
+		bGraspHeld = false;
+		return true;
 	}
+	else if (bTwoHandGraspActive && PossibleTwoHandGraspObject)
+	{
+		PossibleTwoHandGraspObject->GetStaticMeshComponent()->DetachFromComponent(FDetachmentTransformRules(
+			EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
+		UE_LOG(LogTemp, Warning, TEXT("AHand: Detached %s from %s"), *PossibleTwoHandGraspObject->GetName(), *GetName());
+		PossibleTwoHandGraspObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
+		PossibleTwoHandGraspObject->GetStaticMeshComponent()->SetPhysicsLinearVelocity(GetVelocity());
+		PossibleTwoHandGraspObject = nullptr;
+		bTwoHandGraspActive = false;
+		return true;
+	}
+	return false;
 }
+
+// Detach grasped object from hand
+bool AHand::TwoHandAttach()
+{
+	if (PossibleTwoHandGraspObject)
+	{
+		PossibleTwoHandGraspObject->GetStaticMeshComponent()->SetSimulatePhysics(false);
+		PossibleTwoHandGraspObject->AttachToComponent(GetRootComponent(), FAttachmentTransformRules(
+			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
+		bTwoHandGraspActive = true;
+		return true;
+	}
+	return false;
+}
+

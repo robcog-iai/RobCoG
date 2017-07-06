@@ -57,10 +57,16 @@ public:
 	void SwitchGrasp();
 
 	// Attach to hand
-	void AttachToHand();
+	bool AttachToHand();
 
 	// Detach from hand
-	void DetachFromHand();
+	bool DetachFromHand();
+
+	// Attach to hand
+	bool TwoHandAttach();
+
+	// Get possible two hand grasp object
+	AStaticMeshActor* GetPossibleTwoHandGraspObject() const { return PossibleTwoHandGraspObject; };
 	
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
@@ -165,8 +171,14 @@ private:
 	// Pointer to the grasped object
 	AStaticMeshActor* GraspedObject;
 
+	// Pointer to the object graspable with two hands
+	AStaticMeshActor* PossibleTwoHandGraspObject;
+
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
+
+	// Two hand grasp active
+	bool bTwoHandGraspActive;
 
 	// Grasp
 	TSharedPtr<Grasp> GraspPtr;

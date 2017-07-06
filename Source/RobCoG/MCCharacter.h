@@ -109,6 +109,9 @@ protected:
 	// Detach from right hand
 	void DetachFromRightHand();
 
+	// Two hand attachment
+	void TwoHandAttachment();
+
 	// Motion controller origin parent
 	USceneComponent* MCOriginComponent;
 
@@ -141,5 +144,4 @@ protected:
 
 	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
 	FQuat RightHandRotationOffset;
-
 };

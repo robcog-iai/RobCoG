@@ -200,6 +200,7 @@ void AMCCharacter::MoveRight(const float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
 // Move hands when not in VR up and down
 void AMCCharacter::MoveHandsOnZ(const float Value)
 {
@@ -276,9 +277,8 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (RightHand)
 	{
-		// If you dont use the mannequin hand use updategrasp
 		RightHand->UpdateGrasp(Val);
-		//RightHand->UpdateGrasp2(Val);
+		//RightHand->UpdateGrasp2(Val); // TODO For the realisitc grasping part
 	}
 }
 
@@ -287,7 +287,14 @@ void AMCCharacter::AttachToLeftHand()
 {
 	if (LeftHand)
 	{
-		LeftHand->AttachToHand();
+		// If no attachment happens check for possible two hand attachment
+		if (!LeftHand->AttachToHand())
+		{
+			if (LeftHand->GetPossibleTwoHandGraspObject() == RightHand->GetPossibleTwoHandGraspObject())
+			{
+				AMCCharacter::TwoHandAttachment();
+			}
+		}
 	}
 }
 
@@ -296,7 +303,14 @@ void AMCCharacter::AttachToRightHand()
 {
 	if (RightHand)
 	{
-		RightHand->AttachToHand();
+		// If no attachment happens check for possible two hand attachment
+		if (!RightHand->AttachToHand())
+		{
+			if (RightHand->GetPossibleTwoHandGraspObject() == LeftHand->GetPossibleTwoHandGraspObject())
+			{
+				AMCCharacter::TwoHandAttachment();
+			}
+		}
 	}
 }
 
@@ -316,4 +330,11 @@ void AMCCharacter::DetachFromRightHand()
 	{
 		RightHand->DetachFromHand();
 	}
+}
+
+// Two hand attachment
+void AMCCharacter::TwoHandAttachment()
+{
+	LeftHand->TwoHandAttach();
+	RightHand->TwoHandAttach();
 }
