@@ -67,6 +67,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float RotationBoost;
 	
+	// Character camera
+	UPROPERTY(EditAnywhere)
+	UCameraComponent* CharCamera;
+	
 	// Handles moving forward/backward
 	void MoveForward(const float Val);
 
@@ -104,9 +108,6 @@ protected:
 
 	// Detach from right hand
 	void DetachFromRightHand();
-
-	// Character camera
-	UCameraComponent* CharCamera;
 
 	// Motion controller origin parent
 	USceneComponent* MCOriginComponent;

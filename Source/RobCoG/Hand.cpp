@@ -16,12 +16,15 @@ AHand::AHand()
 	// Fixation grasp parameters	
 	bEnableFixationGrasp = true;
 	bGraspHeld = false;
-	MaxAttachMass = 4.5f;
-	MaxAttachLength = 50.f;
+	OneHandFixationMaximumMass = 5.f;
+	OneHandFixationMaximumLength = 50.f;
+	TwoHandsFixationMaximumMass = 15.f;
+	TwoHandsFixationMaximumLength = 120.f;
+
 	// Set attachement collision component
 	AttachmentCollision = CreateDefaultSubobject<USphereComponent>(TEXT("AttachmentCollision"));
 	AttachmentCollision->SetupAttachment(GetRootComponent());
-	AttachmentCollision->InitSphereRadius(5.f);
+	AttachmentCollision->InitSphereRadius(4.f);
 
 	// Set default as left hand
 	HandType = EHandType::Left;
@@ -34,9 +37,9 @@ AHand::AHand()
 	SkelComp->bGenerateOverlapEvents = true;
 
 	// Angular drive default values
-	//AngularDriveMode = EAngularDriveMode::SLERP;
-	Spring = 100.0f;
-	Damping = 100.0f;
+	AngularDriveMode = EAngularDriveMode::SLERP;
+	Spring = 9000.0f;
+	Damping = 1000.0f;
 	ForceLimit = 0.0f;
 
 	// Set fingers and their bone names default values
@@ -57,7 +60,7 @@ void AHand::BeginPlay()
 	AttachmentCollision->OnComponentEndOverlap.AddDynamic(this, &AHand::OnAttachmentCollisionEndOverlap);
 
 	// Setup the values for controlling the hand fingers
-	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
+	AHand::SetupAngularDriveValues(AngularDriveMode);
 
 }
 
@@ -100,9 +103,15 @@ void AHand::OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp
 	if (!GraspedObject)
 	{
 		// Hand is free, check if object is graspable
-		if (IsGraspable(OtherActor))
+		const uint8 Graspable = IsGraspable(OtherActor);
+
+		if (Graspable == HAND_ONE)
 		{
-			GraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
+			OneHandGraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
+		}
+		else if (Graspable == HAND_TWO)
+		{
+			TwoHandsGraspableObjects.Emplace(Cast<AStaticMeshActor>(OtherActor));
 		}
 	}
 }
@@ -115,41 +124,48 @@ void AHand::OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, 
 	if (!GraspedObject)
 	{
 		// If present, remove from the graspable objects
-		GraspableObjects.Remove(Cast<AStaticMeshActor>(OtherActor));
+		OneHandGraspableObjects.Remove(Cast<AStaticMeshActor>(OtherActor));
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Overlap end: %s | GraspableObjects size: %i"),
-		*OtherActor->GetName(), GraspableObjects.Num());
+		*OtherActor->GetName(), OneHandGraspableObjects.Num());
 
 }
 
 // Check if object is graspable
-bool AHand::IsGraspable(AActor* InActor)
+uint8 AHand::IsGraspable(AActor* InActor)
 {
 	// Check if the static mesh actor can be grasped
 	AStaticMeshActor* const SMActor = Cast<AStaticMeshActor>(InActor);
 	if (SMActor)
 	{
+		// Get the static mesh component
 		UStaticMeshComponent* const SMComp = SMActor->GetStaticMeshComponent();
-		if ((SMActor->IsRootComponentMovable()) &&
-			(SMComp) &&
-			(SMComp->IsSimulatingPhysics()) &&
-			(SMComp->GetMass() < MaxAttachMass) &&
-			(SMActor->GetComponentsBoundingBox().GetSize().Size() < MaxAttachLength))
+		if (SMComp)
 		{
-			// Actor is movable
-			// Actor has a static mesh component
-			// Actor is simulating physics and is not too heavy
-			// Actor is not too large
-			// Object can be attached
-			return true;
+			// Check that actor is movable, and has a static mesh component with physics on
+			const bool bIsLegalComponent = SMActor->IsRootComponentMovable() && SMComp->IsSimulatingPhysics();
+			
+			// Check that mass and size are within limits for a one hand grasp
+			const float Mass = SMComp->GetMass();
+			const float Length = SMActor->GetComponentsBoundingBox().GetSize().Size();
+			const bool bOneHandGraspable = Mass < OneHandFixationMaximumMass && Length < OneHandFixationMaximumLength;
+
+			if (bIsLegalComponent && bOneHandGraspable)
+			{
+				return HAND_ONE;
+			}
+			else if(Mass < TwoHandsFixationMaximumMass && Length < TwoHandsFixationMaximumLength)
+			{
+				return HAND_TWO;
+			}
 		}
 	}
 	// Actor cannot be attached
-	return false;
+	return HAND_NONE;
 }
 
 // Hold grasp in the current position
-FORCEINLINE void AHand::HoldGrasp()
+void AHand::HoldGrasp()
 {
 	//for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
 	//{
@@ -350,9 +366,9 @@ void AHand::UpdateGrasp2(const float Alpha)
 // Attach grasped object to hand
 void AHand::AttachToHand()
 {
-	if ((!GraspedObject) && (GraspableObjects.Num() > 0))
+	if ((!GraspedObject) && (OneHandGraspableObjects.Num() > 0))
 	{
-		GraspedObject = GraspableObjects.Pop();
+		GraspedObject = OneHandGraspableObjects.Pop();
 		
 		// Check if the other hand is currently grasping the object
 		if (GraspedObject->GetAttachParentActor() && GraspedObject->GetAttachParentActor()->IsA(AHand::StaticClass()))

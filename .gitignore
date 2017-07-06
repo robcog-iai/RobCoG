@@ -44,7 +44,7 @@
 *.VC.opendb
 
 # UPID Plugin
-Plugins/UPIDController/*
+#Plugins/UPIDController/*
 
 # Precompiled Assets
 SourceArt/**/*.png

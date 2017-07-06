@@ -13,6 +13,13 @@
 
 #include "Hand.generated.h"
 
+/** Number of hands constants */
+enum
+{ 
+	HAND_NONE = 0,
+	HAND_ONE = 1,
+	HAND_TWO = 2
+};
 
 /** Enum indicating the hand type */
 UENUM(BlueprintType)
@@ -93,11 +100,6 @@ protected:
 	void OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
 		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	//	// Callback on collision
-	//	UFUNCTION()
-	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	//		FVector NormalImpulse, const FHitResult& Hit);
-
 	// Enable grasping with fixation
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
 	bool bEnableFixationGrasp;
@@ -107,35 +109,43 @@ protected:
 	USphereComponent* AttachmentCollision;
 
 	// Maximum mass (kg) of an object that can be attached to the hand
-	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	float MaxAttachMass;
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"), meta = (ClampMin = 0))
+	float OneHandFixationMaximumMass;
 
-	// Maximum length of an object that can be attached to the hand
-	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	float MaxAttachLength;
+	// Maximum length (cm) of an object that can be attached to the hand
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"), meta = (ClampMin = 0))
+	float OneHandFixationMaximumLength;
 
-	//// Spring value to apply to the angular drive (Position strength)
-	//UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
-	//EAngularDriveMode::Type AngularDriveMode;
+	// Maximum mass (kg) of an object that can be attached to two hands
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"), meta = (ClampMin = 0))
+	float TwoHandsFixationMaximumMass;
+
+	// Maximum length (cm) of an object that can be attached to two hands
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"), meta = (ClampMin = 0))
+	float TwoHandsFixationMaximumLength;
 
 	// Spring value to apply to the angular drive (Position strength)
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	TEnumAsByte<EAngularDriveMode::Type> AngularDriveMode;;
+
+	// Spring value to apply to the angular drive (Position strength)
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 	float Spring;
 
 	// Damping value to apply to the angular drive (Velocity strength) 
-	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 	float Damping;
 
 	// Limit of the force that the angular drive can apply
-	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 	float ForceLimit;
 
 private:
-	// Check if object is graspable
-	FORCEINLINE bool IsGraspable(AActor* InActor);
+	// Check if object is graspable, return the number of hands (0, 1, 2)
+	uint8 IsGraspable(AActor* InActor);
 
 	// Hold grasp in the current position
-	FORCEINLINE void HoldGrasp();
+	void HoldGrasp();
 
 	// Setup hand default values
 	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
@@ -146,8 +156,11 @@ private:
 	// Setup fingers angular drive values
 	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
 
-	// Pointer to objects in reach for grasping
-	TArray<AStaticMeshActor*> GraspableObjects;
+	// Objects that are in reach to be grasped by one hand
+	TArray<AStaticMeshActor*> OneHandGraspableObjects;
+
+	// Objects that are in reach to be grasped by two hands
+	TArray<AStaticMeshActor*> TwoHandsGraspableObjects;
 
 	// Pointer to the grasped object
 	AStaticMeshActor* GraspedObject;
