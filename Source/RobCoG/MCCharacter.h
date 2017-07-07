@@ -88,7 +88,7 @@ protected:
 		PIDController3D& PIDController,
 		const float DeltaTime);
 
-	// Switch the curent grasping style
+	// Switch the current grasping style
 	void SwitchGrasp();
 
 	// Update left hand grasp
@@ -98,19 +98,16 @@ protected:
 	void GraspWithRightHand(const float Val);
 
 	// Attach to left hand
-	void AttachToLeftHand();
+	void TryLeftFixationGrasp();
 
 	// Attach to right hand
-	void AttachToRightHand();
+	void TryRightFixationGrasp();
 
 	// Detach from left hand
-	void DetachFromLeftHand();
+	void TryLeftGraspDetach();
 
 	// Detach from right hand
-	void DetachFromRightHand();
-
-	// Two hand attachment
-	void TwoHandAttachment();
+	void TryRightGraspDetach();
 
 	// Motion controller origin parent
 	USceneComponent* MCOriginComponent;

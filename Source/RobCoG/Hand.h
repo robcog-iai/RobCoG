@@ -16,9 +16,9 @@
 /** Number of hands constants */
 enum
 { 
-	HAND_NONE = 0,
-	HAND_ONE = 1,
-	HAND_TWO = 2
+	NOT_GRASPABLE = 0,
+	ONE_HAND_GRASPABLE = 1,
+	TWO_HANDS_GRASPABLE = 2
 };
 
 /** Enum indicating the hand type */
@@ -56,17 +56,20 @@ public:
 	// Switch the grasping style
 	void SwitchGrasp();
 
-	// Attach to hand
-	bool AttachToHand();
+	// Fixation grasp via attachment of the object to the hand
+	bool TryOneHandFixationGrasp();
 
-	// Detach from hand
-	bool DetachFromHand();
+	// Fixation grasp of two hands attachment
+	bool TryTwoHandsFixationGrasp(AHand* OtherHand);
 
-	// Attach to hand
-	bool TwoHandAttach();
+	// Detach fixation grasp from hand
+	bool TryDetachFixationGrasp();
 
 	// Get possible two hand grasp object
-	AStaticMeshActor* GetPossibleTwoHandGraspObject() const { return PossibleTwoHandGraspObject; };
+	AStaticMeshActor* GetTwoHandsGraspableObject() const { return TwoHandsGraspableObject; };
+
+	// Update two hands grasped object by the other hand // TODO friend ?
+	void UpdateTwoHandsGraspedObject(AStaticMeshActor* GraspedObject);
 	
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
@@ -96,15 +99,31 @@ protected:
 	// Post edit change property callback
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
 
-	// Object in reach for grasping
+	// Check if the object in reach is one-, two-hand(s), or not graspable
 	UFUNCTION()
-	void OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+	void OnFixationGraspAreaBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
 		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
-	// Object out of reach for grasping
+	// Object out or grasping reach, remove as possible grasp object
 	UFUNCTION()
-	void OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+	void OnFixationGraspAreaEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
 		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+private:
+	// Check if object is graspable, return the number of hands (0, 1, 2)
+	uint8 CheckObjectGraspableType(AActor* InActor);
+
+	// Hold grasp in the current position
+	void MaintainFingerPositions();
+
+	// Setup hand default values
+	void SetupHandDefaultValues(EHandType HandType);
+
+	// Setup skeletal mesh default values
+	void SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent);
+
+	// Setup fingers angular drive values
+	void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
 
 	// Enable grasping with fixation
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
@@ -112,7 +131,7 @@ protected:
 
 	// Collision component used for attaching grasped objects
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	USphereComponent* AttachmentCollision;
+	USphereComponent* FixationGraspArea;
 
 	// Maximum mass (kg) of an object that can be attached to the hand
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"), meta = (ClampMin = 0))
@@ -146,39 +165,20 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 	float ForceLimit;
 
-private:
-	// Check if object is graspable, return the number of hands (0, 1, 2)
-	uint8 IsGraspable(AActor* InActor);
-
-	// Hold grasp in the current position
-	void HoldGrasp();
-
-	// Setup hand default values
-	FORCEINLINE void SetupHandDefaultValues(EHandType HandType);
-
-	// Setup skeletal mesh default values
-	FORCEINLINE void SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent);
-
-	// Setup fingers angular drive values
-	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
-
 	// Objects that are in reach to be grasped by one hand
 	TArray<AStaticMeshActor*> OneHandGraspableObjects;
 
-	// Objects that are in reach to be grasped by two hands
-	TArray<AStaticMeshActor*> TwoHandsGraspableObjects;
-
 	// Pointer to the grasped object
-	AStaticMeshActor* GraspedObject;
+	AStaticMeshActor* OneHandGraspedObject;
 
-	// Pointer to the object graspable with two hands
-	AStaticMeshActor* PossibleTwoHandGraspObject;
+	// Object that is in reach, and is two hand graspable
+	AStaticMeshActor* TwoHandsGraspableObject;
+
+	// Pointer to the object grasped by with two hands
+	AStaticMeshActor* TwoHandsGraspedObject;
 
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
-
-	// Two hand grasp active
-	bool bTwoHandGraspActive;
 
 	// Grasp
 	TSharedPtr<Grasp> GraspPtr;
