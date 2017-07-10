@@ -40,7 +40,8 @@ struct FFinger
 	GENERATED_USTRUCT_BODY()
 
 	// Default constructor
-	FFinger()
+	FFinger() :
+		FingerType(EFingerType::Thumb)
 	{}
 
 	// Finger type

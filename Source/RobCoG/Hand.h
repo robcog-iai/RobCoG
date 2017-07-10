@@ -9,7 +9,6 @@
 #include "Components/SphereComponent.h"
 #include "Engine/StaticMeshActor.h"
 #include "Structs/Finger.h"
-#include "HandOrientationParser.h"
 
 #include "Hand.generated.h"
 
@@ -23,14 +22,41 @@ enum class EHandType : uint8
 };
 
 /**
- * 
+ *
  */
 UCLASS()
 class ROBCOG_API AHand : public ASkeletalMeshActor
 {
 	GENERATED_BODY()
-	
+
 public:
+
+	float TickValue;
+
+	// Hand type
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+		EHandType HandType;
+
+	// Thumb finger skeletal bone names
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+		FFinger Thumb;
+
+	// Index finger skeletal bone names
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+		FFinger Index;
+
+	// Middle finger skeletal bone names
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+		FFinger Middle;
+
+	// Ring finger skeletal bone names
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+		FFinger Ring;
+
+	// Pinky finger skeletal bone names
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+		FFinger Pinky;
+
 	// Sets default values for this actor
 	AHand();
 
@@ -47,72 +73,34 @@ public:
 	void UpdateGrasp2(const float Alpha);
 
 	// Switch the grasping style
-	void SwitchGrasp();
+	void SwitchGraspStyle();
+
+	// Switch the grasping process
+	void SwitchGraspProcess();
 
 	// Attach to hand
 	void AttachToHand();
 
 	// Detach from hand
 	void DetachFromHand();
-	
-	// Hand type
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
-	EHandType HandType;
-
-	// Thumb finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
-	FFinger Thumb;
-
-	// Index finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
-	FFinger Index;
-
-	// Middle finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
-	FFinger Middle;
-
-	// Ring finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
-	FFinger Ring;
-
-	// Pinky finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
-	FFinger Pinky;
 
 protected:
-	// Post edit change property callback
-	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
-
-	// Object in reach for grasping
-	UFUNCTION()
-	void OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
-		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
-
-	// Object out of reach for grasping
-	UFUNCTION()
-	void OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
-		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-	//	// Callback on collision
-	//	UFUNCTION()
-	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	//		FVector NormalImpulse, const FHitResult& Hit);
 
 	// Enable grasping with fixation
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
-	bool bEnableFixationGrasp;
+		bool bEnableFixationGrasp;
 
 	// Collision component used for attaching grasped objects
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	USphereComponent* AttachmentCollision;
+		USphereComponent* AttachmentCollision;
 
 	// Maximum mass (kg) of an object that can be attached to the hand
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	float MaxAttachMass;
+		float MaxAttachMass;
 
 	// Maximum length of an object that can be attached to the hand
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	float MaxAttachLength;
+		float MaxAttachLength;
 
 	//// Spring value to apply to the angular drive (Position strength)
 	//UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
@@ -120,17 +108,47 @@ protected:
 
 	// Spring value to apply to the angular drive (Position strength)
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
-	float Spring;
+		float Spring;
 
 	// Damping value to apply to the angular drive (Velocity strength) 
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
-	float Damping;
+		float Damping;
 
 	// Limit of the force that the angular drive can apply
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
-	float ForceLimit;
+		float ForceLimit;
+
+	// Post edit change property callback
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
+
+	// Object in reach for grasping
+	UFUNCTION()
+		void OnAttachmentCollisionBeginOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+
+	// Object out of reach for grasping
+	UFUNCTION()
+		void OnAttachmentCollisionEndOverlap(class UPrimitiveComponent* HitComp, class AActor* OtherActor,
+			class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	//	// Callback on collision
+	//	UFUNCTION()
+	//	void OnFingerHit(UPrimitiveComponent* SelfComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	//		FVector NormalImpulse, const FHitResult& Hit);
 
 private:
+	// Pointer to objects in reach for grasping
+	TArray<AStaticMeshActor*> GraspableObjects;
+
+	// Pointer to the grasped object
+	AStaticMeshActor* GraspedObject;
+
+	// Mark that the grasp has been held, avoid reinitializing the finger drivers
+	bool bGraspHeld;
+
+	// Grasp
+	TSharedPtr<Grasp> GraspPtr;
+
 	// Check if object is graspable
 	FORCEINLINE bool IsGraspable(AActor* InActor);
 
@@ -146,15 +164,4 @@ private:
 	// Setup fingers angular drive values
 	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
 
-	// Pointer to objects in reach for grasping
-	TArray<AStaticMeshActor*> GraspableObjects;
-
-	// Pointer to the grasped object
-	AStaticMeshActor* GraspedObject;
-
-	// Mark that the grasp has been held, avoid reinitializing the finger drivers
-	bool bGraspHeld;
-
-	// Grasp
-	TSharedPtr<Grasp> GraspPtr;
 };

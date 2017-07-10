@@ -85,7 +85,10 @@ protected:
 		const float DeltaTime);
 
 	// Switch the curent grasping style
-	void SwitchGrasp();
+	void SwitchGraspStyle();
+
+	// For testing several grasping processes
+	void SwitchGraspProcess();
 
 	// Update left hand grasp
 	void GraspWithLeftHand(const float Val);

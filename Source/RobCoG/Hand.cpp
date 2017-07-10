@@ -4,7 +4,6 @@
 #include "Hand.h"
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "HandOrientationParser.h"
 #include "Engine/Engine.h"
 
 // Sets default values
@@ -39,6 +38,8 @@ AHand::AHand()
 	Damping = 100.0f;
 	ForceLimit = 0.0f;
 
+	TickValue = 0.0f;
+
 	// Set fingers and their bone names default values
 	AHand::SetupHandDefaultValues(HandType);
 
@@ -65,6 +66,18 @@ void AHand::BeginPlay()
 void AHand::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	//Debug
+	if (this->HandType == EHandType::Right)
+	{
+		TickValue += DeltaTime;
+
+		if (TickValue > 0.5)
+		{
+			TickValue = 0.0f;
+			GraspPtr->PrintConstraintForce(this);
+		}
+	}
 }
 
 // Update default values if properties have been changed in the editor
@@ -295,14 +308,25 @@ FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMod
 }
 
 // Switch the grasp pose
-void AHand::SwitchGrasp()
+void AHand::SwitchGraspStyle()
 {
-	//TODO: Dynamically Switching, not hardcoded
-
 	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandOrientationParser);
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->SwitchGrasp(this);
+		GraspPtr->SwitchGraspStyle(this);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
+	}
+}
+
+// Switch the grasp process
+void AHand::SwitchGraspProcess()
+{
+	if (GraspPtr.IsValid())
+	{
+		GraspPtr->SwitchGraspProcess(this, Spring, Damping, ForceLimit);
 	}
 	else
 	{
@@ -313,38 +337,46 @@ void AHand::SwitchGrasp()
 // Update the grasp pose
 void AHand::UpdateGrasp(const float Goal)
 {
-		if (!GraspedObject)
+	if (!GraspedObject)
+	{
+		for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
 		{
-			for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 		}
-		else if (!bGraspHeld)
+		for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
 		{
-			AHand::HoldGrasp();
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 		}
+		for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+	}
+	else if (!bGraspHeld)
+	{
+		AHand::HoldGrasp();
+	}
 }
 
+// Update the grasp pose of the mannequin hand
 void AHand::UpdateGrasp2(const float Alpha)
 {
-	GraspPtr->UpdateGrasp(Alpha, this);
+	if (GraspPtr.IsValid())
+	{
+		GraspPtr->UpdateGrasp(Alpha, this);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
+	}
 }
 
 // Attach grasped object to hand
@@ -353,11 +385,11 @@ void AHand::AttachToHand()
 	if ((!GraspedObject) && (GraspableObjects.Num() > 0))
 	{
 		GraspedObject = GraspableObjects.Pop();
-		
+
 		// Check if the other hand is currently grasping the object
 		if (GraspedObject->GetAttachParentActor() && GraspedObject->GetAttachParentActor()->IsA(AHand::StaticClass()))
 		{
-			AHand* OtherHand = Cast<AHand>(GraspedObject->GetAttachParentActor());			
+			AHand* OtherHand = Cast<AHand>(GraspedObject->GetAttachParentActor());
 			UE_LOG(LogTemp, Warning, TEXT("AHand: Attached %s to %s from %s"), *GraspedObject->GetName(), *GetName(), *OtherHand->GetName());
 			OtherHand->DetachFromHand();
 		}
@@ -367,7 +399,7 @@ void AHand::AttachToHand()
 		//GraspedObject->AttachToActor(this, FAttachmentTransformRules(
 		//	EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
 		UE_LOG(LogTemp, Warning, TEXT("AHand: Attached %s to %s"), *GraspedObject->GetName(), *GetName());
-	}	
+	}
 }
 
 // Detach grasped object from hand
@@ -381,6 +413,6 @@ void AHand::DetachFromHand()
 		GraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
 		GraspedObject->GetStaticMeshComponent()->SetPhysicsLinearVelocity(GetVelocity());
 		GraspedObject = nullptr;
-		bGraspHeld = false;		
+		bGraspHeld = false;
 	}
 }

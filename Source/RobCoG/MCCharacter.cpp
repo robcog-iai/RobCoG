@@ -161,7 +161,8 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
-	PlayerInputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &AMCCharacter::SwitchGrasp);
+	PlayerInputComponent->BindAction("SwitchGraspStyle", IE_Pressed, this, &AMCCharacter::SwitchGraspStyle);
+	PlayerInputComponent->BindAction("SwitchGraspProcess", IE_Pressed, this, &AMCCharacter::SwitchGraspProcess);
 
 	// Hand action binding
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::AttachToLeftHand);
@@ -200,6 +201,7 @@ void AMCCharacter::MoveRight(const float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
 // Move hands when not in VR up and down
 void AMCCharacter::MoveHandsOnZ(const float Value)
 {
@@ -215,6 +217,7 @@ void AMCCharacter::MoveHandsOnZ(const float Value)
 
 	}
 }
+
 // Update hand positions
 FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	UMotionControllerComponent* MC,
@@ -248,17 +251,31 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
-// Switch Grasp
-void AMCCharacter::SwitchGrasp()
+// Switch Grasp style
+void AMCCharacter::SwitchGraspStyle()
 {
 	if (RightHand)
 	{
-		RightHand->SwitchGrasp();
+		RightHand->SwitchGraspStyle();
 	}
 
 	if (LeftHand)
 	{
-		LeftHand->SwitchGrasp();
+		LeftHand->SwitchGraspStyle();
+	}
+}
+
+// Switch Grasp process
+void AMCCharacter::SwitchGraspProcess()
+{
+	if (RightHand)
+	{
+		RightHand->SwitchGraspProcess();
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchGraspProcess();
 	}
 }
 
