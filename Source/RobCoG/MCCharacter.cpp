@@ -24,6 +24,8 @@ AMCCharacter::AMCCharacter()
 	// Set flag default values
 	bShowTargetArrows = true;
 	bUseHandsInitialRotationAsOffset = true;
+	bTryFixationGrasp = true;
+	bTryTwoHandsFixationGrasp = true;
 
 	// Create the motion controller offset (hands in front of the character), attach to root component
 	MCOriginComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MCOriginComponent"));
@@ -95,35 +97,46 @@ void AMCCharacter::BeginPlay()
 		MCRight->SetRelativeLocation(FVector(75.f, 30.f, 30.f));
 	}
 
-	// Cast the hands to Hand
-	LeftHand = Cast<AHand>(LeftSkelActor);
-	RightHand = Cast<AHand>(RightSkelActor);
+	if (LeftSkelActor)
+	{	
+		// Cast the hands to AHand
+		LeftHand = Cast<AHand>(LeftSkelActor);
 
-	// Set hand offsets
-	if (bUseHandsInitialRotationAsOffset)
-	{
-		if (LeftSkelActor)
+		// Set hand offsets
+		if (bUseHandsInitialRotationAsOffset)
 		{
 			LeftHandRotationOffset = LeftSkelActor->GetSkeletalMeshComponent()->GetComponentQuat();
 		}
-		if (RightSkelActor)
-		{
-			RightHandRotationOffset = RightSkelActor->GetSkeletalMeshComponent()->GetComponentQuat();
-		}
-	}
 
-	// Teleport hands to the current position of the motion controllers
-	if (LeftSkelActor)
-	{	
+		// Teleport hands to the current position of the motion controllers
 		LeftSkelActor->SetActorLocationAndRotation(MCLeft->GetComponentLocation(),
 			MCLeft->GetComponentQuat() * LeftHandRotationOffset,
 			false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
 	}
+
 	if (RightSkelActor)
 	{
+		// Cast the hands to AHand
+		RightHand = Cast<AHand>(RightSkelActor);
+
+		// Set hand offsets
+		if (bUseHandsInitialRotationAsOffset)
+		{
+			RightHandRotationOffset = RightSkelActor->GetSkeletalMeshComponent()->GetComponentQuat();
+		}
+
+		// Teleport hands to the current position of the motion controllers
 		RightSkelActor->SetActorLocationAndRotation(MCRight->GetComponentLocation(),
 			MCRight->GetComponentQuat() * RightHandRotationOffset,
 			false, (FHitResult*)nullptr,ETeleportType::TeleportPhysics);
+	}
+
+	// If two hands are available, let them know about each other (for two hands fixation grasp)
+	bTryTwoHandsFixationGrasp = (bTryTwoHandsFixationGrasp && LeftHand && RightHand);
+	if (bTryTwoHandsFixationGrasp)
+	{
+		LeftHand->SetOtherHand(RightHand);
+		RightHand->SetOtherHand(LeftHand);
 	}
 }
 
@@ -285,16 +298,16 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 // Attach to left hand
 void AMCCharacter::TryLeftFixationGrasp()
 {
-	if (LeftHand)
+	if (bTryFixationGrasp && LeftHand)
 	{
 		// If one hand attachment is not possible, check for two hands
 		if (!LeftHand->TryOneHandFixationGrasp())
 		{
-			// Check if two hand fixation is possible
-			if (RightHand)
+			// If other hand is set and two hand grasp is enabled
+			if (bTryTwoHandsFixationGrasp && RightHand)
 			{
-				// Check if two hand fixation is possible
-				LeftHand->TryTwoHandsFixationGrasp(RightHand);
+				// Try grasping with two hands
+				LeftHand->TryTwoHandsFixationGrasp();
 			}
 		}
 	}
@@ -303,15 +316,15 @@ void AMCCharacter::TryLeftFixationGrasp()
 // Attach to right hand
 void AMCCharacter::TryRightFixationGrasp()
 {
-	if (RightHand)
+	if (bTryFixationGrasp && RightHand)
 	{
 		// If one hand attachment is not possible, check for two hands
 		if (!RightHand->TryOneHandFixationGrasp())
 		{
-			if (LeftHand)
+			if (bTryTwoHandsFixationGrasp && LeftHand)
 			{
 				// Check if two hand fixation is possible
-				RightHand->TryTwoHandsFixationGrasp(LeftHand);
+				RightHand->TryTwoHandsFixationGrasp();
 			}
 		}
 	}
@@ -322,7 +335,7 @@ void AMCCharacter::TryLeftGraspDetach()
 {
 	if (LeftHand)
 	{
-		LeftHand->TryDetachFixationGrasp();
+		LeftHand->DetachFixationGrasp();
 	}
 }
 
@@ -331,6 +344,6 @@ void AMCCharacter::TryRightGraspDetach()
 {
 	if (RightHand)
 	{
-		RightHand->TryDetachFixationGrasp();
+		RightHand->DetachFixationGrasp();
 	}
 }

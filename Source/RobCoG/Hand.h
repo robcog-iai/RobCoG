@@ -60,16 +60,31 @@ public:
 	bool TryOneHandFixationGrasp();
 
 	// Fixation grasp of two hands attachment
-	bool TryTwoHandsFixationGrasp(AHand* OtherHand);
+	bool TryTwoHandsFixationGrasp();
+
+	// Fixation grasp of two hands attachment (triggered by other hand)
+	bool TwoHandsFixationGraspFromOther();
 
 	// Detach fixation grasp from hand
-	bool TryDetachFixationGrasp();
+	bool DetachFixationGrasp();
+
+	// Detach fixation grasp from hand (triggered by the other hand)
+	bool DetachTwoHandFixationGraspFromOther();
 
 	// Get possible two hand grasp object
 	AStaticMeshActor* GetTwoHandsGraspableObject() const { return TwoHandsGraspableObject; };
 
-	// Update two hands grasped object by the other hand // TODO friend ?
-	void UpdateTwoHandsGraspedObject(AStaticMeshActor* GraspedObject);
+	// Set the two hand grasped object
+	void SetTwoHandsGraspedObject(AStaticMeshActor* GraspedObject);
+
+	// Clear the two hands grasped object
+	void ClearTwoHandsGraspedObject();
+
+	// Check if the two hand grasp is still valid (the hands have not moved away from each other)
+	bool IsTwoHandGraspStillValid();
+
+	// Set pointer to other hand, used for two hand fixation grasp
+	void SetOtherHand(AHand* InOtherHand);
 	
 	// Hand type
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
@@ -94,6 +109,14 @@ public:
 	// Pinky finger skeletal bone names
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Pinky;
+
+	// Enable grasping with fixation
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
+	bool bFixationGraspEnabled;
+
+	// Enable two hand grasping with fixation
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
+	bool bTwoHandsFixationGraspEnabled;
 
 protected:
 	// Post edit change property callback
@@ -124,10 +147,6 @@ private:
 
 	// Setup fingers angular drive values
 	void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
-
-	// Enable grasping with fixation
-	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
-	bool bEnableFixationGrasp;
 
 	// Collision component used for attaching grasped objects
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
@@ -176,6 +195,9 @@ private:
 
 	// Pointer to the object grasped by with two hands
 	AStaticMeshActor* TwoHandsGraspedObject;
+
+	// Pointer to the other hand (used for two hand fixation grasp)
+	AHand* OtherHand;
 
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;

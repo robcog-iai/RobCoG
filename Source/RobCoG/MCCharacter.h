@@ -47,6 +47,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
 	bool bShowTargetArrows;
 
+	// If hands enabled, try fixation grasp
+	UPROPERTY(EditAnywhere, Category = "MC|Hands")
+	bool bTryFixationGrasp;
+
+	// If hands enable it, try two hands fixation grasp
+	UPROPERTY(EditAnywhere, Category = "MC|Hands", meta = (editcondition = "bEnableFixationGrasp"))
+	bool bTryTwoHandsFixationGrasp;
+
 	// PID controller proportional argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float PGain;

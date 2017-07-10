@@ -11,10 +11,11 @@
 AHand::AHand()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	// Fixation grasp parameters	
-	bEnableFixationGrasp = true;
+	bFixationGraspEnabled = true;
+	bTwoHandsFixationGraspEnabled = true;
 	bGraspHeld = false;
 	OneHandFixationMaximumMass = 5.f;
 	OneHandFixationMaximumLength = 50.f;
@@ -56,6 +57,10 @@ void AHand::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Disable tick as default
+	SetActorTickEnabled(false);
+
+	// Bind overlap events
 	FixationGraspArea->OnComponentBeginOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaBeginOverlap);
 	FixationGraspArea->OnComponentEndOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaEndOverlap);
 
@@ -68,6 +73,12 @@ void AHand::BeginPlay()
 void AHand::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (!AHand::IsTwoHandGraspStillValid())
+	{
+		AHand::DetachFixationGrasp();
+	}
+
 }
 
 // Update default values if properties have been changed in the editor
@@ -212,12 +223,14 @@ bool AHand::TryOneHandFixationGrasp()
 }
 
 // Fixation grasp of two hands attachment
-bool AHand::TryTwoHandsFixationGrasp(AHand* OtherHand)
+bool AHand::TryTwoHandsFixationGrasp()
 {
-	if (TwoHandsGraspableObject &&
+	// Check if the other hand can also grasp the same object
+	if (OtherHand && 
+		TwoHandsGraspableObject &&
 		TwoHandsGraspableObject == OtherHand->GetTwoHandsGraspableObject())
 	{
-		// Set the grasped object
+		// Set the grasped object, and clear the graspable one
 		TwoHandsGraspedObject = TwoHandsGraspableObject;
 		TwoHandsGraspableObject = nullptr;
 
@@ -228,13 +241,37 @@ bool AHand::TryTwoHandsFixationGrasp(AHand* OtherHand)
 
 		// Disable overlaps of the fixation grasp area during the active grasp
 		FixationGraspArea->bGenerateOverlapEvents = false;
+
+		// Set other hands grasp as well
+		return OtherHand->TwoHandsFixationGraspFromOther();
+	}
+	return false;
+}
+
+// Fixation grasp of two hands attachment (triggered by other hand)
+bool AHand::TwoHandsFixationGraspFromOther()
+{
+	if (TwoHandsGraspableObject)
+	{
+		// Set the grasped object, and clear the graspable one
+		TwoHandsGraspedObject = TwoHandsGraspableObject;
+		TwoHandsGraspableObject = nullptr;
+
+		// Disable physics on the object and attach it to the hand
+		TwoHandsGraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(false);
+		TwoHandsGraspedObject->AttachToComponent(GetRootComponent(), FAttachmentTransformRules(
+			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
+
+		// Disable overlaps of the fixation grasp area during the active grasp
+		FixationGraspArea->bGenerateOverlapEvents = false;
+
 		return true;
 	}
 	return false;
 }
 
-// Detach fixation grasp from hand
-bool AHand::TryDetachFixationGrasp()
+// Detach fixation grasp from hand(s)
+bool AHand::DetachFixationGrasp()
 {
 	if (OneHandGraspedObject)
 	{
@@ -249,7 +286,7 @@ bool AHand::TryDetachFixationGrasp()
 		FixationGraspArea->bGenerateOverlapEvents = true;
 		return true;
 	}
-	else if (TwoHandsGraspedObject)
+	else if (TwoHandsGraspedObject && OtherHand)
 	{
 		TwoHandsGraspedObject->GetStaticMeshComponent()->DetachFromComponent(FDetachmentTransformRules(
 			EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
@@ -258,32 +295,60 @@ bool AHand::TryDetachFixationGrasp()
 		TwoHandsGraspedObject = nullptr;
 		// Re-enable overlaps for the fixation grasp area
 		FixationGraspArea->bGenerateOverlapEvents = true;
-		// TODO update the other hand
+		// Trigger detachment on other hand as well
+		OtherHand->DetachTwoHandFixationGraspFromOther();
+		return true;
+	}
+	return false;
+}
+
+// Detach fixation grasp from hand (triggered by the other hand)
+bool AHand::DetachTwoHandFixationGraspFromOther()
+{
+	if (TwoHandsGraspedObject)
+	{
+		TwoHandsGraspedObject->GetStaticMeshComponent()->DetachFromComponent(FDetachmentTransformRules(
+			EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, EDetachmentRule::KeepWorld, true));
+		TwoHandsGraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
+		TwoHandsGraspedObject = nullptr;
+		// Re-enable overlaps for the fixation grasp area
+		FixationGraspArea->bGenerateOverlapEvents = true;
 		return true;
 	}
 	return false;
 }
 
 // Update two hands grasped object by the other hand 
-void AHand::UpdateTwoHandsGraspedObject(AStaticMeshActor* GraspedObject)
+void AHand::SetTwoHandsGraspedObject(AStaticMeshActor* GraspedObject)
 {
-	if (GraspedObject)
-	{
-		// Set the grasped object
-		TwoHandsGraspedObject = GraspedObject;
-		TwoHandsGraspableObject = nullptr;
-		// Disable overlaps of the fixation grasp area during the active grasp
-		FixationGraspArea->bGenerateOverlapEvents = false;
-	}
-	else
-	{
-		TwoHandsGraspedObject = nullptr;
-		// Re-enable overlaps for the fixation grasp area
-		FixationGraspArea->bGenerateOverlapEvents = true;
-	}
+	// Set the grasped object
+	TwoHandsGraspedObject = GraspedObject;
+	TwoHandsGraspableObject = nullptr;
+	// Disable overlaps of the fixation grasp area during the active grasp
+	FixationGraspArea->bGenerateOverlapEvents = false;
 }
 
-// Check if object is graspable
+// Clear the two hands grasped object
+void AHand::ClearTwoHandsGraspedObject()
+{
+	TwoHandsGraspedObject = nullptr;
+	// Re-enable overlaps for the fixation grasp area
+	FixationGraspArea->bGenerateOverlapEvents = true;
+}
+
+// Check if the two hand grasp is still valid (the hands have not moved away from each other)
+bool AHand::IsTwoHandGraspStillValid()
+{
+	return true;
+}
+
+// Set pointer to other hand, used for two hand fixation grasp
+void AHand::SetOtherHand(AHand* InOtherHand)
+{
+	OtherHand = InOtherHand;
+}
+
+// Check how the object graspable
 uint8 AHand::CheckObjectGraspableType(AActor* InActor)
 {
 	// Check if the static mesh actor can be grasped
