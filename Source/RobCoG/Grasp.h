@@ -9,6 +9,15 @@
 
 class AHand;
 
+/** Enum indicating the hand type */
+UENUM(BlueprintType)
+enum class EGraspProcess : uint8
+{
+	SLERP		UMETA(DisplayName = "SLERP"),
+	TwistAndSwing		UMETA(DisplayName = "TwistAndSwing")
+};
+
+
 /**
  * This class deals with the grasping of a hand
  */
@@ -24,9 +33,14 @@ public:
 	void SetClosedHandOrientation(FHandOrientation ClosedHandOrientation);
 
 	// Moves the given Hand to the given HandOrientation
-	void DriveToHandOrientation(const FHandOrientation & HandOrientation,const AHand* const Hand);
+	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation,const AHand* const Hand);
 	// Moves the given Finger to the given FingerOrientation
-	void DriveToFingerOrientation(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
+	void DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
+
+	// Moves the given Hand to the given HandOrientation
+	void DriveToHandVelocityTarget(const FHandOrientation & HandOrientation, const AHand * const Hand);
+	// Moves the given Finger to the given FingerOrientation
+	void DriveToFingerVelocityTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
 	// Drives the given Hand to the InitialHandOrientation
 	void DriveToInitialOrientation(const AHand * const Hand);
@@ -34,7 +48,14 @@ public:
 	// Updates the Grasp Orientation of the gven Hand
 	void UpdateGrasp(const float Alpha,const AHand * const Hand);
 
-	void SwitchGrasp(const AHand * const Hand);
+	// Switches the Grasping Style
+	void SwitchGraspStyle(const AHand * const Hand);
+
+	// Switches the Grasping Process
+	void SwitchGraspProcess(AHand * const Hand, const float InSpring, const float InDamping, const float ForceLimit);
+
+	// Print The Fore 
+	void PrintConstraintForce(const AHand * const Hand);
 
 
 private:
@@ -44,6 +65,8 @@ private:
 	FHandOrientation ClosedHandOrientation;
 	// The Current Grasp Position
 	EGraspType CurrentGraspType;
+
+	EGraspProcess CurrentGraspProcess;
 
 	// Parser of the ini files
 	TSharedPtr<HandOrientationParser> HandOrientationParserPtr;

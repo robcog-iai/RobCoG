@@ -17,9 +17,7 @@ public:
 	~HandOrientationParser();
 
 	// Reads the initial and the closed hand orientation out of the ini file
-	void GetHandOrientationsForGraspType(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrietation, EGraspType GraspType);
-
-
+	void GetHandOrientationsForGraspType(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrietation, const FString ConfigPath);
 
 private:
 	// This shared pointer contains the config file
@@ -28,5 +26,5 @@ private:
 	// Writes an ini file for a grasptype
 	void WriteGraspTypeIni(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrientation, EGraspType GraspType);
 	// Reads the initial and the closed hand orientation out of the ini file
-	void ReadGraspTypeIni(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrientation, EGraspType GraspType);
+	void ReadGraspTypeIni(FHandOrientation & InitialHandOrientation, FHandOrientation & ClosedHandOrientation, const FString ConfigPath);
 };
