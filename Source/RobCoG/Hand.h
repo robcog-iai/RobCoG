@@ -74,12 +74,6 @@ public:
 	// Get possible two hand grasp object
 	AStaticMeshActor* GetTwoHandsGraspableObject() const { return TwoHandsGraspableObject; };
 
-	// Set the two hand grasped object
-	void SetTwoHandsGraspedObject(AStaticMeshActor* GraspedObject);
-
-	// Clear the two hands grasped object
-	void ClearTwoHandsGraspedObject();
-
 	// Check if the two hand grasp is still valid (the hands have not moved away from each other)
 	bool IsTwoHandGraspStillValid();
 
