@@ -94,14 +94,15 @@ struct FFinger
 			if (DriveMode == EAngularDriveMode::TwistAndSwing)
 			{
 				MapItr.Value->SetOrientationDriveTwistAndSwing(true, true);
-				MapItr.Value->SetAngularVelocityDriveTwistAndSwing(true, true);
+				//MapItr.Value->SetAngularVelocityDriveTwistAndSwing(true, true);
 			}
 			else if (DriveMode == EAngularDriveMode::SLERP)
 			{
 				MapItr.Value->SetOrientationDriveSLERP(true);
-				MapItr.Value->SetAngularVelocityDriveSLERP(true);
-			}			
+				//MapItr.Value->SetAngularVelocityDriveSLERP(true);
+			}
 			MapItr.Value->SetAngularDriveParams(InSpring, InDamping, InForceLimit);
 		}
 	}
+
 };

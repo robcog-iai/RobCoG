@@ -137,14 +137,30 @@ void Grasp::DriveToInitialOrientation(const AHand * const Hand)
 	DriveToHandOrientationTarget(InitialHandOrientation, Hand);
 }
 
-void Grasp::UpdateGrasp(const float Alpha, const AHand * const Hand)
+void Grasp::UpdateGrasp(const float Alpha, const AHand * const Hand, const float HandOrientationCompareTolerance)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("Alpha: %f"), Alpha);
 	switch (CurrentGraspProcess)
 	{
 	case EGraspProcess::TwistAndSwing:
-		DriveToHandOrientationTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
+	{
+		FHandOrientation CurrentHandOrientation = LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha);
+
+		/*if (CurrentHandOrientation.Equals(LastHandOrientation, HandOrientationCompareTolerance))
+		{
+
+		}
+		else
+		{
+			DriveToHandOrientationTarget(CurrentHandOrientation, Hand);
+		}*/
+
+		DriveToHandOrientationTarget(CurrentHandOrientation, Hand);
+
 		break;
+	}
+
+
 
 	case EGraspProcess::SLERP:
 		DriveToHandVelocityTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
@@ -236,26 +252,26 @@ void Grasp::PrintConstraintForce(const AHand * const Hand)
 	UE_LOG(LogTemp, Warning, TEXT("Index - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
 	Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
 	UE_LOG(LogTemp, Warning, TEXT("Index - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
+	/*
+		Hand->Middle.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Distal - Force: %s"), *OutAngularForce.ToString());
+		Hand->Middle.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
+		Hand->Middle.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
 
-	Hand->Middle.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Distal - Force: %s"), *OutAngularForce.ToString());
-	Hand->Middle.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-	Hand->Middle.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
+		Hand->Ring.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Distal - Force: %s"), *OutAngularForce.ToString());
+		Hand->Ring.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
+		Hand->Ring.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
 
-	Hand->Ring.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Distal - Force: %s"), *OutAngularForce.ToString());
-	Hand->Ring.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-	Hand->Ring.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
-
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Distal - Force: %s"), *OutAngularForce.ToString());
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
-
+		Hand->Pinky.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Distal - Force: %s"), *OutAngularForce.ToString());
+		Hand->Pinky.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
+		Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
+		*/
 }

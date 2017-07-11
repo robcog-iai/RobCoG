@@ -37,6 +37,7 @@ AHand::AHand()
 	Spring = 100.0f;
 	Damping = 100.0f;
 	ForceLimit = 0.0f;
+	HandOrientationCompareTolerance = 0.0f;
 
 	TickValue = 0.0f;
 
@@ -68,7 +69,7 @@ void AHand::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	//Debug
-	if (this->HandType == EHandType::Right)
+	if (this->HandType == EHandType::Right && GraspPtr.IsValid())
 	{
 		TickValue += DeltaTime;
 
@@ -371,7 +372,7 @@ void AHand::UpdateGrasp2(const float Alpha)
 {
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->UpdateGrasp(Alpha, this);
+		GraspPtr->UpdateGrasp(Alpha, this, HandOrientationCompareTolerance);
 	}
 	else
 	{
