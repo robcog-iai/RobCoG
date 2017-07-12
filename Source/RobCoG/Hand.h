@@ -63,7 +63,7 @@ public:
 	bool TryTwoHandsFixationGrasp();
 
 	// Fixation grasp of two hands attachment (triggered by other hand)
-	bool TwoHandsFixationGraspFromOther();
+	void TwoHandsFixationGraspFromOther();
 
 	// Detach fixation grasp from hand
 	bool DetachFixationGrasp();
@@ -104,13 +104,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 	FFinger Pinky;
 
-	// Enable grasping with fixation
-	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
-	bool bFixationGraspEnabled;
-
-	// Enable two hand grasping with fixation
-	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
-	bool bTwoHandsFixationGraspEnabled;
+	// Flag showing that the hand is ready for a two hands grasp
+	bool bReadyForTwoHandsGrasp;
 
 protected:
 	// Post edit change property callback
@@ -127,6 +122,14 @@ protected:
 		class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 private:
+	// Enable grasping with fixation
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp")
+	bool bFixationGraspEnabled;
+
+	// Enable two hand grasping with fixation
+	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"))
+	bool bTwoHandsFixationGraspEnabled;
+
 	// Check if object is graspable, return the number of hands (0, 1, 2)
 	uint8 CheckObjectGraspableType(AActor* InActor);
 
@@ -192,6 +195,15 @@ private:
 
 	// Pointer to the other hand (used for two hand fixation grasp)
 	AHand* OtherHand;
+
+	// If the hand is mimicking movements in the two hand fixation grasp case (no actual attachment)
+	bool bMovementMimickingHand;
+
+	// Movement mimicking relative location from the other hand
+	FVector MimickingRelativeLocation;
+
+	// Movement mimicking relative rotation from the other hand
+	FQuat MimickingRelativeRotation;
 
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;

@@ -229,6 +229,7 @@ void AMCCharacter::MoveHandsOnZ(const float Value)
 
 	}
 }
+
 // Update hand positions
 FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	UMotionControllerComponent* MC,
