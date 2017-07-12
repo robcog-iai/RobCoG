@@ -10,3 +10,7 @@
 	path = Plugins/UPIDController
 	url = https://github.com/robcog-iai/UPIDController.git
 	branch = master
+[submodule "Plugins/URoboVision"]
+	path = Plugins/URoboVision
+	url = https://github.com/robcog-iai/URoboVision.git
+	branch = master
