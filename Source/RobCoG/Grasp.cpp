@@ -82,20 +82,20 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerOrientation & FingerOrienta
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.DistalOrientation.Orientation.Euler());
+		Constraint->SetAngularVelocityTarget(FingerOrientation.DistalOrientation.Orientation.Vector());
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.IntermediateOrientation.Orientation.Euler());
+		Constraint->SetAngularVelocityTarget(FingerOrientation.IntermediateOrientation.Orientation.Vector());
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.ProximalOrientation.Orientation.Euler());
+		Constraint->SetAngularVelocityTarget(FingerOrientation.ProximalOrientation.Orientation.Vector());
 
 	/* Not Implemented yet
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
 	if (Constraint)
-	Constraint->SetAngularVelocityTarget(FingerOrientation.MetacarpalOrientation.Orientation.Euler());
+	Constraint->SetAngularVelocityTarget(FingerOrientation.MetacarpalOrientation.Orientation.Vector());
 	*/
 }
 
