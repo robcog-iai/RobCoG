@@ -18,7 +18,7 @@ Grasp::Grasp()
 
 	FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
 	FString ConfigName = ConfigDir + GraspTypeString + ".ini";
-	HandOrientationParserPtr->GetHandOrientationsForGraspType(this->InitialHandOrientation, this->ClosedHandOrientation, ConfigName);
+	HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, ConfigName);
 }
 
 Grasp::~Grasp()
@@ -33,6 +33,11 @@ void Grasp::SetInitialHandOrientation(FHandOrientation InitialHandOrientation)
 void Grasp::SetClosedHandOrientation(FHandOrientation ClosedHandOrientation)
 {
 	this->ClosedHandOrientation = ClosedHandOrientation;
+}
+
+void Grasp::DriveToInitialOrientation(const AHand * const Hand)
+{
+	DriveToHandOrientationTarget(InitialHandOrientation, Hand);
 }
 
 void Grasp::DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand * const Hand)
@@ -82,89 +87,52 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerOrientation & FingerOrienta
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.DistalOrientation.Orientation.Euler());
+		Constraint->SetAngularVelocityTarget(FingerOrientation.DistalOrientation.Orientation.Vector());
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.IntermediateOrientation.Orientation.Euler());
+		Constraint->SetAngularVelocityTarget(FingerOrientation.IntermediateOrientation.Orientation.Vector());
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.ProximalOrientation.Orientation.Euler());
+		Constraint->SetAngularVelocityTarget(FingerOrientation.ProximalOrientation.Orientation.Vector());
 
 	/* Not Implemented yet
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
 	if (Constraint)
-	Constraint->SetAngularVelocityTarget(FingerOrientation.MetacarpalOrientation.Orientation.Euler());
+	Constraint->SetAngularVelocityTarget(FingerOrientation.MetacarpalOrientation.Orientation.Vector());
 	*/
 }
 
-FHandOrientation Grasp::LerpHandOrientation(FHandOrientation InitialHandOrientation, FHandOrientation ClosedHandOrientation, float Alpha)
+void Grasp::UpdateGrasp(const float Alpha, AHand * const Hand, const float HandOrientationCompareTolerance)
 {
-	FHandOrientation LerpedHandOrientation;
+	FHandOrientation CurrentHandOrientation;
 
-	LerpedHandOrientation.ThumbOrientation = LerpFingerOrientation(InitialHandOrientation.ThumbOrientation, ClosedHandOrientation.ThumbOrientation, Alpha);
-	LerpedHandOrientation.IndexOrientation = LerpFingerOrientation(InitialHandOrientation.IndexOrientation, ClosedHandOrientation.IndexOrientation, Alpha);
-	LerpedHandOrientation.MiddleOrientation = LerpFingerOrientation(InitialHandOrientation.MiddleOrientation, ClosedHandOrientation.MiddleOrientation, Alpha);
-	LerpedHandOrientation.RingOrientation = LerpFingerOrientation(InitialHandOrientation.RingOrientation, ClosedHandOrientation.RingOrientation, Alpha);
-	LerpedHandOrientation.PinkyOrientation = LerpFingerOrientation(InitialHandOrientation.PinkyOrientation, ClosedHandOrientation.PinkyOrientation, Alpha);
+	CurrentHandOrientation.IndexOrientation = Hand->Index.GetCurrentFingerOrientation();
+	CurrentHandOrientation.MiddleOrientation = Hand->Middle.GetCurrentFingerOrientation();
+	CurrentHandOrientation.RingOrientation = Hand->Ring.GetCurrentFingerOrientation();
+	CurrentHandOrientation.PinkyOrientation = Hand->Pinky.GetCurrentFingerOrientation();
+	CurrentHandOrientation.ThumbOrientation = Hand->Thumb.GetCurrentFingerOrientation();
 
-	return LerpedHandOrientation;
-}
-
-FFingerOrientation Grasp::LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha)
-{
-	FFingerOrientation LerpedFingerOrientation;
-
-	LerpedFingerOrientation.DistalOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.DistalOrientation.Orientation,
-		ClosedFingerOrientation.DistalOrientation.Orientation, Alpha);
-	LerpedFingerOrientation.MetacarpalOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.MetacarpalOrientation.Orientation,
-		ClosedFingerOrientation.MetacarpalOrientation.Orientation, Alpha);
-	LerpedFingerOrientation.ProximalOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.ProximalOrientation.Orientation,
-		ClosedFingerOrientation.ProximalOrientation.Orientation, Alpha);
-	LerpedFingerOrientation.IntermediateOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.IntermediateOrientation.Orientation,
-		ClosedFingerOrientation.IntermediateOrientation.Orientation, Alpha);
-
-	return LerpedFingerOrientation;
-}
-
-void Grasp::DriveToInitialOrientation(const AHand * const Hand)
-{
-	DriveToHandOrientationTarget(InitialHandOrientation, Hand);
-}
-
-void Grasp::UpdateGrasp(const float Alpha, const AHand * const Hand, const float HandOrientationCompareTolerance)
-{
-	//UE_LOG(LogTemp, Warning, TEXT("Alpha: %f"), Alpha);
-	switch (CurrentGraspProcess)
+	if(CurrentGraspProcess == EGraspProcess::TwistAndSwing)
 	{
-	case EGraspProcess::TwistAndSwing:
-	{
-		FHandOrientation CurrentHandOrientation = LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha);
-
-		/*if (CurrentHandOrientation.Equals(LastHandOrientation, HandOrientationCompareTolerance))
+		/*
+		if (CurrentHandOrientation.Equals(LastHandOrientation, HandOrientationCompareTolerance))
 		{
-
+			ChangeGraspToVelocity();
 		}
 		else
 		{
 			DriveToHandOrientationTarget(CurrentHandOrientation, Hand);
-		}*/
+		}
+		*/
 
-		DriveToHandOrientationTarget(CurrentHandOrientation, Hand);
+		DriveToHandOrientationTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
 
-		break;
 	}
-
-
-
-	case EGraspProcess::SLERP:
+	else if(CurrentGraspProcess == EGraspProcess::SLERP)
+	{
 		DriveToHandVelocityTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
-		break;
 	}
 }
 
@@ -189,7 +157,9 @@ void Grasp::SwitchGraspStyle(const AHand * const Hand)
 
 		FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
 		FString ConfigName = ConfigDir + GraspTypeString + ".ini";
-		UE_LOG(LogTemp, Warning, TEXT("ConfigName: %s"), *ConfigName);
+
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *GraspTypeString));
 
 		HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, ConfigName);
 
@@ -211,7 +181,9 @@ void Grasp::SwitchGraspProcess(AHand * const Hand, const float InSpring, const f
 
 	CurrentGraspProcess = static_cast<EGraspProcess>(CurrentGraspProcessValue);
 	FString CurrentGraspProcessString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspProcess)).ToString();
-	UE_LOG(LogTemp, Warning, TEXT("CurrentGraspProcess: %s"), *CurrentGraspProcessString);
+
+	if(GEngine) 
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *CurrentGraspProcessString));
 
 	//TODO: Initialize different grasp processes
 	switch (CurrentGraspProcess)
@@ -274,4 +246,42 @@ void Grasp::PrintConstraintForce(const AHand * const Hand)
 		Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
 		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Proximal - Force: %s"), *OutAngularForce.ToString());
 		*/
+}
+
+void Grasp::ChangeGraspToVelocity()
+{
+	
+}
+
+FHandOrientation Grasp::LerpHandOrientation(FHandOrientation InitialHandOrientation, FHandOrientation ClosedHandOrientation, float Alpha)
+{
+	FHandOrientation LerpedHandOrientation;
+
+	LerpedHandOrientation.ThumbOrientation = LerpFingerOrientation(InitialHandOrientation.ThumbOrientation, ClosedHandOrientation.ThumbOrientation, Alpha);
+	LerpedHandOrientation.IndexOrientation = LerpFingerOrientation(InitialHandOrientation.IndexOrientation, ClosedHandOrientation.IndexOrientation, Alpha);
+	LerpedHandOrientation.MiddleOrientation = LerpFingerOrientation(InitialHandOrientation.MiddleOrientation, ClosedHandOrientation.MiddleOrientation, Alpha);
+	LerpedHandOrientation.RingOrientation = LerpFingerOrientation(InitialHandOrientation.RingOrientation, ClosedHandOrientation.RingOrientation, Alpha);
+	LerpedHandOrientation.PinkyOrientation = LerpFingerOrientation(InitialHandOrientation.PinkyOrientation, ClosedHandOrientation.PinkyOrientation, Alpha);
+
+	return LerpedHandOrientation;
+}
+
+FFingerOrientation Grasp::LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha)
+{
+	FFingerOrientation LerpedFingerOrientation;
+
+	LerpedFingerOrientation.DistalOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.DistalOrientation.Orientation,
+		ClosedFingerOrientation.DistalOrientation.Orientation, Alpha);
+	LerpedFingerOrientation.MetacarpalOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.MetacarpalOrientation.Orientation,
+		ClosedFingerOrientation.MetacarpalOrientation.Orientation, Alpha);
+	LerpedFingerOrientation.ProximalOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.ProximalOrientation.Orientation,
+		ClosedFingerOrientation.ProximalOrientation.Orientation, Alpha);
+	LerpedFingerOrientation.IntermediateOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.IntermediateOrientation.Orientation,
+		ClosedFingerOrientation.IntermediateOrientation.Orientation, Alpha);
+
+	return LerpedFingerOrientation;
 }

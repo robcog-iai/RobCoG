@@ -46,7 +46,7 @@ public:
 	void DriveToInitialOrientation(const AHand * const Hand);
 
 	// Updates the Grasp Orientation of the gven Hand
-	void UpdateGrasp(const float Alpha,const AHand * const Hand, const float HandOrientationCompareTolerance);
+	void UpdateGrasp(const float Alpha, AHand * const Hand, const float HandOrientationCompareTolerance);
 
 	// Switches the Grasping Style
 	void SwitchGraspStyle(const AHand * const Hand);
@@ -78,4 +78,5 @@ private:
 	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
 	FFingerOrientation LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha);
 
+	void ChangeGraspToVelocity();
 };
