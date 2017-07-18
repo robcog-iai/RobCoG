@@ -117,6 +117,9 @@ protected:
 	// Limit of the force that the angular drive can apply
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
 		float ForceLimit;
+	// Limit of the force that the angular drive can apply
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+		float HandOrientationCompareTolerance;
 
 	// Post edit change property callback
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);

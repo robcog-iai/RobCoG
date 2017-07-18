@@ -4,7 +4,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HandOrientation.h"
 #include "PhysicsEngine/ConstraintInstance.h"
+
 #include "Finger.generated.h"
 
 /** Enum indicating the finger type */
@@ -98,10 +100,26 @@ struct FFinger
 			}
 			else if (DriveMode == EAngularDriveMode::SLERP)
 			{
-				MapItr.Value->SetOrientationDriveSLERP(true);
-				//MapItr.Value->SetAngularVelocityDriveSLERP(true);
-			}			
+				//MapItr.Value->SetOrientationDriveSLERP(true);
+				MapItr.Value->SetAngularVelocityDriveSLERP(true);
+			}
 			MapItr.Value->SetAngularDriveParams(InSpring, InDamping, InForceLimit);
 		}
 	}
+
+	FFingerOrientation GetCurrentFingerOrientation()
+	{
+
+		FFingerOrientation FingerOrientation;
+
+		FingerOrientation.DistalOrientation.Orientation = FingerPartToConstraint[EFingerPart::Distal]->AngularRotationOffset;
+		FingerOrientation.IntermediateOrientation.Orientation = FingerPartToConstraint[EFingerPart::Intermediate]->AngularRotationOffset;
+		FingerOrientation.ProximalOrientation.Orientation = FingerPartToConstraint[EFingerPart::Proximal]->AngularRotationOffset;
+		//FingerOrientation.MetacarpalOrientation.Orientation = FingerPartToConstraint[EFingerPart::Metacarpal]->AngularRotationOffset;
+
+		return FingerOrientation;
+	}
+
+
+
 };
