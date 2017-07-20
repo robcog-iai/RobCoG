@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "GraspType.h"
+#include "Enums/GraspType.h"
 #include "Structs/HandOrientation.h"
 
 

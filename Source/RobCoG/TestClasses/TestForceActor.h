@@ -6,6 +6,7 @@
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Animation/SkeletalMeshActor.h"
 #include "Components/ArrowComponent.h"
+#include "Utilities/ForceFileWriter.h"
 
 #include "TestForceActor.generated.h"
 
@@ -17,7 +18,7 @@ class ROBCOG_API ATestForceActor : public ASkeletalMeshActor
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Spring value to apply to the angular drive (Position strength)
 	UPROPERTY(EditAnywhere, Category = "Finger|Drive Parameters")
 		float Spring;
@@ -33,6 +34,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Finger|Force Parameters")
 		bool bShowForceArrows;
 
+	UPROPERTY(EditAnywhere, Category = "Finger|Force Logging")
+		int32 NumberOfValuesToBeWritten;
+
+	UPROPERTY(EditAnywhere, Category = "Finger|Force Logging")
+		bool bLogForceIntoFile;
+
 	ATestForceActor();
 
 	// Called when the game starts or when spawned
@@ -42,17 +49,26 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 private:
+	FBodyInstance* MetacarpalBody;
 
-	FConstraintInstance* Proximal;
+	FBodyInstance* ProximalBody;
+	FConstraintInstance* ProximalConstraint;
 	UArrowComponent* ProximalForceArrow;
 
-	FConstraintInstance* Intermediate;
+	FBodyInstance* IntermediateBody;
+	FConstraintInstance* IntermediateConstraint;
 	UArrowComponent* IntermediateForceArrow;
 
-	FConstraintInstance* Distal;
+	FBodyInstance* DistalBody;
+	FConstraintInstance* DistalConstraint;
 	UArrowComponent* DistalForceArrow;
 
-	void InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint);
-	void InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint);
+	TSharedPtr<ForceFileWriter> ForceFileWriterPtr;
+
+	void InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion);
+	void InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector);
+
+	void UpdateConstraintArrow(FConstraintInstance* const Constraint, UArrowComponent* const Arrow);
+	void UpdateBodyArrow(FBodyInstance* const Body, UArrowComponent* const Arrow);
 
 };

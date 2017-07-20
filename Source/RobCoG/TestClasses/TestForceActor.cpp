@@ -1,6 +1,8 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
 #include "TestForceActor.h"
+#include "Utilities/ForceFileWriter.h"
+#include "Paths.h"
 
 ATestForceActor::ATestForceActor()
 {
@@ -10,6 +12,9 @@ ATestForceActor::ATestForceActor()
 	Spring = 50.0;
 	Damping = 10.0;
 	ForceLimit = 0.0;
+
+	bLogForceIntoFile = false;
+	bShowForceArrows = true;
 
 	USkeletalMeshComponent* SkeletalMesh = GetSkeletalMeshComponent();
 	if (SkeletalMesh == nullptr)
@@ -24,58 +29,65 @@ ATestForceActor::ATestForceActor()
 	DistalForceArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("DistalForceArrow"));
 	DistalForceArrow->SetupAttachment(RootComponent);
 
+	ForceFileWriterPtr = MakeShareable(new ForceFileWriter());
+
 }
 
 // Called when the game starts or when spawned
 void ATestForceActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	FString ForceFilePath = FPaths::GameSavedDir() + "Force.csv";
+	if (ForceFileWriterPtr.IsValid() && bLogForceIntoFile)
+	{
+		ForceFileWriterPtr->InitializeFile(ForceFilePath, NumberOfValuesToBeWritten);
+	}
+
 	USkeletalMeshComponent* SkeletalMesh = GetSkeletalMeshComponent();
 	if (SkeletalMesh == nullptr)
 		return;
 
+	SkeletalMesh->SetEnableGravity(false);
 	SkeletalMesh->SetSimulatePhysics(true);
+	/*
+	 * INITIALIZE BODYPARTS
+	 */
 	
-	FVector OutLinearForce;
-	FVector OutAngularForce;
+	MetacarpalBody= SkeletalMesh->GetBodyInstance("Metacarpal");
+	ProximalBody = SkeletalMesh->GetBodyInstance("Proximal");
+	IntermediateBody = SkeletalMesh->GetBodyInstance("Intermediate");
+	DistalBody = SkeletalMesh->GetBodyInstance("Distal");
 
+	/**
+	 * INITIALIZE CONSTRAINTS
+	 */
 	for (auto Constraint : SkeletalMesh->Constraints)
 	{
-		Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
-		Constraint->SetOrientationDriveTwistAndSwing(true, true);
-		Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
-		Constraint->SetAngularOrientationTarget(FRotator(0, 0, 0).Quaternion());
-
-		//InitializeOrientationTwistAndSwing(Constraint);
-		//InitializeVelocityTwistAndSwing(Constraint);
 
 		if (Constraint->JointName.ToString() == "Proximal")
 		{
-			Proximal = Constraint;
-			Proximal->GetConstraintForce(OutLinearForce, OutAngularForce);
-			ProximalForceArrow->SetWorldLocation(Proximal->GetConstraintLocation());
-			ProximalForceArrow->ArrowSize = OutAngularForce.Size();
+			ProximalConstraint = Constraint;
+			ProximalForceArrow->SetWorldLocation(ProximalConstraint->GetConstraintLocation());
 			ProximalForceArrow->SetHiddenInGame(!bShowForceArrows);
-		}
 
-		if (Constraint->JointName.ToString() == "Intermediate")
+			InitializeOrientationTwistAndSwing(ProximalConstraint, FRotator(0, 0, 0).Quaternion());
+		}
+		else if (Constraint->JointName.ToString() == "Intermediate")
 		{
-			Intermediate = Constraint;
-			Intermediate->GetConstraintForce(OutLinearForce, OutAngularForce);
-			IntermediateForceArrow->SetWorldLocation(Intermediate->GetConstraintLocation());
-			IntermediateForceArrow->ArrowSize = OutAngularForce.Size();
+			IntermediateConstraint = Constraint;
+			IntermediateForceArrow->SetWorldLocation(IntermediateConstraint->GetConstraintLocation());
 			IntermediateForceArrow->SetHiddenInGame(!bShowForceArrows);
-		}
 
-		if (Constraint->JointName.ToString() == "Distal")
+			InitializeOrientationTwistAndSwing(IntermediateConstraint, FRotator(0, 0, 0).Quaternion());
+		}
+		else if (Constraint->JointName.ToString() == "Distal")
 		{
-			Distal = Constraint;
-			InitializeVelocityTwistAndSwing(Distal);
-			Distal->GetConstraintForce(OutLinearForce, OutAngularForce);
-			DistalForceArrow->SetWorldLocation(Distal->GetConstraintLocation());
-			DistalForceArrow->ArrowSize = OutAngularForce.Size();
+			DistalConstraint = Constraint;
+			DistalForceArrow->SetWorldLocation(DistalConstraint->GetConstraintLocation());
 			DistalForceArrow->SetHiddenInGame(!bShowForceArrows);
+
+			InitializeOrientationTwistAndSwing(DistalConstraint, FRotator(0, 45, 0).Quaternion());
 		}
 	}
 
@@ -86,30 +98,67 @@ void ATestForceActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FVector OutLinearForce;
-	FVector OutAngularForce;
+	if (DistalConstraint != nullptr && DistalForceArrow != nullptr)
+		UpdateConstraintArrow(DistalConstraint, DistalForceArrow);
 
-	Distal->GetConstraintForce(OutLinearForce, OutAngularForce);
-	DistalForceArrow->ArrowSize = 1;
-	DistalForceArrow->SetWorldLocationAndRotation(Distal->GetConstraintLocation(), OutAngularForce.Rotation());
-	
-	UE_LOG(LogTemp, Warning, TEXT("AngularForce: %s"), *OutAngularForce.ToString());
-	UE_LOG(LogTemp, Warning, TEXT("AngularForce.Size: %f"), OutAngularForce.Size());
+	if (IntermediateConstraint != nullptr && IntermediateForceArrow != nullptr)
+		UpdateConstraintArrow(IntermediateConstraint, IntermediateForceArrow);
+
+	if (ProximalConstraint != nullptr && ProximalForceArrow != nullptr)
+		UpdateConstraintArrow(ProximalConstraint, ProximalForceArrow);
 
 }
 
-void ATestForceActor::InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint)
+void ATestForceActor::InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion)
 {
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 	Constraint->SetOrientationDriveTwistAndSwing(true, true);
 	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
-	Constraint->SetAngularOrientationTarget(FRotator(0, -50, 0).Quaternion());
+	Constraint->SetAngularOrientationTarget(Quaternion);
 }
 
-void ATestForceActor::InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint)
+void ATestForceActor::InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector)
 {
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
 	Constraint->SetAngularVelocityDriveTwistAndSwing(true, true);
-	Constraint->SetAngularVelocityTarget(FRotator(50, 0, 0).Vector());
+	Constraint->SetAngularVelocityTarget(Vector);
 }
+
+void ATestForceActor::UpdateConstraintArrow(FConstraintInstance* const Constraint, UArrowComponent* const Arrow)
+{
+	FVector OutLinearForce;
+	FVector OutAngularForce;
+
+	Constraint->GetConstraintForce(OutLinearForce, OutAngularForce);
+	Arrow->ArrowSize = 1;// OutAngularForce.Size();
+	Arrow->SetWorldLocationAndRotation(Constraint->GetConstraintLocation(), OutAngularForce.Rotation());
+
+	if (Constraint == DistalConstraint)
+	{
+		if (ForceFileWriterPtr.IsValid() && bLogForceIntoFile)
+		{
+			ForceFileWriterPtr->AppendFloatToFile(OutAngularForce.Size(), FPaths::GameSavedDir() + "Force.csv");
+		}
+		UE_LOG(LogTemp, Warning, TEXT("AngularForce: %s"), *OutAngularForce.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("AngularForce.Size: %f"), OutAngularForce.Size());
+	}
+
+}
+
+void ATestForceActor::UpdateBodyArrow(FBodyInstance* const Body, UArrowComponent* const Arrow)
+{
+	
+	Arrow->ArrowSize = 1;// OutAngularForce.Size();
+	Arrow->SetWorldLocationAndRotation(Body->GetUnrealWorldTransform().GetLocation(), Body->GetUnrealWorldTransform().GetRotation());
+
+	/*
+	if (Body == DistalBody)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Force: %s"), Body->Get*Body->GetBodyMass());
+		UE_LOG(LogTemp, Warning, TEXT("AngularForce.Size: %f"), OutAngularForce.Size());
+	}
+	//*/
+
+}
+

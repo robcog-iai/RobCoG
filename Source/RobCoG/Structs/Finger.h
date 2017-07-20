@@ -28,9 +28,9 @@ UENUM(BlueprintType)
 enum class EFingerPart : uint8
 {
 	Metacarpal		UMETA(DisplayName = "Metacarpal"),
-	Proximal		UMETA(DisplayName = "Proximal"),
-	Intermediate	UMETA(DisplayName = "Intermediate"),
-	Distal			UMETA(DisplayName = "Distal")
+	Proximal		UMETA(DisplayName = "ProximalConstraint"),
+	Intermediate	UMETA(DisplayName = "IntermediateConstraint"),
+	Distal			UMETA(DisplayName = "DistalConstraint")
 };
 
 /**

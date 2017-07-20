@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "GraspType.h"
-#include "HandOrientationParser.h"
+#include "Enums/GraspType.h"
+#include "Utilities/HandOrientationParser.h"
 #include "Structs/Finger.h"
 #include "Structs/HandOrientation.h"
 
