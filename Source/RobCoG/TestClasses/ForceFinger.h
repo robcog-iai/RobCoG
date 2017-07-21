@@ -3,18 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PhysicsEngine/ConstraintInstance.h"
-#include "Animation/SkeletalMeshActor.h"
+#include "Animation/SkeletalMeshActor.h" 
 #include "Components/ArrowComponent.h"
+#include "PhysicsEngine/ConstraintInstance.h"
 #include "Utilities/ForceFileWriter.h"
 
-#include "TestForceActor.generated.h"
+#include "ForceFinger.generated.h"
 
 /**
  *
  */
 UCLASS()
-class ROBCOG_API ATestForceActor : public ASkeletalMeshActor
+class ROBCOG_API AForceFinger : public ASkeletalMeshActor
 {
 	GENERATED_BODY()
 
@@ -40,7 +40,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Finger|Force Logging")
 		bool bLogForceIntoFile;
 
-	ATestForceActor();
+	AForceFinger();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -49,17 +49,23 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 private:
+	FVector LastVelocity;
+
 	FBodyInstance* MetacarpalBody;
+	UArrowComponent* MetacarpalBodyArrow;
 
 	FBodyInstance* ProximalBody;
+	UArrowComponent* ProximalBodyArrow;
 	FConstraintInstance* ProximalConstraint;
 	UArrowComponent* ProximalForceArrow;
 
 	FBodyInstance* IntermediateBody;
+	UArrowComponent* IntermediateBodyArrow;
 	FConstraintInstance* IntermediateConstraint;
 	UArrowComponent* IntermediateForceArrow;
 
 	FBodyInstance* DistalBody;
+	UArrowComponent* DistalBodyArrow;
 	FConstraintInstance* DistalConstraint;
 	UArrowComponent* DistalForceArrow;
 
@@ -69,6 +75,6 @@ private:
 	void InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector);
 
 	void UpdateConstraintArrow(FConstraintInstance* const Constraint, UArrowComponent* const Arrow);
-	void UpdateBodyArrow(FBodyInstance* const Body, UArrowComponent* const Arrow);
+	void UpdateBodyArrow(FBodyInstance* const Body, UArrowComponent* const Arrow, const float DeltaTime);
 
 };

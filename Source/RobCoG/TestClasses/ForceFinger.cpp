@@ -1,10 +1,10 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
-#include "TestForceActor.h"
+#include "ForceFinger.h"
 #include "Utilities/ForceFileWriter.h"
 #include "Paths.h"
 
-ATestForceActor::ATestForceActor()
+AForceFinger::AForceFinger()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -20,6 +20,9 @@ ATestForceActor::ATestForceActor()
 	if (SkeletalMesh == nullptr)
 		return;
 
+	/*
+	 * INITIALIZE FORCE ARROWS
+	 */
 	ProximalForceArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("ProximalForceArrow"));
 	ProximalForceArrow->SetupAttachment(RootComponent);
 
@@ -29,12 +32,27 @@ ATestForceActor::ATestForceActor()
 	DistalForceArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("DistalForceArrow"));
 	DistalForceArrow->SetupAttachment(RootComponent);
 
+	/*
+	* INITIALIZE BODY ARROWS
+	*/
+	MetacarpalBodyArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("MetacarpalBodyArrow"));
+	MetacarpalBodyArrow->SetupAttachment(RootComponent);
+
+	ProximalBodyArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("ProximalBodyArrow"));
+	ProximalBodyArrow->SetupAttachment(RootComponent);
+
+	IntermediateBodyArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("IntermediateBodyArrow"));
+	IntermediateBodyArrow->SetupAttachment(RootComponent);
+
+	DistalBodyArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("DistalBodyArrow"));
+	DistalBodyArrow->SetupAttachment(RootComponent);
+
 	ForceFileWriterPtr = MakeShareable(new ForceFileWriter());
 
 }
 
 // Called when the game starts or when spawned
-void ATestForceActor::BeginPlay()
+void AForceFinger::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -53,8 +71,8 @@ void ATestForceActor::BeginPlay()
 	/*
 	 * INITIALIZE BODYPARTS
 	 */
-	
-	MetacarpalBody= SkeletalMesh->GetBodyInstance("Metacarpal");
+
+	MetacarpalBody = SkeletalMesh->GetBodyInstance("Metacarpal");
 	ProximalBody = SkeletalMesh->GetBodyInstance("Proximal");
 	IntermediateBody = SkeletalMesh->GetBodyInstance("Intermediate");
 	DistalBody = SkeletalMesh->GetBodyInstance("Distal");
@@ -94,10 +112,11 @@ void ATestForceActor::BeginPlay()
 }
 
 // Called every frame, used for motion control
-void ATestForceActor::Tick(float DeltaTime)
+void AForceFinger::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/*
 	if (DistalConstraint != nullptr && DistalForceArrow != nullptr)
 		UpdateConstraintArrow(DistalConstraint, DistalForceArrow);
 
@@ -106,10 +125,11 @@ void ATestForceActor::Tick(float DeltaTime)
 
 	if (ProximalConstraint != nullptr && ProximalForceArrow != nullptr)
 		UpdateConstraintArrow(ProximalConstraint, ProximalForceArrow);
+	*/
 
 }
 
-void ATestForceActor::InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion)
+void AForceFinger::InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion)
 {
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 	Constraint->SetOrientationDriveTwistAndSwing(true, true);
@@ -117,7 +137,7 @@ void ATestForceActor::InitializeOrientationTwistAndSwing(FConstraintInstance* Co
 	Constraint->SetAngularOrientationTarget(Quaternion);
 }
 
-void ATestForceActor::InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector)
+void AForceFinger::InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector)
 {
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
@@ -125,7 +145,7 @@ void ATestForceActor::InitializeVelocityTwistAndSwing(FConstraintInstance* Const
 	Constraint->SetAngularVelocityTarget(Vector);
 }
 
-void ATestForceActor::UpdateConstraintArrow(FConstraintInstance* const Constraint, UArrowComponent* const Arrow)
+void AForceFinger::UpdateConstraintArrow(FConstraintInstance* const Constraint, UArrowComponent* const Arrow)
 {
 	FVector OutLinearForce;
 	FVector OutAngularForce;
@@ -146,19 +166,24 @@ void ATestForceActor::UpdateConstraintArrow(FConstraintInstance* const Constrain
 
 }
 
-void ATestForceActor::UpdateBodyArrow(FBodyInstance* const Body, UArrowComponent* const Arrow)
+void AForceFinger::UpdateBodyArrow(FBodyInstance* const Body, UArrowComponent* const Arrow, const float DeltaTime)
 {
-	
-	Arrow->ArrowSize = 1;// OutAngularForce.Size();
+
+	Arrow->ArrowSize = 1;
 	Arrow->SetWorldLocationAndRotation(Body->GetUnrealWorldTransform().GetLocation(), Body->GetUnrealWorldTransform().GetRotation());
 
 	/*
 	if (Body == DistalBody)
 	{
+
+		FVector Acceleration = (Body->GetUnrealWorldAngularVelocity() - LastVelocity) / DeltaTime;
+		FVector Force = Body->GetBodyMass() * Acceleration;
 		UE_LOG(LogTemp, Warning, TEXT("Force: %s"), Body->Get*Body->GetBodyMass());
 		UE_LOG(LogTemp, Warning, TEXT("AngularForce.Size: %f"), OutAngularForce.Size());
+
 	}
 	//*/
 
+	LastVelocity = Body->GetUnrealWorldAngularVelocity();
 }
 
