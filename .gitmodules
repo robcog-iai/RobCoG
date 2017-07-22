@@ -14,3 +14,7 @@
 	path = Plugins/URoboVision
 	url = https://github.com/robcog-iai/URoboVision.git
 	branch = master
+[submodule "Plugins/UMCInteraction"]
+	path = Plugins/UMCInteraction
+	url = https://github.com/robcog-iai/UMCInteraction.git
+	branch = master

@@ -14,7 +14,8 @@ public class RobCoG : ModuleRules
 			"CoreUObject", 
 			"Engine", 
 			"InputCore",
-			"UPIDController"
+			"UPIDController",
+            "SemLog"
 			});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {
