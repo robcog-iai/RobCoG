@@ -18,12 +18,6 @@ AForceCharacter::AForceCharacter()
 	GetCapsuleComponent()->SetCapsuleRadius(10);
 	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Spectator"));
 
-	CurrentRotation = FRotator(10, 10, 10);
-
-	Spring = 50.0f;
-	Damping = 50.0f;
-	ForceLimit = 0.0f;
-
 }
 
 // Called when the game starts or when spawned
@@ -31,26 +25,6 @@ void AForceCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	USkeletalMeshComponent* SkeletalMeshComponent = GetMesh();
-
-	if(SkeletalMeshComponent != nullptr)
-	{
-		//SkeletalMeshComponent->SetEnableGravity(false);
-		//SkeletalMeshComponent->SetSimulatePhysics(true);
-
-		LeftConstraint = SkeletalMeshComponent->Constraints[0];
-
-		LeftConstraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
-		LeftConstraint->SetOrientationDriveTwistAndSwing(true, true);
-		LeftConstraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
-		LeftConstraint->SetAngularOrientationTarget(CurrentRotation.Quaternion());
-		
-		RightConstraint = SkeletalMeshComponent->Constraints[1];
-		RightConstraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
-		RightConstraint->SetOrientationDriveTwistAndSwing(true, true);
-		RightConstraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
-		RightConstraint->SetAngularOrientationTarget(CurrentRotation.Quaternion());
-	}
 }
 
 // Called every frame
@@ -115,28 +89,17 @@ void AForceCharacter::MoveHandsOnZ(const float Value)
 {
 	if (Value != 0)
 	{
-		GetMesh()->AddLocalOffset(FVector(0.f, 0.f, Value),false,nullptr,ETeleportType::TeleportPhysics);
+		ForceSimpleHand->GetSkeletalMeshComponent()->AddLocalOffset(FVector(0.f, 0.f, Value),false,nullptr,ETeleportType::TeleportPhysics);
 	}
 }
 
 void AForceCharacter::Open(const float Value)
 {
-	if (Value != 0)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Value: %f | Rotation: %s"), Value, *CurrentRotation.ToString());
+	ForceSimpleHand->Open(Value);
 
-		CurrentRotation.Add(1,1,1);
-		LeftConstraint->SetAngularOrientationTarget(CurrentRotation.Quaternion());
-
-		FRotator Rotation = CurrentRotation * -1;
-		RightConstraint->SetAngularOrientationTarget(Rotation.Quaternion());
-	}
 }
 
 void AForceCharacter::Close(const float Value)
 {
-	if (Value != 0)
-	{
-
-	}
+	ForceSimpleHand->Close(Value);
 }
