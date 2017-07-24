@@ -40,12 +40,13 @@ public:
 
 	void Open(const float Value) const;
 	void Close(const float Value) const ;
-private:
 
+private:
 	FConstraintInstance* LeftConstraint;
+
 	FConstraintInstance* RightConstraint;
 
-	void InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion) const;
-	void InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector) const;
+	void InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion);
+	void InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector);
 
 };

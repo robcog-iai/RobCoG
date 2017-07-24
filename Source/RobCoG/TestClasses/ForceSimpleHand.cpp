@@ -1,7 +1,6 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
 #include "ForceSimpleHand.h"
-#include "Utilities/ForceFileWriter.h"
 #include "Paths.h"
 
 AForceSimpleHand::AForceSimpleHand()
@@ -34,27 +33,24 @@ void AForceSimpleHand::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("SkeletalMesh assigned"));
 
-		for (FConstraintInstance* Constraint : SkeletalMesh->Constraints)
+		LeftConstraint = SkeletalMesh->FindConstraintInstance("Left");
+		if (LeftConstraint)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Left Constraint Found"));
+			//ProximalForceArrow->SetWorldLocation(LeftConstraint->GetConstraintLocation());
+			//ProximalForceArrow->SetHiddenInGame(!bShowForceArrows);
 
-			if (Constraint->JointName.ToString() == "Left")
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Left Constraint Found"));
-				LeftConstraint = Constraint;
-				//ProximalForceArrow->SetWorldLocation(LeftConstraint->GetConstraintLocation());
-				//ProximalForceArrow->SetHiddenInGame(!bShowForceArrows);
+			//InitializeOrientationTwistAndSwing(LeftConstraint, FRotator(0, 0, 0).Quaternion());
+		}
 
-				InitializeVelocityTwistAndSwing(LeftConstraint, FRotator(0, 0, 0).Vector());
-			}
-			else if (Constraint->JointName.ToString() == "Right")
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Right Constraint Found"));
-				RightConstraint = Constraint;
-				//IntermediateForceArrow->SetWorldLocation(LeftConstraint->GetConstraintLocation());
-				//IntermediateForceArrow->SetHiddenInGame(!bShowForceArrows);
+		RightConstraint = SkeletalMesh->FindConstraintInstance("Right");
+		if (RightConstraint)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Right Constraint Found"));
+			//IntermediateForceArrow->SetWorldLocation(LeftConstraint->GetConstraintLocation());
+			//IntermediateForceArrow->SetHiddenInGame(!bShowForceArrows);
 
-				InitializeVelocityTwistAndSwing(RightConstraint, FRotator(0, 0, 0).Vector());
-			}
+			//InitializeOrientationTwistAndSwing(RightConstraint, FRotator(0, 0, 0).Quaternion());
 		}
 	}
 }
@@ -78,19 +74,17 @@ void AForceSimpleHand::Tick(float DeltaTime)
 
 }
 
-void AForceSimpleHand::Open(const float Value) const 
+void AForceSimpleHand::Open(const float Value) const
 {
 	if (Value != 0)
 	{
-
 		if (LeftConstraint != nullptr && RightConstraint != nullptr)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Open - Value: %f | Rotation: %s"), Value, *FRotator(0, 0, 0).ToString());
-			LeftConstraint->SetAngularVelocityTarget(FRotator(0, 0, 0).Vector());
+			LeftConstraint->SetAngularOrientationTarget(FRotator(0, 0, 0).Quaternion());
 
-			RightConstraint->SetAngularVelocityTarget(FRotator(0, 0, 0).Vector());
+			RightConstraint->SetAngularOrientationTarget(FRotator(0, 0, 0).Quaternion());
 		}
-
 	}
 }
 
@@ -98,19 +92,17 @@ void AForceSimpleHand::Close(const float Value) const
 {
 	if (Value != 0)
 	{
-
 		if (LeftConstraint != nullptr && RightConstraint != nullptr)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Close - Value: %f | Rotation: %s"), Value, *FRotator(0, 0, 20).ToString());
-			LeftConstraint->SetAngularVelocityTarget(FRotator(-20, -20, -20).Vector());
+			LeftConstraint->SetAngularOrientationTarget(FRotator(-20, -20, -20).Quaternion());
 
-			RightConstraint->SetAngularVelocityTarget(FRotator(20, 20, 20).Vector());
+			RightConstraint->SetAngularOrientationTarget(FRotator(20, 20, 20).Quaternion());
 		}
-
 	}
 }
 
-void AForceSimpleHand::InitializeOrientationTwistAndSwing(FConstraintInstance* const Constraint, const FQuat & Quaternion) const
+void AForceSimpleHand::InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion)
 {
 	Constraint->SetDisableCollision(true);
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
@@ -119,11 +111,11 @@ void AForceSimpleHand::InitializeOrientationTwistAndSwing(FConstraintInstance* c
 	Constraint->SetAngularOrientationTarget(Quaternion);
 }
 
-void AForceSimpleHand::InitializeVelocityTwistAndSwing(FConstraintInstance* const  Constraint, const FVector & Vector) const
+void AForceSimpleHand::InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector)
 {
 	Constraint->SetDisableCollision(true);
-	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
-	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
 	Constraint->SetAngularVelocityDriveTwistAndSwing(true, true);
 	Constraint->SetAngularVelocityTarget(Vector);
+	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
+	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 }

@@ -131,6 +131,7 @@ void AForceFinger::Tick(float DeltaTime)
 
 void AForceFinger::InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion)
 {
+	Constraint->SetDisableCollision(true);
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 	Constraint->SetOrientationDriveTwistAndSwing(true, true);
 	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
@@ -139,6 +140,7 @@ void AForceFinger::InitializeOrientationTwistAndSwing(FConstraintInstance* Const
 
 void AForceFinger::InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector)
 {
+	Constraint->SetDisableCollision(true);
 	Constraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
 	Constraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
 	Constraint->SetAngularVelocityDriveTwistAndSwing(true, true);
