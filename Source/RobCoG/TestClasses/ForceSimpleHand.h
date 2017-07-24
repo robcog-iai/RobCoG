@@ -38,8 +38,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
-	void Open(const float Value);
-	void Close(const float Value);
+	void Open(const float Value) const;
+	void Close(const float Value) const ;
 private:
 
 	FConstraintInstance* LeftConstraint;
