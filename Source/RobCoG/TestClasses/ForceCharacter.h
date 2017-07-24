@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/TriggerSphere.h"
 #include "GameFramework/Character.h"
+
 #include "ForceSimpleHand.h"
 
 #include "ForceCharacter.generated.h"
@@ -16,11 +18,11 @@ class ROBCOG_API AForceCharacter : public ACharacter
 public:
 
 	UPROPERTY(EditAnywhere, Category = "SkeletalMeshActor")
-		AForceSimpleHand* ForceSimpleHand;
+	AForceSimpleHand* ForceSimpleHand;
 
 	// Sets default values for this character's properties
 	AForceCharacter();
-	
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -33,8 +35,10 @@ protected:
 
 	void MoveForward(const float Value);
 	void MoveRight(const float Value);
-	void MoveHandsOnZ(const float Value);
 	void Open(const float Value);
 	void Close(const float Value);
+
+private:
+	FQuat ForceSimpleHandOffset;
 
 };

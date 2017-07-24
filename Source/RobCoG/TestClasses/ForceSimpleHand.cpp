@@ -32,23 +32,27 @@ void AForceSimpleHand::BeginPlay()
 		SkeletalMesh->SetEnableGravity(false);
 		SkeletalMesh->SetSimulatePhysics(true);
 
-		//SkeletalMeshComponent->SetEnableGravity(false);
-		//SkeletalMeshComponent->SetSimulatePhysics(true);
+		for (auto Constraint : SkeletalMesh->Constraints)
+		{
 
-		/*LeftConstraint = SkeletalMeshComponent->Constraints[0];
+			if (Constraint->JointName.ToString() == "Left")
+			{
+				LeftConstraint = Constraint;
+				//ProximalForceArrow->SetWorldLocation(LeftConstraint->GetConstraintLocation());
+				//ProximalForceArrow->SetHiddenInGame(!bShowForceArrows);
 
-		LeftConstraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
-		LeftConstraint->SetOrientationDriveTwistAndSwing(true, true);
-		LeftConstraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
-		LeftConstraint->SetAngularOrientationTarget(CurrentRotation.Quaternion());
+				InitializeOrientationTwistAndSwing(LeftConstraint, FRotator(0, 0, 0).Quaternion());
+			}
+			else if (Constraint->JointName.ToString() == "Right")
+			{
+				RightConstraint = Constraint;
+				//IntermediateForceArrow->SetWorldLocation(LeftConstraint->GetConstraintLocation());
+				//IntermediateForceArrow->SetHiddenInGame(!bShowForceArrows);
 
-		RightConstraint = SkeletalMeshComponent->Constraints[1];
-		RightConstraint->SetAngularDriveMode(EAngularDriveMode::TwistAndSwing);
-		RightConstraint->SetOrientationDriveTwistAndSwing(true, true);
-		RightConstraint->SetAngularDriveParams(Spring, Damping, ForceLimit);
-		RightConstraint->SetAngularOrientationTarget(CurrentRotation.Quaternion());*/
+				InitializeOrientationTwistAndSwing(RightConstraint, FRotator(0, 0, 0).Quaternion());
+			}
+		}
 	}
-
 }
 
 // Called every frame, used for motion control
@@ -57,15 +61,16 @@ void AForceSimpleHand::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 
-	/*if (DistalConstraint != nullptr && DistalForceArrow != nullptr)
+	/*
+	if (DistalConstraint != nullptr && DistalForceArrow != nullptr)
 		UpdateConstraintArrow(DistalConstraint, DistalForceArrow);
 
 	if (IntermediateConstraint != nullptr && IntermediateForceArrow != nullptr)
 		UpdateConstraintArrow(IntermediateConstraint, IntermediateForceArrow);
 
 	if (ProximalConstraint != nullptr && ProximalForceArrow != nullptr)
-		UpdateConstraintArrow(ProximalConstraint, ProximalForceArrow);*/
-
+		UpdateConstraintArrow(ProximalConstraint, ProximalForceArrow);
+	*/
 
 }
 

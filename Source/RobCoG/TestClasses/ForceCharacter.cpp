@@ -24,14 +24,12 @@ AForceCharacter::AForceCharacter()
 void AForceCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AForceCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -42,12 +40,11 @@ void AForceCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	// Set up gameplay key bindings
 	PlayerInputComponent->BindAxis("MoveForward", this, &AForceCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AForceCharacter::MoveRight);
-	PlayerInputComponent->BindAxis("MoveHandsOnZ", this, &AForceCharacter::MoveHandsOnZ);
 
 	// Default Camera view bindings
 	PlayerInputComponent->BindAxis("CameraPitch", this, &AForceCharacter::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("CameraYaw", this, &AForceCharacter::AddControllerYawInput);
-	
+
 	// Hand control binding
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AForceCharacter::Open);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AForceCharacter::Close);
@@ -84,22 +81,14 @@ void AForceCharacter::MoveRight(const float Value)
 	}
 }
 
-// Move hands when not in VR up and down
-void AForceCharacter::MoveHandsOnZ(const float Value)
-{
-	if (Value != 0)
-	{
-		ForceSimpleHand->GetSkeletalMeshComponent()->AddLocalOffset(FVector(0.f, 0.f, Value),false,nullptr,ETeleportType::TeleportPhysics);
-	}
-}
-
 void AForceCharacter::Open(const float Value)
 {
-	ForceSimpleHand->Open(Value);
-
+	if (ForceSimpleHand != nullptr)
+		ForceSimpleHand->Open(Value);
 }
 
 void AForceCharacter::Close(const float Value)
 {
-	ForceSimpleHand->Close(Value);
+	if (ForceSimpleHand != nullptr)
+		ForceSimpleHand->Close(Value);
 }
