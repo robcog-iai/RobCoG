@@ -16,7 +16,7 @@ AForceCharacter::AForceCharacter()
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 	// Make the capsule thin, and set it only to collide with static objects (VR Mode)
 	GetCapsuleComponent()->SetCapsuleRadius(10);
-	GetCapsuleComponent()->SetCollisionProfileName(TEXT("Spectator"));
+	GetCapsuleComponent()->SetCollisionProfileName(TEXT("BlockAll"));
 
 }
 
@@ -84,11 +84,11 @@ void AForceCharacter::MoveRight(const float Value)
 void AForceCharacter::Open(const float Value)
 {
 	if (ForceSimpleHand != nullptr)
-		ForceSimpleHand->Open(Value);
+		ForceSimpleHand->StartGrasp(Value);
 }
 
 void AForceCharacter::Close(const float Value)
 {
 	if (ForceSimpleHand != nullptr)
-		ForceSimpleHand->Close(Value);
+		ForceSimpleHand->StopGrasp(Value);
 }

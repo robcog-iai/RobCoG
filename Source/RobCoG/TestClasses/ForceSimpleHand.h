@@ -30,6 +30,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Drive Parameters")
 		float ForceLimit;
 
+	UPROPERTY(EditAnywhere, Category = "Drive Parameters")
+		float ForceThreshold;
+
 	AForceSimpleHand();
 
 	// Called when the game starts or when spawned
@@ -38,13 +41,18 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
-	void Open(const float Value) const;
-	void Close(const float Value) const ;
+	void StartGrasp(const float Value);
+	void StopGrasp(const float Value);
 
 private:
+	bool bGraspRunning;
+	bool bGraspChangeable;
+
 	FConstraintInstance* LeftConstraint;
 
 	FConstraintInstance* RightConstraint;
+
+	void ResetConstraint(FConstraintInstance* Constraint);
 
 	void InitializeOrientationTwistAndSwing(FConstraintInstance* Constraint, const FQuat & Quaternion);
 	void InitializeVelocityTwistAndSwing(FConstraintInstance* Constraint, const FVector & Vector);
