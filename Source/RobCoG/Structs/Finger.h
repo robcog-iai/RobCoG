@@ -120,6 +120,4 @@ struct FFinger
 		return FingerOrientation;
 	}
 
-
-
 };

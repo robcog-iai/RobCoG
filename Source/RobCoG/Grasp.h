@@ -13,8 +13,19 @@ class AHand;
 UENUM(BlueprintType)
 enum class EGraspProcess : uint8
 {
-	SLERP		UMETA(DisplayName = "SLERP"),
-	TwistAndSwing		UMETA(DisplayName = "TwistAndSwing")
+	SLERP			UMETA(DisplayName = "SLERP"),
+	TwistAndSwing	UMETA(DisplayName = "TwistAndSwing")
+};
+
+/** Enum indicating the hand type */
+UENUM(BlueprintType)
+enum class EGraspStatus : uint8
+{
+	Started			UMETA(DisplayName = "Started"),
+	OrientationStarting		UMETA(DisplayName = "OrientationStarting"),
+	OrientationRunning		UMETA(DisplayName = "OrientationRunning"),
+	Velocity		UMETA(DisplayName = "Velocity"),
+	Stopped		UMETA(DisplayName = "Stopped"),
 };
 
 
@@ -46,7 +57,7 @@ public:
 	void DriveToInitialOrientation(const AHand * const Hand);
 
 	// Updates the Grasp Orientation of the gven Hand
-	void UpdateGrasp(const float Alpha, AHand * const Hand, const float HandOrientationCompareTolerance);
+	void UpdateGrasp(const float Alpha, const float ForceThreshold, AHand * const Hand);
 
 	// Switches the Grasping Style
 	void SwitchGraspStyle(const AHand * const Hand);
@@ -59,6 +70,8 @@ public:
 
 
 private:
+	// The current status of the grasp process
+	EGraspStatus GraspStatus;
 	// The initial HandOrientation
 	FHandOrientation InitialHandOrientation;
 	// The closed HandOrientation
@@ -79,4 +92,8 @@ private:
 	FFingerOrientation LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha);
 
 	void ChangeGraspToVelocity();
+	bool ForceOfAllConstraintsSmaler(const AHand* const Hand, const float ForceThreshold);
+	bool ForceOfAllFingerConstraintsSmaler(const FFinger & Finger, const float ForceThreshold);
+	bool ForceOfAllConstraintsBigger(const AHand* const Hand, const float ForceThreshold);
+	bool ForceOfAllFingerConstraintsBigger(const FFinger & Finger, const float ForceThreshold);
 };

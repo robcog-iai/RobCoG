@@ -104,36 +104,115 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerOrientation & FingerOrienta
 	*/
 }
 
-void Grasp::UpdateGrasp(const float Alpha, AHand * const Hand, const float HandOrientationCompareTolerance)
+void Grasp::UpdateGrasp(const float Alpha, const float ForceThreshold, AHand * const Hand)
 {
-	FHandOrientation CurrentHandOrientation;
-
-	CurrentHandOrientation.IndexOrientation = Hand->Index.GetCurrentFingerOrientation();
-	CurrentHandOrientation.MiddleOrientation = Hand->Middle.GetCurrentFingerOrientation();
-	CurrentHandOrientation.RingOrientation = Hand->Ring.GetCurrentFingerOrientation();
-	CurrentHandOrientation.PinkyOrientation = Hand->Pinky.GetCurrentFingerOrientation();
-	CurrentHandOrientation.ThumbOrientation = Hand->Thumb.GetCurrentFingerOrientation();
-
-	if(CurrentGraspProcess == EGraspProcess::TwistAndSwing)
+	if (Alpha != 0)
 	{
-		/*
-		if (CurrentHandOrientation.Equals(LastHandOrientation, HandOrientationCompareTolerance))
+		if (GraspStatus == EGraspStatus::Stopped)
 		{
-			ChangeGraspToVelocity();
+			GraspStatus = EGraspStatus::OrientationStarting;
 		}
-		else
+		else if (GraspStatus == EGraspStatus::OrientationStarting)
 		{
-			DriveToHandOrientationTarget(CurrentHandOrientation, Hand);
+			// TODO: Initialize Orientation Drives
+			// TODO: Manipulate Orientation Drives
+
+			if (ForceOfAllConstraintsBigger(Hand, 1))
+			{
+				GraspStatus = EGraspStatus::OrientationRunning;
+			}
+
 		}
-		*/
-
-		DriveToHandOrientationTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
-
+		else if (GraspStatus == EGraspStatus::OrientationRunning)
+		{
+			if (ForceOfAllConstraintsSmaler(Hand, ForceThreshold))
+			{
+				GraspStatus = EGraspStatus::Velocity;
+			}
+		}
+		else if (GraspStatus == EGraspStatus::Velocity)
+		{
+			// TODO: Initialize Velocity Drives
+			// TODO: Manipulate Velocity Drives
+		}
 	}
-	else if(CurrentGraspProcess == EGraspProcess::SLERP)
+	else
 	{
-		DriveToHandVelocityTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
+		if (GraspStatus != EGraspStatus::Stopped)
+		{
+			// TODO: Drive to Initial
+			GraspStatus = EGraspStatus::Stopped;
+		}
 	}
+}
+
+bool Grasp::ForceOfAllConstraintsSmaler(const AHand* const Hand, const float ForceThreshold)
+{
+	bool bAllForcesSmaler = true;
+
+	FVector OutAngularForce;
+	FVector OutLinearForce;
+
+	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsSmaler(Hand->Index, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Middle, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Ring, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Pinky, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Thumb, ForceThreshold);
+
+	return bAllForcesSmaler;
+}
+
+bool Grasp::ForceOfAllFingerConstraintsSmaler(const FFinger & Finger, const float ForceThreshold)
+{
+	bool bAllForcesSmaler = true;
+
+	FVector OutAngularForce;
+	FVector OutLinearForce;
+
+	Finger.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+	Finger.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+	Finger.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+	//Hand->Index.FingerPartToConstraint[EFingerPart::Metacarpal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+
+	return bAllForcesSmaler;
+}
+bool Grasp::ForceOfAllConstraintsBigger(const AHand* const Hand, const float ForceThreshold)
+{
+	bool bAllForcesSmaler = true;
+
+	FVector OutAngularForce;
+	FVector OutLinearForce;
+
+	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Index, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Middle, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Ring, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Pinky, ForceThreshold);
+	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Thumb, ForceThreshold);
+
+	return bAllForcesSmaler;
+}
+
+bool Grasp::ForceOfAllFingerConstraintsBigger(const FFinger & Finger, const float ForceThreshold)
+{
+	bool bAllForcesSmaler = true;
+
+	FVector OutAngularForce;
+	FVector OutLinearForce;
+
+	Finger.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+	Finger.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+	Finger.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+	//Hand->Index.FingerPartToConstraint[EFingerPart::Metacarpal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
+
+	return bAllForcesSmaler;
 }
 
 void Grasp::SwitchGraspStyle(const AHand * const Hand)
@@ -182,7 +261,7 @@ void Grasp::SwitchGraspProcess(AHand * const Hand, const float InSpring, const f
 	CurrentGraspProcess = static_cast<EGraspProcess>(CurrentGraspProcessValue);
 	FString CurrentGraspProcessString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspProcess)).ToString();
 
-	if(GEngine) 
+	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *CurrentGraspProcessString));
 
 	//TODO: Initialize different grasp processes
@@ -250,7 +329,7 @@ void Grasp::PrintConstraintForce(const AHand * const Hand)
 
 void Grasp::ChangeGraspToVelocity()
 {
-	
+
 }
 
 FHandOrientation Grasp::LerpHandOrientation(FHandOrientation InitialHandOrientation, FHandOrientation ClosedHandOrientation, float Alpha)

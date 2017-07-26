@@ -372,7 +372,7 @@ void AHand::UpdateGrasp2(const float Alpha)
 {
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->UpdateGrasp(Alpha, this, HandOrientationCompareTolerance);
+		GraspPtr->UpdateGrasp(Alpha, this);
 	}
 	else
 	{
