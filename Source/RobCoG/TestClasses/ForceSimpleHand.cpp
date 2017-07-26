@@ -14,8 +14,8 @@ AForceSimpleHand::AForceSimpleHand()
 	ForceLimit = 0.0;
 
 	bGraspRunning = false;
-	bGraspChangeable = false;
-
+	bLeftChangeable = false;
+	bRightChangeable = false;
 
 	USkeletalMeshComponent* SkeletalMesh = GetSkeletalMeshComponent();
 	if (SkeletalMesh == nullptr)
@@ -64,32 +64,31 @@ void AForceSimpleHand::Tick(float DeltaTime)
 
 		LeftConstraint->GetConstraintForce(OutLinearForce, OutAngularForce);
 		if (OutAngularForce.Size() > ForceThreshold)
-			bGraspChangeable = true;
-		RightConstraint->GetConstraintForce(OutLinearForce, OutAngularForce);
-		if (OutAngularForce.Size() > ForceThreshold)
-			bGraspChangeable = true;
+			bLeftChangeable = true;
 
-
-
-		if (bGraspChangeable)
+		if (bLeftChangeable)
 		{
 			if (OutAngularForce.Size() < 1)
 			{
 				if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Change Left to Velocity");
-				//InitializeVelocityTwistAndSwing(LeftConstraint, FVector(10, 0, 0));
+				InitializeVelocityTwistAndSwing(LeftConstraint, FVector(10, 0, 0));
 			}
 		}
 		UE_LOG(LogTemp, Warning, TEXT("Left Force: %f"), OutAngularForce.Size());
 
+		RightConstraint->GetConstraintForce(OutLinearForce, OutAngularForce);
+		if (OutAngularForce.Size() > ForceThreshold)
+			bRightChangeable = true;
 
-
-		
-		if (OutAngularForce.Size() < 0.00001)
+		if (bRightChangeable)
 		{
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Change Right to Velocity");
-			//InitializeVelocityTwistAndSwing(RightConstraint, FVector(10, 0, 0));
+
+			if (OutAngularForce.Size() < 1)
+			{
+				if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Change Right to Velocity");
+				InitializeVelocityTwistAndSwing(RightConstraint, FVector(10, 0, 0));
+			}
 		}
-	}
 		UE_LOG(LogTemp, Warning, TEXT("Right Force: %f"), OutAngularForce.Size());
 	}
 }
@@ -120,7 +119,8 @@ void AForceSimpleHand::StopGrasp(const float Value)
 		{
 			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "StopGrasp");
 			bGraspRunning = false;
-			bGraspChangeable = false;
+			bLeftChangeable = false;
+			bRightChangeable = false;
 
 			ResetConstraint(LeftConstraint);
 			ResetConstraint(RightConstraint);

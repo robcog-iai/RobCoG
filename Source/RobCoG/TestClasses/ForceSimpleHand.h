@@ -46,7 +46,8 @@ public:
 
 private:
 	bool bGraspRunning;
-	bool bGraspChangeable;
+	bool bLeftChangeable;
+	bool bRightChangeable;
 
 	FConstraintInstance* LeftConstraint;
 
