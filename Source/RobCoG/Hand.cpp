@@ -37,7 +37,8 @@ AHand::AHand()
 	Spring = 100.0f;
 	Damping = 100.0f;
 	ForceLimit = 0.0f;
-	HandOrientationCompareTolerance = 0.0f;
+
+	VelocityThreshold = 1.0;
 
 	TickValue = 0.0f;
 
@@ -59,7 +60,8 @@ void AHand::BeginPlay()
 	AttachmentCollision->OnComponentEndOverlap.AddDynamic(this, &AHand::OnAttachmentCollisionEndOverlap);
 
 	// Setup the values for controlling the hand fingers
-	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing);
+	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Orientation);
+	AHand::SetupBones();
 
 }
 
@@ -76,7 +78,7 @@ void AHand::Tick(float DeltaTime)
 		if (TickValue > 0.5)
 		{
 			TickValue = 0.0f;
-			GraspPtr->PrintConstraintForce(this);
+			GraspPtr->PrintHandInfo(this);
 		}
 	}
 }
@@ -283,29 +285,50 @@ FORCEINLINE void AHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InSke
 }
 
 // Setup fingers angular drive values
-FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode)
+FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType)
 {
 	USkeletalMeshComponent* const SkelMeshComp = GetSkeletalMeshComponent();
 	if (Thumb.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Thumb.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Thumb.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Index.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Index.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Index.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Middle.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Middle.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Middle.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Ring.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Ring.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Ring.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Pinky.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Pinky.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Pinky.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
+}
+
+// Reset fingers angular drive values
+void AHand::ResetAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType)
+{
+	Thumb.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Index.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Middle.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Ring.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Pinky.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+}
+
+// Setup finger bones
+FORCEINLINE void AHand::SetupBones()
+{
+	USkeletalMeshComponent* const SkelMeshComp = GetSkeletalMeshComponent();
+	Thumb.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Index.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Middle.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Ring.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Pinky.SetFingerPartsBones(SkelMeshComp->Bodies);
 }
 
 // Switch the grasp pose
@@ -372,7 +395,7 @@ void AHand::UpdateGrasp2(const float Alpha)
 {
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->UpdateGrasp(Alpha, this);
+		GraspPtr->UpdateGrasp(Alpha, VelocityThreshold, this);
 	}
 	else
 	{

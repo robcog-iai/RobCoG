@@ -84,6 +84,8 @@ public:
 	// Detach from hand
 	void DetachFromHand();
 
+
+	void ResetAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType);
 protected:
 
 	// Enable grasping with fixation
@@ -117,9 +119,11 @@ protected:
 	// Limit of the force that the angular drive can apply
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
 		float ForceLimit;
-	// Limit of the force that the angular drive can apply
+
+	// Limit of the force that the angular drive must apply before changiing to velocity
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
-		float HandOrientationCompareTolerance;
+		float VelocityThreshold;
+
 
 	// Post edit change property callback
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent);
@@ -165,6 +169,8 @@ private:
 	FORCEINLINE void SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshComponent);
 
 	// Setup fingers angular drive values
-	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode);
+	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType);
 
+	// Setup finger bones
+	FORCEINLINE void SetupBones();
 };

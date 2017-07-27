@@ -13,8 +13,10 @@ class AHand;
 UENUM(BlueprintType)
 enum class EGraspProcess : uint8
 {
-	SLERP			UMETA(DisplayName = "SLERP"),
-	TwistAndSwing	UMETA(DisplayName = "TwistAndSwing")
+	SLERP_Orientation			UMETA(DisplayName = "SLERP_Orientation"), 
+	SLERP_Velocity				UMETA(DisplayName = "SLERP_Velocity"),
+	TwistAndSwing_Orientation	UMETA(DisplayName = "TwistAndSwing_Orientation"),
+	TwistAndSwing_Velocity		UMETA(DisplayName = "TwistAndSwing_Velocity"),
 };
 
 /** Enum indicating the hand type */
@@ -22,10 +24,9 @@ UENUM(BlueprintType)
 enum class EGraspStatus : uint8
 {
 	Started			UMETA(DisplayName = "Started"),
-	OrientationStarting		UMETA(DisplayName = "OrientationStarting"),
-	OrientationRunning		UMETA(DisplayName = "OrientationRunning"),
+	Orientation		UMETA(DisplayName = "Orientation"),
 	Velocity		UMETA(DisplayName = "Velocity"),
-	Stopped		UMETA(DisplayName = "Stopped"),
+	Stopped			UMETA(DisplayName = "Stopped"),
 };
 
 
@@ -39,12 +40,12 @@ public:
 	~Grasp();
 
 	// Sets the InitialHandOrientation
-	void SetInitialHandOrientation(FHandOrientation InitialHandOrientation);
+	void SetInitialHandOrientation(const FHandOrientation & InitialHandOrientation);
 	// Sets the ClosedHandOrientation
-	void SetClosedHandOrientation(FHandOrientation ClosedHandOrientation);
+	void SetClosedHandOrientation(const FHandOrientation & ClosedHandOrientation);
 
 	// Moves the given Hand to the given HandOrientation
-	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation,const AHand* const Hand);
+	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand* const Hand);
 	// Moves the given Finger to the given FingerOrientation
 	void DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
@@ -57,7 +58,7 @@ public:
 	void DriveToInitialOrientation(const AHand * const Hand);
 
 	// Updates the Grasp Orientation of the gven Hand
-	void UpdateGrasp(const float Alpha, const float ForceThreshold, AHand * const Hand);
+	void UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand * const Hand);
 
 	// Switches the Grasping Style
 	void SwitchGraspStyle(const AHand * const Hand);
@@ -66,7 +67,7 @@ public:
 	void SwitchGraspProcess(AHand * const Hand, const float InSpring, const float InDamping, const float ForceLimit);
 
 	// Print The Fore 
-	void PrintConstraintForce(const AHand * const Hand);
+	void PrintHandInfo(const AHand * const Hand);
 
 
 private:
@@ -85,13 +86,13 @@ private:
 
 	// Parser of the ini files
 	TSharedPtr<HandOrientationParser> HandOrientationParserPtr;
-	
-	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
-	FHandOrientation LerpHandOrientation(FHandOrientation InitialHandOrientation, FHandOrientation ClosedHandOrientation, float Alpha);
-	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
-	FFingerOrientation LerpFingerOrientation(FFingerOrientation InitialFingerOrientation, FFingerOrientation ClosedFingerOrientation, float Alpha);
 
-	void ChangeGraspToVelocity();
+	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
+	FHandOrientation LerpHandOrientation(const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha);
+	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
+	FFingerOrientation LerpFingerOrientation(const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha);
+
+	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold);
 	bool ForceOfAllConstraintsSmaler(const AHand* const Hand, const float ForceThreshold);
 	bool ForceOfAllFingerConstraintsSmaler(const FFinger & Finger, const float ForceThreshold);
 	bool ForceOfAllConstraintsBigger(const AHand* const Hand, const float ForceThreshold);
