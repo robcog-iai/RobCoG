@@ -105,7 +105,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 		if (GraspStatus == EGraspStatus::Stopped)
 		{
 			GraspStatus = EGraspStatus::Orientation;
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Orientation");
+			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
 		}
 		else if (GraspStatus == EGraspStatus::Orientation)
 		{
@@ -117,7 +117,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold))
 			{
 				GraspStatus = EGraspStatus::Velocity;
-				if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Velocity");
+				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");
 			}
 
 		}
@@ -136,7 +136,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			Hand->ResetAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Orientation);
 			DriveToInitialOrientation(Hand);
 			GraspStatus = EGraspStatus::Stopped;
-			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Stopped");
+			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Stopped");
 		}
 	}
 }
@@ -309,10 +309,10 @@ void Grasp::PrintHandInfo(const AHand * const Hand)
 	FVector OutAngularForce;
 
 	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(1, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
 
 	Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(3, 1, FColor::Blue, FString::Printf(TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
 
 /*
 	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
