@@ -47,6 +47,14 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
 	bool bShowTargetArrows;
 
+	// If hands enabled, try fixation grasp
+	UPROPERTY(EditAnywhere, Category = "MC|Hands")
+	bool bTryFixationGrasp;
+
+	// If hands enable it, try two hands fixation grasp
+	UPROPERTY(EditAnywhere, Category = "MC|Hands", meta = (editcondition = "bEnableFixationGrasp"))
+	bool bTryTwoHandsFixationGrasp;
+
 	// PID controller proportional argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float PGain;
@@ -66,6 +74,10 @@ protected:
 	// Hand rotation controller boost
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
 	float RotationBoost;
+	
+	// Character camera
+	UPROPERTY(EditAnywhere)
+	UCameraComponent* CharCamera;
 	
 	// Handles moving forward/backward
 	void MoveForward(const float Val);
@@ -97,19 +109,16 @@ protected:
 	void GraspWithRightHand(const float Val);
 
 	// Attach to left hand
-	void AttachToLeftHand();
+	void TryLeftFixationGrasp();
 
 	// Attach to right hand
-	void AttachToRightHand();
+	void TryRightFixationGrasp();
 
 	// Detach from left hand
-	void DetachFromLeftHand();
+	void TryLeftGraspDetach();
 
 	// Detach from right hand
-	void DetachFromRightHand();
-
-	// Character camera
-	UCameraComponent* CharCamera;
+	void TryRightGraspDetach();
 
 	// Motion controller origin parent
 	USceneComponent* MCOriginComponent;
@@ -143,5 +152,4 @@ protected:
 
 	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
 	FQuat RightHandRotationOffset;
-
 };

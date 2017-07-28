@@ -15,7 +15,7 @@ Grasp::Grasp()
 	if (!EnumPtr) return;
 
 	FString ConfigDir = FPaths::GameConfigDir();
-	
+
 	//For creating new HandInformation .Ini
 	//FString TestConfig = ConfigDir + "TestGrasp.ini";
 	//HandOrientationParserPtr->SetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, TestConfig);
@@ -104,17 +104,21 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 	{
 		if (GraspStatus == EGraspStatus::Stopped)
 		{
-			GraspStatus = EGraspStatus::Orientation;
-			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
-		}
-		else if (GraspStatus == EGraspStatus::Orientation)
-		{
-			// Initialize Orientation Drives
-			Hand->ResetAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Orientation);
 			// Manipulate Orientation Drives
 			DriveToHandOrientationTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
 
-			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold))
+			if (CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Bigger))
+			{
+				GraspStatus = EGraspStatus::Orientation;
+				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
+			}
+		}
+		else if (GraspStatus == EGraspStatus::Orientation)
+		{
+			// Manipulate Orientation Drives
+			DriveToHandOrientationTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
+
+			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Smaller))
 			{
 				GraspStatus = EGraspStatus::Velocity;
 				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");
@@ -141,16 +145,29 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 	}
 }
 
-bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold)
+bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison)
 {
-	bool bVelocitySmaler = true;
+	bool bVelocitySmaler;
+	if (Comparison == EComparison::Smaller)
+	{
+		bVelocitySmaler = true;
 
-	bVelocitySmaler = bVelocitySmaler && (Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
-	bVelocitySmaler = bVelocitySmaler && (Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
-	bVelocitySmaler = bVelocitySmaler && (Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
-	bVelocitySmaler = bVelocitySmaler && (Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
-	bVelocitySmaler = bVelocitySmaler && (Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler && (Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler && (Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler && (Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler && (Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler && (Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
+	}
+	else if (Comparison == EComparison::Bigger)
+	{
+		bVelocitySmaler = false;
 
+		bVelocitySmaler = bVelocitySmaler || (Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler || (Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler || (Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler || (Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
+		bVelocitySmaler = bVelocitySmaler || (Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
+	}
 	return bVelocitySmaler;
 }
 
@@ -314,42 +331,42 @@ void Grasp::PrintHandInfo(const AHand * const Hand)
 	Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
 	if (GEngine) GEngine->AddOnScreenDebugMessage(3, 1, FColor::Blue, FString::Printf(TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
 
-/*
-	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
-	Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: Intermetiate - Force: %f"), OutAngularForce.Size());
-	Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: ProximalConstraint - Force: %f"), OutAngularForce.Size());
+	/*
+		Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
+		Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: Intermetiate - Force: %f"), OutAngularForce.Size());
+		Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: ProximalConstraint - Force: %f"), OutAngularForce.Size());
 
-	Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
-	Hand->Index.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Index - Part: Intermetiate - Force: %f"), OutAngularForce.Size());
-	Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Index - Part: ProximalConstraint - Force: %f"), OutAngularForce.Size());
+		Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
+		Hand->Index.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Index - Part: Intermetiate - Force: %f"), OutAngularForce.Size());
+		Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Index - Part: ProximalConstraint - Force: %f"), OutAngularForce.Size());
 
-	Hand->Middle.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
-	Hand->Middle.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-	Hand->Middle.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
+		Hand->Middle.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
+		Hand->Middle.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
+		Hand->Middle.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
 
-	Hand->Ring.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
-	Hand->Ring.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-	Hand->Ring.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
+		Hand->Ring.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
+		Hand->Ring.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
+		Hand->Ring.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
 
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
-	*/
+		Hand->Pinky.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
+		Hand->Pinky.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
+		Hand->Pinky.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
+		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
+		*/
 }
 
 

@@ -10,7 +10,7 @@
 
 class AHand;
 
-/** Enum indicating the hand type */
+/** Enum indicating the grasp process */
 UENUM(BlueprintType)
 enum class EGraspProcess : uint8
 {
@@ -20,14 +20,23 @@ enum class EGraspProcess : uint8
 	TwistAndSwing_Velocity		UMETA(DisplayName = "TwistAndSwing_Velocity"),
 };
 
-/** Enum indicating the hand type */
+/** Enum indicating the grasp status */
 UENUM(BlueprintType)
 enum class EGraspStatus : uint8
 {
-	Started			UMETA(DisplayName = "Started"),
-	Orientation		UMETA(DisplayName = "Orientation"),
-	Velocity		UMETA(DisplayName = "Velocity"),
-	Stopped			UMETA(DisplayName = "Stopped"),
+	Started		UMETA(DisplayName = "Started"),
+	Orientation	UMETA(DisplayName = "Orientation"),
+	Velocity	UMETA(DisplayName = "Velocity"),
+	Stopped		UMETA(DisplayName = "Stopped"),
+};
+
+/** Enum indicating the hand type */
+UENUM(BlueprintType)
+enum class EComparison : uint8
+{
+	Bigger	UMETA(DisplayName = "Bigger"),
+	Smaller	UMETA(DisplayName = "Smaller"),
+	Equals	UMETA(DisplayName = "Equals"),
 };
 
 
@@ -90,7 +99,7 @@ private:
 	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
 	FFingerOrientation LerpFingerOrientation(const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha);
 
-	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold);
+	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison);
 	bool ForceOfAllConstraintsSmaler(const AHand* const Hand, const float ForceThreshold);
 	bool ForceOfAllFingerConstraintsSmaler(const FFinger & Finger, const float ForceThreshold);
 	bool ForceOfAllConstraintsBigger(const AHand* const Hand, const float ForceThreshold);
