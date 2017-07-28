@@ -76,6 +76,9 @@ void AForceSimpleHand::Tick(float DeltaTime)
 		}
 		UE_LOG(LogTemp, Warning, TEXT("Left Force: %f"), OutAngularForce.Size());
 
+
+		//RIGHT
+
 		RightConstraint->GetConstraintForce(OutLinearForce, OutAngularForce);
 		if (OutAngularForce.Size() > ForceThreshold)
 			bRightChangeable = true;

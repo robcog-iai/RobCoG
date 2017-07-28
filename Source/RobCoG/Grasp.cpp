@@ -7,7 +7,7 @@
 
 Grasp::Grasp()
 {
-	HandOrientationParserPtr = MakeShareable(new HandOrientationParser());
+	HandInformationnParserPtr = MakeShareable(new HandInformationParser());
 	CurrentGraspProcess = EGraspProcess::TwistAndSwing_Orientation;
 	CurrentGraspType = EGraspType::FullGrasp;
 
@@ -15,24 +15,18 @@ Grasp::Grasp()
 	if (!EnumPtr) return;
 
 	FString ConfigDir = FPaths::GameConfigDir();
+	
+	//For creating new HandInformation .Ini
+	//FString TestConfig = ConfigDir + "TestGrasp.ini";
+	//HandOrientationParserPtr->SetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, TestConfig);
 
 	FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
 	FString ConfigName = ConfigDir + GraspTypeString + ".ini";
-	HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, ConfigName);
+	HandInformationnParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
 }
 
 Grasp::~Grasp()
 {
-}
-
-void Grasp::SetInitialHandOrientation(const FHandOrientation & InitialHandOrientation)
-{
-	this->InitialHandOrientation = InitialHandOrientation;
-}
-
-void Grasp::SetClosedHandOrientation(const FHandOrientation & ClosedHandOrientation)
-{
-	this->ClosedHandOrientation = ClosedHandOrientation;
 }
 
 void Grasp::DriveToInitialOrientation(const AHand * const Hand)
@@ -72,30 +66,30 @@ void Grasp::DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrie
 	*/
 }
 
-void Grasp::DriveToHandVelocityTarget(const FHandOrientation & HandOrientation, const AHand * const Hand)
+void Grasp::DriveToHandVelocityTarget(const FHandVelocity & HandVelocity, const AHand * const Hand)
 {
-	DriveToFingerVelocityTarget(HandOrientation.ThumbOrientation, Hand->Thumb);
-	DriveToFingerVelocityTarget(HandOrientation.IndexOrientation, Hand->Index);
-	DriveToFingerVelocityTarget(HandOrientation.MiddleOrientation, Hand->Middle);
-	DriveToFingerVelocityTarget(HandOrientation.RingOrientation, Hand->Ring);
-	DriveToFingerVelocityTarget(HandOrientation.PinkyOrientation, Hand->Pinky);
+	DriveToFingerVelocityTarget(HandVelocity.ThumbVelocity, Hand->Thumb);
+	DriveToFingerVelocityTarget(HandVelocity.IndexVelocity, Hand->Index);
+	DriveToFingerVelocityTarget(HandVelocity.MiddleVelocity, Hand->Middle);
+	DriveToFingerVelocityTarget(HandVelocity.RingVelocity, Hand->Ring);
+	DriveToFingerVelocityTarget(HandVelocity.PinkyVelocity, Hand->Pinky);
 }
 
-void Grasp::DriveToFingerVelocityTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger)
+void Grasp::DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, const FFinger & Finger)
 {
 	FConstraintInstance* Constraint;
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.DistalOrientation.Orientation.Vector());
+		Constraint->SetAngularVelocityTarget(FingerVelocity.DistalVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.IntermediateOrientation.Orientation.Vector());
+		Constraint->SetAngularVelocityTarget(FingerVelocity.IntermediateVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
 	if (Constraint)
-		Constraint->SetAngularVelocityTarget(FingerOrientation.ProximalOrientation.Orientation.Vector());
+		Constraint->SetAngularVelocityTarget(FingerVelocity.ProximalVelocity.Velocity);
 
 	/* Not Implemented yet
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
@@ -132,14 +126,14 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			// Initialize Velocity Drives
 			Hand->ResetAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Velocity);
 			// Manipulate Velocity Drives
-			// TODO: VELOCITY
-			DriveToHandVelocityTarget(LerpHandOrientation(InitialHandOrientation, ClosedHandOrientation, Alpha), Hand);
+			DriveToHandVelocityTarget(HandVelocity, Hand);
 		}
 	}
 	else
 	{
 		if (GraspStatus != EGraspStatus::Stopped)
 		{
+			Hand->ResetAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Orientation);
 			DriveToInitialOrientation(Hand);
 			GraspStatus = EGraspStatus::Stopped;
 			if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Green, "Stopped");
@@ -231,11 +225,8 @@ bool Grasp::ForceOfAllFingerConstraintsBigger(const FFinger & Finger, const floa
 
 void Grasp::SwitchGraspStyle(const AHand * const Hand)
 {
-	if (HandOrientationParserPtr.IsValid())
+	if (HandInformationnParserPtr.IsValid())
 	{
-		FHandOrientation InitialHandOrientation;
-		FHandOrientation ClosedHandOrientation;
-
 		FString ConfigDir = FPaths::GameConfigDir();
 
 		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EGraspType"), true);
@@ -254,10 +245,8 @@ void Grasp::SwitchGraspStyle(const AHand * const Hand)
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *GraspTypeString));
 
-		HandOrientationParserPtr->GetHandOrientationsForGraspType(InitialHandOrientation, ClosedHandOrientation, ConfigName);
+		HandInformationnParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
 
-		SetInitialHandOrientation(InitialHandOrientation);
-		SetClosedHandOrientation(ClosedHandOrientation);
 		DriveToInitialOrientation(Hand);
 	}
 }
@@ -302,26 +291,30 @@ void Grasp::SwitchGraspProcess(AHand * const Hand, const float InSpring, const f
 void Grasp::PrintHandInfo(const AHand * const Hand)
 {
 
-	UE_LOG(LogTemp, Warning, TEXT("Index - Distal - Velocity: %f"),
-		Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	UE_LOG(LogTemp, Warning, TEXT("Middle - Distal - Velocity: %f"),
-		Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	UE_LOG(LogTemp, Warning, TEXT("Ring - Distal - Velocity: %f"),
-		Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	UE_LOG(LogTemp, Warning, TEXT("Pinky - Distal - Velocity: %f"),
-		Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	UE_LOG(LogTemp, Warning, TEXT("Thumb - Distal - Velocity: %f"),
-		Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("Index - Distal - Velocity: %f"),
+	//	Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("Middle - Distal - Velocity: %f"),
+	//	Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("Ring - Distal - Velocity: %f"),
+	//	Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("Pinky - Distal - Velocity: %f"),
+	//	Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("Thumb - Distal - Velocity: %f"),
+	//	Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
 
 	//UE_LOG(LogTemp, Warning, TEXT("Index - Distal - AngularVelocity: %f"),
-		//Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldAngularVelocity().Size());
+	//	Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldAngularVelocity().Size());
 
-
-	
-	/*
 	FVector OutLinearForce;
 	FVector OutAngularForce;
 
+	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(1, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
+
+	Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
+
+/*
 	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
 	UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
 	Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);

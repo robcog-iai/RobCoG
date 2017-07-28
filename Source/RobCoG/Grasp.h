@@ -3,9 +3,10 @@
 #pragma once
 
 #include "Enums/GraspType.h"
-#include "Utilities/HandOrientationParser.h"
+#include "Utilities/HandInformationParser.h"
 #include "Structs/Finger.h"
 #include "Structs/HandOrientation.h"
+#include "Structs/HandVelocity.h"
 
 class AHand;
 
@@ -38,21 +39,16 @@ class ROBCOG_API Grasp
 public:
 	Grasp();
 	~Grasp();
-
-	// Sets the InitialHandOrientation
-	void SetInitialHandOrientation(const FHandOrientation & InitialHandOrientation);
-	// Sets the ClosedHandOrientation
-	void SetClosedHandOrientation(const FHandOrientation & ClosedHandOrientation);
-
+	
 	// Moves the given Hand to the given HandOrientation
 	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand* const Hand);
 	// Moves the given Finger to the given FingerOrientation
 	void DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
 	// Moves the given Hand to the given HandOrientation
-	void DriveToHandVelocityTarget(const FHandOrientation & HandOrientation, const AHand * const Hand);
+	void DriveToHandVelocityTarget(const FHandVelocity & HandVelocity, const AHand * const Hand);
 	// Moves the given Finger to the given FingerOrientation
-	void DriveToFingerVelocityTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
+	void DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, const FFinger & Finger);
 
 	// Drives the given Hand to the InitialHandOrientation
 	void DriveToInitialOrientation(const AHand * const Hand);
@@ -77,6 +73,8 @@ private:
 	FHandOrientation InitialHandOrientation;
 	// The closed HandOrientation
 	FHandOrientation ClosedHandOrientation;
+	// The HandVelocity after grasping
+	FHandVelocity HandVelocity;
 	// The HandOrientation of the last Tick
 	FHandOrientation LastHandOrientation;
 	// The Current Grasp Position
@@ -85,7 +83,7 @@ private:
 	EGraspProcess CurrentGraspProcess;
 
 	// Parser of the ini files
-	TSharedPtr<HandOrientationParser> HandOrientationParserPtr;
+	TSharedPtr<HandInformationParser> HandInformationnParserPtr;
 
 	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
 	FHandOrientation LerpHandOrientation(const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha);

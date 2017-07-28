@@ -334,7 +334,7 @@ FORCEINLINE void AHand::SetupBones()
 // Switch the grasp pose
 void AHand::SwitchGraspStyle()
 {
-	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandOrientationParser);
+	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandInformationParser);
 	if (GraspPtr.IsValid())
 	{
 		GraspPtr->SwitchGraspStyle(this);
