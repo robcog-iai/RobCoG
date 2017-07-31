@@ -4,7 +4,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HandOrientation.h"
 #include "PhysicsEngine/ConstraintInstance.h"
+#include "PhysicsEngine/BodySetup.h"
+
 #include "Finger.generated.h"
 
 /** Enum indicating the finger type */
@@ -26,9 +29,16 @@ UENUM(BlueprintType)
 enum class EFingerPart : uint8
 {
 	Metacarpal		UMETA(DisplayName = "Metacarpal"),
-	Proximal		UMETA(DisplayName = "Proximal"),
-	Intermediate	UMETA(DisplayName = "Intermediate"),
-	Distal			UMETA(DisplayName = "Distal")
+	Proximal		UMETA(DisplayName = "ProximalConstraint"),
+	Intermediate	UMETA(DisplayName = "IntermediateConstraint"),
+	Distal			UMETA(DisplayName = "DistalConstraint")
+};
+
+UENUM(BlueprintType)
+enum class EAngularDriveType : uint8
+{
+	Orientation		UMETA(DisplayName = "Orientation"),
+	Velocity		UMETA(DisplayName = "Velocity"),
 };
 
 /**
@@ -40,7 +50,8 @@ struct FFinger
 	GENERATED_USTRUCT_BODY()
 
 	// Default constructor
-	FFinger()
+	FFinger() :
+		FingerType(EFingerType::Thumb)
 	{}
 
 	// Finger type
@@ -49,7 +60,10 @@ struct FFinger
 
 	// Map of finger part to skeletal bone name
 	UPROPERTY(EditAnywhere, Category = "Finger")
-	TMap<EFingerPart, FString> FingerPartToBoneName;
+		TMap<EFingerPart, FString> FingerPartToBoneName;
+
+	// Map of finger part to skeletal bone 
+	TMap<EFingerPart, FBodyInstance*> FingerPartToBone;
 
 	// Map of finger part to constraint
 	TMap<EFingerPart, FConstraintInstance*> FingerPartToConstraint;
@@ -64,7 +78,7 @@ struct FFinger
 			// Check if bone name match with the constraint joint name
 			FConstraintInstance* FingerPartConstraint = *Constraints.FindByPredicate(
 				[&MapItr](FConstraintInstance* ConstrInst)
-				{return ConstrInst->JointName.ToString() == MapItr.Value;}
+			{return ConstrInst->JointName.ToString() == MapItr.Value; }
 			);
 			// If constraint has been found, add to map
 			if (FingerPartConstraint)
@@ -80,9 +94,36 @@ struct FFinger
 		return true;
 	}
 
+	// Set finger part to constraint from bone names
+	bool SetFingerPartsBones(TArray<FBodyInstance*>& Bodies)
+	{
+		// Iterate the bone names
+		for (const auto& MapItr : FingerPartToBoneName)
+		{
+			// TODO null ptr exception if the names do not match
+			// Check if bone name match with the constraint joint name
+			FBodyInstance* FingerPartBone = *Bodies.FindByPredicate(
+				[&MapItr](FBodyInstance* BodyInst)
+			{return BodyInst->BodySetup->BoneName.ToString() == MapItr.Value; }
+			);
+			// If constraint has been found, add to map
+			if (FingerPartBone)
+			{
+				FingerPartToBone.Add(MapItr.Key, FingerPartBone);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("Finger: Bone %s has no bone!"), *MapItr.Value);
+				return false;
+			}
+		}
+		return true;
+	}
+
 	// Set constraint drive mode
 	void SetFingerDriveMode(
 		const EAngularDriveMode::Type DriveMode,
+		const EAngularDriveType DriveType,
 		const float InSpring,
 		const float InDamping,
 		const float InForceLimit)
@@ -92,13 +133,53 @@ struct FFinger
 			MapItr.Value->SetAngularDriveMode(DriveMode);
 			if (DriveMode == EAngularDriveMode::TwistAndSwing)
 			{
-				MapItr.Value->SetOrientationDriveTwistAndSwing(true, true);
+				if(DriveType == EAngularDriveType::Orientation)
+				{
+					MapItr.Value->SetOrientationDriveSLERP(false);
+					MapItr.Value->SetAngularVelocityDriveSLERP(false);
+					MapItr.Value->SetAngularVelocityDriveTwistAndSwing(false, false);
+					MapItr.Value->SetOrientationDriveTwistAndSwing(true, true);
+				}
+				else if(DriveType == EAngularDriveType::Velocity)
+				{
+					MapItr.Value->SetOrientationDriveSLERP(false);
+					MapItr.Value->SetAngularVelocityDriveSLERP(false);
+					MapItr.Value->SetOrientationDriveTwistAndSwing(false, false);
+					MapItr.Value->SetAngularVelocityDriveTwistAndSwing(true, true);
+				}
 			}
 			else if (DriveMode == EAngularDriveMode::SLERP)
 			{
-				MapItr.Value->SetOrientationDriveSLERP(true);
-			}			
+				if (DriveType == EAngularDriveType::Orientation)
+				{
+					MapItr.Value->SetOrientationDriveTwistAndSwing(false, false);
+					MapItr.Value->SetAngularVelocityDriveTwistAndSwing(false, false);
+					MapItr.Value->SetAngularVelocityDriveSLERP(false);
+					MapItr.Value->SetOrientationDriveSLERP(true);
+				}
+				else if (DriveType == EAngularDriveType::Velocity)
+				{
+					MapItr.Value->SetOrientationDriveTwistAndSwing(false, false);
+					MapItr.Value->SetAngularVelocityDriveTwistAndSwing(false, false);
+					MapItr.Value->SetOrientationDriveSLERP(false);
+					MapItr.Value->SetAngularVelocityDriveSLERP(true);
+				}
+			}
 			MapItr.Value->SetAngularDriveParams(InSpring, InDamping, InForceLimit);
 		}
 	}
+
+	FFingerOrientation GetCurrentFingerOrientation()
+	{
+
+		FFingerOrientation FingerOrientation;
+
+		FingerOrientation.DistalOrientation.Orientation = FingerPartToConstraint[EFingerPart::Distal]->AngularRotationOffset;
+		FingerOrientation.IntermediateOrientation.Orientation = FingerPartToConstraint[EFingerPart::Intermediate]->AngularRotationOffset;
+		FingerOrientation.ProximalOrientation.Orientation = FingerPartToConstraint[EFingerPart::Proximal]->AngularRotationOffset;
+		//FingerOrientation.MetacarpalOrientation.Orientation = FingerPartToConstraint[EFingerPart::Metacarpal]->AngularRotationOffset;
+
+		return FingerOrientation;
+	}
+
 };

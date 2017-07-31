@@ -174,7 +174,8 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
-	PlayerInputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &AMCCharacter::SwitchGrasp);
+	PlayerInputComponent->BindAction("SwitchGraspStyle", IE_Pressed, this, &AMCCharacter::SwitchGraspStyle);
+	PlayerInputComponent->BindAction("SwitchGraspProcess", IE_Pressed, this, &AMCCharacter::SwitchGraspProcess);
 
 	// Hand action binding
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::TryLeftFixationGrasp);
@@ -263,17 +264,31 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
-// Switch Grasp
-void AMCCharacter::SwitchGrasp()
+// Switch Grasp style
+void AMCCharacter::SwitchGraspStyle()
 {
 	if (RightHand)
 	{
-		RightHand->SwitchGrasp();
+		RightHand->SwitchGraspStyle();
 	}
 
 	if (LeftHand)
 	{
-		LeftHand->SwitchGrasp();
+		LeftHand->SwitchGraspStyle();
+	}
+}
+
+// Switch Grasp process
+void AMCCharacter::SwitchGraspProcess()
+{
+	if (RightHand)
+	{
+		RightHand->SwitchGraspProcess();
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchGraspProcess();
 	}
 }
 
@@ -291,8 +306,9 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (RightHand)
 	{
-		RightHand->UpdateGrasp(Val);
-		//RightHand->UpdateGrasp2(Val); // TODO For the realisitc grasping part
+		//RightHand->UpdateGrasp(Val);
+		// TODO For the realisitc grasping part
+		RightHand->UpdateGrasp2(Val); 
 	}
 }
 

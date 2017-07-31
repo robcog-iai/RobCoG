@@ -4,7 +4,6 @@
 #include "Hand.h"
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "HandOrientationParser.h"
 #include "Engine/Engine.h"
 
 // Sets default values
@@ -45,6 +44,10 @@ AHand::AHand()
 	Damping = 1000.0f;
 	ForceLimit = 0.0f;
 
+	VelocityThreshold = 1.0;
+
+	TickValue = 0.0f;
+
 	// Set fingers and their bone names default values
 	AHand::SetupHandDefaultValues(HandType);
 
@@ -60,14 +63,15 @@ void AHand::BeginPlay()
 	Super::BeginPlay();
 
 	// Disable tick as default
-	SetActorTickEnabled(false);
+	//SetActorTickEnabled(false);
 
 	// Bind overlap events
 	FixationGraspArea->OnComponentBeginOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaBeginOverlap);
 	FixationGraspArea->OnComponentEndOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaEndOverlap);
 
 	// Setup the values for controlling the hand fingers
-	AHand::SetupAngularDriveValues(AngularDriveMode);
+	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Orientation);
+	AHand::SetupBones();
 
 }
 
@@ -75,6 +79,18 @@ void AHand::BeginPlay()
 void AHand::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	//Debug
+	if (this->HandType == EHandType::Right && GraspPtr.IsValid())
+	{
+		TickValue += DeltaTime;
+
+		if (TickValue > 0.2)
+		{
+			TickValue = 0.0f;
+			GraspPtr->PrintHandInfo(this);
+		}
+	}
 
 	if (bMovementMimickingHand)
 	{
@@ -190,23 +206,7 @@ void AHand::UpdateGrasp(const float Goal)
 // Physics based grasping
 void AHand::UpdateGrasp2(const float Alpha)
 {
-	GraspPtr->UpdateGrasp(Alpha, this);
-}
-
-// Switch the grasp pose
-void AHand::SwitchGrasp()
-{
-	//TODO: Dynamically Switching, not hardcoded
-
-	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandOrientationParser);
-	if (GraspPtr.IsValid())
-	{
-		GraspPtr->SwitchGrasp(this);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
-	}
+	GraspPtr->UpdateGrasp(Alpha, VelocityThreshold, this);
 }
 
 // Fixation grasp via attachment of the object to the hand
@@ -549,27 +549,75 @@ void AHand::SetupSkeletalDefaultValues(USkeletalMeshComponent* InSkeletalMeshCom
 }
 
 // Setup fingers angular drive values
-void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode)
+FORCEINLINE void AHand::SetupAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType)
 {
 	USkeletalMeshComponent* const SkelMeshComp = GetSkeletalMeshComponent();
 	if (Thumb.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Thumb.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Thumb.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Index.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Index.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Index.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Middle.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Middle.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Middle.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Ring.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Ring.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Ring.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
 	}
 	if (Pinky.SetFingerPartsConstraints(SkelMeshComp->Constraints))
 	{
-		Pinky.SetFingerDriveMode(DriveMode, Spring, Damping, ForceLimit);
+		Pinky.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	}
+}
+
+// Reset fingers angular drive values
+void AHand::ResetAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType)
+{
+	Thumb.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Index.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Middle.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Ring.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+	Pinky.SetFingerDriveMode(DriveMode, DriveType, Spring, Damping, ForceLimit);
+}
+
+// Setup finger bones
+FORCEINLINE void AHand::SetupBones()
+{
+	USkeletalMeshComponent* const SkelMeshComp = GetSkeletalMeshComponent();
+	Thumb.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Index.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Middle.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Ring.SetFingerPartsBones(SkelMeshComp->Bodies);
+	Pinky.SetFingerPartsBones(SkelMeshComp->Bodies);
+}
+
+// Switch the grasp pose
+void AHand::SwitchGraspStyle()
+{
+	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandInformationParser);
+	if (GraspPtr.IsValid())
+	{
+		GraspPtr->SwitchGraspStyle(this);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
+	}
+}
+
+// Switch the grasp process
+void AHand::SwitchGraspProcess()
+{
+	if (GraspPtr.IsValid())
+	{
+		GraspPtr->SwitchGraspProcess(this, Spring, Damping, ForceLimit);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
 	}
 }
