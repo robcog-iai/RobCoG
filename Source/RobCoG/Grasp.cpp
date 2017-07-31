@@ -8,6 +8,7 @@
 Grasp::Grasp()
 {
 	HandInformationnParserPtr = MakeShareable(new HandInformationParser());
+	GraspStatus = EGraspStatus::Velocity;
 	CurrentGraspProcess = EGraspProcess::TwistAndSwing_Orientation;
 	CurrentGraspType = EGraspType::FullGrasp;
 
@@ -45,7 +46,7 @@ void Grasp::DriveToHandOrientationTarget(const FHandOrientation & HandOrientatio
 
 void Grasp::DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger)
 {
-	FConstraintInstance* Constraint;
+	FConstraintInstance* Constraint = nullptr;
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
 	if (Constraint)
@@ -147,7 +148,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 
 bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison)
 {
-	bool bVelocitySmaler;
+	bool bVelocitySmaler = false;
 	if (Comparison == EComparison::Smaller)
 	{
 		bVelocitySmaler = true;
@@ -169,75 +170,6 @@ bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThr
 		bVelocitySmaler = bVelocitySmaler || (Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
 	}
 	return bVelocitySmaler;
-}
-
-bool Grasp::ForceOfAllConstraintsSmaler(const AHand* const Hand, const float ForceThreshold)
-{
-	bool bAllForcesSmaler = true;
-
-	FVector OutAngularForce;
-	FVector OutLinearForce;
-
-	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsSmaler(Hand->Index, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Middle, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Ring, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Pinky, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler &&ForceOfAllFingerConstraintsSmaler(Hand->Thumb, ForceThreshold);
-
-	return bAllForcesSmaler;
-}
-
-bool Grasp::ForceOfAllFingerConstraintsSmaler(const FFinger & Finger, const float ForceThreshold)
-{
-	bool bAllForcesSmaler = true;
-
-	FVector OutAngularForce;
-	FVector OutLinearForce;
-
-	Finger.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-	Finger.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-	Finger.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-	//Hand->Index.FingerPartToConstraint[EFingerPart::Metacarpal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	//bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-
-	return bAllForcesSmaler;
-}
-bool Grasp::ForceOfAllConstraintsBigger(const AHand* const Hand, const float ForceThreshold)
-{
-	bool bAllForcesSmaler = true;
-
-	FVector OutAngularForce;
-	FVector OutLinearForce;
-
-	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Index, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Middle, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Ring, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Pinky, ForceThreshold);
-	bAllForcesSmaler = bAllForcesSmaler && ForceOfAllFingerConstraintsBigger(Hand->Thumb, ForceThreshold);
-
-	return bAllForcesSmaler;
-}
-
-bool Grasp::ForceOfAllFingerConstraintsBigger(const FFinger & Finger, const float ForceThreshold)
-{
-	bool bAllForcesSmaler = true;
-
-	FVector OutAngularForce;
-	FVector OutLinearForce;
-
-	Finger.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-	Finger.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-	Finger.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-	//Hand->Index.FingerPartToConstraint[EFingerPart::Metacarpal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	//bAllForcesSmaler = bAllForcesSmaler && (OutAngularForce.Size() < ForceThreshold);
-
-	return bAllForcesSmaler;
 }
 
 void Grasp::SwitchGraspStyle(const AHand * const Hand)
@@ -305,6 +237,39 @@ void Grasp::SwitchGraspProcess(AHand * const Hand, const float InSpring, const f
 	}
 }
 
+FHandOrientation Grasp::LerpHandOrientation(const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha)
+{
+	FHandOrientation LerpedHandOrientation;
+
+	LerpedHandOrientation.ThumbOrientation = LerpFingerOrientation(InitialHandOrientation.ThumbOrientation, ClosedHandOrientation.ThumbOrientation, Alpha);
+	LerpedHandOrientation.IndexOrientation = LerpFingerOrientation(InitialHandOrientation.IndexOrientation, ClosedHandOrientation.IndexOrientation, Alpha);
+	LerpedHandOrientation.MiddleOrientation = LerpFingerOrientation(InitialHandOrientation.MiddleOrientation, ClosedHandOrientation.MiddleOrientation, Alpha);
+	LerpedHandOrientation.RingOrientation = LerpFingerOrientation(InitialHandOrientation.RingOrientation, ClosedHandOrientation.RingOrientation, Alpha);
+	LerpedHandOrientation.PinkyOrientation = LerpFingerOrientation(InitialHandOrientation.PinkyOrientation, ClosedHandOrientation.PinkyOrientation, Alpha);
+
+	return LerpedHandOrientation;
+}
+
+FFingerOrientation Grasp::LerpFingerOrientation(const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha)
+{
+	FFingerOrientation LerpedFingerOrientation;
+
+	LerpedFingerOrientation.DistalOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.DistalOrientation.Orientation,
+		ClosedFingerOrientation.DistalOrientation.Orientation, Alpha);
+	LerpedFingerOrientation.MetacarpalOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.MetacarpalOrientation.Orientation,
+		ClosedFingerOrientation.MetacarpalOrientation.Orientation, Alpha);
+	LerpedFingerOrientation.ProximalOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.ProximalOrientation.Orientation,
+		ClosedFingerOrientation.ProximalOrientation.Orientation, Alpha);
+	LerpedFingerOrientation.IntermediateOrientation.Orientation = FMath::LerpRange(
+		InitialFingerOrientation.IntermediateOrientation.Orientation,
+		ClosedFingerOrientation.IntermediateOrientation.Orientation, Alpha);
+
+	return LerpedFingerOrientation;
+}
+
 void Grasp::PrintHandInfo(const AHand * const Hand)
 {
 
@@ -366,39 +331,5 @@ void Grasp::PrintHandInfo(const AHand * const Hand)
 		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
 		Hand->Pinky.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
 		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
-		*/
-}
-
-
-FHandOrientation Grasp::LerpHandOrientation(const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha)
-{
-	FHandOrientation LerpedHandOrientation;
-
-	LerpedHandOrientation.ThumbOrientation = LerpFingerOrientation(InitialHandOrientation.ThumbOrientation, ClosedHandOrientation.ThumbOrientation, Alpha);
-	LerpedHandOrientation.IndexOrientation = LerpFingerOrientation(InitialHandOrientation.IndexOrientation, ClosedHandOrientation.IndexOrientation, Alpha);
-	LerpedHandOrientation.MiddleOrientation = LerpFingerOrientation(InitialHandOrientation.MiddleOrientation, ClosedHandOrientation.MiddleOrientation, Alpha);
-	LerpedHandOrientation.RingOrientation = LerpFingerOrientation(InitialHandOrientation.RingOrientation, ClosedHandOrientation.RingOrientation, Alpha);
-	LerpedHandOrientation.PinkyOrientation = LerpFingerOrientation(InitialHandOrientation.PinkyOrientation, ClosedHandOrientation.PinkyOrientation, Alpha);
-
-	return LerpedHandOrientation;
-}
-
-FFingerOrientation Grasp::LerpFingerOrientation(const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha)
-{
-	FFingerOrientation LerpedFingerOrientation;
-
-	LerpedFingerOrientation.DistalOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.DistalOrientation.Orientation,
-		ClosedFingerOrientation.DistalOrientation.Orientation, Alpha);
-	LerpedFingerOrientation.MetacarpalOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.MetacarpalOrientation.Orientation,
-		ClosedFingerOrientation.MetacarpalOrientation.Orientation, Alpha);
-	LerpedFingerOrientation.ProximalOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.ProximalOrientation.Orientation,
-		ClosedFingerOrientation.ProximalOrientation.Orientation, Alpha);
-	LerpedFingerOrientation.IntermediateOrientation.Orientation = FMath::LerpRange(
-		InitialFingerOrientation.IntermediateOrientation.Orientation,
-		ClosedFingerOrientation.IntermediateOrientation.Orientation, Alpha);
-
-	return LerpedFingerOrientation;
+	*/
 }

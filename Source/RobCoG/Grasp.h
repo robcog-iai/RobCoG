@@ -30,7 +30,7 @@ enum class EGraspStatus : uint8
 	Stopped		UMETA(DisplayName = "Stopped"),
 };
 
-/** Enum indicating the hand type */
+/** Enum indicating the comparison type */
 UENUM(BlueprintType)
 enum class EComparison : uint8
 {
@@ -49,18 +49,6 @@ public:
 	Grasp();
 	~Grasp();
 	
-	// Moves the given Hand to the given HandOrientation
-	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand* const Hand);
-	// Moves the given Finger to the given FingerOrientation
-	void DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
-
-	// Moves the given Hand to the given HandOrientation
-	void DriveToHandVelocityTarget(const FHandVelocity & HandVelocity, const AHand * const Hand);
-	// Moves the given Finger to the given FingerOrientation
-	void DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, const FFinger & Finger);
-
-	// Drives the given Hand to the InitialHandOrientation
-	void DriveToInitialOrientation(const AHand * const Hand);
 
 	// Updates the Grasp Orientation of the gven Hand
 	void UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand * const Hand);
@@ -99,9 +87,18 @@ private:
 	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
 	FFingerOrientation LerpFingerOrientation(const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha);
 
+	// Moves the given Hand to the given HandOrientation
+	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand* const Hand);
+	// Moves the given Finger to the given FingerOrientation
+	void DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
+
+	// Moves the given Hand to the given HandOrientation
+	void DriveToHandVelocityTarget(const FHandVelocity & HandVelocity, const AHand * const Hand);
+	// Moves the given Finger to the given FingerOrientation
+	void DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, const FFinger & Finger);
+
+	// Drives the given Hand to the InitialHandOrientation
+	void DriveToInitialOrientation(const AHand * const Hand);
+
 	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison);
-	bool ForceOfAllConstraintsSmaler(const AHand* const Hand, const float ForceThreshold);
-	bool ForceOfAllFingerConstraintsSmaler(const FFinger & Finger, const float ForceThreshold);
-	bool ForceOfAllConstraintsBigger(const AHand* const Hand, const float ForceThreshold);
-	bool ForceOfAllFingerConstraintsBigger(const FFinger & Finger, const float ForceThreshold);
 };

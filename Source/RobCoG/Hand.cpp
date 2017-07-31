@@ -63,7 +63,7 @@ void AHand::BeginPlay()
 	Super::BeginPlay();
 
 	// Disable tick as default
-	SetActorTickEnabled(false);
+	//SetActorTickEnabled(false);
 
 	// Bind overlap events
 	FixationGraspArea->OnComponentBeginOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaBeginOverlap);
@@ -85,7 +85,7 @@ void AHand::Tick(float DeltaTime)
 	{
 		TickValue += DeltaTime;
 
-		if (TickValue > 0.5)
+		if (TickValue > 0.2)
 		{
 			TickValue = 0.0f;
 			GraspPtr->PrintHandInfo(this);
