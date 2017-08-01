@@ -7,7 +7,7 @@
 
 Grasp::Grasp()
 {
-	HandInformationnParserPtr = MakeShareable(new HandInformationParser());
+	HandInformationParserPtr = MakeShareable(new HandInformationParser());
 	GraspStatus = EGraspStatus::Velocity;
 	CurrentGraspProcess = EGraspProcess::TwistAndSwing_Orientation;
 	CurrentGraspType = EGraspType::FullGrasp;
@@ -23,7 +23,7 @@ Grasp::Grasp()
 
 	FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
 	FString ConfigName = ConfigDir + GraspTypeString + ".ini";
-	HandInformationnParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
+	HandInformationParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
 }
 
 Grasp::~Grasp()
@@ -174,7 +174,7 @@ bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThr
 
 void Grasp::SwitchGraspStyle(const AHand * const Hand)
 {
-	if (HandInformationnParserPtr.IsValid())
+	if (HandInformationParserPtr.IsValid())
 	{
 		FString ConfigDir = FPaths::GameConfigDir();
 
@@ -194,7 +194,7 @@ void Grasp::SwitchGraspStyle(const AHand * const Hand)
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *GraspTypeString));
 
-		HandInformationnParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
+		HandInformationParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
 
 		DriveToInitialOrientation(Hand);
 	}

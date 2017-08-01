@@ -80,7 +80,7 @@ private:
 	EGraspProcess CurrentGraspProcess;
 
 	// Parser of the ini files
-	TSharedPtr<HandInformationParser> HandInformationnParserPtr;
+	TSharedPtr<HandInformationParser> HandInformationParserPtr;
 
 	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
 	FHandOrientation LerpHandOrientation(const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha);
