@@ -21,7 +21,7 @@ public:
 
 	// The Box in which the new Items are spawned
 	UPROPERTY(EditAnywhere)
-		ATriggerBox* SpwaningBox;
+		ATriggerBox* SpawningBox;
 
 	// The Box in which the Items have to be placed
 	UPROPERTY(EditAnywhere)
