@@ -27,9 +27,9 @@ void AGraspingGame::BeginPlay()
 	for (auto && Path : Paths)
 	{
 		AbsolutePath = ContentFolder + Path;
-		UE_LOG(LogTemp, Warning, TEXT("AbsolutePath: %s"), *AbsolutePath);
 		GetAssetsInFolder(AbsolutePath, Items);
 	}
+	NormalizePaths(Items);
 
 	SpawnItem(Items);
 }
@@ -43,16 +43,27 @@ void AGraspingGame::Tick(float DeltaTime)
 
 void AGraspingGame::GetAssetsInFolder(const FString & Directory, TArray<FString> & Assets)
 {
-	Assets.Empty();
+	UE_LOG(LogTemp, Warning, TEXT("Directory: %s"), *Directory);
 	if (FPaths::DirectoryExists(Directory))
 	{
 		auto Path = Directory + "/*.uasset";
-		UE_LOG(LogTemp, Warning, TEXT("Path: %s"), *Path);
 		FFileManagerGeneric::Get().FindFiles(Assets, *Path, true, false);
 		for (auto & Asset : Assets)
 		{
 			Asset = Directory + "/" + Asset;
 		}
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Found Assets: %i"), Assets.Num());
+}
+
+void AGraspingGame::NormalizePaths(TArray<FString> & Assets)
+{
+	FString Left = "";
+	for (auto & Asset : Assets)
+	{
+		Left = Asset.Left(Asset.Find("Content") + 7);
+		Asset = Asset.Replace(*Left, *FString("/Game"));
 	}
 }
 
@@ -80,7 +91,13 @@ void AGraspingGame::SpawnItem(TArray<FString> & Assets)
 
 	UE_LOG(LogTemp, Warning, TEXT("PathName: %s"), *PathName);
 
-	UStaticMesh* Mesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, *PathName));
-	if (Mesh) SpawnedMesh->SetStaticMesh(Mesh);
+	UStaticMesh* Mesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *PathName));
+
+	if (Mesh) {
+		SpawnedMesh->SetStaticMesh(Mesh);
+		SpawnedMesh->SetEnableGravity(true);
+		SpawnedMesh->SetSimulatePhysics(true);
+	}
 	if (SpawningBox) SpawnedMesh->SetWorldLocation(SpawningBox->GetActorLocation());
+
 }

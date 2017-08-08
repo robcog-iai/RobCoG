@@ -44,5 +44,8 @@ private:
 
 	void GetAssetsInFolder(const FString & Directory, TArray<FString> & Assets);
 
+	void NormalizePaths(TArray<FString> & Assets);
+
 	void SpawnItem(TArray<FString> & Assets);
+
 };
