@@ -8,7 +8,7 @@ public class RobCoG : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UROSBridge", "URoboSim" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UROSBridge", "URoboSim", "Json", "JsonUtilities" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {
 			});
