@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/TriggerBox.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/TextRenderComponent.h"
 
 #include "GraspingGame.generated.h"
 
@@ -15,6 +16,24 @@ class ROBCOG_API AGraspingGame : public AActor
 	GENERATED_BODY()
 
 public:
+
+	//How long, in seconds, the countdown will run
+	int32 CountdownTime;
+
+	UPROPERTY(EditAnywhere)
+		UTextRenderComponent* CountdownText;
+
+	void UpdateTimerDisplay();
+
+	void AdvanceTimer();
+
+	void CountdownHasFinished();
+
+	FTimerHandle CountdownTimerHandle;
+
+
+
+
 	// The Paths to be scanned for Items
 	UPROPERTY(EditAnywhere)
 		TArray<FString> Paths;
@@ -38,14 +57,18 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+
+//	USceneComponent* RootComponent;
 	UStaticMeshComponent* SpawnedMesh;
 	// All found Items to be found
 	TArray<FString> Items;
 
-	void GetAssetsInFolder(const FString & Directory, TArray<FString> & Assets);
+	void GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets) const;
 
-	void NormalizePaths(TArray<FString> & Assets);
+	void AbsoluteToGamePath(TArray<FString> & Assets) const;
 
-	void SpawnItem(TArray<FString> & Assets);
+	void SpawnRandomItem(TArray<FString> & Assets);
+
+	void ResetGame();
 
 };
