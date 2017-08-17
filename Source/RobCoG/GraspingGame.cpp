@@ -3,6 +3,12 @@
 #include "GraspingGame.h"
 #include "Paths.h"
 #include "FileManagerGeneric.h"
+#include "TimerManager.h"
+#include "Engine/World.h"
+#include "Components/InputComponent.h"
+#include "GameFramework/PlayerController.h"
+#include "GameFramework/Character.h"
+#include "Engine/StaticMesh.h"
 
 
 // Sets default values
@@ -11,26 +17,39 @@ AGraspingGame::AGraspingGame()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	bGameRunning = false;
+	CharacterStartTransform = FTransform();
+
 	Paths.Add("Items/Scanned/Meshes");
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"),this);
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"), this);
 
 	SpawnedMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpawnedMesh"), this);
-	SpawnedMesh->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
+	SpawnedMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	CountdownText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("CountdownNumber"));
-	CountdownText->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	CountdownText->SetHorizontalAlignment(EHTA_Center);
-	CountdownText->SetWorldSize(150.0f);
+	TimerText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("CountdownNumber"));
+	TimerText->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	TimerText->SetText(FText::FromName("Countdown!"));
+	TimerText->SetHorizontalAlignment(EHTA_Center);
+	TimerText->SetWorldSize(50.0f);
 
-	CountdownTime = 3;
+	StartTime = 3;
+	GameTime = 30;
 }
 
 // Called when the game starts or when spawned
 void AGraspingGame::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (PlayerController)
+	{
+		EnableInput(PlayerController);
+		InputComponent->BindAction("GameControl", IE_Pressed, this, &AGraspingGame::ControlGame);
+		CharacterStartTransform = PlayerController->GetActorTransform();
+	}
+
 	FString AbsolutePath = "";
 	auto ContentFolder = FPaths::GameContentDir();
 
@@ -107,36 +126,113 @@ void AGraspingGame::SpawnRandomItem(TArray<FString> & Assets)
 		SpawnedMesh->SetStaticMesh(Mesh);
 		SpawnedMesh->SetEnableGravity(true);
 		SpawnedMesh->SetSimulatePhysics(true);
+		SpawnedMesh->bGenerateOverlapEvents = true;
 	}
-	if (SpawningBox) SpawnedMesh->SetWorldLocation(SpawningBox->GetActorLocation());
+	if (SpawningBox)
+	{
+		SpawnedMesh->SetWorldRotation(FRotator(0, 0, 0), false, nullptr, ETeleportType::TeleportPhysics);
+		SpawnedMesh->SetWorldLocation(SpawningBox->GetActorLocation(), false, nullptr, ETeleportType::TeleportPhysics);
+
+	}
+}
+
+void AGraspingGame::ControlGame()
+{
+	UE_LOG(LogTemp, Warning, TEXT("ControlGame"));
+	if (bGameRunning)
+	{
+		ResetGame();
+	}
+	else
+	{
+		StartGame();
+		bGameRunning = true;
+	}
+}
+
+void AGraspingGame::StartGame()
+{
+	UE_LOG(LogTemp, Warning, TEXT("StartGame"));
+	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
+	GetWorldTimerManager().SetTimer(StartTimerHandle, this, &AGraspingGame::UpdateStartTimer, 1.0f, true);
+}
+
+void AGraspingGame::StopGame()
+{
 }
 
 void AGraspingGame::ResetGame()
 {
-	UpdateTimerDisplay();
-	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AGraspingGame::AdvanceTimer, 1.0f, true);
+	UE_LOG(LogTemp, Warning, TEXT("ResetGame"));
+	ResetCharacterTransform();
+	StartGame();
 }
 
-void AGraspingGame::UpdateTimerDisplay()
+void AGraspingGame::ResetCharacterTransform() const
 {
-	CountdownText->SetText(FText::AsNumber(FMath::Max(CountdownTime, 0)));
-}
-
-void AGraspingGame::AdvanceTimer()
-{
-	--CountdownTime;
-	UpdateTimerDisplay();
-	if (CountdownTime < 1)
+	UE_LOG(LogTemp, Warning, TEXT("ResetCharacterTransform"));
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (PlayerController)
 	{
-		// We're done counting down, so stop running the timer.
-		GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
-		//Perform any special actions we want to do when the timer ends.
-		CountdownHasFinished();
+		UE_LOG(LogTemp, Warning, TEXT("StartTrans: %s | CurrentTrans: %s"), *CharacterStartTransform.ToString(), *PlayerController->GetActorTransform().ToString());
+		PlayerController->GetCharacter()->SetActorTransform(CharacterStartTransform, false, nullptr, ETeleportType::TeleportPhysics);
 	}
 }
 
-void AGraspingGame::CountdownHasFinished()
+void AGraspingGame::UpdateStartTimer()
 {
+	UE_LOG(LogTemp, Warning, TEXT("UpdateStartTimer"));
+
+	--StartTime;
+	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
+	if (StartTime < 1)
+	{
+		// We're done counting down, so stop running the timer.
+		GetWorldTimerManager().ClearTimer(StartTimerHandle);
+		//Perform any special actions we want to do when the timer ends.
+		StartTimerHasFinished();
+	}
+}
+
+void AGraspingGame::StartTimerHasFinished()
+{
+	UE_LOG(LogTemp, Warning, TEXT("StartTimerHasFinished"));
 	//Change to a special readout
-	CountdownText->SetText(FText::FromName("GO!"));
+	SpawnRandomItem(Items);
+	TimerText->SetText(FText::FromName("GO!"));
+	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
+	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 1.0f, true);
+	StartTime = 3;
+}
+
+void AGraspingGame::UpdateGameTimer()
+{
+	UE_LOG(LogTemp, Warning, TEXT("UpdateGameTimer"));
+	TArray<UPrimitiveComponent*> Components;
+	TargetBox->GetOverlappingComponents(Components);
+	for (auto Component : Components)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Component: %s"), *Component->GetName());
+
+	}
+	bool bRoundFinished = Components.Contains(SpawnedMesh);
+
+	--GameTime;
+	TimerText->SetText(FText::AsNumber(FMath::Max(GameTime, 0)));
+
+	if (GameTime < 1 || bRoundFinished)
+	{
+		// We're done counting down, so stop running the timer.
+		GetWorldTimerManager().ClearTimer(GameTimerHandle);
+		//Perform any special actions we want to do when the timer ends.
+		GameTimerHasFinished();
+	}
+}
+
+void AGraspingGame::GameTimerHasFinished()
+{
+	UE_LOG(LogTemp, Warning, TEXT("GameTimerHasFinished"));
+	//Change to a special readout
+	TimerText->SetText(FText::FromName("Round Finished. Press SPACE to reload"));
+	GameTime = 30;
 }

@@ -10,29 +10,13 @@
 
 #include "GraspingGame.generated.h"
 
+
 UCLASS()
 class ROBCOG_API AGraspingGame : public AActor
 {
 	GENERATED_BODY()
 
 public:
-
-	//How long, in seconds, the countdown will run
-	int32 CountdownTime;
-
-	UPROPERTY(EditAnywhere)
-		UTextRenderComponent* CountdownText;
-
-	void UpdateTimerDisplay();
-
-	void AdvanceTimer();
-
-	void CountdownHasFinished();
-
-	FTimerHandle CountdownTimerHandle;
-
-
-
 
 	// The Paths to be scanned for Items
 	UPROPERTY(EditAnywhere)
@@ -57,17 +41,49 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	bool bGameRunning;
 
-//	USceneComponent* RootComponent;
-	UStaticMeshComponent* SpawnedMesh;
+	FTransform CharacterStartTransform;
+
 	// All found Items to be found
 	TArray<FString> Items;
+
+	UStaticMeshComponent* SpawnedMesh;
+
+	//How long, in seconds, the countdown will run
+	UPROPERTY(EditAnywhere, Category = "Timer")
+		int32 StartTime;
+	//How long, in seconds, the countdown will run
+	UPROPERTY(EditAnywhere, Category = "Timer")
+		int32 GameTime;
+
+	UPROPERTY(EditAnywhere, Category = "Timer")
+		UTextRenderComponent* TimerText;
+
+	FTimerHandle StartTimerHandle;
+	FTimerHandle GameTimerHandle;
+
+	void UpdateStartTimer();
+
+	void StartTimerHasFinished();
+
+	void UpdateGameTimer();
+
+	void GameTimerHasFinished();
 
 	void GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets) const;
 
 	void AbsoluteToGamePath(TArray<FString> & Assets) const;
 
 	void SpawnRandomItem(TArray<FString> & Assets);
+
+	void ResetCharacterTransform() const;
+
+	void ControlGame();
+
+	void StartGame();
+
+	void StopGame();
 
 	void ResetGame();
 
