@@ -207,7 +207,7 @@ private:
 	// Pointer to objects in reach for grasping
 	TArray<AStaticMeshActor*> GraspableObjects;
 
-	TEnumAsByte<EAngularDriveMode::Type> AngularDriveMode;;
+	TEnumAsByte<EAngularDriveMode::Type> AngularDriveMode;
 
 	// Objects that are in reach to be grasped by one hand
 	TArray<AStaticMeshActor*> OneHandGraspableObjects;

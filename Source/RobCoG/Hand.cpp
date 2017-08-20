@@ -45,7 +45,7 @@ AHand::AHand()
 	ForceLimit = 0.0f;
 
 	VelocityThreshold = 1.0;
-
+	
 	TickValue = 0.0f;
 
 	// Set fingers and their bone names default values
@@ -70,7 +70,7 @@ void AHand::BeginPlay()
 	FixationGraspArea->OnComponentEndOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaEndOverlap);
 
 	// Setup the values for controlling the hand fingers
-	AHand::SetupAngularDriveValues(EAngularDriveMode::TwistAndSwing, EAngularDriveType::Orientation);
+	AHand::SetupAngularDriveValues(AngularDriveMode, EAngularDriveType::Orientation);
 	AHand::SetupBones();
 
 }
