@@ -45,7 +45,7 @@ AHand::AHand()
 	ForceLimit = 0.0f;
 
 	VelocityThreshold = 1.0;
-	
+
 	TickValue = 0.0f;
 
 	// Set fingers and their bone names default values
@@ -174,33 +174,33 @@ void AHand::OnFixationGraspAreaEndOverlap(class UPrimitiveComponent* HitComp, cl
 // Update the grasp pose
 void AHand::UpdateGrasp(const float Goal)
 {
-		if (!OneHandGraspedObject)
+	if (!OneHandGraspedObject)
+	{
+		for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
 		{
-			for (const auto& ConstrMapItr : Thumb.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
-			for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
-			{
-				ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
-			}
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 		}
-		else if (!bGraspHeld)
+		for (const auto& ConstrMapItr : Index.FingerPartToConstraint)
 		{
-			AHand::MaintainFingerPositions();
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
 		}
+		for (const auto& ConstrMapItr : Middle.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Ring.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+		for (const auto& ConstrMapItr : Pinky.FingerPartToConstraint)
+		{
+			ConstrMapItr.Value->SetAngularOrientationTarget(FQuat(FRotator(0.f, 0.f, Goal * 100.f)));
+		}
+	}
+	else if (!bGraspHeld)
+	{
+		AHand::MaintainFingerPositions();
+	}
 }
 
 // Physics based grasping
@@ -217,7 +217,7 @@ bool AHand::TryOneHandFixationGrasp()
 	{
 		// Get the object to be grasped from the pool of objects
 		OneHandGraspedObject = OneHandGraspableObjects.Pop();
-	
+
 		// TODO bug report, overlaps flicker when object is attached to hand, this prevents directly attaching objects from one hand to another
 		//if (OneHandGraspedObject->GetAttachParentActor() && OneHandGraspedObject->GetAttachParentActor()->IsA(AHand::StaticClass()))
 		//{
@@ -233,7 +233,7 @@ bool AHand::TryOneHandFixationGrasp()
 			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));*/
 		OneHandGraspedObject->AttachToActor(this, FAttachmentTransformRules(
 			EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
-		
+
 		// Disable overlap checks for the fixation grasp area during active grasping
 		FixationGraspArea->bGenerateOverlapEvents = false;
 		// Successful grasp
@@ -270,7 +270,7 @@ bool AHand::TryTwoHandsFixationGrasp()
 			//	EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, EAttachmentRule::KeepWorld, true));
 
 			UE_LOG(LogTemp, Warning, TEXT("AHand: TwoHand Attached %s to %s"), *TwoHandsGraspedObject->GetName(), *GetName());
-			
+
 			// Disable overlaps of the fixation grasp area during the active grasp
 			FixationGraspArea->bGenerateOverlapEvents = false;
 
@@ -334,7 +334,7 @@ bool AHand::DetachFixationGrasp()
 		// Enable physics with and apply current hand velocity, clear pointer to object
 		TwoHandsGraspedObject->GetStaticMeshComponent()->SetSimulatePhysics(true);
 		TwoHandsGraspedObject->GetStaticMeshComponent()->SetPhysicsLinearVelocity(GetVelocity());
-		TwoHandsGraspedObject = nullptr;		
+		TwoHandsGraspedObject = nullptr;
 
 		// Trigger detachment on other hand as well
 		OtherHand->DetachTwoHandFixationGraspFromOther();
@@ -357,7 +357,7 @@ bool AHand::DetachFixationGrasp()
 bool AHand::DetachTwoHandFixationGraspFromOther()
 {
 	// Re-enable overlaps for the fixation grasp area
-	FixationGraspArea->bGenerateOverlapEvents = true;	
+	FixationGraspArea->bGenerateOverlapEvents = true;
 
 	// Check grasp type of the hand (attachment or movement mimicking)
 	if (TwoHandsGraspedObject)
@@ -417,7 +417,7 @@ uint8 AHand::CheckObjectGraspableType(AActor* InActor)
 				return ONE_HAND_GRASPABLE;
 			}
 			// check for two hand graspable dimensions
-			else if(SMComp->GetMass() < TwoHandsFixationMaximumMass &&
+			else if (SMComp->GetMass() < TwoHandsFixationMaximumMass &&
 				SMActor->GetComponentsBoundingBox().GetSize().Size() < TwoHandsFixationMaximumLength)
 			{
 				return TWO_HANDS_GRASPABLE;
@@ -601,7 +601,7 @@ void AHand::SwitchGraspStyle(EGraspType GraspType)
 	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandInformationParser);
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->SwitchGraspStyle(this,GraspType);
+		GraspPtr->SwitchGraspStyle(this, GraspType);
 	}
 	else
 	{
@@ -620,4 +620,36 @@ void AHand::SwitchGraspProcess()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
 	}
+}
+
+float AHand::GetMaxAngularForceOfAllConstraints()
+{
+	float MaxForce = 0.0f;;
+
+	FVector OutLinearForce;
+	FVector OutAngularForce;
+	for (auto & Constraint : GetSkeletalMeshComponent()->Constraints)
+	{
+		Constraint->GetConstraintForce(OutLinearForce, OutAngularForce);
+		if (OutAngularForce.Size() > MaxForce)
+			MaxForce = OutAngularForce.Size();
+	}
+
+	return MaxForce;
+}
+
+float AHand::GetAngularForceOfConstraint(const FName & JointName)
+{
+	FVector OutLinearForce;
+	FVector OutAngularForce;
+	for (auto & Constraint : GetSkeletalMeshComponent()->Constraints)
+	{
+		if(Constraint->JointName == JointName)
+		{
+			Constraint->GetConstraintForce(OutLinearForce, OutAngularForce);
+			return OutAngularForce.Size();
+		}
+	}
+
+	return 0;
 }

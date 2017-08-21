@@ -148,6 +148,13 @@ void AMCCharacter::BeginPlay()
 	// Initialize UserInterface
 	UserInterface = CreateWidget<UGraspTypeWidget>(GetWorld(), UGraspTypeWidget::StaticClass());
 	if (UserInterface) UserInterface->SetupWidget(this);
+
+	FStringClassReference HandForceWidgetClassRef(TEXT("/Game/Widget/WB_HandForce.WB_HandForce_C"));
+	if (UClass* HandForceClass = HandForceWidgetClassRef.TryLoadClass<UUserWidget>())
+	{
+		UUserWidget* HandForceWidget = CreateWidget<UUserWidget>(GetWorld(), HandForceClass);
+		HandForceWidget->AddToViewport(10);
+	}
 }
 
 // Called every frame

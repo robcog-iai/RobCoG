@@ -41,27 +41,27 @@ public:
 	float TickValue;
 
 	// Hand type
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		EHandType HandType;
 
 	// Thumb finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		FFinger Thumb;
 
 	// Index finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		FFinger Index;
 
 	// Middle finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		FFinger Middle;
 
 	// Ring finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		FFinger Ring;
 
 	// Pinky finger skeletal bone names
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		FFinger Pinky;
 
 	// Sets default values for this actor
@@ -110,6 +110,12 @@ public:
 	void SetOtherHand(AHand* InOtherHand);
 
 	void ResetAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType);
+
+	UFUNCTION(BlueprintCallable)
+		float GetMaxAngularForceOfAllConstraints();
+
+	UFUNCTION(BlueprintCallable)
+		float GetAngularForceOfConstraint(const FName & JointName);
 
 protected:
 	// Collision component used for attaching grasped objects
