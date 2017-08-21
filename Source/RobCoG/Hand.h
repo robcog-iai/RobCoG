@@ -80,7 +80,7 @@ public:
 	void UpdateGrasp2(const float Alpha);
 
 	// Switch the grasping style
-	void SwitchGraspStyle();
+	void SwitchGraspStyle(EGraspType GraspType);
 
 	// Switch the grasping process
 	void SwitchGraspProcess();
@@ -206,8 +206,6 @@ private:
 private:
 	// Pointer to objects in reach for grasping
 	TArray<AStaticMeshActor*> GraspableObjects;
-
-	TEnumAsByte<EAngularDriveMode::Type> AngularDriveMode;
 
 	// Objects that are in reach to be grasped by one hand
 	TArray<AStaticMeshActor*> OneHandGraspableObjects;

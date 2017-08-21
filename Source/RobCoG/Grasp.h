@@ -10,16 +10,6 @@
 
 class AHand;
 
-/** Enum indicating the grasp process */
-UENUM(BlueprintType)
-enum class EGraspProcess : uint8
-{
-	SLERP_Orientation			UMETA(DisplayName = "SLERP_Orientation"), 
-	SLERP_Velocity				UMETA(DisplayName = "SLERP_Velocity"),
-	TwistAndSwing_Orientation	UMETA(DisplayName = "TwistAndSwing_Orientation"),
-	TwistAndSwing_Velocity		UMETA(DisplayName = "TwistAndSwing_Velocity"),
-};
-
 /** Enum indicating the grasp status */
 UENUM(BlueprintType)
 enum class EGraspStatus : uint8
@@ -46,21 +36,22 @@ enum class EComparison : uint8
 class ROBCOG_API Grasp
 {
 public:
+	// Constructor
 	Grasp();
+	// Destructor
 	~Grasp();
-	
 
 	// Updates the Grasp Orientation of the gven Hand
 	void UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand * const Hand);
 
 	// Switches the Grasping Style
-	void SwitchGraspStyle(const AHand * const Hand);
+	void SwitchGraspStyle(const AHand * const Hand, EGraspType GraspType);
 
 	// Switches the Grasping Process
 	void SwitchGraspProcess(AHand * const Hand, const float InSpring, const float InDamping, const float ForceLimit);
 
 	// Print The Fore 
-	void PrintHandInfo(const AHand * const Hand);
+	void PrintHandInfo(const AHand * const Hand) const;
 
 
 private:
@@ -77,15 +68,15 @@ private:
 	// The Current Grasp Position
 	EGraspType CurrentGraspType;
 	// Current Grasp Process
-	EGraspProcess CurrentGraspProcess;
+	TEnumAsByte<EAngularDriveMode::Type> CurrentAngularDriveMode;
 
 	// Parser of the ini files
 	TSharedPtr<HandInformationParser> HandInformationParserPtr;
 
 	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
-	FHandOrientation LerpHandOrientation(const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha);
+	void LerpHandOrientation(FHandOrientation & TargetHandOrientation, const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha);
 	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
-	FFingerOrientation LerpFingerOrientation(const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha);
+	void LerpFingerOrientation(FFingerOrientation & TargetFingerOrientation, const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha);
 
 	// Moves the given Hand to the given HandOrientation
 	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand* const Hand);
@@ -100,5 +91,6 @@ private:
 	// Drives the given Hand to the InitialHandOrientation
 	void DriveToInitialOrientation(const AHand * const Hand);
 
+	// Checks the Distal Velocity to be higher,lower,equals the threshold
 	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison);
 };

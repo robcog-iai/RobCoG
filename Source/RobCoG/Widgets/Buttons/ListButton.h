@@ -1,0 +1,31 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Components/Button.h"
+#include "Enums/GraspType.h"
+
+#include "ListButton.generated.h"
+
+
+/*
+*
+*/
+UCLASS()
+class ROBCOG_API UListButton : public UButton
+{
+	GENERATED_BODY()
+
+private:
+	UPROPERTY()
+		EGraspType GraspType;
+
+	UUserWidget* ParentWidget;
+
+public:
+	UListButton();
+
+	UFUNCTION()
+		void OnClick();
+
+	void SetupButton(UUserWidget* Widget, EGraspType GraspType);
+};

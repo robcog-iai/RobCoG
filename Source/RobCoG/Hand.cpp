@@ -4,6 +4,7 @@
 #include "Hand.h"
 #include "PhysicsEngine/ConstraintInstance.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 
 // Sets default values
@@ -39,7 +40,6 @@ AHand::AHand()
 	SkelComp->bGenerateOverlapEvents = true;
 
 	// Angular drive default values
-	AngularDriveMode = EAngularDriveMode::SLERP;
 	Spring = 9000.0f;
 	Damping = 1000.0f;
 	ForceLimit = 0.0f;
@@ -70,7 +70,7 @@ void AHand::BeginPlay()
 	FixationGraspArea->OnComponentEndOverlap.AddDynamic(this, &AHand::OnFixationGraspAreaEndOverlap);
 
 	// Setup the values for controlling the hand fingers
-	AHand::SetupAngularDriveValues(AngularDriveMode, EAngularDriveType::Orientation);
+	AHand::SetupAngularDriveValues(EAngularDriveMode::SLERP, EAngularDriveType::Orientation);
 	AHand::SetupBones();
 
 }
@@ -596,12 +596,12 @@ FORCEINLINE void AHand::SetupBones()
 }
 
 // Switch the grasp pose
-void AHand::SwitchGraspStyle()
+void AHand::SwitchGraspStyle(EGraspType GraspType)
 {
 	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandInformationParser);
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->SwitchGraspStyle(this);
+		GraspPtr->SwitchGraspStyle(this,GraspType);
 	}
 	else
 	{
