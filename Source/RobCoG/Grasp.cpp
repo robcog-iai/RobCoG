@@ -126,7 +126,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Smaller))
 			{
 				GraspStatus = EGraspStatus::Velocity;
-				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");
+				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");				
 			}
 
 		}
@@ -134,6 +134,8 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 		{
 			// Initialize Velocity Drives
 			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Velocity);
+			// Lock Proximal Thumb
+			//LockConstraint(Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]);
 			// Manipulate Velocity Drives
 			DriveToHandVelocityTarget(HandVelocity, Hand);
 		}
@@ -143,6 +145,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 		// Stop Grasp
 		if (GraspStatus != EGraspStatus::Stopped)
 		{
+			//UnlockConstraint(Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]);
 			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Orientation);
 			DriveToInitialOrientation(Hand);
 			GraspStatus = EGraspStatus::Stopped;
@@ -261,64 +264,56 @@ void Grasp::LerpFingerOrientation(FFingerOrientation & TargetFingerOrientation, 
 
 void Grasp::PrintHandInfo(const AHand * const Hand) const
 {
-
-	//UE_LOG(LogTemp, Warning, TEXT("Index - Distal - Velocity: %f"),
-	//	Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	//UE_LOG(LogTemp, Warning, TEXT("Middle - Distal - Velocity: %f"),
-	//	Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	//UE_LOG(LogTemp, Warning, TEXT("Ring - Distal - Velocity: %f"),
-	//	Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	//UE_LOG(LogTemp, Warning, TEXT("Pinky - Distal - Velocity: %f"),
-	//	Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-	//UE_LOG(LogTemp, Warning, TEXT("Thumb - Distal - Velocity: %f"),
-	//	Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
-
-	//UE_LOG(LogTemp, Warning, TEXT("Index - Distal - AngularVelocity: %f"),
-	//	Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldAngularVelocity().Size());
-
 	FVector OutLinearForce;
 	FVector OutAngularForce;
 
 	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Distal: %f"), OutAngularForce.Size()));
+	Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(3, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Intermediate: %f"), OutAngularForce.Size()));
+	Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(4, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Proximal: %f"), OutAngularForce.Size()));
 
 	Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(3, 1, FColor::Blue, FString::Printf(TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size()));
+	if (GEngine) GEngine->AddOnScreenDebugMessage(5, 1, FColor::Blue, FString::Printf(TEXT("Index - Distal: %f"), OutAngularForce.Size()));
+	Hand->Index.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(6, 1, FColor::Blue, FString::Printf(TEXT("Index - Intermediate: %f"), OutAngularForce.Size()));
+	Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(7, 1, FColor::Blue, FString::Printf(TEXT("Index - Proximal: %f"), OutAngularForce.Size()));
 
-	/*
-		Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
-		Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: Intermetiate - Force: %f"), OutAngularForce.Size());
-		Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Thumb - Part: ProximalConstraint - Force: %f"), OutAngularForce.Size());
+	Hand->Middle.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(8, 1, FColor::Blue, FString::Printf(TEXT("Middle - Distal: %f"), OutAngularForce.Size()));
+	Hand->Middle.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(9, 1, FColor::Blue, FString::Printf(TEXT("Middle - Intermediate: %f"), OutAngularForce.Size()));
+	Hand->Middle.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(10, 1, FColor::Blue, FString::Printf(TEXT("Middle - Proximal: %f"), OutAngularForce.Size()));
 
-		Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Index - Part: DistalConstraint - Force: %f"), OutAngularForce.Size());
-		Hand->Index.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Index - Part: Intermetiate - Force: %f"), OutAngularForce.Size());
-		Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Index - Part: ProximalConstraint - Force: %f"), OutAngularForce.Size());
+	Hand->Ring.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(11, 1, FColor::Blue, FString::Printf(TEXT("Ring - Distal: %f"), OutAngularForce.Size()));
+	Hand->Ring.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(12, 1, FColor::Blue, FString::Printf(TEXT("Ring - Intermediate: %f"), OutAngularForce.Size()));
+	Hand->Ring.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(13, 1, FColor::Blue, FString::Printf(TEXT("Ring - Proximal: %f"), OutAngularForce.Size()));
 
-		Hand->Middle.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
-		Hand->Middle.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-		Hand->Middle.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Middle - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
+	Hand->Pinky.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(14, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Distal: %f"), OutAngularForce.Size()));
+	Hand->Pinky.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(15, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Intermediate: %f"), OutAngularForce.Size()));
+	Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	if (GEngine) GEngine->AddOnScreenDebugMessage(16, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Proximal: %f"), OutAngularForce.Size()));
 
-		Hand->Ring.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
-		Hand->Ring.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-		Hand->Ring.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Ring - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
+}
 
-		Hand->Pinky.FingerPartToConstraint[EFingerPart::DistalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: DistalConstraint - Force: %s"), *OutAngularForce.ToString());
-		Hand->Pinky.FingerPartToConstraint[EFingerPart::IntermediateConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: Intermetiate - Force: %s"), *OutAngularForce.ToString());
-		Hand->Pinky.FingerPartToConstraint[EFingerPart::ProximalConstraint]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		UE_LOG(LogTemp, Warning, TEXT("Pinky - Part: ProximalConstraint - Force: %s"), *OutAngularForce.ToString());
-	*/
+void Grasp::LockConstraint( FConstraintInstance* Constraint)
+{
+	Constraint->SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked,500.0);
+	Constraint->SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, 500.0);
+	Constraint->SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked,500.0);
+}
+
+void Grasp::UnlockConstraint(FConstraintInstance* Constraint)
+{
+	Constraint->SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Limited, 500.0);
+	Constraint->SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Limited, 500.0);
+	Constraint->SetAngularTwistLimit(EAngularConstraintMotion::ACM_Limited, 500.0);
 }

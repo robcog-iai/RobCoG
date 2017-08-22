@@ -6,7 +6,6 @@
 
 #include "ListButton.generated.h"
 
-
 /*
 *
 */
@@ -26,6 +25,9 @@ public:
 
 	UFUNCTION()
 		void OnClick();
+	
+	UFUNCTION()
+		void OnHovered();
 
 	void SetupButton(UUserWidget* Widget, EGraspType GraspType);
 };

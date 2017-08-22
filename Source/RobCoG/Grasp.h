@@ -93,4 +93,8 @@ private:
 
 	// Checks the Distal Velocity to be higher,lower,equals the threshold
 	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison);
+
+	void LockConstraint(FConstraintInstance* Constraint);
+
+	void UnlockConstraint(FConstraintInstance* Constraint);
 };
