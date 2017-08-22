@@ -45,23 +45,23 @@ public:
 		EHandType HandType;
 
 	// Thumb finger skeletal bone names
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 		FFinger Thumb;
 
 	// Index finger skeletal bone names
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 		FFinger Index;
 
 	// Middle finger skeletal bone names
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 		FFinger Middle;
 
 	// Ring finger skeletal bone names
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 		FFinger Ring;
 
 	// Pinky finger skeletal bone names
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, Category = "MC|Hand")
 		FFinger Pinky;
 
 	// Sets default values for this actor
