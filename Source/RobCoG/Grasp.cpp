@@ -78,7 +78,7 @@ void Grasp::DriveToHandVelocityTarget(const FHandVelocity & HandVelocity, const 
 
 void Grasp::DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, const FFinger & Finger)
 {
-	FConstraintInstance* Constraint;
+	FConstraintInstance* Constraint = nullptr;
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
 	if (Constraint)
@@ -205,6 +205,8 @@ void Grasp::SwitchGraspStyle(const AHand * const Hand, EGraspType GraspType)
 
 void Grasp::SwitchGraspProcess(AHand * const Hand, const float InSpring, const float InDamping, const float ForceLimit)
 {
+	// TODO: Just if else
+
 	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EAngularDriveMode"), true);
 	if (!EnumPtr) return;
 

@@ -35,6 +35,9 @@ public:
 	// Switch the curent grasping style
 	void SwitchGraspStyle(EGraspType GraspType);
 
+	//Toggle the User Interface
+	void ToggleUserInterface();
+
 protected:
 	// Left hand skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
@@ -122,9 +125,6 @@ protected:
 
 	// Detach from right hand
 	void TryRightGraspDetach();
-
-	//Toggle the User Interface
-	void ToggleUserInterface();
 
 	// Motion controller origin parent
 	USceneComponent* MCOriginComponent;

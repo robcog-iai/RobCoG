@@ -87,7 +87,7 @@ void AMCCharacter::BeginPlay()
 	RightPIDController.SetValues(PGain, IGain, DGain, MaxOutput, -MaxOutput);
 
 	// Check if VR is enabled
-	IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
+	IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->HMDDevice.Get());
 	if (HMD && HMD->IsStereoEnabled())
 	{
 		// VR MODE
@@ -117,7 +117,7 @@ void AMCCharacter::BeginPlay()
 		// Teleport hands to the current position of the motion controllers
 		LeftSkelActor->SetActorLocationAndRotation(MCLeft->GetComponentLocation(),
 			MCLeft->GetComponentQuat() * LeftHandRotationOffset,
-			false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
+			false, static_cast<FHitResult*>(nullptr), ETeleportType::TeleportPhysics);
 	}
 
 	if (RightSkelActor)
@@ -134,7 +134,7 @@ void AMCCharacter::BeginPlay()
 		// Teleport hands to the current position of the motion controllers
 		RightSkelActor->SetActorLocationAndRotation(MCRight->GetComponentLocation(),
 			MCRight->GetComponentQuat() * RightHandRotationOffset,
-			false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
+			false, static_cast<FHitResult*>(nullptr), ETeleportType::TeleportPhysics);
 	}
 
 	// If two hands are available, let them know about each other (for two hands fixation grasp)
@@ -386,14 +386,14 @@ void AMCCharacter::TryRightGraspDetach()
 //Toggle the User Interface
 void AMCCharacter::ToggleUserInterface()
 {
-	if (!UserInterface)
-		return;
-
 	if (bShowUserInterface == false)
 	{
 		bShowUserInterface = true;
 
-
+		UserInterface = CreateWidget<UGraspTypeWidget>(GetWorld(), UGraspTypeWidget::StaticClass());
+		if (!UserInterface)
+				return;
+		UserInterface->SetupWidget(this);
 		UserInterface->AddToViewport();
 
 		// Focus on list and activate cursor
@@ -407,7 +407,7 @@ void AMCCharacter::ToggleUserInterface()
 	}
 	else
 	{
-		UserInterface->RemoveFromViewport();
+		UserInterface->ConditionalBeginDestroy();
 		bShowUserInterface = false;
 
 		FInputModeGameOnly Mode;

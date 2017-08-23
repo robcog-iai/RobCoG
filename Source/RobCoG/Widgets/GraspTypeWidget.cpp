@@ -64,7 +64,7 @@ TSharedRef<SWidget> UGraspTypeWidget::RebuildWidget()
 
 		if (ScrollboxSlot)
 		{
-			ScrollboxSlot->SetAnchors(FAnchors(0.9f, 0, 1, 1)); // 0.9 means it takes at least 10% of the screen
+			ScrollboxSlot->SetAnchors(FAnchors(0, 0, 0.1, 1)); // 10% of the screen
 			ScrollboxSlot->SetOffsets(FMargin(0, 0)); // Distance from top and bottom
 		}
 
@@ -87,4 +87,12 @@ TSharedRef<SWidget> UGraspTypeWidget::RebuildWidget()
 	}
 	return Widget;
 
+}
+
+void UGraspTypeWidget::Toggle()
+{
+	AMCCharacter* Character = Cast<AMCCharacter>(this->Character);
+	{
+		Character->ToggleUserInterface();
+	}
 }

@@ -28,6 +28,7 @@ public:
 	void SetupWidget(ACharacter* Character);
 	void ReactToButtonClick(EGraspType GraspType);
 
+	void Toggle();
 
 
 

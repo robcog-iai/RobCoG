@@ -4,6 +4,7 @@
 UListButton::UListButton()
 {
 	SetBackgroundColor(FLinearColor(255,255,255,0.5));
+	IsFocusable = false;
 
 	OnClicked.AddDynamic(this, &UListButton::OnClick);
 }
@@ -14,6 +15,7 @@ void UListButton::OnClick()
 	if(Widget)
 	{
 		Widget->ReactToButtonClick(this->GraspType);
+		Widget->Toggle();
 	}
 }
 
