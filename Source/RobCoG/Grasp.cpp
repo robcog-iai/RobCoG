@@ -81,20 +81,20 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, 
 	FConstraintInstance* Constraint = nullptr;
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
-	if (Constraint)
+	if (Constraint && FingerVelocity.DistalVelocity.Velocity.Size() == 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.DistalVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
-	if (Constraint)
+	if (Constraint && FingerVelocity.IntermediateVelocity.Velocity.Size() == 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.IntermediateVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
-	if (Constraint)
+	if (Constraint && FingerVelocity.ProximalVelocity.Velocity.Size() == 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.ProximalVelocity.Velocity);
 
 	/* Not Implemented yet
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
-	if (Constraint)
+	if (Constraint && FingerVelocity.MetacarpalOrientation.Velocity.Size() == 0.0)
 	Constraint->SetAngularVelocityTarget(FingerOrientation.MetacarpalOrientation.Orientation.Vector());
 	*/
 }
@@ -136,8 +136,12 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Velocity);
 			// Lock Proximal Thumb
 			//LockConstraint(Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]);
-			// Manipulate Velocity Drives
-			DriveToHandVelocityTarget(HandVelocity, Hand);
+
+			// Manipulate Velocity Drives - Orientations of SLERP and T&S are different
+			if (CurrentAngularDriveMode == EAngularDriveMode::SLERP)
+				DriveToHandVelocityTarget(HandVelocity, Hand);
+			else if(CurrentAngularDriveMode == EAngularDriveMode::TwistAndSwing)
+				DriveToHandVelocityTarget(HandVelocity*-1, Hand);
 		}
 	}
 	else
