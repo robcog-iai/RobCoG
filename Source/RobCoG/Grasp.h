@@ -7,6 +7,7 @@
 #include "Structs/Finger.h"
 #include "Structs/HandOrientation.h"
 #include "Structs/HandVelocity.h"
+#include "HandLogger.h"
 
 class AHand;
 
@@ -70,6 +71,8 @@ private:
 	// Current Grasp Process
 	TEnumAsByte<EAngularDriveMode::Type> CurrentAngularDriveMode;
 
+	// Provide functionality to log data 
+	HandLogger* HandLoggerPtr;
 	// Parser of the ini files
 	TSharedPtr<HandInformationParser> HandInformationParserPtr;
 

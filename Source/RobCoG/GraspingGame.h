@@ -11,6 +11,7 @@
 #include "GraspingGame.generated.h"
 
 
+
 UCLASS()
 class ROBCOG_API AGraspingGame : public AActor
 {
@@ -41,26 +42,34 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	// Is a Game Running
 	bool bGameRunning;
-
+	
+	// The Start transform of the Character
 	FTransform CharacterStartTransform;
 
 	// All found Items to be found
 	TArray<FString> Items;
 
+	// The Spawned Mesh to be carried
 	UStaticMeshComponent* SpawnedMesh;
 
-	//How long, in seconds, the countdown will run
+	// How long, in seconds, the countdown will run
 	UPROPERTY(EditAnywhere, Category = "Timer")
 		int32 StartTime;
-	//How long, in seconds, the countdown will run
+
+	// How long, in seconds, the countdown will run
 	UPROPERTY(EditAnywhere, Category = "Timer")
 		int32 GameTime;
 
+	// The Text which is updated by the start timer
 	UPROPERTY(EditAnywhere, Category = "Timer")
 		UTextRenderComponent* TimerText;
-
+	
+	// The start countdown timer
 	FTimerHandle StartTimerHandle;
+
+	// The game timer to log the 
 	FTimerHandle GameTimerHandle;
 
 	void UpdateStartTimer();
@@ -71,13 +80,13 @@ private:
 
 	void GameTimerHasFinished();
 
-	void GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets) const;
+	void GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets);
 
-	void AbsoluteToGamePath(TArray<FString> & Assets) const;
+	void AbsoluteToGamePath(TArray<FString> & Assets);
 
 	void SpawnRandomItem(TArray<FString> & Assets);
 
-	void ResetCharacterTransform() const;
+	void ResetCharacterTransform();
 
 	void ControlGame();
 

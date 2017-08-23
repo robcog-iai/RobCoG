@@ -68,7 +68,7 @@ void AGraspingGame::Tick(float DeltaTime)
 
 }
 
-void AGraspingGame::GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets) const
+void AGraspingGame::GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Directory: %s"), *Directory);
 	if (FPaths::DirectoryExists(Directory))
@@ -85,7 +85,7 @@ void AGraspingGame::GetAllAssetsInFolder(const FString & Directory, TArray<FStri
 	AbsoluteToGamePath(Assets);
 }
 
-void AGraspingGame::AbsoluteToGamePath(TArray<FString> & Assets) const
+void AGraspingGame::AbsoluteToGamePath(TArray<FString> & Assets)
 {
 	if (Assets.Num() <= 0) return;
 
@@ -168,7 +168,7 @@ void AGraspingGame::ResetGame()
 	StartGame();
 }
 
-void AGraspingGame::ResetCharacterTransform() const
+void AGraspingGame::ResetCharacterTransform()
 {
 	UE_LOG(LogTemp, Warning, TEXT("ResetCharacterTransform"));
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();

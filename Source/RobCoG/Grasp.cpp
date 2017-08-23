@@ -8,6 +8,8 @@
 Grasp::Grasp()
 {
 	HandInformationParserPtr = MakeShareable(new HandInformationParser());
+	HandLoggerPtr = NewObject<HandLogger>();
+
 	GraspStatus = EGraspStatus::Velocity;
 	CurrentAngularDriveMode = EAngularDriveMode::SLERP;
 	CurrentGraspType = EGraspType::FullGrasp;
@@ -81,20 +83,20 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, 
 	FConstraintInstance* Constraint = nullptr;
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
-	if (Constraint && FingerVelocity.DistalVelocity.Velocity.Size() == 0.0)
+	if (Constraint && FingerVelocity.DistalVelocity.Velocity.Size() != 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.DistalVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
-	if (Constraint && FingerVelocity.IntermediateVelocity.Velocity.Size() == 0.0)
+	if (Constraint && FingerVelocity.IntermediateVelocity.Velocity.Size() != 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.IntermediateVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
-	if (Constraint && FingerVelocity.ProximalVelocity.Velocity.Size() == 0.0)
+	if (Constraint && FingerVelocity.ProximalVelocity.Velocity.Size() != 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.ProximalVelocity.Velocity);
 
 	/* Not Implemented yet
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Metacarpal];
-	if (Constraint && FingerVelocity.MetacarpalOrientation.Velocity.Size() == 0.0)
+	if (Constraint && FingerVelocity.MetacarpalOrientation.Velocity.Size() != 0.0)
 	Constraint->SetAngularVelocityTarget(FingerOrientation.MetacarpalOrientation.Orientation.Vector());
 	*/
 }
