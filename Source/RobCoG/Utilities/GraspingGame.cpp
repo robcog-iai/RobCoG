@@ -18,6 +18,8 @@ AGraspingGame::AGraspingGame()
 	PrimaryActorTick.bCanEverTick = true;
 
 	bGameRunning = false;
+	bRoundSuccessfulFinished = false;
+
 	CharacterStartTransform = FTransform();
 
 	CurrentItemName = "";
@@ -35,7 +37,6 @@ AGraspingGame::AGraspingGame()
 	TimerText->SetWorldSize(50.0f);
 
 	StartTime = 3;
-	GameTime = 30;
 }
 
 // Called when the game starts or when spawned
@@ -162,6 +163,7 @@ void AGraspingGame::StartGame()
 {
 	UE_LOG(LogTemp, Warning, TEXT("StartGame"));
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
+	bRoundSuccessfulFinished = false;
 	GetWorldTimerManager().SetTimer(StartTimerHandle, this, &AGraspingGame::UpdateStartTimer, 1.0f, true);
 }
 
@@ -223,12 +225,11 @@ void AGraspingGame::UpdateGameTimer()
 		UE_LOG(LogTemp, Warning, TEXT("Component: %s"), *Component->GetName());
 
 	}
-	bool bRoundFinished = Components.Contains(SpawnedMesh);
+	bRoundSuccessfulFinished = Components.Contains(SpawnedMesh);
 
-	--GameTime;
-	TimerText->SetText(FText::AsNumber(FMath::Max(GameTime, 0)));
+	TimerText->SetText(FText::FromString("Round Running"));
 
-	if (GameTime < 1 || bRoundFinished)
+	if (bRoundSuccessfulFinished)
 	{
 		// We're done counting down, so stop running the timer.
 		GetWorldTimerManager().ClearTimer(GameTimerHandle);
@@ -241,6 +242,5 @@ void AGraspingGame::GameTimerHasFinished()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GameTimerHasFinished"));
 	//Change to a special readout
-	TimerText->SetText(FText::FromName("Round Finished. Press SPACE to reload"));
-	GameTime = 30;
+	TimerText->SetText(FText::FromName("Round Finished. <br> Press SPACE to reload"));
 }

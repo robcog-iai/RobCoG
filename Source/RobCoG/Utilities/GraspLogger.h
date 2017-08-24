@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GraspingGame.h"
-#include "Hand.h"
+#include "Hand/Hand.h"
 
 #include "GraspLogger.generated.h"
 

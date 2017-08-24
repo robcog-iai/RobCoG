@@ -7,7 +7,7 @@
 #include "Structs/Finger.h"
 #include "Structs/HandOrientation.h"
 #include "Structs/HandVelocity.h"
-#include "GraspingGame.h"
+#include "Utilities/GraspingGame.h"
 
 class AHand;
 

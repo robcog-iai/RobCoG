@@ -9,7 +9,7 @@
 #include "Animation/SkeletalMeshActor.h"
 #include "MotionControllerComponent.h"
 #include "PIDController3D.h"
-#include "Hand.h"
+#include "Hand/Hand.h"
 #include "Widgets/GraspTypeWidget.h"
 
 #include "MCCharacter.generated.h"

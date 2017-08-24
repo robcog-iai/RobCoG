@@ -31,7 +31,11 @@ public:
 	UPROPERTY(EditAnywhere)
 		ATriggerBox* TargetBox;
 
+	// The Name of the currently spawned item
 	FString CurrentItemName;
+
+	// Is the round successful finished
+	bool bRoundSuccessfulFinished;
 
 	// Sets default values for this actor's properties
 	AGraspingGame();
@@ -46,6 +50,7 @@ protected:
 private:
 	// Is a Game Running
 	bool bGameRunning;
+
 	
 	// The Start transform of the Character
 	FTransform CharacterStartTransform;
@@ -60,10 +65,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Timer")
 		int32 StartTime;
 
-	// How long, in seconds, the countdown will run
-	UPROPERTY(EditAnywhere, Category = "Timer")
-		int32 GameTime;
-
 	// The Text which is updated by the start timer
 	UPROPERTY(EditAnywhere, Category = "Timer")
 		UTextRenderComponent* TimerText;
@@ -74,28 +75,40 @@ private:
 	// The game timer to log the 
 	FTimerHandle GameTimerHandle;
 
+	// Updates the start timer
 	void UpdateStartTimer();
 
+	// Called when the start timer has finished
 	void StartTimerHasFinished();
 
+	// Updates the game timer
 	void UpdateGameTimer();
 
+	// Called when the game tmer has finished
 	void GameTimerHasFinished();
 
+	// Writes all assetnames into a list
 	void GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets);
 
+	// Absolute paths to ue4 valid loading paths
 	void AbsoluteToGamePath(TArray<FString> & Assets);
 
+	// Spawns a random item
 	void SpawnRandomItem(TArray<FString> & Assets);
 
+	// Reset the character to the base position
 	void ResetCharacterTransform();
 
+	// This method is called on the input
 	void ControlGame();
 
+	// Starts the game functionality
 	void StartGame();
 
+	// Stops the game functionality
 	void StopGame();
 
+	// Resets the game
 	void ResetGame();
 
 };

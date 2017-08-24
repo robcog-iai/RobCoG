@@ -12,8 +12,6 @@ AGraspLogger::AGraspLogger() :
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-
 }
 
 // Called when the game starts or when spawned
@@ -51,8 +49,8 @@ void AGraspLogger::Tick(float DeltaTime)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("StopLogging"));
 		GetWorldTimerManager().ClearTimer(TimerHandle);
-		// Wenn Game gut, dann Save Currents
-		SaveValues();
+		if (GraspingGame->bRoundSuccessfulFinished)
+			SaveValues();
 	}
 	else
 	{
