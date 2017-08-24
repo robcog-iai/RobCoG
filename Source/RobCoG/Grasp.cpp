@@ -8,7 +8,6 @@
 Grasp::Grasp()
 {
 	HandInformationParserPtr = MakeShareable(new HandInformationParser());
-	HandLoggerPtr = NewObject<HandLogger>();
 
 	GraspStatus = EGraspStatus::Velocity;
 	CurrentAngularDriveMode = EAngularDriveMode::SLERP;

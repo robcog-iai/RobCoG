@@ -7,7 +7,7 @@
 #include "Structs/Finger.h"
 #include "Structs/HandOrientation.h"
 #include "Structs/HandVelocity.h"
-#include "HandLogger.h"
+#include "GraspingGame.h"
 
 class AHand;
 
@@ -30,7 +30,6 @@ enum class EComparison : uint8
 	Equals	UMETA(DisplayName = "Equals"),
 };
 
-
 /**
  * This class deals with the grasping of a hand
  */
@@ -39,6 +38,7 @@ class ROBCOG_API Grasp
 public:
 	// Constructor
 	Grasp();
+
 	// Destructor
 	~Grasp();
 
@@ -53,41 +53,47 @@ public:
 
 	// Print The Fore 
 	void PrintHandInfo(const AHand * const Hand) const;
-
-
-private:
+	
 	// The current status of the grasp process
 	EGraspStatus GraspStatus;
+
+	// The Current Grasp type
+	EGraspType CurrentGraspType;
+
+private:
 	// The initial HandOrientation
 	FHandOrientation InitialHandOrientation;
+
 	// The closed HandOrientation
 	FHandOrientation ClosedHandOrientation;
+
 	// The HandVelocity after grasping
 	FHandVelocity HandVelocity;
+
 	// The HandOrientation of the last Tick
 	FHandOrientation LastHandOrientation;
-	// The Current Grasp Position
-	EGraspType CurrentGraspType;
+
 	// Current Grasp Process
 	TEnumAsByte<EAngularDriveMode::Type> CurrentAngularDriveMode;
 
-	// Provide functionality to log data 
-	HandLogger* HandLoggerPtr;
 	// Parser of the ini files
 	TSharedPtr<HandInformationParser> HandInformationParserPtr;
 
 	// Linear Interpolation between the given InitialHandOrientation and the given ClosedHandOrientation from 0-1
 	void LerpHandOrientation(FHandOrientation & TargetHandOrientation, const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha);
+	
 	// Linear Interpolation between the given InitialFingerOrientation and the given ClosedFingerOrientation from 0-1
 	void LerpFingerOrientation(FFingerOrientation & TargetFingerOrientation, const FFingerOrientation & InitialFingerOrientation, const FFingerOrientation & ClosedFingerOrientation, const float Alpha);
 
 	// Moves the given Hand to the given HandOrientation
 	void DriveToHandOrientationTarget(const FHandOrientation & HandOrientation, const AHand* const Hand);
+	
 	// Moves the given Finger to the given FingerOrientation
 	void DriveToFingerOrientationTarget(const FFingerOrientation & FingerOrientation, const FFinger & Finger);
 
 	// Moves the given Hand to the given HandOrientation
 	void DriveToHandVelocityTarget(const FHandVelocity & HandVelocity, const AHand * const Hand);
+	
 	// Moves the given Finger to the given FingerOrientation
 	void DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, const FFinger & Finger);
 
@@ -97,7 +103,9 @@ private:
 	// Checks the Distal Velocity to be higher,lower,equals the threshold
 	bool CheckDistalVelocity(const AHand* const Hand, const float VelocityThreshold, const EComparison Comparison);
 
+	// Locks the angular rotation of a Constraint
 	void LockConstraint(FConstraintInstance* Constraint);
 
+	//Unlocks the angular rotation of a constraint
 	void UnlockConstraint(FConstraintInstance* Constraint);
 };

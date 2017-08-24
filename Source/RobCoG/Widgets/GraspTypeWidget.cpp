@@ -64,7 +64,7 @@ TSharedRef<SWidget> UGraspTypeWidget::RebuildWidget()
 
 		if (ScrollboxSlot)
 		{
-			ScrollboxSlot->SetAnchors(FAnchors(0, 0, 0.1, 1)); // 10% of the screen
+			ScrollboxSlot->SetAnchors(FAnchors(0, 0, 0.2, 1)); // 10% of the screen
 			ScrollboxSlot->SetOffsets(FMargin(0, 0)); // Distance from top and bottom
 		}
 

@@ -6,6 +6,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AHand::AHand()
@@ -39,6 +40,7 @@ AHand::AHand()
 	SkelComp->SetCollisionProfileName(TEXT("BlockAll"));
 	SkelComp->bGenerateOverlapEvents = true;
 
+	bLogGrasp = true;
 	// Angular drive default values
 	Spring = 9000.0f;
 	Damping = 1000.0f;

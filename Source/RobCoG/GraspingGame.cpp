@@ -20,6 +20,7 @@ AGraspingGame::AGraspingGame()
 	bGameRunning = false;
 	CharacterStartTransform = FTransform();
 
+	CurrentItemName = "";
 	Paths.Add("Items/Scanned/Meshes");
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"), this);
@@ -123,6 +124,13 @@ void AGraspingGame::SpawnRandomItem(TArray<FString> & Assets)
 	UStaticMesh* Mesh = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr, *MeshPath));
 
 	if (Mesh) {
+
+		auto SlashPosition = 0;
+		auto PointPosition = 0;
+		MeshPath.FindLastChar('/', SlashPosition);
+		MeshPath.FindLastChar('.', PointPosition);
+
+		CurrentItemName = MeshPath.Mid(SlashPosition + 1, PointPosition - (SlashPosition + 1));
 		SpawnedMesh->SetStaticMesh(Mesh);
 		SpawnedMesh->SetEnableGravity(true);
 		SpawnedMesh->SetSimulatePhysics(true);

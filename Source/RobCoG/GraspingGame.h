@@ -31,6 +31,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		ATriggerBox* TargetBox;
 
+	FString CurrentItemName;
+
 	// Sets default values for this actor's properties
 	AGraspingGame();
 
