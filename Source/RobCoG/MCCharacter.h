@@ -9,7 +9,9 @@
 #include "Animation/SkeletalMeshActor.h"
 #include "MotionControllerComponent.h"
 #include "PIDController3D.h"
-#include "Hand.h"
+#include "Hand/Hand.h"
+#include "Widgets/GraspTypeWidget.h"
+
 #include "MCCharacter.generated.h"
 
 UCLASS()
@@ -29,6 +31,12 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	// Switch the curent grasping style
+	void SwitchGraspStyle(EGraspType GraspType);
+
+	//Toggle the User Interface
+	void ToggleUserInterface();
 
 protected:
 	// Left hand skeletal mesh
@@ -96,8 +104,6 @@ protected:
 		PIDController3D& PIDController,
 		const float DeltaTime);
 
-	// Switch the curent grasping style
-	void SwitchGraspStyle();
 
 	// For testing several grasping processes
 	void SwitchGraspProcess();
@@ -152,4 +158,10 @@ protected:
 
 	// Offset to add to the hand in order to tracked in the selected position (world rotation at start time)
 	FQuat RightHandRotationOffset;
+
+	// User Interface is shown
+	bool bShowUserInterface;
+
+	//User Interface as GraspTypeWidget
+	UGraspTypeWidget* UserInterface;
 };

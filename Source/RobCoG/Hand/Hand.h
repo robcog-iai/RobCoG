@@ -40,8 +40,11 @@ public:
 	// Tick value for debuging
 	float TickValue;
 
+	// Constrolls Grasping funktionality 
+	TSharedPtr<Grasp> GraspPtr;
+
 	// Hand type
-	UPROPERTY(EditAnywhere, Category = "MC|Hand")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MC|Hand")
 		EHandType HandType;
 
 	// Thumb finger skeletal bone names
@@ -80,7 +83,7 @@ public:
 	void UpdateGrasp2(const float Alpha);
 
 	// Switch the grasping style
-	void SwitchGraspStyle();
+	void SwitchGraspStyle(EGraspType GraspType);
 
 	// Switch the grasping process
 	void SwitchGraspProcess();
@@ -110,6 +113,12 @@ public:
 	void SetOtherHand(AHand* InOtherHand);
 
 	void ResetAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType);
+
+	UFUNCTION(BlueprintCallable)
+		float GetMaxAngularForceOfAllConstraints();
+
+	UFUNCTION(BlueprintCallable)
+		float GetAngularForceOfConstraint(const FName & JointName);
 
 protected:
 	// Collision component used for attaching grasped objects
@@ -162,20 +171,24 @@ private:
 	UPROPERTY(EditAnywhere, Category = "MC|Fixation Grasp", meta = (editcondition = "bEnableFixationGrasp"), meta = (ClampMin = 0))
 		float TwoHandsFixationMaximumLength;
 
-	// Spring value to apply to the angular drive (Position strength)
+	// Should the Force of the Grasps be logged.
 	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+		bool bLogGrasp;
+
+	// Spring value to apply to the angular drive (Position strength)
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 		float Spring;
 
 	// Damping value to apply to the angular drive (Velocity strength) 
-	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 		float Damping;
 
 	// Limit of the force that the angular drive can apply
-	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 		float ForceLimit;
 
 	// Limit of the force that the angular drive must apply before changiing to velocity
-	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters")
+	UPROPERTY(EditAnywhere, Category = "MC|Drive Parameters", meta = (ClampMin = 0))
 		float VelocityThreshold;
 
 	// Enable grasping with fixation
@@ -207,8 +220,6 @@ private:
 	// Pointer to objects in reach for grasping
 	TArray<AStaticMeshActor*> GraspableObjects;
 
-	TEnumAsByte<EAngularDriveMode::Type> AngularDriveMode;;
-
 	// Objects that are in reach to be grasped by one hand
 	TArray<AStaticMeshActor*> OneHandGraspableObjects;
 
@@ -235,13 +246,11 @@ private:
 
 	// Mark that the grasp has been held, avoid reinitializing the finger drivers
 	bool bGraspHeld;
-
-	// Grasp
-	TSharedPtr<Grasp> GraspPtr;
-
+	
 	// Setup fingers angular drive values
 	FORCEINLINE void SetupAngularDriveValues(EAngularDriveMode::Type DriveMode, EAngularDriveType DriveType);
 
 	// Setup finger bones
 	FORCEINLINE void SetupBones();
+
 };

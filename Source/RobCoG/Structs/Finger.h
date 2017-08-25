@@ -66,6 +66,7 @@ struct FFinger
 	TMap<EFingerPart, FBodyInstance*> FingerPartToBone;
 
 	// Map of finger part to constraint
+	//UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Finger")
 	TMap<EFingerPart, FConstraintInstance*> FingerPartToConstraint;
 
 	// Set finger part to constraint from bone names
