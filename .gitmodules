@@ -6,3 +6,6 @@
 	path = Plugins/URoboSim
 	url = https://github.com/robcog-iai/URoboSim
 	branch = master
+[submodule "ROS"]
+	path = ROS
+	url = https://github.com/gnoliyil/pr2_kinetic_packages.git
