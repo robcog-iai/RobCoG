@@ -6,26 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "GraspingGame.h"
 #include "Hand/Hand.h"
+#include "ForceFileWriter.h"
 
 #include "GraspLogger.generated.h"
-
-
-struct FLogInfo
-{
-	// Default constructor
-	FLogInfo() : GraspType(EGraspType::FullGrasp) {}
-
-	EGraspType GraspType;
-	TArray<float> OrientationGrasp;
-	TArray<float> VelocityGrasp;
-
-	FORCEINLINE void Clear()
-	{
-		OrientationGrasp.Empty();
-		VelocityGrasp.Empty();
-	}
-};
-
 
 UCLASS()
 class ROBCOG_API AGraspLogger : public AActor
@@ -52,6 +35,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+
+	TSharedPtr<ForceFileWriter> ForceFileWriterPtr;
+
 	FString CurrentItemName;
 	FLogInfo CurrentLogInfo;
 	// Saves the Itemname and the chosen 
@@ -65,7 +51,7 @@ private:
 
 	void UpdateTimer();
 
-	void ClearGraspInfo();
+	void ClearCurrentGraspInfo();
 	void SaveValues();
 
 };

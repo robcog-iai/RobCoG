@@ -56,12 +56,6 @@ void AForceFinger::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FString ForceFilePath = FPaths::GameSavedDir() + "Force.csv";
-	if (ForceFileWriterPtr.IsValid() && bLogForceIntoFile)
-	{
-		ForceFileWriterPtr->InitializeFile(ForceFilePath, NumberOfValuesToBeWritten);
-	}
-
 	USkeletalMeshComponent* SkeletalMesh = GetSkeletalMeshComponent();
 	if (SkeletalMesh == nullptr)
 		return;

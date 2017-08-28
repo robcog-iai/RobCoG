@@ -2,6 +2,7 @@
 
 #include "GraspLogger.h"
 #include "TimerManager.h"
+#include "Paths.h"
 
 
 // Sets default values
@@ -12,6 +13,7 @@ AGraspLogger::AGraspLogger() :
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	ForceFileWriterPtr = MakeShareable(new ForceFileWriter());
 }
 
 // Called when the game starts or when spawned
@@ -35,7 +37,7 @@ void AGraspLogger::Tick(float DeltaTime)
 	else if (LastGraspStatus == EGraspStatus::Stopped && Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("StartLogging"));
-		ClearGraspInfo();
+		ClearCurrentGraspInfo();
 
 		CurrentItemName = GraspingGame->CurrentItemName;
 		UE_LOG(LogTemp, Warning, TEXT("CurrentItemName: %s"), *CurrentItemName);
@@ -50,7 +52,14 @@ void AGraspLogger::Tick(float DeltaTime)
 		UE_LOG(LogTemp, Warning, TEXT("StopLogging"));
 		GetWorldTimerManager().ClearTimer(TimerHandle);
 		if (GraspingGame->bRoundSuccessfulFinished)
+		{
+			// TODO: Use the Map...
 			SaveValues();
+			if (ForceFileWriterPtr.IsValid())
+				ForceFileWriterPtr->WriteGraspInfoMapToFile(ItemToGraspInfoMap,FPaths::GameSavedDir()+"Force.csv");
+			ItemToGraspInfoMap.Empty();
+			ClearCurrentGraspInfo();
+		}
 	}
 	else
 	{
@@ -82,7 +91,7 @@ void AGraspLogger::UpdateTimer()
 	}
 }
 
-void AGraspLogger::ClearGraspInfo()
+void AGraspLogger::ClearCurrentGraspInfo()
 {
 	CurrentItemName = "";
 	CurrentLogInfo.Clear();

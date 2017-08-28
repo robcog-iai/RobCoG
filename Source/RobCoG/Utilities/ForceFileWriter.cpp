@@ -1,12 +1,10 @@
 // Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
 #include "ForceFileWriter.h"
+#include "UObjectGlobals.h"
 
 ForceFileWriter::ForceFileWriter()
 {
-	CurrentValueNumber = 0;
-	NumberOfValues = 300;
-	AbsoluteFilePath = "";
 }
 
 ForceFileWriter::~ForceFileWriter()
@@ -14,38 +12,58 @@ ForceFileWriter::~ForceFileWriter()
 	
 }
 
-void ForceFileWriter::InitializeFile(
-	const FString & AbsoluteFilePath, 
-	const int32 NumberOfValuesToBeWritten, 
-	FFileHelper::EEncodingOptions::Type EncodingOptions,
-	IFileManager* FileManager)
-{
-	this->NumberOfValues = NumberOfValuesToBeWritten;
-	this->AbsoluteFilePath = AbsoluteFilePath;
-
-	UE_LOG(LogTemp, Warning, TEXT("AbsoluteFilePath: %s"), *this->AbsoluteFilePath);
-	FileManager->Delete(*this->AbsoluteFilePath);
-
-	for (int i = 0; i < NumberOfValues; i++)
-		FFileHelper::SaveStringToFile(";Tick " + FString::FromInt(i), *this->AbsoluteFilePath, EncodingOptions, FileManager, FILEWRITE_Append);
-
-}
 
 bool ForceFileWriter::AppendFloatToFile(
-	const float Value, 
-	const FString & Filename, 
+	const float Value,
+	const FString & Filename,
 	FFileHelper::EEncodingOptions::Type EncodingOptions,
 	IFileManager* FileManager)
 {
-	if (CurrentValueNumber >= NumberOfValues)
-		return false;
-	 
-	if(CurrentValueNumber == 0 )
-		FFileHelper::SaveStringToFile("\nForce:", *AbsoluteFilePath, EncodingOptions, FileManager, FILEWRITE_Append);
+	return FFileHelper::SaveStringToFile(";" + FString::SanitizeFloat(Value), *Filename, EncodingOptions, FileManager, FILEWRITE_Append);
+}
 
-	FFileHelper::SaveStringToFile(";" + FString::SanitizeFloat(Value), *Filename, EncodingOptions, FileManager, FILEWRITE_Append);
+bool ForceFileWriter::AppendStringToFile(
+	const FString & Value,
+	const FString & Filename,
+	FFileHelper::EEncodingOptions::Type EncodingOptions,
+	IFileManager* FileManager)
+{
+	return FFileHelper::SaveStringToFile(Value, *Filename, EncodingOptions, FileManager, FILEWRITE_Append);
+}
 
-	//UE_LOG(LogTemp, Warning, TEXT("Float: %f | Sanitized: %s"), Value, *FString::SanitizeFloat(Value));
-	CurrentValueNumber += 1;
-	return false; 
+bool ForceFileWriter::WriteGraspInfoMapToFile(const TMap<FString, FLogInfo> & ItemToGraspInfoMap,
+	const FString & Filename,
+	FFileHelper::EEncodingOptions::Type EncodingOptions,
+	IFileManager* FileManager)
+{
+	bool Success = true;
+	for(auto Entry : ItemToGraspInfoMap)
+	{
+		FString ItemName = Entry.Key;
+		FLogInfo LogInfo = Entry.Value;
+
+		FString GraspType;
+		UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EGraspType"), true);
+		
+		if (EnumPtr)
+			GraspType = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(LogInfo.GraspType)).ToString();
+		else
+			GraspType = "Error";
+
+		Success = Success && AppendStringToFile("\nItemName:;" + ItemName, Filename);
+		Success = Success && AppendStringToFile("\nGraspType:;" + GraspType, Filename);
+		Success = Success && AppendStringToFile("\nOrientation:", Filename);
+		for(auto OrientationValue : LogInfo.OrientationGrasp)
+		{
+			Success = Success && AppendFloatToFile(OrientationValue, Filename);
+		}
+		Success = Success && AppendStringToFile("\nVelocity:", Filename);
+		for (auto VelocityValue : LogInfo.VelocityGrasp)
+		{
+			Success = Success && AppendFloatToFile(VelocityValue, Filename);
+		}
+		Success = Success && AppendStringToFile("\n\n", Filename);
+
+	}
+	return Success;
 }
