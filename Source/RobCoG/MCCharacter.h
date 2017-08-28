@@ -11,6 +11,7 @@
 #include "PIDController3D.h"
 #include "Hand/Hand.h"
 #include "Widgets/GraspTypeWidget.h"
+#include "WidgetInteractionComponent.h"
 
 #include "MCCharacter.generated.h"
 
@@ -41,52 +42,56 @@ public:
 protected:
 	// Left hand skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	ASkeletalMeshActor* LeftSkelActor;
+		ASkeletalMeshActor* LeftSkelActor;
 
 	// Right hand skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	ASkeletalMeshActor* RightSkelActor;
-	
+		ASkeletalMeshActor* RightSkelActor;
+
 	// Flag to apply rotation offset to hands
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	bool bUseHandsInitialRotationAsOffset;
+		bool bUseHandsInitialRotationAsOffset;
 
 	// Show motion controller pose arrows
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	bool bShowTargetArrows;
+		bool bShowTargetArrows;
 
 	// If hands enabled, try fixation grasp
 	UPROPERTY(EditAnywhere, Category = "MC|Hands")
-	bool bTryFixationGrasp;
+		bool bTryFixationGrasp;
 
 	// If hands enable it, try two hands fixation grasp
 	UPROPERTY(EditAnywhere, Category = "MC|Hands", meta = (editcondition = "bEnableFixationGrasp"))
-	bool bTryTwoHandsFixationGrasp;
+		bool bTryTwoHandsFixationGrasp;
 
 	// PID controller proportional argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
-	float PGain;
+		float PGain;
 
 	// PID controller integral argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
-	float IGain;
-	
+		float IGain;
+
 	// PID controller derivative argument
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
-	float DGain;
-	
+		float DGain;
+
 	// PID controller maximum output (absolute value)
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
-	float MaxOutput;
+		float MaxOutput;
 
 	// Hand rotation controller boost
 	UPROPERTY(EditAnywhere, Category = "MC|Control")
-	float RotationBoost;
-	
+		float RotationBoost;
+
 	// Character camera
 	UPROPERTY(EditAnywhere)
-	UCameraComponent* CharCamera;
-	
+		UCameraComponent* CharCamera;
+
+	// Widget Interaction
+	UPROPERTY(EditAnywhere)
+		UWidgetInteractionComponent* WidgetInteractionComponent;
+
 	// Handles moving forward/backward
 	void MoveForward(const float Val);
 

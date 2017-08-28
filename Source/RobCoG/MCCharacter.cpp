@@ -43,6 +43,11 @@ AMCCharacter::AMCCharacter()
 	//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
 	//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
 
+	WidgetInteractionComponent = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WindgetInteractionComponent"));
+	WidgetInteractionComponent->SetupAttachment(CharCamera);
+
+	// TODO: IUmplement Clicks
+
 	// Create left/right motion controller
 	MCLeft = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCLeft"));
 	MCLeft->SetupAttachment(MCOriginComponent);
