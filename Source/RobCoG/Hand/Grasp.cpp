@@ -82,15 +82,15 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, 
 	FConstraintInstance* Constraint = nullptr;
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Distal];
-	if (Constraint && FingerVelocity.DistalVelocity.Velocity.Size() != 0.0)
+	if (Constraint)// && FingerVelocity.DistalVelocity.Velocity.Size() != 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.DistalVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Intermediate];
-	if (Constraint && FingerVelocity.IntermediateVelocity.Velocity.Size() != 0.0)
+	if (Constraint)// && FingerVelocity.IntermediateVelocity.Velocity.Size() != 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.IntermediateVelocity.Velocity);
 
 	Constraint = Finger.FingerPartToConstraint[EFingerPart::Proximal];
-	if (Constraint && FingerVelocity.ProximalVelocity.Velocity.Size() != 0.0)
+	if (Constraint)// && FingerVelocity.ProximalVelocity.Velocity.Size() != 0.0)
 		Constraint->SetAngularVelocityTarget(FingerVelocity.ProximalVelocity.Velocity);
 
 	/* Not Implemented yet
@@ -271,43 +271,43 @@ void Grasp::LerpFingerOrientation(FFingerOrientation & TargetFingerOrientation, 
 
 void Grasp::PrintHandInfo(const AHand * const Hand) const
 {
-	FVector OutLinearForce;
-	FVector OutAngularForce;
+	//FVector OutLinearForce;
+	//FVector OutAngularForce;
 
-	Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Distal: %f"), OutAngularForce.Size()));
-	Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(3, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Intermediate: %f"), OutAngularForce.Size()));
-	Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(4, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Proximal: %f"), OutAngularForce.Size()));
+	//Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(2, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Distal: %f"), OutAngularForce.Size()));
+	//Hand->Thumb.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(3, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Intermediate: %f"), OutAngularForce.Size()));
+	//Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(4, 1, FColor::Blue, FString::Printf(TEXT("Thumb - Proximal: %f"), OutAngularForce.Size()));
 
-	Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(5, 1, FColor::Blue, FString::Printf(TEXT("Index - Distal: %f"), OutAngularForce.Size()));
-	Hand->Index.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(6, 1, FColor::Blue, FString::Printf(TEXT("Index - Intermediate: %f"), OutAngularForce.Size()));
-	Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(7, 1, FColor::Blue, FString::Printf(TEXT("Index - Proximal: %f"), OutAngularForce.Size()));
+	//Hand->Index.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(5, 1, FColor::Blue, FString::Printf(TEXT("Index - Distal: %f"), OutAngularForce.Size()));
+	//Hand->Index.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(6, 1, FColor::Blue, FString::Printf(TEXT("Index - Intermediate: %f"), OutAngularForce.Size()));
+	//Hand->Index.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(7, 1, FColor::Blue, FString::Printf(TEXT("Index - Proximal: %f"), OutAngularForce.Size()));
 
-	Hand->Middle.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(8, 1, FColor::Blue, FString::Printf(TEXT("Middle - Distal: %f"), OutAngularForce.Size()));
-	Hand->Middle.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(9, 1, FColor::Blue, FString::Printf(TEXT("Middle - Intermediate: %f"), OutAngularForce.Size()));
-	Hand->Middle.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(10, 1, FColor::Blue, FString::Printf(TEXT("Middle - Proximal: %f"), OutAngularForce.Size()));
+	//Hand->Middle.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(8, 1, FColor::Blue, FString::Printf(TEXT("Middle - Distal: %f"), OutAngularForce.Size()));
+	//Hand->Middle.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(9, 1, FColor::Blue, FString::Printf(TEXT("Middle - Intermediate: %f"), OutAngularForce.Size()));
+	//Hand->Middle.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(10, 1, FColor::Blue, FString::Printf(TEXT("Middle - Proximal: %f"), OutAngularForce.Size()));
 
-	Hand->Ring.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(11, 1, FColor::Blue, FString::Printf(TEXT("Ring - Distal: %f"), OutAngularForce.Size()));
-	Hand->Ring.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(12, 1, FColor::Blue, FString::Printf(TEXT("Ring - Intermediate: %f"), OutAngularForce.Size()));
-	Hand->Ring.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(13, 1, FColor::Blue, FString::Printf(TEXT("Ring - Proximal: %f"), OutAngularForce.Size()));
+	//Hand->Ring.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(11, 1, FColor::Blue, FString::Printf(TEXT("Ring - Distal: %f"), OutAngularForce.Size()));
+	//Hand->Ring.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(12, 1, FColor::Blue, FString::Printf(TEXT("Ring - Intermediate: %f"), OutAngularForce.Size()));
+	//Hand->Ring.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(13, 1, FColor::Blue, FString::Printf(TEXT("Ring - Proximal: %f"), OutAngularForce.Size()));
 
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(14, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Distal: %f"), OutAngularForce.Size()));
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(15, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Intermediate: %f"), OutAngularForce.Size()));
-	Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-	if (GEngine) GEngine->AddOnScreenDebugMessage(16, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Proximal: %f"), OutAngularForce.Size()));
+	//Hand->Pinky.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(14, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Distal: %f"), OutAngularForce.Size()));
+	//Hand->Pinky.FingerPartToConstraint[EFingerPart::Intermediate]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(15, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Intermediate: %f"), OutAngularForce.Size()));
+	//Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(16, 1, FColor::Blue, FString::Printf(TEXT("Pinky - Proximal: %f"), OutAngularForce.Size()));
 
 }
 

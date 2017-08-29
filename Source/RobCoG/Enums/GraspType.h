@@ -10,6 +10,10 @@ UENUM(BlueprintType)
 enum class EGraspType : uint8
 {
 	FullGrasp			UMETA(DisplayName = "FullGrasp"),
-	PinchGrasp			UMETA(DisplayName = "PinchGrasp"),
-	PinchThreeGrasp		UMETA(DisplayName = "PinchThreeGrasp"),
+	LargeDiameter			UMETA(DisplayName = "LargeDiameter"),
+	Ring			UMETA(DisplayName = "Ring"),
+	PalmarPinch			UMETA(DisplayName = "PalmarPinch"),
+	SphereThreeFinger		UMETA(DisplayName = "SphereThreeFinger"),
+	Lateral		UMETA(DisplayName = "Lateral"),
+	ParallelExtension		UMETA(DisplayName = "ParallelExtension")
 };
