@@ -46,8 +46,6 @@ AMCCharacter::AMCCharacter()
 	WidgetInteractionComponent = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WindgetInteractionComponent"));
 	WidgetInteractionComponent->SetupAttachment(CharCamera);
 
-	// TODO: IUmplement Clicks
-
 	// Create left/right motion controller
 	MCLeft = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCLeft"));
 	MCLeft->SetupAttachment(MCOriginComponent);
@@ -204,6 +202,8 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("AttachToRightHand", IE_Pressed, this, &AMCCharacter::TryRightFixationGrasp);
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Released, this, &AMCCharacter::TryLeftGraspDetach);
 	PlayerInputComponent->BindAction("AttachToRightHand", IE_Released, this, &AMCCharacter::TryRightGraspDetach);
+
+	PlayerInputComponent->BindAction("WI_MouseButton", IE_Released, this, &AMCCharacter::SimulateMouseClick); 
 }
 
 // Handles moving forward/backward
@@ -423,4 +423,10 @@ void AMCCharacter::ToggleUserInterface()
 
 		UE_LOG(LogTemp, Warning, TEXT("Remove User Interface"));
 	}
+}
+
+void AMCCharacter::SimulateMouseClick()
+{
+	WidgetInteractionComponent->PressPointerKey(EKeys::LeftMouseButton);
+	WidgetInteractionComponent->ReleasePointerKey(EKeys::LeftMouseButton);
 }

@@ -8,11 +8,12 @@
 #include "Buttons/ListButton.h"
 #include "TextBlock.h"
 #include "MCCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 
 UGraspTypeWidget::UGraspTypeWidget(const class FObjectInitializer& PCIP) : Super(PCIP)
 {
-	Character = nullptr;
+	Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 }
 
 void UGraspTypeWidget::SetupWidget(ACharacter* Character)
@@ -28,7 +29,10 @@ void UGraspTypeWidget::NativeConstruct()
 
 void UGraspTypeWidget::ReactToButtonClick(EGraspType GraspType)
 {
+	Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	AMCCharacter* Character = Cast<AMCCharacter>(this->Character);
+
+	if(Character)
 	{
 		Character->SwitchGraspStyle(GraspType);
 	}

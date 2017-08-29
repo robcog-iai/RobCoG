@@ -169,4 +169,7 @@ protected:
 
 	//User Interface as GraspTypeWidget
 	UGraspTypeWidget* UserInterface;
+
+	//Simulates mouse click for Widget
+	void SimulateMouseClick();
 };

@@ -15,7 +15,7 @@ void UListButton::OnClick()
 	if(Widget)
 	{
 		Widget->ReactToButtonClick(this->GraspType);
-		Widget->Toggle();
+		//Widget->Toggle();
 	}
 }
 
