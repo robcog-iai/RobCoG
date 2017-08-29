@@ -14,7 +14,8 @@ public class RobCoG : ModuleRules
 			"CoreUObject", 
 			"Engine", 
 			"InputCore",
-			"UPIDController"
+			"UPIDController",
+			"UMG"
 			});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {
@@ -23,7 +24,7 @@ public class RobCoG : ModuleRules
 			});
 
 		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
 		// Uncomment if you are using online features
 		// PrivateDependencyModuleNames.Add("OnlineSubsystem");

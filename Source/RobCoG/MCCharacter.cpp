@@ -7,13 +7,17 @@
 #include "Components/CapsuleComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "HeadMountedDisplay.h"
 #include "IHeadMountedDisplay.h"
+#include "Kismet/GameplayStatics.h"
+#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
+#include "Engine/Engine.h"
 
 // Sets default values
 AMCCharacter::AMCCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	// Set this pawn to be controlled by the lowest-numbered player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -38,6 +42,9 @@ AMCCharacter::AMCCharacter()
 	// Default camera for VR use -- relative location at the floor 
 	//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
 	//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
+
+	WidgetInteractionComponent = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WindgetInteractionComponent"));
+	WidgetInteractionComponent->SetupAttachment(CharCamera);
 
 	// Create left/right motion controller
 	MCLeft = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MCLeft"));
@@ -65,6 +72,8 @@ AMCCharacter::AMCCharacter()
 	// Init rotation offset
 	LeftHandRotationOffset = FQuat::Identity;
 	RightHandRotationOffset = FQuat::Identity;
+
+	bShowUserInterface = false;
 }
 
 // Called when the game starts or when spawned
@@ -81,14 +90,14 @@ void AMCCharacter::BeginPlay()
 	RightPIDController.SetValues(PGain, IGain, DGain, MaxOutput, -MaxOutput);
 
 	// Check if VR is enabled
-	IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
+	IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->HMDDevice.Get());
 	if (HMD && HMD->IsStereoEnabled())
-	{		
+	{
 		// VR MODE
 		//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
 	}
 	else
-	{		
+	{
 		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
 		CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
 		CharCamera->bUsePawnControlRotation = true;
@@ -98,7 +107,7 @@ void AMCCharacter::BeginPlay()
 	}
 
 	if (LeftSkelActor)
-	{	
+	{
 		// Cast the hands to AHand
 		LeftHand = Cast<AHand>(LeftSkelActor);
 
@@ -111,7 +120,7 @@ void AMCCharacter::BeginPlay()
 		// Teleport hands to the current position of the motion controllers
 		LeftSkelActor->SetActorLocationAndRotation(MCLeft->GetComponentLocation(),
 			MCLeft->GetComponentQuat() * LeftHandRotationOffset,
-			false, (FHitResult*)nullptr, ETeleportType::TeleportPhysics);
+			false, static_cast<FHitResult*>(nullptr), ETeleportType::TeleportPhysics);
 	}
 
 	if (RightSkelActor)
@@ -128,7 +137,7 @@ void AMCCharacter::BeginPlay()
 		// Teleport hands to the current position of the motion controllers
 		RightSkelActor->SetActorLocationAndRotation(MCRight->GetComponentLocation(),
 			MCRight->GetComponentQuat() * RightHandRotationOffset,
-			false, (FHitResult*)nullptr,ETeleportType::TeleportPhysics);
+			false, static_cast<FHitResult*>(nullptr), ETeleportType::TeleportPhysics);
 	}
 
 	// If two hands are available, let them know about each other (for two hands fixation grasp)
@@ -137,6 +146,17 @@ void AMCCharacter::BeginPlay()
 	{
 		LeftHand->SetOtherHand(RightHand);
 		RightHand->SetOtherHand(LeftHand);
+	}
+
+	// Initialize UserInterface
+	UserInterface = CreateWidget<UGraspTypeWidget>(GetWorld(), UGraspTypeWidget::StaticClass());
+	if (UserInterface) UserInterface->SetupWidget(this);
+
+	FStringClassReference HandForceWidgetClassRef(TEXT("/Game/Widget/WB_HandForce.WB_HandForce_C"));
+	if (UClass* HandForceClass = HandForceWidgetClassRef.TryLoadClass<UUserWidget>())
+	{
+		UUserWidget* HandForceWidget = CreateWidget<UUserWidget>(GetWorld(), HandForceClass);
+		HandForceWidget->AddToViewport(10);
 	}
 }
 
@@ -163,24 +183,31 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// Set up gameplay key bindings
-	PlayerInputComponent->BindAxis("MoveForward", this, &AMCCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMCCharacter::MoveRight);
-	PlayerInputComponent->BindAxis("MoveHandsOnZ", this, &AMCCharacter::MoveHandsOnZ);
-	// Default Camera view bindings
-	PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
+	if (IsRootComponentMovable())
+	{
+		// Set up gameplay key bindings
+		PlayerInputComponent->BindAxis("MoveForward", this, &AMCCharacter::MoveForward);
+		PlayerInputComponent->BindAxis("MoveRight", this, &AMCCharacter::MoveRight);
+		PlayerInputComponent->BindAxis("MoveHandsOnZ", this, &AMCCharacter::MoveHandsOnZ);
+		// Default Camera view bindings
+		PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
+		PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
+	}
+
 	// Hand control binding
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
-	PlayerInputComponent->BindAction("SwitchGrasp", IE_Pressed, this, &AMCCharacter::SwitchGrasp);
+	PlayerInputComponent->BindAction("SwitchGraspStyle", IE_Pressed, this, &AMCCharacter::ToggleUserInterface);
+	PlayerInputComponent->BindAction("SwitchGraspProcess", IE_Pressed, this, &AMCCharacter::SwitchGraspProcess);
 
 	// Hand action binding
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Pressed, this, &AMCCharacter::TryLeftFixationGrasp);
 	PlayerInputComponent->BindAction("AttachToRightHand", IE_Pressed, this, &AMCCharacter::TryRightFixationGrasp);
 	PlayerInputComponent->BindAction("AttachToLeftHand", IE_Released, this, &AMCCharacter::TryLeftGraspDetach);
 	PlayerInputComponent->BindAction("AttachToRightHand", IE_Released, this, &AMCCharacter::TryRightGraspDetach);
+
+	PlayerInputComponent->BindAction("WI_MouseButton", IE_Released, this, &AMCCharacter::SimulateMouseClick); 
 }
 
 // Handles moving forward/backward
@@ -229,6 +256,7 @@ void AMCCharacter::MoveHandsOnZ(const float Value)
 
 	}
 }
+
 // Update hand positions
 FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	UMotionControllerComponent* MC,
@@ -262,17 +290,31 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
-// Switch Grasp
-void AMCCharacter::SwitchGrasp()
+// Switch Grasp style
+void AMCCharacter::SwitchGraspStyle(EGraspType GraspType)
 {
 	if (RightHand)
 	{
-		RightHand->SwitchGrasp();
+		RightHand->SwitchGraspStyle(GraspType);
 	}
 
 	if (LeftHand)
 	{
-		LeftHand->SwitchGrasp();
+		LeftHand->SwitchGraspStyle(GraspType);
+	}
+}
+
+// Switch Grasp process
+void AMCCharacter::SwitchGraspProcess()
+{
+	if (RightHand)
+	{
+		RightHand->SwitchGraspProcess();
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchGraspProcess();
 	}
 }
 
@@ -282,6 +324,8 @@ void AMCCharacter::GraspWithLeftHand(const float Val)
 	if (LeftHand)
 	{
 		LeftHand->UpdateGrasp(Val);
+		// For the realisitc grasping part
+		//LeftHand->UpdateGrasp2(Val);
 	}
 }
 
@@ -290,8 +334,9 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 {
 	if (RightHand)
 	{
-		RightHand->UpdateGrasp(Val);
-		//RightHand->UpdateGrasp2(Val); // TODO For the realisitc grasping part
+		//RightHand->UpdateGrasp(Val);
+		// For the realisitc grasping part
+		RightHand->UpdateGrasp2(Val);
 	}
 }
 
@@ -346,4 +391,46 @@ void AMCCharacter::TryRightGraspDetach()
 	{
 		RightHand->DetachFixationGrasp();
 	}
+}
+
+
+//Toggle the User Interface
+void AMCCharacter::ToggleUserInterface()
+{
+	if (bShowUserInterface == false)
+	{
+		bShowUserInterface = true;
+
+		UserInterface = CreateWidget<UGraspTypeWidget>(GetWorld(), UGraspTypeWidget::StaticClass());
+		if (!UserInterface)
+				return;
+		UserInterface->SetupWidget(this);
+		UserInterface->AddToViewport();
+
+		// Focus on list and activate cursor
+		FInputModeGameAndUI Mode;
+		Mode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
+		Mode.SetHideCursorDuringCapture(false);
+		GetWorld()->GetFirstPlayerController()->SetInputMode(Mode);
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = true;
+
+		UE_LOG(LogTemp, Warning, TEXT("Add User Interface"));
+	}
+	else
+	{
+		UserInterface->ConditionalBeginDestroy();
+		bShowUserInterface = false;
+
+		FInputModeGameOnly Mode;
+		GetWorld()->GetFirstPlayerController()->SetInputMode(Mode);
+		GetWorld()->GetFirstPlayerController()->bShowMouseCursor = false;
+
+		UE_LOG(LogTemp, Warning, TEXT("Remove User Interface"));
+	}
+}
+
+void AMCCharacter::SimulateMouseClick()
+{
+	WidgetInteractionComponent->PressPointerKey(EKeys::LeftMouseButton);
+	WidgetInteractionComponent->ReleasePointerKey(EKeys::LeftMouseButton);
 }
