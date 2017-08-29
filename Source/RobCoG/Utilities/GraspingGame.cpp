@@ -25,9 +25,9 @@ AGraspingGame::AGraspingGame()
 	CurrentItemName = "";
 	Paths.Add("Items/Scanned/Meshes");
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"), this);
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 
-	SpawnedMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpawnedMesh"), this);
+	SpawnedMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpawnedMesh"));
 	SpawnedMesh->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	TimerText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("CountdownNumber"));

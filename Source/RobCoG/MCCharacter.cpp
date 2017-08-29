@@ -183,13 +183,17 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// Set up gameplay key bindings
-	PlayerInputComponent->BindAxis("MoveForward", this, &AMCCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMCCharacter::MoveRight);
-	PlayerInputComponent->BindAxis("MoveHandsOnZ", this, &AMCCharacter::MoveHandsOnZ);
-	// Default Camera view bindings
-	PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
+	if (IsRootComponentMovable())
+	{
+		// Set up gameplay key bindings
+		PlayerInputComponent->BindAxis("MoveForward", this, &AMCCharacter::MoveForward);
+		PlayerInputComponent->BindAxis("MoveRight", this, &AMCCharacter::MoveRight);
+		PlayerInputComponent->BindAxis("MoveHandsOnZ", this, &AMCCharacter::MoveHandsOnZ);
+		// Default Camera view bindings
+		PlayerInputComponent->BindAxis("CameraPitch", this, &AMCCharacter::AddControllerPitchInput);
+		PlayerInputComponent->BindAxis("CameraYaw", this, &AMCCharacter::AddControllerYawInput);
+	}
+
 	// Hand control binding
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
@@ -319,9 +323,9 @@ void AMCCharacter::GraspWithLeftHand(const float Val)
 {
 	if (LeftHand)
 	{
-		//LeftHand->UpdateGrasp(Val);
-		// TODO For the realisitc grasping part
-		LeftHand->UpdateGrasp2(Val);
+		LeftHand->UpdateGrasp(Val);
+		// For the realisitc grasping part
+		//LeftHand->UpdateGrasp2(Val);
 	}
 }
 
@@ -331,7 +335,7 @@ void AMCCharacter::GraspWithRightHand(const float Val)
 	if (RightHand)
 	{
 		//RightHand->UpdateGrasp(Val);
-		// TODO For the realisitc grasping part
+		// For the realisitc grasping part
 		RightHand->UpdateGrasp2(Val);
 	}
 }

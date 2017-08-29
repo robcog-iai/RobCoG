@@ -13,7 +13,7 @@
 
 UGraspTypeWidget::UGraspTypeWidget(const class FObjectInitializer& PCIP) : Super(PCIP)
 {
-	Character = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	Character = nullptr;
 }
 
 void UGraspTypeWidget::SetupWidget(ACharacter* Character)
