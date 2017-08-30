@@ -10,7 +10,7 @@
 #include "MotionControllerComponent.h"
 #include "PIDController3D.h"
 #include "Hand/Hand.h"
-#include "Widgets/GraspTypeWidget.h"
+#include "Widgets/GraspTypeWidget/GraspTypeWidget.h"
 #include "WidgetInteractionComponent.h"
 
 #include "MCCharacter.generated.h"

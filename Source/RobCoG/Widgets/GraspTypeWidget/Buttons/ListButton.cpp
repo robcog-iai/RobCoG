@@ -1,5 +1,5 @@
 #include "ListButton.h"
-#include "Widgets/GraspTypeWidget.h"
+#include "Widgets/GraspTypeWidget/GraspTypeWidget.h"
 
 UListButton::UListButton()
 {
