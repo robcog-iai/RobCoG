@@ -42,24 +42,28 @@ void AGraspLogger::Tick(float DeltaTime)
 		CurrentItemName = GraspingGame->CurrentItemName;
 		UE_LOG(LogTemp, Warning, TEXT("CurrentItemName: %s"), *CurrentItemName);
 
-		GetWorldTimerManager().SetTimer(TimerHandle, this, &AGraspLogger::UpdateTimer, 0.5f, true);
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AGraspLogger::UpdateTimer, 0.05f, true);
 	}
 	else if (LastGraspStatus == EGraspStatus::Orientation && Hand->GraspPtr->GraspStatus == EGraspStatus::Velocity)
 	{
 	}
 	else if (LastGraspStatus == EGraspStatus::Velocity && Hand->GraspPtr->GraspStatus == EGraspStatus::Stopped)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("StopLogging"));
+		
 		GetWorldTimerManager().ClearTimer(TimerHandle);
 		if (GraspingGame->bRoundSuccessfulFinished)
 		{
 			// TODO: Use the Map...
 			SaveValues();
-			if (ForceFileWriterPtr.IsValid())
-				ForceFileWriterPtr->WriteGraspInfoMapToFile(ItemToGraspInfoMap,FPaths::GameSavedDir()+"Force.csv");
+			if (ForceFileWriterPtr.IsValid()) 
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Logged to File"));
+				ForceFileWriterPtr->WriteGraspInfoMapToFile(ItemToGraspInfoMap, FPaths::GameSavedDir() + "Force.csv");
+			}
 			ItemToGraspInfoMap.Empty();
 			ClearCurrentGraspInfo();
 		}
+		UE_LOG(LogTemp, Warning, TEXT("StopLogging"));
 	}
 	else
 	{
@@ -72,22 +76,23 @@ void AGraspLogger::Tick(float DeltaTime)
 
 void AGraspLogger::UpdateTimer()
 {
+	FVector OutLinearForce;
+	FVector OutAngularForce;
+
 	//Logs only Thumb - Distal
 	if (Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation)
 	{
-		FVector OutLinearForce;
-		FVector OutAngularForce;
-
 		Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
 		CurrentLogInfo.OrientationGrasp.Add(OutAngularForce.Size());
+		UE_LOG(LogTemp, Warning, TEXT("Orientation - Force: %f"),OutAngularForce.Size());
 	}
 	else if (Hand->GraspPtr->GraspStatus == EGraspStatus::Velocity)
 	{
-		FVector OutLinearForce;
-		FVector OutAngularForce;
 
 		Hand->Thumb.FingerPartToConstraint[EFingerPart::Distal]->GetConstraintForce(OutLinearForce, OutAngularForce);
-		CurrentLogInfo.OrientationGrasp.Add(OutAngularForce.Size());
+		CurrentLogInfo.VelocityGrasp.Add(OutAngularForce.Size());
+
+		UE_LOG(LogTemp, Warning, TEXT("Velocity - Force: %f"), OutAngularForce.Size());
 	}
 }
 

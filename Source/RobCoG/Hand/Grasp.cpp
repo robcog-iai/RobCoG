@@ -114,6 +114,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			if (CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Bigger))
 			{
 				GraspStatus = EGraspStatus::Orientation;
+				UE_LOG(LogTemp, Warning, TEXT("ORIENTATION - Alpha: %f"), Alpha);
 				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
 			}
 		}
@@ -127,6 +128,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Smaller))
 			{
 				GraspStatus = EGraspStatus::Velocity;
+				UE_LOG(LogTemp, Warning, TEXT("VELOCITY - Alpha: %f"), Alpha);
 				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");				
 			}
 
@@ -154,6 +156,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Orientation);
 			DriveToInitialOrientation(Hand);
 			GraspStatus = EGraspStatus::Stopped;
+			UE_LOG(LogTemp, Warning, TEXT("STOPPED - Alpha: %f"), Alpha);
 			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Stopped");
 		}
 	}
@@ -164,6 +167,7 @@ bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThr
 	bool bVelocitySmaler = false;
 	if (Comparison == EComparison::Smaller)
 	{
+		//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - SMALLER"));
 		bVelocitySmaler = true;
 
 		bVelocitySmaler = bVelocitySmaler && (Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() < VelocityThreshold);
@@ -174,6 +178,7 @@ bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThr
 	}
 	else if (Comparison == EComparison::Bigger)
 	{
+		//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - BIGGER"));
 		bVelocitySmaler = false;
 
 		bVelocitySmaler = bVelocitySmaler || (Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
@@ -182,6 +187,11 @@ bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThr
 		bVelocitySmaler = bVelocitySmaler || (Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
 		bVelocitySmaler = bVelocitySmaler || (Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size() > VelocityThreshold);
 	}
+	//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - Index: %f"), Hand->Index.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - Middle: %f"), Hand->Middle.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - Ring: %f"), Hand->Ring.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - Pinky: %f"), Hand->Pinky.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
+	//UE_LOG(LogTemp, Warning, TEXT("CheckDistalVelocity - Thumb: %f"), Hand->Thumb.FingerPartToBone[EFingerPart::Distal]->GetUnrealWorldVelocity().Size());
 	return bVelocitySmaler;
 }
 
