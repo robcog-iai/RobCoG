@@ -217,7 +217,7 @@ void AGraspingGame::StartTimerHasFinished()
 
 void AGraspingGame::UpdateGameTimer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("UpdateGameTimer"));
+	//UE_LOG(LogTemp, Warning, TEXT("UpdateGameTimer"));
 	TArray<UPrimitiveComponent*> Components;
 	TargetBox->GetOverlappingComponents(Components);
 	for (auto Component : Components)
