@@ -10,4 +10,4 @@ See repository branches for various projects/versions:
  * [game-VRKitchen](https://github.com/robcog-iai/RobCoG/tree/game-VRKitchen) - IAI Kitchen with VR interaction and semantic logging.
  * [robosim](https://github.com/robcog-iai/RobCoG/tree/robosim) - experimental integration project of PR2 with ROS
  * [grasp-dev](https://github.com/robcog-iai/RobCoG/tree/grasp-dev) - realistic force based grasping
- * [mc-dev](https://github.com/robcog-iai/RobCoG/tree/mc.dev) - motion controller integration example
+ * [mc-dev](https://github.com/robcog-iai/RobCoG/tree/mc-dev) - motion controller integration example
