@@ -1,3 +1,5 @@
+![Alt text](https://raw.githubusercontent.com/robcog-iai/RobCoG/master/robcog-title.png "RobCoG")
+
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames 
 
 Equipping robots with commonsense and naive physics knowledge.
