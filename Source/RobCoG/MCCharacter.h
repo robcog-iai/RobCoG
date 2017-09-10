@@ -33,8 +33,14 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// Switch the curent grasping style
-	void SwitchGraspStyle(EGraspType GraspType);
+	// Switch the current grasping type
+	void SwitchGraspType(EGraspType GraspType);
+
+	// Switch to the last grasping type
+	void SwitchToPreviousGraspType();
+
+	// Switch to the next grasping type
+	void SwitchToNextGraspType();
 
 	//Toggle the User Interface
 	void ToggleUserInterface();
@@ -87,6 +93,11 @@ protected:
 	// Character camera
 	UPROPERTY(EditAnywhere)
 		UCameraComponent* CharCamera;
+
+
+	// Text component to show Text in VR
+	UPROPERTY(EditAnywhere)
+		UTextRenderComponent* TextComponent;
 
 	// Widget Interaction
 	UPROPERTY(EditAnywhere)

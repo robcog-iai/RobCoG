@@ -123,7 +123,6 @@ void AGraspLogger::UpdateTimer()
 		Hand->Pinky.FingerPartToConstraint[EFingerPart::Proximal]->GetConstraintForce(OutLinearForce, OutAngularForce);
 		CurrentLogInfo.OrientationHandForces.PinkyProximal.Add(OutAngularForce.Size());
 
-
 	}
 	else if (Hand->GraspPtr->GraspStatus == EGraspStatus::Velocity)
 	{

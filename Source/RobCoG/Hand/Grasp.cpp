@@ -195,7 +195,65 @@ bool Grasp::CheckDistalVelocity(const AHand* const Hand, const float VelocityThr
 	return bVelocitySmaler;
 }
 
-void Grasp::SwitchGraspStyle(const AHand * const Hand, EGraspType GraspType)
+// Switches the Grasping Type
+void Grasp::SwitchToPreviousGraspType(const AHand * const Hand, FText & GraspTypeName)
+{
+	if (HandInformationParserPtr.IsValid())
+	{
+		FString ConfigDir = FPaths::GameConfigDir();
+
+		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EGraspType"), true);
+		if (!EnumPtr) return;
+
+		int64 DecrEnumIndex = static_cast<int64>(CurrentGraspType) - 1;
+		
+		if (DecrEnumIndex <= 0) DecrEnumIndex = 0;
+		
+		CurrentGraspType = static_cast<EGraspType>(DecrEnumIndex);
+
+		FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
+		FString ConfigName = ConfigDir + GraspTypeString + ".ini";
+
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *GraspTypeString));
+
+		HandInformationParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
+
+		DriveToInitialOrientation(Hand);
+		GraspTypeName = FText::FromString(GraspTypeString);
+	}
+}
+
+// Switches the Grasping Type
+void Grasp::SwitchToNextGraspType(const AHand * const Hand, FText & GraspTypeName)
+{
+	if (HandInformationParserPtr.IsValid())
+	{
+		FString ConfigDir = FPaths::GameConfigDir();
+
+		const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EGraspType"), true);
+		if (!EnumPtr) return;
+
+		int64 IncrEnumIndex = static_cast<int64>(CurrentGraspType) + 1;
+
+		if (IncrEnumIndex >= EnumPtr->GetMaxEnumValue()-1) IncrEnumIndex = EnumPtr->GetMaxEnumValue()-1;
+
+		CurrentGraspType = static_cast<EGraspType>(IncrEnumIndex);
+
+		FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
+		FString ConfigName = ConfigDir + GraspTypeString + ".ini";
+
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("CurrentGraspProcess: %s"), *GraspTypeString));
+
+		HandInformationParserPtr->GetHandInformationForGraspType(InitialHandOrientation, ClosedHandOrientation, HandVelocity, ConfigName);
+
+		DriveToInitialOrientation(Hand);
+		GraspTypeName = FText::FromString(GraspTypeString);
+	}
+}
+
+void Grasp::SwitchGraspType(const AHand * const Hand, EGraspType GraspType)
 {
 	if (HandInformationParserPtr.IsValid())
 	{

@@ -82,8 +82,14 @@ public:
 	// Update the grasp with the mannequin hand
 	void UpdateGrasp2(const float Alpha);
 
-	// Switch the grasping style
-	void SwitchGraspStyle(EGraspType GraspType);
+	// Switch the grasping type
+	void SwitchGraspType(EGraspType GraspType);
+
+	// Switch the grasping type
+	void SwitchToNextGraspType(FText & GraspTypeName);
+
+	// Switch the grasping type
+	void SwitchToPreviousGraspType(FText & GraspTypeName);
 
 	// Switch the grasping process
 	void SwitchGraspProcess();

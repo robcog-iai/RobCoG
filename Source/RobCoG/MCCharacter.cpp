@@ -8,7 +8,6 @@
 #include "Components/ArrowComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "HeadMountedDisplay.h"
 #include "IHeadMountedDisplay.h"
 #include "Kismet/GameplayStatics.h"
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
@@ -72,6 +71,18 @@ AMCCharacter::AMCCharacter()
 	// Init rotation offset
 	LeftHandRotationOffset = FQuat::Identity;
 	RightHandRotationOffset = FQuat::Identity;
+
+	// Init TextComponent
+	TextComponent = CreateDefaultSubobject<UTextRenderComponent>(TEXT("TextComponent"));
+	TextComponent->SetupAttachment(CharCamera);
+	TextComponent->SetRelativeLocationAndRotation(FVector(20, 0, 7), FRotator(180, 0, 0));
+	TextComponent->SetText(FText::FromString("FullGrasp"));
+	TextComponent->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
+	TextComponent->SetTextRenderColor(FColor::Black);
+	TextComponent->SetXScale(0.1f);
+	TextComponent->SetYScale(0.1f);
+	TextComponent->SetWorldSize(10.0f);
+
 
 	bShowUserInterface = false;
 }
@@ -198,7 +209,9 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
-	PlayerInputComponent->BindAction("SwitchGraspStyle", IE_Pressed, this, &AMCCharacter::ToggleUserInterface);
+	PlayerInputComponent->BindAction("SwitchGraspType", IE_Pressed, this, &AMCCharacter::ToggleUserInterface);
+	PlayerInputComponent->BindAction("NextGraspType", IE_Pressed, this, &AMCCharacter::SwitchToNextGraspType);
+	PlayerInputComponent->BindAction("PreviousGraspType", IE_Pressed, this, &AMCCharacter::SwitchToPreviousGraspType);
 	PlayerInputComponent->BindAction("SwitchGraspProcess", IE_Pressed, this, &AMCCharacter::SwitchGraspProcess);
 
 	// Hand action binding
@@ -290,17 +303,55 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
-// Switch Grasp style
-void AMCCharacter::SwitchGraspStyle(EGraspType GraspType)
+
+// Switch to the last grasping type
+void AMCCharacter::SwitchToPreviousGraspType()
 {
+	FText GraspTypeName = FText::FromName("");
+	
 	if (RightHand)
 	{
-		RightHand->SwitchGraspStyle(GraspType);
+		RightHand->SwitchToPreviousGraspType(GraspTypeName);
 	}
 
 	if (LeftHand)
 	{
-		LeftHand->SwitchGraspStyle(GraspType);
+		LeftHand->SwitchToPreviousGraspType(GraspTypeName);
+	}
+
+	TextComponent->SetText(GraspTypeName);
+
+}
+
+// Switch to the next grasping type
+void AMCCharacter::SwitchToNextGraspType()
+{
+	FText GraspTypeName = FText::FromName("");
+
+	if (RightHand)
+	{
+		RightHand->SwitchToNextGraspType(GraspTypeName);
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchToNextGraspType(GraspTypeName);
+	}
+
+	TextComponent->SetText(GraspTypeName);
+}
+
+// Switch Grasp style
+void AMCCharacter::SwitchGraspType(EGraspType GraspType)
+{
+	if (RightHand)
+	{
+		RightHand->SwitchGraspType(GraspType);
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchGraspType(GraspType);
 	}
 }
 

@@ -597,13 +597,38 @@ FORCEINLINE void AHand::SetupBones()
 	Pinky.SetFingerPartsBones(SkelMeshComp->Bodies);
 }
 
+
+void AHand::SwitchToNextGraspType(FText & GraspTypeName)
+{
+	if (GraspPtr.IsValid())
+	{
+		return GraspPtr->SwitchToNextGraspType(this, GraspTypeName);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
+	}
+}
+
+void AHand::SwitchToPreviousGraspType(FText & GraspTypeName)
+{
+	if (GraspPtr.IsValid())
+	{
+		return GraspPtr->SwitchToPreviousGraspType(this,GraspTypeName);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Grasp shared pointer is not valid!"));
+	}
+}
+
 // Switch the grasp pose
-void AHand::SwitchGraspStyle(EGraspType GraspType)
+void AHand::SwitchGraspType(EGraspType GraspType)
 {
 	//IHandOrientationReadable* HandOrientationReadable = Cast<IHandOrientationReadable>(HandInformationParser);
 	if (GraspPtr.IsValid())
 	{
-		GraspPtr->SwitchGraspStyle(this, GraspType);
+		GraspPtr->SwitchGraspType(this, GraspType);
 	}
 	else
 	{

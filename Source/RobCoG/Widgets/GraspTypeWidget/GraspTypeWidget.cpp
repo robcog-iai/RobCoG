@@ -34,7 +34,7 @@ void UGraspTypeWidget::ReactToButtonClick(EGraspType GraspType)
 
 	if(Character)
 	{
-		Character->SwitchGraspStyle(GraspType);
+		Character->SwitchGraspType(GraspType);
 	}
 }
 
