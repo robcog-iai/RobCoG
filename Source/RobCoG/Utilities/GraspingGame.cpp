@@ -174,7 +174,7 @@ void AGraspingGame::StopGame()
 void AGraspingGame::ResetGame()
 {
 	UE_LOG(LogTemp, Warning, TEXT("ResetGame"));
-	ResetCharacterTransform();
+	//ResetCharacterTransform();
 	StartGame();
 }
 
