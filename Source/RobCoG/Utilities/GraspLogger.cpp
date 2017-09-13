@@ -30,7 +30,7 @@ void AGraspLogger::Tick(float DeltaTime)
 	if (!Hand || !GraspingGame)
 		return;
 
-	if (LastGraspStatus == Hand->GraspPtr->GraspStatus || GraspingGame->CurrentItemName != "")
+	if (LastGraspStatus == Hand->GraspPtr->GraspStatus || GraspingGame->CurrentItemName == "")
 	{
 		return;
 	}
