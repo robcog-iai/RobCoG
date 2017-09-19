@@ -207,7 +207,7 @@ void Grasp::SwitchToPreviousGraspType(const AHand * const Hand, FText & GraspTyp
 
 		int64 DecrEnumIndex = static_cast<int64>(CurrentGraspType) - 1;
 		
-		if (DecrEnumIndex <= 0) DecrEnumIndex = 0;
+		if (DecrEnumIndex < 0) DecrEnumIndex = EnumPtr->GetMaxEnumValue()-1;
 		
 		CurrentGraspType = static_cast<EGraspType>(DecrEnumIndex);
 
@@ -236,7 +236,7 @@ void Grasp::SwitchToNextGraspType(const AHand * const Hand, FText & GraspTypeNam
 
 		int64 IncrEnumIndex = static_cast<int64>(CurrentGraspType) + 1;
 
-		if (IncrEnumIndex >= EnumPtr->GetMaxEnumValue()-1) IncrEnumIndex = EnumPtr->GetMaxEnumValue()-1;
+		if (IncrEnumIndex >= EnumPtr->GetMaxEnumValue()) IncrEnumIndex = 0;
 
 		CurrentGraspType = static_cast<EGraspType>(IncrEnumIndex);
 
