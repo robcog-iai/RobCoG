@@ -125,12 +125,14 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			LerpHandOrientation(TargetOrientation, InitialHandOrientation, ClosedHandOrientation, Alpha);
 			DriveToHandOrientationTarget(TargetOrientation, Hand);
 
+			/*
 			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Smaller))
 			{
 				GraspStatus = EGraspStatus::Velocity;
 				UE_LOG(LogTemp, Warning, TEXT("VELOCITY - Alpha: %f"), Alpha);
 				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");				
 			}
+			*/
 
 		}
 		else if (GraspStatus == EGraspStatus::Velocity)
