@@ -11,7 +11,7 @@ Grasp::Grasp()
 
 	GraspStatus = EGraspStatus::Velocity;
 	CurrentAngularDriveMode = EAngularDriveMode::SLERP;
-	CurrentGraspType = EGraspType::FullGrasp;
+	CurrentGraspType = EGraspType::LargeDiameter;
 
 	const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EGraspType"), true);
 	if (!EnumPtr) return;
@@ -114,7 +114,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			if (CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Bigger))
 			{
 				GraspStatus = EGraspStatus::Orientation;
-				UE_LOG(LogTemp, Warning, TEXT("ORIENTATION - Alpha: %f"), Alpha);
+				//UE_LOG(LogTemp, Warning, TEXT("ORIENTATION - Alpha: %f"), Alpha);
 				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
 			}
 		}
@@ -158,7 +158,7 @@ void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand 
 			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Orientation);
 			DriveToInitialOrientation(Hand);
 			GraspStatus = EGraspStatus::Stopped;
-			UE_LOG(LogTemp, Warning, TEXT("STOPPED - Alpha: %f"), Alpha);
+			//UE_LOG(LogTemp, Warning, TEXT("STOPPED - Alpha: %f"), Alpha);
 			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Stopped");
 		}
 	}

@@ -147,7 +147,7 @@ void AGraspingGame::SpawnRandomItem(TArray<FString> & Assets)
 
 void AGraspingGame::ControlGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ControlGame"));
+	//UE_LOG(LogTemp, Warning, TEXT("ControlGame"));
 	if (bGameRunning)
 	{
 		ResetGame();
@@ -161,7 +161,7 @@ void AGraspingGame::ControlGame()
 
 void AGraspingGame::StartGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("StartGame"));
+	//UE_LOG(LogTemp, Warning, TEXT("StartGame"));
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
 	bRoundSuccessfulFinished = false;
 	GetWorldTimerManager().SetTimer(StartTimerHandle, this, &AGraspingGame::UpdateStartTimer, 1.0f, true);
@@ -173,7 +173,7 @@ void AGraspingGame::StopGame()
 
 void AGraspingGame::ResetGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ResetGame"));
+	//UE_LOG(LogTemp, Warning, TEXT("ResetGame"));
 	//ResetCharacterTransform();
 	StartGame();
 }
@@ -191,7 +191,7 @@ void AGraspingGame::ResetCharacterTransform()
 
 void AGraspingGame::UpdateStartTimer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("UpdateStartTimer"));
+	//UE_LOG(LogTemp, Warning, TEXT("UpdateStartTimer"));
 
 	--StartTime;
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
@@ -206,12 +206,12 @@ void AGraspingGame::UpdateStartTimer()
 
 void AGraspingGame::StartTimerHasFinished()
 {
-	UE_LOG(LogTemp, Warning, TEXT("StartTimerHasFinished"));
+	//UE_LOG(LogTemp, Warning, TEXT("StartTimerHasFinished"));
 	//Change to a special readout
 	SpawnRandomItem(Items);
-	TimerText->SetText(FText::FromName("GO!"));
+	TimerText->SetText(FText::FromString("Round Running"));
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
-	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 1.0f, true);
+	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 0.1f, true);
 	StartTime = 3;
 }
 
@@ -227,7 +227,6 @@ void AGraspingGame::UpdateGameTimer()
 	}
 	bRoundSuccessfulFinished = Components.Contains(SpawnedMesh);
 
-	TimerText->SetText(FText::FromString("Round Running"));
 
 	if (bRoundSuccessfulFinished)
 	{

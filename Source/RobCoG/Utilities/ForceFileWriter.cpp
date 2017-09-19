@@ -53,7 +53,14 @@ bool ForceFileWriter::WriteGraspInfoMapToFile(const TMap<FString, FLogInfo> & It
 
 		Success = Success && AppendStringToFile("\nItemName:;" + ItemName, Filename);
 		Success = Success && AppendStringToFile("\nGraspType:;" + GraspType, Filename);
-		Success = Success && AppendStringToFile("\nStatus:;" + GraspSucceeded, Filename);
+		if (GraspSucceeded)
+		{
+			Success = Success && AppendStringToFile("\nStatus:;True", Filename);
+		}
+		else
+		{
+			Success = Success && AppendStringToFile("\nStatus:;False", Filename);
+		}
 
 		if (GraspSucceeded)
 		{

@@ -54,8 +54,14 @@ void AGraspLogger::Tick(float DeltaTime)
 		SaveValues();
 		if (ForceFileWriterPtr.IsValid())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Logged to File"));
-			ForceFileWriterPtr->WriteGraspInfoMapToFile(ItemToGraspInfoMap, FPaths::GameSavedDir() + "Force.csv", GraspingGame->bRoundSuccessfulFinished);
+			if (ForceFileWriterPtr->WriteGraspInfoMapToFile(ItemToGraspInfoMap, FPaths::GameSavedDir() + "Force.csv", GraspingGame->bRoundSuccessfulFinished)) 
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Logged to File"));
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Logging to File Failed!"));
+			}
 		}
 		ItemToGraspInfoMap.Empty();
 		ClearCurrentGraspInfo();

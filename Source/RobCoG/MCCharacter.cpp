@@ -76,7 +76,7 @@ AMCCharacter::AMCCharacter()
 	TextComponent = CreateDefaultSubobject<UTextRenderComponent>(TEXT("TextComponent"));
 	TextComponent->SetupAttachment(CharCamera);
 	TextComponent->SetRelativeLocationAndRotation(FVector(20, 0, 7), FRotator(180, 0, 0));
-	TextComponent->SetText(FText::FromString("FullGrasp"));
+	TextComponent->SetText(FText::FromString("Current Grasp"));
 	TextComponent->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
 	TextComponent->SetTextRenderColor(FColor::Black);
 	TextComponent->SetXScale(0.1f);
