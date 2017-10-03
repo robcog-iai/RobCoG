@@ -1,4 +1,4 @@
-// Fout your copyright notice in the Description page of Project Settings.
+// Copyright 2017, Institute for Artificial Intelligence - University of Bremen
 
 #pragma once
 
@@ -9,7 +9,8 @@
 #include "ROSBridgeSubscriber.h"
 #include "sensor_msgs/JointState.h"
 
-class FROSBridgeForceSubScriber : public FROSBridgeSubscriber {
+class FROSBridgeForceSubScriber : public FROSBridgeSubscriber 
+{
 
 public:
     ARRobot* Robot;
