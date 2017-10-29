@@ -82,7 +82,7 @@ private:
 	void StartTimerHasFinished();
 
 	// Updates the game timer
-	void UpdateGameTimer();
+	void UpdateGame();
 
 	// Called when the game tmer has finished
 	void GameTimerHasFinished();

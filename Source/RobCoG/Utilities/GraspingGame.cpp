@@ -68,6 +68,11 @@ void AGraspingGame::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if(bGameRunning)
+	{
+		UpdateGame();
+	}
+
 }
 
 void AGraspingGame::GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets)
@@ -211,27 +216,20 @@ void AGraspingGame::StartTimerHasFinished()
 	SpawnRandomItem(Items);
 	TimerText->SetText(FText::FromString("Round Running"));
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
-	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 0.1f, true);
 	StartTime = 3;
+	//GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 0.1f, true);
+	bGameRunning = true;
 }
 
-void AGraspingGame::UpdateGameTimer()
+void AGraspingGame::UpdateGame()
 {
 	//UE_LOG(LogTemp, Warning, TEXT("UpdateGameTimer"));
 	TArray<UPrimitiveComponent*> Components;
 	TargetBox->GetOverlappingComponents(Components);
-	for (auto Component : Components)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Component: %s"), *Component->GetName());
-
-	}
 	bRoundSuccessfulFinished = Components.Contains(SpawnedMesh);
-
 
 	if (bRoundSuccessfulFinished)
 	{
-		// We're done counting down, so stop running the timer.
-		GetWorldTimerManager().ClearTimer(GameTimerHandle);
 		//Perform any special actions we want to do when the timer ends.
 		GameTimerHasFinished();
 	}
@@ -241,5 +239,6 @@ void AGraspingGame::GameTimerHasFinished()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GameTimerHasFinished"));
 	//Change to a special readout
+	bGameRunning = false;
 	TimerText->SetText(FText::FromName("Round Finished. <br> Press SPACE to reload"));
 }
