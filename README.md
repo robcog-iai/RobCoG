@@ -13,3 +13,16 @@ Branch for the Flex related game development.
 ```git submodule update --init --recursive```
 
 ### Engine Version 4.17 
+
+# Coding Standard
+
+
+#### 1.1 Examples
+
+##### Bob
+
+| Asset Type               | Asset Name                                                 |
+| -----------------------  | ---------------------------------------------------------- |
+| Flex Container           | FC_Bob                                                     |
+| Particle System (Emitter)| FE_Bob                                                     |
+| Spawn Flex Shape         | FSM_Cylinder_10_20                                         |
