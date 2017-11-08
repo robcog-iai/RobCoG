@@ -4,6 +4,7 @@
 
 #include "FileHelper.h"
 #include "Enums/GraspType.h"
+#include "PlatformFilemanager.h"
 
 struct FHandForces
 {
@@ -77,6 +78,21 @@ public:
 	ForceFileWriter();
 	~ForceFileWriter();
 
+
+	bool WriteGraspInfoMapToFile(
+		const TMap<FString, FLogInfo> & ItemToGraspInfoMap,
+		const FString & Filename,
+		bool GraspSucceeded,
+		FFileHelper::EEncodingOptions::Type EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
+		IFileManager* FileManager = &IFileManager::Get());
+
+	void CreateNewForceTableFileAndSaveOld(
+		const FString & Path, 
+		const FString & Filename,
+		IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile());
+
+private:
+
 	bool AppendFloatToFile(
 		const float Value,
 		const FString & Filename,
@@ -88,12 +104,4 @@ public:
 		const FString & Filename,
 		FFileHelper::EEncodingOptions::Type EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
-
-	bool WriteGraspInfoMapToFile(
-		const TMap<FString, FLogInfo> & ItemToGraspInfoMap,
-		const FString & Filename,
-		bool GraspSucceeded,
-		FFileHelper::EEncodingOptions::Type EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
-		IFileManager* FileManager = &IFileManager::Get());
-
 };

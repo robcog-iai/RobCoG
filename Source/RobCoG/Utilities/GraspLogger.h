@@ -17,6 +17,8 @@ class ROBCOG_API AGraspLogger : public AActor
 
 public:
 
+	const FString ForceTableFilename;
+
 	// The grasping game
 	UPROPERTY(EditAnywhere)
 		AGraspingGame* GraspingGame;
@@ -37,10 +39,12 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	bool bUpdateTimer;
 
 	TSharedPtr<ForceFileWriter> ForceFileWriterPtr;
 
 	FString CurrentItemName;
+
 	FLogInfo CurrentLogInfo;
 	// Saves the Itemname and the chosen 
 	TMap<FString, FLogInfo> ItemToGraspInfoMap;
@@ -51,9 +55,13 @@ private:
 	//The Last GraspType of the Hand
 	EGraspStatus LastGraspStatus;
 
+	// Updates the Log info
 	void UpdateTimer();
 
+	// Clears the current Grasp Info Map
 	void ClearCurrentGraspInfo();
+
+	// Saves the Values of the current Grasp Info Map
 	void SaveValues();
 
 };

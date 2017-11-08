@@ -2,6 +2,7 @@
 
 #include "ForceFileWriter.h"
 #include "UObjectGlobals.h"
+#include "PlatformFilemanager.h"
 
 ForceFileWriter::ForceFileWriter()
 {
@@ -12,6 +13,19 @@ ForceFileWriter::~ForceFileWriter()
 
 }
 
+void ForceFileWriter::CreateNewForceTableFileAndSaveOld(const FString & Path, const FString & Filename, IPlatformFile & PlatformFile)
+{
+	const FString AbsoluteSourcePath = Path + Filename;
+	const FString AbsoluteDestinationPath = Path + FDateTime::Now().ToString() + "_" + Filename;
+
+	if (PlatformFile.FileExists(*AbsoluteSourcePath))
+	{
+		if (!PlatformFile.MoveFile(*AbsoluteDestinationPath, *AbsoluteSourcePath))
+		{
+		}
+	}
+
+}
 
 bool ForceFileWriter::AppendFloatToFile(
 	const float Value,
