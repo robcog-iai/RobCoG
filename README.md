@@ -14,6 +14,8 @@ Equipping robots with commonsense and naive physics knowledge.
 
 ```git submodule update --init --recursive```
 
+### Engine Version 4.18
+
 # Quick Start
 
 Drag and drop the pr2 example urdf in the content menu
