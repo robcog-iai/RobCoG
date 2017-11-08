@@ -14,3 +14,5 @@ No functionalities just the kitchen environment assets.
 ## How to add a newer map version:
 
 * Save `Kitchen.umap` as `Kitchen-vxx+1.umap` and use `Kitchen.umap` as the most up to date version
+
+### Engine Version 4.18
