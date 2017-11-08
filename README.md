@@ -1,10 +1,12 @@
+![Alt text](Documentation/Img/FleX.png "FleX example")
+
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames 
 
 Equipping robots with commonsense and naive physics knowledge.
 
-# FleX 
+# FleX - particle based simulation
 
-Branch for the Flex related game development.
+Branch using FleX in RobCoG.
 
 # Submodules
 
@@ -14,12 +16,7 @@ Branch for the Flex related game development.
 
 ### Engine Version 4.17 
 
-# Coding Standard
-
-
-#### 1.1 Examples
-
-##### Bob
+# Naming Convention
 
 | Asset Type               | Asset Name                                                 |
 | -----------------------  | ---------------------------------------------------------- |
