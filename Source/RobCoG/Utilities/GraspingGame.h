@@ -82,7 +82,8 @@ private:
 	void StartTimerHasFinished();
 
 	// If an Actor Overlaps
-	void ActorOverlaped(AActor* OverlappedActor, AActor* OtherActor);
+	UFUNCTION()
+		void ActorOverlaped(AActor* OverlappedActor, AActor* OtherActor);
 
 	// Called when the game tmer has finished
 	void RoundFinished();

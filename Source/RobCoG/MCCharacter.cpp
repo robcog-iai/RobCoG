@@ -12,6 +12,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Engine/Engine.h"
+#include "IXRTrackingSystem.h"
 
 // Sets default values
 AMCCharacter::AMCCharacter()
@@ -101,20 +102,22 @@ void AMCCharacter::BeginPlay()
 	RightPIDController.SetValues(PGain, IGain, DGain, MaxOutput, -MaxOutput);
 
 	// Check if VR is enabled
-	IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->HMDDevice.Get());
-	if (HMD && HMD->IsStereoEnabled())
-	{
-		// VR MODE
-		//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
-	}
-	else
-	{
-		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
-		CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
-		CharCamera->bUsePawnControlRotation = true;
-		MCOriginComponent->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
-		MCLeft->SetRelativeLocation(FVector(75.f, -30.f, 30.f));
-		MCRight->SetRelativeLocation(FVector(75.f, 30.f, 30.f));
+	if (GEngine) {
+		IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->XRSystem->GetHMDDevice());
+		if (HMD && HMD->IsHMDEnabled())
+		{
+			// VR MODE
+			//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
+		}
+		else
+		{
+			GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
+			CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
+			CharCamera->bUsePawnControlRotation = true;
+			MCOriginComponent->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
+			MCLeft->SetRelativeLocation(FVector(75.f, -30.f, 30.f));
+			MCRight->SetRelativeLocation(FVector(75.f, 30.f, 30.f));
+		}
 	}
 
 	if (LeftSkelActor)
@@ -262,8 +265,8 @@ void AMCCharacter::MoveHandsOnZ(const float Value)
 	if (Value != 0)
 	{
 		// Check if VR is enabled
-		IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
-		if (!(HMD && HMD->IsStereoEnabled()))
+		IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->XRSystem->GetHMDDevice());
+		if (HMD && HMD->IsHMDEnabled())
 		{
 			MCLeft->AddLocalOffset(FVector(0.f, 0.f, Value));
 			MCRight->AddLocalOffset(FVector(0.f, 0.f, Value));

@@ -42,6 +42,7 @@ AGraspingGame::AGraspingGame()
 // Called when the game starts or when spawned
 void AGraspingGame::BeginPlay()
 {
+	UE_LOG(LogTemp, Warning, TEXT("BEGIN"));
 	Super::BeginPlay();
 
 	if (TargetBox) {
@@ -220,13 +221,18 @@ void AGraspingGame::StartTimerHasFinished()
 
 void AGraspingGame::ActorOverlaped(AActor* OverlappedActor, AActor* OtherActor)
 {
-	UE_LOG(LogTemp, Warning, TEXT("ActorOverlapped"));
+	UE_LOG(LogTemp, Warning, TEXT("ActorOverlapped: %s - %s - %s"), *OtherActor->GetName(), *OverlappedActor->GetName(), *SpawnedMesh->GetName());
 
-	if(OtherActor->GetName().Equals(SpawnedMesh->GetName()))
-	{
-		bRoundSuccessfulFinished = true;
-		//Perform any special actions we want to do when the timer ends.
-		RoundFinished();
+	AGraspingGame* GraspingGame = Cast<AGraspingGame>(OtherActor);
+	if (GraspingGame) {
+		UE_LOG(LogTemp, Warning, TEXT("Cast Okay: CurrentItemNameCast: %s - CurrentItemName: %s"), *GraspingGame->CurrentItemName, *CurrentItemName);
+
+		if(GraspingGame->CurrentItemName.Equals(CurrentItemName))
+		{
+			bRoundSuccessfulFinished = true;
+			//Perform any special actions we want to do when the timer ends.
+			RoundFinished();
+		}
 	}
 }
 
