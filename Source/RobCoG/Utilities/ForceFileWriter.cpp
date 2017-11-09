@@ -30,7 +30,7 @@ void ForceFileWriter::CreateNewForceTableFileAndSaveOld(const FString & Path, co
 bool ForceFileWriter::AppendFloatToFile(
 	const float Value,
 	const FString & Filename,
-	FFileHelper::EEncodingOptions::Type EncodingOptions,
+	FFileHelper::EEncodingOptions EncodingOptions,
 	IFileManager* FileManager)
 {
 	return FFileHelper::SaveStringToFile(";" + FString::SanitizeFloat(Value), *Filename, EncodingOptions, FileManager, FILEWRITE_Append);
@@ -39,7 +39,7 @@ bool ForceFileWriter::AppendFloatToFile(
 bool ForceFileWriter::AppendStringToFile(
 	const FString & Value,
 	const FString & Filename,
-	FFileHelper::EEncodingOptions::Type EncodingOptions,
+	FFileHelper::EEncodingOptions EncodingOptions,
 	IFileManager* FileManager)
 {
 	return FFileHelper::SaveStringToFile(Value, *Filename, EncodingOptions, FileManager, FILEWRITE_Append);
@@ -48,7 +48,7 @@ bool ForceFileWriter::AppendStringToFile(
 bool ForceFileWriter::WriteGraspInfoMapToFile(const TMap<FString, FLogInfo> & ItemToGraspInfoMap,
 	const FString & Filename,
 	bool GraspSucceeded,
-	FFileHelper::EEncodingOptions::Type EncodingOptions,
+	FFileHelper::EEncodingOptions EncodingOptions,
 	IFileManager* FileManager)
 {
 	bool Success = true;

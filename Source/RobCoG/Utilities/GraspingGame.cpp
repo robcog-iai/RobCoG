@@ -44,6 +44,10 @@ void AGraspingGame::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (TargetBox) {
+		TargetBox->OnActorBeginOverlap.AddDynamic(this, &AGraspingGame::ActorOverlaped);
+	}
+
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	if (PlayerController)
 	{
@@ -67,12 +71,6 @@ void AGraspingGame::BeginPlay()
 void AGraspingGame::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if(bGameRunning)
-	{
-		UpdateGame();
-	}
-
 }
 
 void AGraspingGame::GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets)
@@ -146,7 +144,6 @@ void AGraspingGame::SpawnRandomItem(TArray<FString> & Assets)
 	{
 		SpawnedMesh->SetWorldRotation(FRotator(0, 0, 0), false, nullptr, ETeleportType::TeleportPhysics);
 		SpawnedMesh->SetWorldLocation(SpawningBox->GetActorLocation(), false, nullptr, ETeleportType::TeleportPhysics);
-
 	}
 }
 
@@ -221,24 +218,21 @@ void AGraspingGame::StartTimerHasFinished()
 	bGameRunning = true;
 }
 
-void AGraspingGame::UpdateGame()
+void AGraspingGame::ActorOverlaped(AActor* OverlappedActor, AActor* OtherActor)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("UpdateGameTimer"));
-	TArray<UPrimitiveComponent*> Components;
-	TargetBox->GetOverlappingComponents(Components);
-	bRoundSuccessfulFinished = Components.Contains(SpawnedMesh);
+	UE_LOG(LogTemp, Warning, TEXT("ActorOverlapped"));
 
-	if (bRoundSuccessfulFinished)
+	if(OtherActor->GetName().Equals(SpawnedMesh->GetName()))
 	{
+		bRoundSuccessfulFinished = true;
 		//Perform any special actions we want to do when the timer ends.
-		GameTimerHasFinished();
+		RoundFinished();
 	}
 }
 
-void AGraspingGame::GameTimerHasFinished()
+void AGraspingGame::RoundFinished()
 {
-	UE_LOG(LogTemp, Warning, TEXT("GameTimerHasFinished"));
-	//Change to a special readout
+	UE_LOG(LogTemp, Warning, TEXT("RoundFinished"));
 	bGameRunning = false;
 	TimerText->SetText(FText::FromName("Round Finished. <br> Press SPACE to reload"));
 }

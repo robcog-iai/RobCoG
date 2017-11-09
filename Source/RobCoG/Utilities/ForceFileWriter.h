@@ -83,7 +83,7 @@ public:
 		const TMap<FString, FLogInfo> & ItemToGraspInfoMap,
 		const FString & Filename,
 		bool GraspSucceeded,
-		FFileHelper::EEncodingOptions::Type EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
+		FFileHelper::EEncodingOptions EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
 
 	void CreateNewForceTableFileAndSaveOld(
@@ -96,12 +96,12 @@ private:
 	bool AppendFloatToFile(
 		const float Value,
 		const FString & Filename,
-		FFileHelper::EEncodingOptions::Type EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
+		FFileHelper::EEncodingOptions EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
 
 	bool AppendStringToFile(
 		const FString & Value,
 		const FString & Filename,
-		FFileHelper::EEncodingOptions::Type EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
+		FFileHelper::EEncodingOptions EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
 };

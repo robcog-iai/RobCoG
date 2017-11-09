@@ -89,8 +89,13 @@ void AGraspLogger::Tick(float DeltaTime)
 
 void AGraspLogger::UpdateTimer()
 {
+	if (!Hand)
+		return;
+
 	FVector OutLinearForce;
 	FVector OutAngularForce;
+
+	CurrentLogInfo.GraspType = Hand->GraspPtr->CurrentGraspType;
 
 	if (Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation)
 	{
