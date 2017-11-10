@@ -1,4 +1,4 @@
-![Alt text](Documentation/Img/FleX.PNG "FleX example")
+![](Documentation/Img/FleX.jpg "FleX example")
 
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames 
 
