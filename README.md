@@ -8,7 +8,7 @@ Equipping robots with commonsense and naive physics knowledge.
 
 See repository branches for various projects/versions:
 
- * [env-dev](https://github.com/robcog-iai/RobCoG/tree/env-dev) - default project with assets and maps
+ * [dev-env](https://github.com/robcog-iai/RobCoG/tree/dev-env) - default project with assets and maps
  * [game-VRKitchen](https://github.com/robcog-iai/RobCoG/tree/game-VRKitchen) - IAI Kitchen with VR interaction and semantic logging.
  * [dev-flex](https://github.com/robcog-iai/RobCoG/tree/dev-flex) - NVIDIA FleX development of particle based models
  * [robosim](https://github.com/robcog-iai/RobCoG/tree/robosim) - experimental integration project of PR2 with ROS
