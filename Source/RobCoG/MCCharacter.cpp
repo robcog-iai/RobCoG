@@ -102,7 +102,7 @@ void AMCCharacter::BeginPlay()
 	RightPIDController.SetValues(PGain, IGain, DGain, MaxOutput, -MaxOutput);
 
 	// Check if VR is enabled
-	if (GEngine) {
+	if (GEngine && GEngine->XRSystem.IsValid()) {
 		IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->XRSystem->GetHMDDevice());
 		if (HMD && HMD->IsHMDEnabled())
 		{
