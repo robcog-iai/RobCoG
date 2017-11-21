@@ -133,7 +133,7 @@ git clone https://github.com/gnoliyil/pr2_kinetic_packages.git
 git checkout master
 ```
 
-__Step 1.__ Install dependency packages: `ros-kinetic-pr2-common` `ros-kinetic-pr2-description` `ros-kinetic-pr2-machine` `ros-kinetic-pr2-msgs` and `ros-kinetic-moveit` are required; Download EML(EtherCAT Master for Linux) from [this repository](images/https://github.com/ros-gbp/eml-release/tree/release/hydro/eml/eml-svn) (in release/hydro/eml branch) and run (do not run in the catkin workspace)
+__Step 1.__ Install dependency packages: `ros-kinetic-pr2-common` `ros-kinetic-pr2-description` `ros-kinetic-pr2-machine` `ros-kinetic-pr2-msgs` and `ros-kinetic-moveit` are required; Download EML(EtherCAT Master for Linux) from [this repository](https://github.com/ros-gbp/eml-release/tree/release/hydro/eml/eml-svn) (in release/hydro/eml branch) and run (do not run in the catkin workspace)
 
 ```
 $ mkdir build
@@ -620,12 +620,23 @@ The controller manager works in a loop in every frame.
    ![image](images/gazebo-3.png) 
 
 2. Then it updates the controller to set the “**effort**” property in joint states. 
-   ![image](images/gazebo-4.png) 3. Controllers get current state (including position, velocity, previous efforts), and calculate the efforts so that they can update the efforts in robot model. 
-   ![image](images/gazebo-4-2.png) 4. Finally the controller manager propagates (forward) joint efforts to the actuator. The actuator can 
+   ![image](images/gazebo-4.png) 
+
+3. Controllers get current state (including position, velocity, previous efforts), and calculate the efforts so 
+that they can update the efforts in robot model. 
+   ![image](images/gazebo-4-2.png) 
+
+4. Finally the controller manager propagates (forward) joint efforts to the actuator. The actuator can 
 be connected to the EtherCAT devices to control a real PR2 robot, or to a **fake state** to 
-synchronize robot state with simulators.    ![image](images/gazebo-5.png) In each gazebo frame, the gazebo 3d model will communicate with the ros plugin. 
-1. The plugin gets all joint position and velocity into the fake joint state, 
-   ![image](images/gazebo-6.png)    then backward-propagates them to actuator position.
+synchronize robot state with simulators. 
+   ![image](images/gazebo-5.png) 
+
+In each gazebo frame, the gazebo 3d model will communicate with the ros plugin. 
+
+1. The plugin gets all joint position and velocity into the fake joint state, 
+   ![image](images/gazebo-6.png) 
+
+   then backward-propagates them to actuator position.
    ![image](images/gazebo-7.png) 
 
 2. Then the controller manager updates (executes the loop), reading actuator positions and returning actuator efforts. 
