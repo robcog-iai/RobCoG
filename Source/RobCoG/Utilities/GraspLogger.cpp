@@ -3,7 +3,8 @@
 #include "GraspLogger.h"
 #include "TimerManager.h"
 #include "Paths.h"
-
+#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 
 // Sets default values
 AGraspLogger::AGraspLogger() :
@@ -23,6 +24,16 @@ void AGraspLogger::BeginPlay()
 {
 	Super::BeginPlay();
 
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if(PlayerController)
+	{
+		if(PlayerController->InputComponent)
+		{
+			PlayerController->InputComponent->BindAction("ToggleHandLogging", EInputEvent::IE_Pressed, this, &AGraspLogger::ToggleLogging);
+		}
+		
+	}
+
 	if(ForceFileWriterPtr.IsValid())
 	{
 		ForceFileWriterPtr->CreateNewForceTableFileAndSaveOld(FPaths::GameSavedDir(), ForceTableFilename);
@@ -34,19 +45,15 @@ void AGraspLogger::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!Hand || !GraspingGame)
+	if (!Hand || !GraspingGame || !bLoggingEnabled)
 		return;
 
-	if (LastGraspStatus != Hand->GraspPtr->GraspStatus && GraspingGame->CurrentItemName != "")
+	if (LastGraspStatus != Hand->GraspPtr->GraspStatus)
 	{
-		if (LastGraspStatus == EGraspStatus::Stopped && Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation &&  GraspingGame->CurrentItemName != "")
+		if (LastGraspStatus == EGraspStatus::Stopped && Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("StartLogging"));
 			ClearCurrentGraspInfo();
-
-			CurrentItemName = GraspingGame->CurrentItemName;
-
-			UE_LOG(LogTemp, Warning, TEXT("CurrentItemName: %s"), *CurrentItemName);
 
 			bUpdateTimer = true;
 		}
@@ -54,11 +61,9 @@ void AGraspLogger::Tick(float DeltaTime)
 		{
 			bUpdateTimer = false;
 
-			// TODO: Use Map
-			SaveValues();
 			if (ForceFileWriterPtr.IsValid())
 			{
-				if (ForceFileWriterPtr->WriteGraspInfoMapToFile(ItemToGraspInfoMap, FPaths::GameSavedDir() + ForceTableFilename, GraspingGame->bRoundSuccessfulFinished))
+				if (ForceFileWriterPtr->WriteGraspInfoMapToFile(CurrentLogInfo, FPaths::GameSavedDir() + ForceTableFilename))
 				{
 					UE_LOG(LogTemp, Warning, TEXT("Logged to File"));
 				}
@@ -67,7 +72,6 @@ void AGraspLogger::Tick(float DeltaTime)
 					UE_LOG(LogTemp, Warning, TEXT("Logging to File Failed!"));
 				}
 			}
-			ItemToGraspInfoMap.Empty();
 			ClearCurrentGraspInfo();
 
 			UE_LOG(LogTemp, Warning, TEXT("StopLogging"));
@@ -149,11 +153,17 @@ void AGraspLogger::UpdateTimer()
 
 void AGraspLogger::ClearCurrentGraspInfo()
 {
-	CurrentItemName = "";
 	CurrentLogInfo.Clear();
 }
 
-void AGraspLogger::SaveValues()
+void AGraspLogger::ToggleLogging()
 {
-	ItemToGraspInfoMap.Add(CurrentItemName, CurrentLogInfo);
+	if(bLoggingEnabled == true)
+	{
+		bLoggingEnabled = false;
+	}
+	else
+	{
+		bLoggingEnabled = true;
+	}
 }
