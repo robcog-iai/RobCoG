@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "EngineMinimal.h"
 #include "FileHelper.h"
 #include "Enums/GraspType.h"
 #include "PlatformFilemanager.h"
@@ -80,9 +81,8 @@ public:
 
 
 	bool WriteGraspInfoMapToFile(
-		const TMap<FString, FLogInfo> & ItemToGraspInfoMap,
+		const FLogInfo & ItemToGraspInfoMap,
 		const FString & Filename,
-		bool GraspSucceeded,
 		FFileHelper::EEncodingOptions EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
 

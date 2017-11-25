@@ -41,13 +41,11 @@ protected:
 private:
 	bool bUpdateTimer;
 
+	bool bLoggingEnabled;
+
 	TSharedPtr<ForceFileWriter> ForceFileWriterPtr;
 
-	FString CurrentItemName;
-
 	FLogInfo CurrentLogInfo;
-	// Saves the Itemname and the chosen 
-	TMap<FString, FLogInfo> ItemToGraspInfoMap;
 
 	// The start countdown timer
 	FTimerHandle TimerHandle;
@@ -61,7 +59,6 @@ private:
 	// Clears the current Grasp Info Map
 	void ClearCurrentGraspInfo();
 
-	// Saves the Values of the current Grasp Info Map
-	void SaveValues();
+	void ToggleLogging();
 
 };
