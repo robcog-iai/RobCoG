@@ -8,11 +8,12 @@
 
 // Sets default values
 AGraspLogger::AGraspLogger() :
-	GraspingGame(nullptr),
 	Hand(nullptr),
 	LastGraspStatus(EGraspStatus::Stopped),
-	bUpdateTimer(false),
-	ForceTableFilename("Force.csv")
+	ForceTableFilename("Force.csv"),
+	LoggingCounter(1),
+	bLoggingEnabled(false),
+	bUpdateTimer(false)
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -24,17 +25,21 @@ void AGraspLogger::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UE_LOG(LogTemp, Warning, TEXT("Try to Bind Logging Toggler"));
+
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-	if(PlayerController)
+	if (PlayerController)
 	{
-		if(PlayerController->InputComponent)
+		if (PlayerController->InputComponent)
 		{
-			PlayerController->InputComponent->BindAction("ToggleHandLogging", EInputEvent::IE_Pressed, this, &AGraspLogger::ToggleLogging);
+
+			UE_LOG(LogTemp, Warning, TEXT("Bind Logging Toggler"));
+			PlayerController->InputComponent->BindAction("ToggleHandLogging", IE_Pressed, this, &AGraspLogger::ToggleHandLogging);
 		}
-		
+
 	}
 
-	if(ForceFileWriterPtr.IsValid())
+	if (ForceFileWriterPtr.IsValid())
 	{
 		ForceFileWriterPtr->CreateNewForceTableFileAndSaveOld(FPaths::GameSavedDir(), ForceTableFilename);
 	}
@@ -45,11 +50,28 @@ void AGraspLogger::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!Hand || !GraspingGame || !bLoggingEnabled)
+	if (!Hand || !bLoggingEnabled)
 		return;
+
+	if (LoggingCounter != 5) {
+		LoggingCounter++;
+		return;
+	}
+	else
+	{
+		LoggingCounter = 0;
+	}
 
 	if (LastGraspStatus != Hand->GraspPtr->GraspStatus)
 	{
+		if (Hand->GraspPtr->GraspStatus == EGraspStatus::Stopped) {
+			UE_LOG(LogTemp, Warning, TEXT("GraspStatus: Stopped"));
+		}
+		else if (Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation) {
+			UE_LOG(LogTemp, Warning, TEXT("GraspStatus: Orientation"));
+		}
+
+
 		if (LastGraspStatus == EGraspStatus::Stopped && Hand->GraspPtr->GraspStatus == EGraspStatus::Orientation)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("StartLogging"));
@@ -81,7 +103,7 @@ void AGraspLogger::Tick(float DeltaTime)
 			bUpdateTimer = false;
 			UE_LOG(LogTemp, Warning, TEXT("AbortLogging"));
 		}
-	
+
 		LastGraspStatus = Hand->GraspPtr->GraspStatus;
 	}
 
@@ -156,9 +178,9 @@ void AGraspLogger::ClearCurrentGraspInfo()
 	CurrentLogInfo.Clear();
 }
 
-void AGraspLogger::ToggleLogging()
+void AGraspLogger::ToggleHandLogging()
 {
-	if(bLoggingEnabled == true)
+	if (bLoggingEnabled == true)
 	{
 		bLoggingEnabled = false;
 	}
@@ -166,4 +188,5 @@ void AGraspLogger::ToggleLogging()
 	{
 		bLoggingEnabled = true;
 	}
+	UE_LOG(LogTemp, Warning, TEXT("ToggleHandLogging: %s"), (bLoggingEnabled ? "true" : "false"));
 }

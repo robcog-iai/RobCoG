@@ -9,7 +9,7 @@ Grasp::Grasp()
 {
 	HandInformationParserPtr = MakeShareable(new HandInformationParser());
 
-	GraspStatus = EGraspStatus::Velocity;
+	GraspStatus = EGraspStatus::Orientation;
 	CurrentAngularDriveMode = EAngularDriveMode::SLERP;
 	CurrentGraspType = EGraspType::LargeDiameter;
 
@@ -102,63 +102,25 @@ void Grasp::DriveToFingerVelocityTarget(const FFingerVelocity & FingerVelocity, 
 
 void Grasp::UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand * const Hand)
 {
-	if (Alpha != 0)
+	//UE_LOG(LogTemp, Warning, TEXT("Alpha: %f"), Alpha);
+	if (Alpha > 0.0001)
 	{
-		if (GraspStatus == EGraspStatus::Stopped)
-		{
-			// Manipulate Orientation Drives
-			FHandOrientation TargetOrientation;
-			LerpHandOrientation(TargetOrientation, InitialHandOrientation, ClosedHandOrientation, Alpha);
-			DriveToHandOrientationTarget(TargetOrientation, Hand);
+		GraspStatus = EGraspStatus::Orientation;
+		if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
 
-			if (CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Bigger))
-			{
-				GraspStatus = EGraspStatus::Orientation;
-				//UE_LOG(LogTemp, Warning, TEXT("ORIENTATION - Alpha: %f"), Alpha);
-				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Orientation");
-			}
-		}
-		else if (GraspStatus == EGraspStatus::Orientation)
-		{
-			// Manipulate Orientation Drives
-			FHandOrientation TargetOrientation;
-			LerpHandOrientation(TargetOrientation, InitialHandOrientation, ClosedHandOrientation, Alpha);
-			DriveToHandOrientationTarget(TargetOrientation, Hand);
-
-			/*
-			if (Alpha == 1.0 && CheckDistalVelocity(Hand, VelocityThreshold, EComparison::Smaller))
-			{
-				GraspStatus = EGraspStatus::Velocity;
-				UE_LOG(LogTemp, Warning, TEXT("VELOCITY - Alpha: %f"), Alpha);
-				if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Velocity");				
-			}
-			*/
-
-		}
-		else if (GraspStatus == EGraspStatus::Velocity)
-		{
-			// Initialize Velocity Drives
-			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Velocity);
-			// Lock Proximal Thumb
-			//LockConstraint(Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]);
-
-			// Manipulate Velocity Drives - Orientations of SLERP and T&S are different
-			if (CurrentAngularDriveMode == EAngularDriveMode::SLERP)
-				DriveToHandVelocityTarget(HandVelocity, Hand);
-			else if(CurrentAngularDriveMode == EAngularDriveMode::TwistAndSwing)
-				DriveToHandVelocityTarget(HandVelocity*-1, Hand);
-		}
+		// Manipulate Orientation Drives
+		FHandOrientation TargetOrientation;
+		LerpHandOrientation(TargetOrientation, InitialHandOrientation, ClosedHandOrientation, Alpha);
+		DriveToHandOrientationTarget(TargetOrientation, Hand);
 	}
 	else
 	{
 		// Stop Grasp
 		if (GraspStatus != EGraspStatus::Stopped)
 		{
-			//UnlockConstraint(Hand->Thumb.FingerPartToConstraint[EFingerPart::Proximal]);
 			Hand->ResetAngularDriveValues(CurrentAngularDriveMode, EAngularDriveType::Orientation);
 			DriveToInitialOrientation(Hand);
 			GraspStatus = EGraspStatus::Stopped;
-			//UE_LOG(LogTemp, Warning, TEXT("STOPPED - Alpha: %f"), Alpha);
 			if (GEngine) GEngine->AddOnScreenDebugMessage(1, 5, FColor::Green, "GraspStatus: Stopped");
 		}
 	}
@@ -208,9 +170,9 @@ void Grasp::SwitchToPreviousGraspType(const AHand * const Hand, FText & GraspTyp
 		if (!EnumPtr) return;
 
 		int64 DecrEnumIndex = static_cast<int64>(CurrentGraspType) - 1;
-		
-		if (DecrEnumIndex < 0) DecrEnumIndex = EnumPtr->GetMaxEnumValue()-1;
-		
+
+		if (DecrEnumIndex < 0) DecrEnumIndex = EnumPtr->GetMaxEnumValue() - 1;
+
 		CurrentGraspType = static_cast<EGraspType>(DecrEnumIndex);
 
 		FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
@@ -265,7 +227,7 @@ void Grasp::SwitchGraspType(const AHand * const Hand, EGraspType GraspType)
 		if (!EnumPtr) return;
 
 		CurrentGraspType = GraspType;
-		
+
 		FString GraspTypeString = EnumPtr->GetDisplayNameTextByIndex(static_cast<int64>(CurrentGraspType)).ToString();
 		FString ConfigName = ConfigDir + GraspTypeString + ".ini";
 
@@ -316,7 +278,7 @@ void Grasp::SwitchGraspProcess(AHand * const Hand, const float InSpring, const f
 void Grasp::LerpHandOrientation(FHandOrientation & TargetHandOrientation, const FHandOrientation & InitialHandOrientation, const FHandOrientation & ClosedHandOrientation, const float Alpha)
 {
 	LerpFingerOrientation(TargetHandOrientation.ThumbOrientation, InitialHandOrientation.ThumbOrientation, ClosedHandOrientation.ThumbOrientation, Alpha);
-	LerpFingerOrientation(TargetHandOrientation.IndexOrientation,InitialHandOrientation.IndexOrientation, ClosedHandOrientation.IndexOrientation, Alpha);
+	LerpFingerOrientation(TargetHandOrientation.IndexOrientation, InitialHandOrientation.IndexOrientation, ClosedHandOrientation.IndexOrientation, Alpha);
 	LerpFingerOrientation(TargetHandOrientation.MiddleOrientation, InitialHandOrientation.MiddleOrientation, ClosedHandOrientation.MiddleOrientation, Alpha);
 	LerpFingerOrientation(TargetHandOrientation.RingOrientation, InitialHandOrientation.RingOrientation, ClosedHandOrientation.RingOrientation, Alpha);
 	LerpFingerOrientation(TargetHandOrientation.PinkyOrientation, InitialHandOrientation.PinkyOrientation, ClosedHandOrientation.PinkyOrientation, Alpha);
@@ -381,11 +343,11 @@ void Grasp::PrintHandInfo(const AHand * const Hand) const
 
 }
 
-void Grasp::LockConstraint( FConstraintInstance* Constraint)
+void Grasp::LockConstraint(FConstraintInstance* Constraint)
 {
-	Constraint->SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked,500.0);
+	Constraint->SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, 500.0);
 	Constraint->SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, 500.0);
-	Constraint->SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked,500.0);
+	Constraint->SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, 500.0);
 }
 
 void Grasp::UnlockConstraint(FConstraintInstance* Constraint)

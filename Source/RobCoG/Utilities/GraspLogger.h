@@ -19,10 +19,6 @@ public:
 
 	const FString ForceTableFilename;
 
-	// The grasping game
-	UPROPERTY(EditAnywhere)
-		AGraspingGame* GraspingGame;
-
 	// The Hand to be logged
 	UPROPERTY(EditAnywhere)
 		AHand* Hand;
@@ -43,6 +39,8 @@ private:
 
 	bool bLoggingEnabled;
 
+	int LoggingCounter;
+
 	TSharedPtr<ForceFileWriter> ForceFileWriterPtr;
 
 	FLogInfo CurrentLogInfo;
@@ -59,6 +57,6 @@ private:
 	// Clears the current Grasp Info Map
 	void ClearCurrentGraspInfo();
 
-	void ToggleLogging();
+	void ToggleHandLogging();
 
 };
