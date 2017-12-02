@@ -7,6 +7,7 @@
 #include "Enums/GraspType.h"
 #include "PlatformFilemanager.h"
 
+// A struct wich saves hand forces or torques to be written into a file
 struct FHandForces
 {
 	FHandForces(){}
@@ -58,7 +59,7 @@ struct FHandForces
 struct FLogInfo
 {
 	// Default constructor
-	FLogInfo() : GraspType(EGraspType::FullGrasp) {}
+	FLogInfo() : GraspType(EGraspType::LargeDiameter) {}
 
 	EGraspType GraspType;
 	FHandForces OrientationHandForces;
@@ -75,17 +76,20 @@ struct FLogInfo
 class ROBCOG_API ForceFileWriter
 {
 public:
-
+	// Constructor
 	ForceFileWriter();
+
+	//Destructor
 	~ForceFileWriter();
 
-
+	// To write an FLog info struct into a file 
 	bool WriteGraspInfoMapToFile(
 		const FLogInfo & ItemToGraspInfoMap,
 		const FString & Filename,
 		FFileHelper::EEncodingOptions EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
 
+	// To backup old file with the same name with timestamp
 	void CreateNewForceTableFileAndSaveOld(
 		const FString & Path, 
 		const FString & Filename,
@@ -93,12 +97,14 @@ public:
 
 private:
 
+	// Appends a single float to a file
 	bool AppendFloatToFile(
 		const float Value,
 		const FString & Filename,
 		FFileHelper::EEncodingOptions EncodingOptions = FFileHelper::EEncodingOptions::AutoDetect,
 		IFileManager* FileManager = &IFileManager::Get());
 
+	//Appends a string to a file
 	bool AppendStringToFile(
 		const FString & Value,
 		const FString & Filename,

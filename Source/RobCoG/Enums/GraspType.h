@@ -14,6 +14,5 @@ enum class EGraspType : uint8
 	PalmarPinch			UMETA(DisplayName = "PalmarPinch"),
 	ParallelExtension	UMETA(DisplayName = "ParallelExtension"),
 	Lateral				UMETA(DisplayName = "Lateral"),
-	SphereThreeFinger	UMETA(DisplayName = "SphereThreeFinger"),
-	FullGrasp			UMETA(DisplayName = "FullGrasp"),
+	Tripod				UMETA(DisplayName = "Tripod"),
 };
