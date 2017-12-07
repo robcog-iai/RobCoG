@@ -14,8 +14,6 @@ Branch using FleX in RobCoG.
 
 ```git submodule update --init --recursive```
 
-### Engine Version 4.17 
-
 # Naming Convention
 
 | Asset Type               | Asset Name                                                 |
@@ -23,3 +21,5 @@ Branch using FleX in RobCoG.
 | Flex Container           | FC_Bob                                                     |
 | Particle System (Emitter)| FE_Bob                                                     |
 | Spawn Flex Shape         | FSM_Cylinder_10_20                                         |
+
+### Engine Version [4.17](https://github.com/NvPhysX/UnrealEngine/tree/FleX-4.17.1) 
