@@ -1,4 +1,4 @@
-![Alt text](Documentation/images/robot.png "Robot example")
+![](Documentation/images/robot.png "Robot example")
 
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames 
 
@@ -6,7 +6,9 @@ Equipping robots with commonsense and naive physics knowledge.
 
 # Robot Simulation
 
-[Documentation](https://github.com/robcog-iai/RobCoG/tree/robosim/Documentation)
+* This is an example project of using [URoboSim](https://github.com/robcog-iai/URoboSim) and [UROSBridge](https://github.com/robcog-iai/UROSBridge)
+* See [documentation](https://github.com/robcog-iai/RobCoG/tree/robosim/Documentation) for more details.
+
 
 # Submodules
 
@@ -14,18 +16,20 @@ Equipping robots with commonsense and naive physics knowledge.
 
 ```git submodule update --init --recursive```
 
-### Engine Version 4.18
 
 # Quick Start
 
 Drag and drop the pr2 example urdf in the content menu
 
-![Alt text](Documentation/images/drag-drop-urdf.png "Robot example")
+[](Documentation/images/drag-drop-urdf.png "Robot example")
 
 Drag and drop the the generated file in the world
 
-![Alt text](Documentation/images/drag-drop-robot.png "Robot example")
+[](Documentation/images/drag-drop-robot.png "Robot example")
 
 Generated robot tree
 
-![Alt text](Documentation/images/robot-tree.png "Robot example")
+[](Documentation/images/robot-tree.png "Robot example")
+
+
+### Engine Version 4.18
