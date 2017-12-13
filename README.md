@@ -21,15 +21,15 @@ Equipping robots with commonsense and naive physics knowledge.
 
 Drag and drop the pr2 example urdf in the content menu
 
-[](Documentation/images/drag-drop-urdf.png "Robot example")
+![](Documentation/images/drag-drop-urdf.png "Robot example")
 
 Drag and drop the the generated file in the world
 
-[](Documentation/images/drag-drop-robot.png "Robot example")
+![](Documentation/images/drag-drop-robot.png "Robot example")
 
 Generated robot tree
 
-[](Documentation/images/robot-tree.png "Robot example")
+![](Documentation/images/robot-tree.png "Robot example")
 
 
 ### Engine Version 4.18
