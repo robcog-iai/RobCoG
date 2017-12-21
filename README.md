@@ -1,16 +1,41 @@
-[![](Documentation/Img/RobCoG.png)](http://robcog.org/)
+ 
+# [UROSBridge](https://github.com/robcog-iai/UROSBridge) - Hello World
 
-# RobCoG - **Rob**ot **Co**mmonsense **G**ames 
+An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to communicate between Unreal and Ros with std-msgs/String. 
 
-Equipping robots with commonsense and naive physics knowledge.
+# Quick Start
 
-# Usage
+### 1. Install [rosbridge_suite ](http://wiki.ros.org/rosbridge_suite) package in Ubuntu system.
 
-See repository branches for various projects/versions:
+* After installation, set up your environment for ROS and rosbridge:
 
- * [dev-env](https://github.com/robcog-iai/RobCoG/tree/dev-env) - default project with assets and maps
- * [game-VRKitchen](https://github.com/robcog-iai/RobCoG/tree/game-VRKitchen) - IAI Kitchen with VR interaction and semantic logging.
- * [dev-flex](https://github.com/robcog-iai/RobCoG/tree/dev-flex) - NVIDIA FleX development of particle based models
- * [robosim](https://github.com/robcog-iai/RobCoG/tree/robosim) - experimental integration project of PR2 with ROS
- * [grasp-dev](https://github.com/robcog-iai/RobCoG/tree/grasp-dev) - realistic force based grasping
- * [mc-dev](https://github.com/robcog-iai/RobCoG/tree/mc-dev) - motion controller integration example
+   ```source /opt/ros/<rosdistro>/setup.bash```
+   
+* Run the rosbridge to create a [WebSocket](https://www.websocket.org/) on port 9090 by default.
+
+   ```roslaunch rosbridge_server rosbridge_websocket.launch```
+   
+* Run the following command to publish a String Message 'Hello World' to a ROS topic.
+
+   ``` rostopic pub Ros_String std_msgs/String "Hello World"```
+   
+   
+   
+### 2. Drag and drop the ```StringPublisher``` and ```RosStringSubscriber``` to your Level Editor.
+
+* **```StringPublisher```** -- A Actor to publish FString Message to ROS topic ```Unreal_String```. 
+
+* **```RosStringSubscriber```**  -- A Actor to subscribe String Message from another ROS topic ```Ros_String```.
+
+   Your need to set _WebsocketIPAddr_ to your linux IP in both Actor. You can get more details about how to compile publisher and subscriber in Unreal from this [Tutorial](https://github.com/robcog-iai/UROSBridge/blob/master/Documentation/Examples.md).
+   
+   
+
+### 3. Now you can compile and play in Level Editor.
+
+* Make Sure to run the rosbridge in Ubuntu and then press play button in Unreal.
+
+
+
+
+### Congratulation! Now you should able to see the Message published in ```Unreal_String``` topic and Message subscribed from topic ```Ros_String``` in Output Log in Unreal. 

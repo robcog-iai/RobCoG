@@ -1,0 +1,1721 @@
+﻿Log file open, 12/19/17 17:30:50
+LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
+LogWindows: File 'aqProf.dll' does not exist
+LogWindows: Failed to load 'VSPerf140.dll' (GetLastError=126)
+LogWindows: File 'VSPerf140.dll' does not exist
+LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi.dll' does not exist
+LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi32e.dll' does not exist
+LogInit: Display: Running engine for game: HelloWorld
+LogPlatformFile: Not using cached read wrapper
+LogInit: Display: RandInit(-1943888133) SRandInit(-1943888133).
+LogInit: Read version file with build ID '3709383'
+LogInit: Overriding engine version to CL 3794801, compatible CL 3709383
+LogInit: Registered custom module enumerator with build ID '3709383'
+LogTaskGraph: Started task graph with 5 named threads and 14 total threads with 3 sets of task threads.
+LogStats: Stats thread started at 0.251409
+LogD3D11RHI: Aftermath initialized
+LogPluginManager: Mounting plugin Paper2D
+LogPluginManager: Mounting plugin LightPropagationVolume
+LogPluginManager: Mounting plugin CodeLiteSourceCodeAccess
+LogPluginManager: Mounting plugin GitSourceControl
+LogPluginManager: Mounting plugin KDevelopSourceCodeAccess
+LogPluginManager: Mounting plugin NullSourceCodeAccess
+LogPluginManager: Mounting plugin PerforceSourceControl
+LogPluginManager: Mounting plugin SubversionSourceControl
+LogPluginManager: Mounting plugin UObjectPlugin
+LogPluginManager: Mounting plugin VisualStudioCodeSourceCodeAccess
+LogPluginManager: Mounting plugin VisualStudioSourceCodeAccess
+LogPluginManager: Mounting plugin XCodeSourceCodeAccess
+LogPluginManager: Mounting plugin AssetManagerEditor
+LogPluginManager: Mounting plugin AudioCapture
+LogPluginManager: Mounting plugin FacialAnimation
+LogPluginManager: Mounting plugin GameplayTagsEditor
+LogPluginManager: Mounting plugin MobileLauncherProfileWizard
+LogPluginManager: Mounting plugin PluginBrowser
+LogPluginManager: Mounting plugin SpeedTreeImporter
+LogPluginManager: Mounting plugin AlembicImporter
+LogPluginManager: Mounting plugin CharacterAI
+LogPluginManager: Mounting plugin HTML5Networking
+LogPluginManager: Mounting plugin AndroidMedia
+LogPluginManager: Mounting plugin AvfMedia
+LogPluginManager: Mounting plugin ImgMedia
+LogPluginManager: Mounting plugin MediaCompositing
+LogPluginManager: Mounting plugin MediaPlayerEditor
+LogPluginManager: Mounting plugin WmfMedia
+LogPluginManager: Mounting plugin TcpMessaging
+LogPluginManager: Mounting plugin UdpMessaging
+LogPluginManager: Mounting plugin ActorSequence
+LogPluginManager: Mounting plugin LevelSequenceEditor
+LogPluginManager: Mounting plugin MatineeToLevelSequence
+LogPluginManager: Mounting plugin OnlineSubsystemGooglePlay
+LogPluginManager: Mounting plugin OnlineSubsystemIOS
+LogPluginManager: Mounting plugin OnlineSubsystem
+LogPluginManager: Mounting plugin OnlineSubsystemNull
+LogPluginManager: Mounting plugin OnlineSubsystemUtils
+LogPluginManager: Mounting plugin AndroidDeviceProfileSelector
+LogPluginManager: Mounting plugin AndroidMoviePlayer
+LogPluginManager: Mounting plugin AndroidPermission
+LogPluginManager: Mounting plugin AppleARKit
+LogPluginManager: Mounting plugin AppleMoviePlayer
+LogPluginManager: Mounting plugin ArchVisCharacter
+LogPluginManager: Mounting plugin CableComponent
+LogPluginManager: Mounting plugin CustomMeshComponent
+LogPluginManager: Mounting plugin ExampleDeviceProfileSelector
+LogPluginManager: Mounting plugin GoogleCloudMessaging
+LogPluginManager: Mounting plugin ImmediatePhysics
+LogPluginManager: Mounting plugin IOSDeviceProfileSelector
+LogPluginManager: Mounting plugin LinuxDeviceProfileSelector
+LogPluginManager: Mounting plugin LocationServicesBPLibrary
+LogPluginManager: Mounting plugin MobilePatchingUtils
+LogPluginManager: Mounting plugin OculusVR
+LogPluginManager: Plugin shader directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders found
+LogPluginManager: Mapping shader source directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders to virtual directory /Plugin/OculusVR
+LogPluginManager: Mounting plugin PhysXVehicles
+LogPluginManager: Mounting plugin ProceduralMeshComponent
+LogPluginManager: Mounting plugin RuntimePhysXCooking
+LogPluginManager: Mounting plugin SteamVR
+LogPluginManager: Mounting plugin WindowsMoviePlayer
+LogPluginManager: Mounting plugin URoboSim
+LogPluginManager: Mounting plugin UROSBridge
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Binaries/Win64/UE4Editor-HelloWorld.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2DEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperSpriteSheetImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperTiledImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-SmartSnapping.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeRuntime.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/GitSourceControl/Binaries/Win64/UE4Editor-GitSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/PerforceSourceControl/Binaries/Win64/UE4Editor-PerforceSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/SubversionSourceControl/Binaries/Win64/UE4Editor-SubversionSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/UObjectPlugin/Binaries/Win64/UE4Editor-UObjectPlugin.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioCodeSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioCodeSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AssetManagerEditor/Binaries/Win64/UE4Editor-AssetManagerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AudioCapture/Binaries/Win64/UE4Editor-AudioCapture.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimation.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimationEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/GameplayTagsEditor/Binaries/Win64/UE4Editor-GameplayTagsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/MobileLauncherProfileWizard/Binaries/Win64/UE4Editor-MobileLauncherProfileWizard.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/PluginBrowser/Binaries/Win64/UE4Editor-PluginBrowser.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/SpeedTreeImporter/Binaries/Win64/UE4Editor-SpeedTreeImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/CharacterAI/Binaries/Win64/UE4Editor-CharacterAI.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/HTML5Networking/Binaries/Win64/UE4Editor-HTML5Networking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-OpenExrWrapper.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositing.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositingEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaPlayerEditor/Binaries/Win64/UE4Editor-MediaPlayerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/TcpMessaging/Binaries/Win64/UE4Editor-TcpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/UdpMessaging/Binaries/Win64/UE4Editor-UdpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/ActorSequence/Binaries/Win64/UE4Editor-ActorSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/LevelSequenceEditor/Binaries/Win64/UE4Editor-LevelSequenceEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/MatineeToLevelSequence/Binaries/Win64/UE4Editor-MatineeToLevelSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystem/Binaries/Win64/UE4Editor-OnlineSubsystem.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemNull/Binaries/Win64/UE4Editor-OnlineSubsystemNull.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineSubsystemUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineBlueprintSupport.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidDeviceProfileSelector/Binaries/Win64/UE4Editor-AndroidDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidPermission/Binaries/Win64/UE4Editor-AndroidPermission.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AppleARKit/Binaries/Win64/UE4Editor-AppleARKit.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ArchVisCharacter/Binaries/Win64/UE4Editor-ArchVisCharacter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CableComponent/Binaries/Win64/UE4Editor-CableComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CustomMeshComponent/Binaries/Win64/UE4Editor-CustomMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ExampleDeviceProfileSelector/Binaries/Win64/UE4Editor-ExampleDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysics.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysicsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/LocationServicesBPLibrary/Binaries/Win64/UE4Editor-LocationServicesBPLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/MobilePatchingUtils/Binaries/Win64/UE4Editor-MobilePatchingUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusHMD.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusInput.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehicles.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehiclesEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponentEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/RuntimePhysXCooking/Binaries/Win64/UE4Editor-RuntimePhysXCooking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVR.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVRController.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/WindowsMoviePlayer/Binaries/Win64/UE4Editor-WindowsMoviePlayer.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSim.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSimEd.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/UROSBridge/Binaries/Win64/UE4Editor-UROSBridge.dll (API version 3709383).
+LogInit: Using libcurl 7.47.1
+LogInit:  - built for x86_64-pc-win32
+LogInit:  - supports SSL with OpenSSL/1.0.2g
+LogInit:  - supports HTTP deflate (compression) using libz 1.2.8
+LogInit:  - other features:
+LogInit:      CURL_VERSION_SSL
+LogInit:      CURL_VERSION_LIBZ
+LogInit:      CURL_VERSION_IPV6
+LogInit:      CURL_VERSION_ASYNCHDNS
+LogInit:      CURL_VERSION_LARGEFILE
+LogInit:      CURL_VERSION_IDN
+LogInit:  CurlRequestOptions (configurable via config and command line):
+LogInit:  - bVerifyPeer = false  - Libcurl will NOT verify peer certificate
+LogInit:  - bUseHttpProxy = false  - Libcurl will NOT use HTTP proxy
+LogInit:  - bDontReuseConnections = false  - Libcurl will reuse connections
+LogInit:  - CertBundlePath = nullptr  - Libcurl will use whatever was configured at build time.
+LogInit: Build: ++UE4+Release-4.18-CL-3794801
+LogInit: Engine Version: 4.18.2-3794801+++UE4+Release-4.18
+LogInit: Compatible Engine Version: 4.18.0-3709383+++UE4+Release-4.18
+LogInit: Net CL: 3709383
+LogDevObjectVersion: Number of dev versions registered: 16
+LogDevObjectVersion:   Dev-Blueprints (B0D832E4-1F89-4F0D-ACCF-7EB736FD4AA2): 10
+LogDevObjectVersion:   Dev-Build (E1C64328-A22C-4D53-A36C-8E866417BD8C): 0
+LogDevObjectVersion:   Dev-Core (375EC13C-06E4-48FB-B500-84F0262A717E): 2
+LogDevObjectVersion:   Dev-Editor (E4B068ED-F494-42E9-A231-DA0B2E46BB41): 20
+LogDevObjectVersion:   Dev-Framework (CFFC743F-43B0-4480-9391-14DF171D2073): 30
+LogDevObjectVersion:   Dev-Mobile (B02B49B5-BB20-44E9-A304-32B752E40360): 0
+LogDevObjectVersion:   Dev-Networking (A4E4105C-59A1-49B5-A7C5-40C4547EDFEE): 0
+LogDevObjectVersion:   Dev-Online (39C831C9-5AE6-47DC-9A44-9C173E1C8E7C): 0
+LogDevObjectVersion:   Dev-Physics (78F01B33-EBEA-4F98-B9B4-84EACCB95AA2): 0
+LogDevObjectVersion:   Dev-Platform (6631380F-2D4D-43E0-8009-CF276956A95A): 0
+LogDevObjectVersion:   Dev-Rendering (12F88B9F-8875-4AFC-A67C-D90C383ABD29): 20
+LogDevObjectVersion:   Dev-Sequencer (7B5AE74C-D270-4C10-A958-57980B212A5A): 4
+LogDevObjectVersion:   Dev-VR (D7296918-1DD6-4BDD-9DE2-64A83CC13884): 0
+LogDevObjectVersion:   Dev-LoadTimes (C2A15278-BFE7-4AFE-6C17-90FF531DF755): 1
+LogDevObjectVersion:   Private-Geometry (6EACA3D4-40EC-4CC1-B786-8BED09428FC5): 1
+LogDevObjectVersion:   Dev-AnimPhys (29E575DD-E0A3-4627-9D10-D276232CDCEA): 12
+LogInit: Compiled (64-bit): Dec  8 2017 02:04:53
+LogInit: Compiled with Visual C++: 19.00.24215.01
+LogInit: Build Configuration: Development
+LogInit: Branch Name: ++UE4+Release-4.18
+LogInit: Command line:  -skipcompile
+LogInit: Base directory: C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/Win64/
+LogInit: Installed Engine Build: 1
+LogInit: Presizing for max 8388607 objects, including 0 objects not considered by GC, pre-allocating 0 bytes for permanent pool.
+LogInit: Object subsystem initialized
+[2017.12.19-16.30.52:552][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-16.30.52:552][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2017.12.19-16.30.52:562][  0]LogInit: Computer: DESKTOP-INMJF5R
+[2017.12.19-16.30.52:562][  0]LogInit: User: guan
+[2017.12.19-16.30.52:562][  0]LogInit: CPU Page size=4096, Cores=4
+[2017.12.19-16.30.52:562][  0]LogInit: High frequency timer resolution =2.533209 MHz
+[2017.12.19-16.30.52:562][  0]LogMemory: Memory total: Physical=7.9GB (8GB approx)
+[2017.12.19-16.30.52:563][  0]LogMemory: Platform Memory Stats for Windows
+[2017.12.19-16.30.52:563][  0]LogMemory: Process Physical Memory: 273.75 MB used, 273.75 MB peak
+[2017.12.19-16.30.52:563][  0]LogMemory: Process Virtual Memory: 271.66 MB used, 271.66 MB peak
+[2017.12.19-16.30.52:563][  0]LogMemory: Physical Memory: 5312.03 MB used,  2769.02 MB free, 8081.05 MB total
+[2017.12.19-16.30.52:563][  0]LogMemory: Virtual Memory: 646.11 MB used,  2769.02 MB free, 134217728.00 MB total
+[2017.12.19-16.30.52:753][  0]LogInit: Using OS detected language (en-US).
+[2017.12.19-16.30.52:753][  0]LogInit: Using OS detected locale (en-DE).
+[2017.12.19-16.30.52:755][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2017.12.19-16.30.53:172][  0]LogInit: Setting process to per monitor DPI aware
+[2017.12.19-16.30.53:436][  0]LogD3D11RHI: D3D11 adapters:
+[2017.12.19-16.30.53:462][  0]LogD3D11RHI:    0. 'NVIDIA GeForce GTX 950M           ' (Feature Level 11_0)
+[2017.12.19-16.30.53:462][  0]LogD3D11RHI:       1995/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:1, VendorId:0x10de
+[2017.12.19-16.30.53:477][  0]LogD3D11RHI:    1. 'Intel(R) HD Graphics 4600' (Feature Level 11_0)
+[2017.12.19-16.30.53:477][  0]LogD3D11RHI:       112/0/2048 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x8086
+[2017.12.19-16.30.53:482][  0]LogD3D11RHI:    2. 'Microsoft Basic Render Driver' (Feature Level 11_0)
+[2017.12.19-16.30.53:482][  0]LogD3D11RHI:       0/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
+[2017.12.19-16.30.53:482][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
+[2017.12.19-16.30.53:488][  0]LogD3D11RHI: Creating new Direct3DDevice
+[2017.12.19-16.30.53:488][  0]LogD3D11RHI:     GPU DeviceId: 0x139a (for the marketing name, search the web for "GPU Device Id")
+[2017.12.19-16.30.53:488][  0]LogWindows: EnumDisplayDevices:
+[2017.12.19-16.30.53:488][  0]LogWindows:    0. 'Intel(R) HD Graphics 4600' (P:1 D:1)
+[2017.12.19-16.30.53:489][  0]LogWindows:    1. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-16.30.53:489][  0]LogWindows:    2. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-16.30.53:490][  0]LogWindows: DebugString: PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter FoundDriverCount:0 
+[2017.12.19-16.30.53:490][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce GTX 950M           
+[2017.12.19-16.30.53:490][  0]LogD3D11RHI:   Driver Version: Unknown (internal:Unknown, unified:Unknown)
+[2017.12.19-16.30.53:490][  0]LogD3D11RHI:      Driver Date: Unknown
+[2017.12.19-16.30.53:490][  0]LogRHI: Texture pool is 1397 MB (70% of 1995 MB)
+[2017.12.19-16.30.53:638][  0]LogD3D11RHI: NvAPI_D3D_GetCurrentSLIState failed: 0xfffffff7
+[2017.12.19-16.30.53:638][  0]LogD3D11RHI: Async texture creation enabled
+[2017.12.19-16.30.53:655][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 2)
+[2017.12.19-16.30.53:656][  0]LogShaderCompilers: Guid format shader working directory is 2 characters bigger than the processId version (D:/unreal engine/Unreal Projects/HelloWorld/Intermediate/Shaders/WorkingDirectory/1688/).
+[2017.12.19-16.30.53:656][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/guan/AppData/Local/Temp/UnrealShaderWorkingDir/F6DDCF8E49D67DFF47C1B0A80E44DA96/'.
+[2017.12.19-16.30.53:656][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2017.12.19-16.30.54:631][  0]LogTemp: Display: Loaded TP AllDesktopTargetPlatform
+[2017.12.19-16.30.54:692][  0]LogTemp: Display: Loaded TP MacClientTargetPlatform
+[2017.12.19-16.30.54:752][  0]LogTemp: Display: Loaded TP MacNoEditorTargetPlatform
+[2017.12.19-16.30.54:814][  0]LogTemp: Display: Loaded TP MacServerTargetPlatform
+[2017.12.19-16.30.54:876][  0]LogTemp: Display: Loaded TP MacTargetPlatform
+[2017.12.19-16.30.54:936][  0]LogTemp: Display: Loaded TP WindowsClientTargetPlatform
+[2017.12.19-16.30.54:999][  0]LogTemp: Display: Loaded TP WindowsNoEditorTargetPlatform
+[2017.12.19-16.30.55:060][  0]LogTemp: Display: Loaded TP WindowsServerTargetPlatform
+[2017.12.19-16.30.55:116][  0]LogTemp: Display: Loaded TP WindowsTargetPlatform
+[2017.12.19-16.30.55:173][  0]LogTemp: Display: Loaded TP Android_ASTCTargetPlatform
+[2017.12.19-16.30.55:235][  0]LogTemp: Display: Loaded TP Android_ATCTargetPlatform
+[2017.12.19-16.30.55:295][  0]LogTemp: Display: Loaded TP Android_DXTTargetPlatform
+[2017.12.19-16.30.55:356][  0]LogTemp: Display: Loaded TP Android_ETC1TargetPlatform
+[2017.12.19-16.30.55:419][  0]LogTemp: Display: Loaded TP Android_ETC2TargetPlatform
+[2017.12.19-16.30.55:543][  0]LogTemp: Display: Loaded TP Android_MultiTargetPlatform
+[2017.12.19-16.30.55:543][  0]LogTemp: Display: Loaded TP Android_PVRTCTargetPlatform
+[2017.12.19-16.30.55:602][  0]LogTemp: Display: Loaded TP AndroidTargetPlatform
+[2017.12.19-16.30.55:650][  0]LogTemp: Display: Loaded TP HTML5TargetPlatform
+[2017.12.19-16.30.55:759][  0]LogTemp: Display: Loaded TP IOSTargetPlatform
+[2017.12.19-16.30.55:791][  0]LogTemp: Display: Loaded TP TVOSTargetPlatform
+[2017.12.19-16.30.55:851][  0]LogTemp: Display: Loaded TP LinuxClientTargetPlatform
+[2017.12.19-16.30.55:907][  0]LogTemp: Display: Loaded TP LinuxNoEditorTargetPlatform
+[2017.12.19-16.30.55:965][  0]LogTemp: Display: Loaded TP LinuxServerTargetPlatform
+[2017.12.19-16.30.56:030][  0]LogTemp: Display: Loaded TP LinuxTargetPlatform
+[2017.12.19-16.30.56:030][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2017.12.19-16.30.56:622][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2017.12.19-16.30.56:709][  0]LogDerivedDataCache: Loaded boot cache 0.09s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-16.30.56:709][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc
+[2017.12.19-16.30.56:710][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2017.12.19-16.30.56:710][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2017.12.19-16.30.56:710][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2017.12.19-16.30.56:710][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2017.12.19-16.30.56:726][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2017.12.19-16.30.56:741][  0]LogDerivedDataCache: Using Local data cache path C:/Users/guan/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2017.12.19-16.30.56:752][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
+[2017.12.19-16.30.56:752][  0]LogSlate: Using Freetype 2.6.0
+[2017.12.19-16.30.56:753][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-16.30.56:753][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-16.30.57:136][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-16.30.57:523][  0]LogSimplygon: Simplygon DLL not present - disabling.
+[2017.12.19-16.30.57:571][  0]LogMeshReduction: Using SimplygonSwarm for distributed automatic mesh merging
+[2017.12.19-16.30.57:571][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2017.12.19-16.30.57:571][  0]LogMeshReduction: No automatic skeletal mesh reduction module available
+[2017.12.19-16.30.57:572][  0]LogMeshReduction: No automatic mesh merging module available
+[2017.12.19-16.30.57:572][  0]LogMeshMerging: No automatic mesh merging module available
+[2017.12.19-16.30.57:603][  0]LogNetVersion: HelloWorld , NetCL: 3709383, EngineNetVer: 2, GameNetVer: 0 (Checksum: 5827342)
+[2017.12.19-16.30.57:773][  0]LogAssetRegistry: FAssetRegistry took 0.0281 seconds to start up
+[2017.12.19-16.30.58:306][  0]LogPackageLocalizationCache: Processed 9 localized package path(s) for 2 prioritized culture(s) in 0.079457 seconds
+[2017.12.19-16.30.58:313][  0]LogUObjectArray: 35900 objects as part of root set at end of initial load.
+[2017.12.19-16.30.58:313][  0]LogUObjectAllocator: 7372016 out of 0 bytes used by permanent object pool.
+[2017.12.19-16.30.58:313][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2017.12.19-16.30.58:374][  0]LogInit: WinSock: version 1.1 (2.2), MaxSocks=32767, MaxUdp=65467
+[2017.12.19-16.31.01:328][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2017.12.19-16.31.01:378][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2017.12.19-16.31.01:380][  0]FUdpSocketBuilder: Failed to subscribe UdpMessageMulticastSocket to multicast group 230.0.0.1
+[2017.12.19-16.31.01:381][  0]FUdpSocketBuilder: Failed to create and initialize socket UdpMessageMulticastSocket (last error: 0)
+[2017.12.19-16.31.01:381][  0]LogUdpMessaging: Warning: StartTransport failed to create multicast socket on 0.0.0.0:0, joined to 230.0.0.1:6666 with TTL 1
+[2017.12.19-16.31.02:273][  0]LogMaterial: Uniform references updated for custom material expression Custom.
+[2017.12.19-16.31.02:762][  0]SourceControl: Source control is disabled
+[2017.12.19-16.31.02:762][  0]SourceControl: Source control is disabled
+[2017.12.19-16.31.02:824][  0]SourceControl: Source control is disabled
+[2017.12.19-16.31.02:888][  0]SourceControl: Source control is disabled
+[2017.12.19-16.31.03:842][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2017.12.19-16.31.04:154][  0]LogOcInput: OculusInput pre-init called
+[2017.12.19-16.31.04:411][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-16.31.04:420][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-16.31.05:503][  0]LogEngine: Initializing Engine...
+[2017.12.19-16.31.05:506][  0]LogHMD: Failed to initialize OpenVR with code 110
+[2017.12.19-16.31.05:726][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: Construct from data asset -  0.000 s
+[2017.12.19-16.31.05:726][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: GameplayTagTreeChangedEvent.Broadcast -  0.000 s
+[2017.12.19-16.31.05:883][  0]LogAIModule: Creating AISystem for world Untitled
+[2017.12.19-16.31.05:895][  0]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.31.05:927][  0]LogInit: FAudioDevice initialized.
+[2017.12.19-16.31.06:182][  0]LogDerivedDataCache: Saved boot cache 0.25s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-16.31.06:195][  0]LogInit: Texture streaming: Enabled
+[2017.12.19-16.31.06:325][  0]LogEngineSessionManager: EngineSessionManager initialized
+[2017.12.19-16.31.06:474][  0]LogInit: Transaction tracking system initialized
+[2017.12.19-16.31.06:863][  0]BlueprintLog: New page: Editor Load
+[2017.12.19-16.31.07:962][  0]LocalizationService: Localization service is disabled
+[2017.12.19-16.31.08:860][  0]LogConsoleResponse: Display: 
+[2017.12.19-16.31.09:043][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
+[2017.12.19-16.31.09:043][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/' took 0.01s
+[2017.12.19-16.31.09:043][  0]LogCook: Display: Mobile HDR setting 1
+[2017.12.19-16.31.09:043][  0]LogGameplayTags: Display: UGameplayTagsManager::DoneAddingNativeTags. DelegateIsBound: 0
+[2017.12.19-16.31.10:417][  0]SourceControl: Source control is disabled
+[2017.12.19-16.31.10:417][  0]Cmd: MAP LOAD FILE="../../../Engine/Content/Maps/Templates/Template_Default.umap" TEMPLATE=1 SHOWPROGRESS=1 FEATURELEVEL=3
+[2017.12.19-16.31.10:417][  0]LightingResults: New page: Lighting Build
+[2017.12.19-16.31.10:465][  0]MapCheck: New page: Map Check
+[2017.12.19-16.31.10:465][  0]LightingResults: New page: Lighting Build
+[2017.12.19-16.31.10:696][  0]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.31.10:703][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2017.12.19-16.31.10:718][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2017.12.19-16.31.10:762][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 43.844ms to complete.
+[2017.12.19-16.31.10:762][  0]LogFileHelpers: Loading map 'Template_Default' took 0.346
+[2017.12.19-16.31.10:824][  0]LogWindowsTextInputMethodSystem: Display: IME system now deactivated.
+[2017.12.19-16.31.10:926][  0]LogCollectionManager: Loaded 0 collections in 0.002668 seconds
+[2017.12.19-16.31.11:018][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Saved/Collections/' took 0.01s
+[2017.12.19-16.31.11:019][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Developers/guan/Collections/' took 0.01s
+[2017.12.19-16.31.11:019][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Collections/' took 0.01s
+[2017.12.19-16.31.11:019][  0]LogCollectionManager: Rebuilt the GUID cache for 0 collections in 0.000000 seconds
+[2017.12.19-16.31.11:028][  0]LogContentBrowser: Native class hierarchy populated in 0.0085 seconds. Added 2372 classes and 524 folders.
+[2017.12.19-16.31.11:103][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0004 seconds. Added 0 classes and 0 folders.
+[2017.12.19-16.31.11:142][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0005 seconds. Added 0 classes and 0 folders.
+[2017.12.19-16.31.11:195][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0005 seconds. Added 1 classes and 2 folders.
+[2017.12.19-16.31.11:282][  0]LogSlate: Took 0.000234 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2017.12.19-16.31.11:284][  0]LogSlate: Took 0.000156 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2017.12.19-16.31.11:289][  0]LogSlate: Took 0.000164 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2017.12.19-16.31.11:290][  0]LogSlate: Took 0.000127 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/DroidSansMono.ttf' (77K)
+[2017.12.19-16.31.11:421][  0]LogRenderer: Reallocating scene render targets to support 968x436 Format 9 NumSamples 1 (Frame:1).
+[2017.12.19-16.31.11:682][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0005 seconds. Added 1 classes and 2 folders.
+[2017.12.19-16.31.11:683][  0]LogLoad: (Engine Initialization) Total time: 22.03 seconds
+[2017.12.19-16.31.11:683][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2017.12.19-16.31.11:683][  0]LogExternalProfiler: No external profilers were discovered.  External profiling features will not be available.
+[2017.12.19-16.31.11:710][  0]LogAssetRegistry: Asset discovery search completed in 13.9601 seconds
+[2017.12.19-16.31.11:712][  0]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000000 seconds (found 0 objects)
+[2017.12.19-16.31.11:712][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000315 seconds (updated 0 objects)
+[2017.12.19-16.31.11:715][  0]LogContentStreaming: Texture pool size now 800 MB
+[2017.12.19-16.33.54:483][602]LogSlate: Took 0.000446 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (159K)
+[2017.12.19-16.33.55:934][767]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at -490.00,-290.00,20.00
+[2017.12.19-16.33.56:518][833]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at -250.00,-180.00,20.00
+[2017.12.19-16.33.59:113][124]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.33.59:133][124]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.33.59:134][124]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:33:59 PM)
+[2017.12.19-16.33.59:135][124]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.33.59:142][124]LogPlayLevel: PIE: StaticDuplicateObject took: (0.007284s)
+[2017.12.19-16.33.59:143][124]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.33.59:144][124]LogPlayLevel: PIE: World Init took: (0.001578s)
+[2017.12.19-16.33.59:144][124]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.009934s)
+[2017.12.19-16.33.59:159][124]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.33.59:184][124]LogInit: FAudioDevice initialized.
+[2017.12.19-16.33.59:237][124]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.33.59:240][124]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 0) at 2017.12.19-17.33.59
+[2017.12.19-16.33.59:241][124]LogWorld: Bringing up level for play took: 0.001213
+[2017.12.19-16.33.59:304][124]LogContentBrowser: Native class hierarchy updated for 'MovieSceneCapture' in 0.0007 seconds. Added 11 classes and 0 folders.
+[2017.12.19-16.33.59:355][124]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.33.59:355][124]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.33.59:356][124]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-16.33.59:356][124]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.33.59:356][124]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 1.18
+[2017.12.19-16.33.59:513][138]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.33.59:615][150]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.33.59:713][162]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.33.59:804][173]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.33.59:914][186]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:005][197]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:113][210]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:204][221]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:314][234]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:413][246]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:513][258]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:613][270]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:714][282]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:814][294]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.00:904][305]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:015][318]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:107][329]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:215][342]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:307][353]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:415][366]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:511][377]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:609][389]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:709][401]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:816][414]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.01:910][425]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:016][438]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:109][449]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:209][461]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:312][473]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:410][485]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:512][497]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:601][508]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:709][519]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:803][527]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.02:911][534]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:006][540]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:111][547]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:205][554]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:314][567]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:409][578]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:516][591]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:611][602]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:701][613]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:814][626]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.03:904][635]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:013][648]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:105][659]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:211][669]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:306][678]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:416][689]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:510][700]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:613][712]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:713][724]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:810][735]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.04:911][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:009][758]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:111][769]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:205][781]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:315][794]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:413][805]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:514][817]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:607][827]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:702][838]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:813][851]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.05:905][862]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:014][875]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:108][886]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:210][898]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:310][910]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:410][919]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:509][930]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:610][942]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:714][954]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:810][965]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.06:910][977]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:006][988]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:113][999]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:208][ 10]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:315][ 23]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:408][ 34]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:509][ 46]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:610][ 58]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:711][ 70]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:812][ 82]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.07:902][ 93]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:012][106]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:107][117]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:208][129]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:309][141]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:408][153]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:509][165]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:608][177]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:716][190]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:809][201]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.08:915][214]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:009][225]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:109][237]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:209][249]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:309][261]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:416][274]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:510][285]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:610][294]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:707][305]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:808][317]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.09:907][326]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:008][337]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:109][349]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:207][361]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:315][374]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:408][385]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:509][397]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:608][409]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:710][421]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:808][433]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.10:911][445]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:006][456]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:117][469]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:208][480]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:318][493]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:408][504]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:508][516]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:608][528]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:709][540]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:809][552]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.11:919][565]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:009][576]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:119][589]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:209][600]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:302][611]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:412][624]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:505][635]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:613][648]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:707][659]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:813][672]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.12:905][683]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:013][696]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:105][707]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:213][720]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:313][732]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:405][743]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:513][756]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:613][768]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:713][780]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:805][791]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.13:913][804]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:005][815]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:113][828]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:205][839]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:314][852]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:413][864]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:505][875]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:613][888]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:705][899]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:815][912]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.14:905][923]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:014][936]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:105][947]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:215][960]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:305][971]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:408][983]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:515][996]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:606][  7]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:716][ 20]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:806][ 31]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.15:915][ 44]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:006][ 55]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:116][ 68]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:207][ 79]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:316][ 92]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:406][103]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:507][115]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:616][128]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:707][139]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:816][152]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.16:908][163]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:020][176]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:106][186]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:206][198]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:315][211]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:406][222]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:516][235]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:607][246]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:706][258]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:816][271]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.17:906][282]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:006][294]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:109][306]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:208][318]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:318][331]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:408][342]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:509][354]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:608][366]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:709][378]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:808][390]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.18:902][401]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:008][414]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:108][426]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:484][431]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:484][431]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:485][431]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:817][432]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:817][432]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:817][432]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.19:817][432]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:150][433]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:151][433]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:151][433]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:484][434]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:484][434]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:484][434]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:816][435]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:817][435]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:817][435]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.20:817][435]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:150][436]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:150][436]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:150][436]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:483][437]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:483][437]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:483][437]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:816][438]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:816][438]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:816][438]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.21:816][438]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:149][439]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:150][439]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:150][439]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:483][440]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:484][440]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:484][440]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:816][441]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:816][441]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:816][441]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.22:816][441]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:150][442]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:150][442]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:150][442]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:483][443]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:483][443]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:484][443]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:816][444]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:817][444]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:817][444]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.23:817][444]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:149][445]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:150][445]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:150][445]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:483][446]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:483][446]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:483][446]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:816][447]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:817][447]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:817][447]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.24:817][447]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:150][448]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:150][448]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:151][448]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:484][449]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:484][449]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:484][449]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:817][450]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:817][450]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:817][450]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.25:817][450]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:150][451]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:150][451]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:150][451]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:483][452]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:483][452]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:483][452]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:816][453]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:816][453]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:816][453]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.26:817][453]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:149][454]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:150][454]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:150][454]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:483][455]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:484][455]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:484][455]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:816][456]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:817][456]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:817][456]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.27:817][456]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:149][457]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:149][457]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:150][457]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:483][458]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:483][458]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:483][458]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:816][459]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:817][459]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:817][459]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.28:817][459]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:149][460]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:150][460]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:150][460]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:483][461]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:484][461]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:484][461]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:816][462]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:817][462]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:817][462]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.29:817][462]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:150][463]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:150][463]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:150][463]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:483][464]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:484][464]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:484][464]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:816][465]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:816][465]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:817][465]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.30:817][465]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:150][466]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:150][466]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:150][466]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:483][467]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:483][467]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:483][467]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:816][468]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:817][468]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:817][468]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.31:817][468]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:150][469]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:150][469]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:150][469]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:483][470]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:483][470]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:483][470]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:816][471]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:816][471]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:817][471]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.32:817][471]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:150][472]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:151][472]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:151][472]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:483][473]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:484][473]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:484][473]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:816][474]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:816][474]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:816][474]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.33:817][474]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:149][475]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:150][475]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:150][475]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:483][476]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:483][476]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:483][476]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:816][477]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:816][477]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:816][477]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.34:816][477]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:149][478]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:150][478]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:150][478]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:483][479]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:483][479]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:483][479]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:817][480]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:817][480]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:817][480]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.35:818][480]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:150][481]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:151][481]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:151][481]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:483][482]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:483][482]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:483][482]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:816][483]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:816][483]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:816][483]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.36:816][483]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:150][484]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:151][484]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:151][484]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:485][485]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:486][485]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:486][485]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:817][486]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:817][486]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:818][486]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.37:818][486]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:151][487]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:151][487]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:151][487]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:483][488]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:484][488]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:484][488]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:816][489]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:816][489]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:816][489]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.38:817][489]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:152][490]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:153][490]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:153][490]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:210][497]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:310][509]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:410][521]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:511][533]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:602][544]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:713][557]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:802][568]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.39:913][581]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:013][593]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:113][605]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:208][616]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:308][628]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:411][640]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:511][652]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:612][664]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:712][676]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:813][688]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.40:904][699]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:014][712]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:104][723]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:215][736]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:305][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:415][760]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:505][771]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:613][784]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:707][795]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:815][808]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.41:907][819]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:003][830]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:111][843]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:212][855]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:311][867]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:404][878]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:512][891]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:613][903]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:703][914]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:814][927]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.42:912][939]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:014][951]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:112][963]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:205][974]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:309][986]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:410][998]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:515][ 11]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:610][ 22]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:711][ 34]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:812][ 46]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.43:911][ 58]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:010][ 70]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:111][ 82]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:211][ 94]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:311][106]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:403][117]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:513][130]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:604][141]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:715][153]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:810][164]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.44:915][176]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:005][187]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:102][198]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:213][210]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:304][220]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:410][232]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:517][243]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:613][254]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:717][266]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:814][277]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.45:913][288]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:012][300]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:105][311]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:214][324]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:306][335]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:413][348]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:508][359]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:614][372]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:707][383]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:806][395]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.46:907][407]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:003][418]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:114][430]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:205][441]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:312][454]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:406][465]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:512][478]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:607][489]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:714][502]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:808][513]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.47:908][525]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:016][538]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:108][549]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:217][562]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:308][573]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:409][585]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:510][597]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:617][610]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:710][621]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:806][632]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.48:907][644]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:008][656]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:110][668]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:205][679]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:550][681]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:550][681]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:550][681]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:883][682]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:884][682]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.49:884][682]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:218][683]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:218][683]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:218][683]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:218][683]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:551][684]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:551][684]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:551][684]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:883][685]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:883][685]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.50:883][685]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:218][686]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:219][686]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:219][686]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:219][686]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:550][687]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:551][687]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:551][687]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:883][688]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:884][688]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.51:884][688]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:216][689]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:217][689]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:217][689]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:217][689]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:550][690]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:550][690]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:550][690]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:883][691]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:884][691]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.52:884][691]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:218][692]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:218][692]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:218][692]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:218][692]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:550][693]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:550][693]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:550][693]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:883][694]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:883][694]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.53:883][694]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:217][695]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:217][695]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:217][695]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:218][695]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:549][696]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:550][696]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:550][696]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:884][697]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:884][697]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.54:884][697]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:217][698]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:217][698]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:218][698]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:218][698]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:550][699]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:550][699]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:551][699]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:883][700]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:883][700]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.55:883][700]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:217][701]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:217][701]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:217][701]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:217][701]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:549][702]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:550][702]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:550][702]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:883][703]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:883][703]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.56:883][703]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:217][704]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:218][704]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:218][704]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:218][704]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:550][705]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:550][705]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:550][705]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:883][706]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:883][706]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.57:883][706]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:216][707]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:216][707]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:216][707]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:217][707]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:550][708]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:551][708]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:551][708]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:883][709]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:883][709]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.58:883][709]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:216][710]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:217][710]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:217][710]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:217][710]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:550][711]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:550][711]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:550][711]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:883][712]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:884][712]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.34.59:884][712]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:217][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:218][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:218][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:218][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:550][714]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:550][714]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:551][714]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:883][715]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:884][715]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.00:884][715]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:216][716]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:217][716]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:217][716]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:217][716]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:549][717]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:550][717]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:550][717]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:883][718]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:884][718]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.01:884][718]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:216][719]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:216][719]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:217][719]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:217][719]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:550][720]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:550][720]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:551][720]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:883][721]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:883][721]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.02:884][721]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:217][722]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:218][722]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:218][722]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:218][722]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:549][723]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:550][723]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:550][723]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:883][724]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:883][724]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.03:884][724]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:216][725]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:217][725]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:217][725]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:217][725]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:551][726]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:551][726]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:551][726]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:883][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:883][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.04:883][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:221][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:221][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:221][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:222][727]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:549][729]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:550][729]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:550][729]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:883][730]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:884][730]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.05:884][730]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:216][731]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:217][731]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:217][731]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:217][731]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:549][732]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:550][732]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:550][732]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:883][733]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:883][733]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.06:884][733]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:216][734]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:217][734]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:217][734]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:217][734]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:550][735]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:550][735]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:550][735]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:883][736]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:883][736]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.07:884][736]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:218][737]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:218][737]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:218][737]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:218][737]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:551][738]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:551][738]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:551][738]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:883][739]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:883][739]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.08:884][739]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:217][740]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:217][740]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:217][740]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:217][740]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:551][741]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:551][741]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:551][741]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:883][742]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:883][742]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.09:884][742]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:217][743]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:217][743]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:217][743]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:218][743]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:552][744]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:553][744]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:553][744]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:883][745]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:884][745]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.10:884][745]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:217][746]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:218][746]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:218][746]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:218][746]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:550][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:550][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:550][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:883][748]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:884][748]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.11:884][748]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:218][749]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:219][749]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:219][749]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:219][749]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:552][750]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:553][750]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:553][750]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:884][751]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:885][751]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.12:885][751]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:216][752]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:217][752]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:217][752]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:217][752]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:550][753]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:550][753]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:550][753]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:883][754]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:883][754]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.13:883][754]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:216][755]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:217][755]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:217][755]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:217][755]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:550][756]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:551][756]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:551][756]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:883][757]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:884][757]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.14:884][757]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:217][758]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:217][758]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:217][758]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:217][758]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:551][759]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:551][759]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:551][759]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:883][760]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:884][760]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.15:884][760]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:217][761]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:218][761]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:218][761]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:218][761]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:550][762]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:550][762]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:550][762]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:883][763]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:883][763]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.16:883][763]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:217][764]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:217][764]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:217][764]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:217][764]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:549][765]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:549][765]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:550][765]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:883][766]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:883][766]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.17:883][766]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:217][767]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:218][767]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:218][767]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:218][767]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:552][768]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:552][768]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:552][768]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:883][769]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:883][769]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.18:883][769]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:216][770]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:217][770]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:217][770]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:217][770]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:550][771]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:551][771]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:551][771]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:883][772]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:883][772]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.19:883][772]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:217][773]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:217][773]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:217][773]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:218][773]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:550][774]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:550][774]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:550][774]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:883][775]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:883][775]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.20:883][775]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:217][776]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:217][776]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:217][776]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:218][776]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:551][777]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:551][777]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:551][777]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:883][778]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:884][778]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.21:884][778]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:217][779]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:218][779]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:218][779]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:218][779]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:549][780]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:549][780]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:550][780]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:883][781]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:884][781]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.22:884][781]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:217][782]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:217][782]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:217][782]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:218][782]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:548][783]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:548][783]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:549][783]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:602][786]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:707][789]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:805][796]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.23:912][809]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:005][820]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:114][833]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:207][844]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:308][856]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:407][868]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:511][880]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:609][892]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:701][903]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:810][916]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.24:909][928]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:009][940]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:110][952]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:210][964]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:309][976]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:401][987]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:507][999]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:606][ 11]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:710][ 23]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:808][ 35]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.25:908][ 47]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:008][ 59]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:108][ 71]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:208][ 83]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:308][ 95]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:408][107]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:502][118]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:608][131]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:704][142]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:810][155]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.26:913][167]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:004][178]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:109][189]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:208][201]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:310][213]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:403][224]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:509][237]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:610][249]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:720][262]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:810][273]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.27:903][284]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:013][297]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:106][308]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:213][321]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:306][332]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:417][345]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:509][356]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:617][369]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:707][380]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:817][393]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.28:908][404]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:003][415]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:109][428]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:220][441]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:309][452]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:402][463]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:509][476]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:603][486]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:712][494]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:806][504]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.29:913][514]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:008][525]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:116][538]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:210][549]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:302][560]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:409][573]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:503][584]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:611][597]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:710][609]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:803][620]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.30:908][629]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:002][639]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:109][652]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:209][664]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:315][676]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:406][687]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:516][700]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:607][711]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:706][723]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:816][736]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.31:908][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:001][758]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:109][771]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:209][783]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:317][796]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:409][807]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:503][818]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:609][831]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:711][842]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:810][854]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.32:909][866]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:010][878]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:111][890]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:202][901]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:316][914]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:405][925]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:516][938]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:607][949]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:709][961]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:810][973]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.33:911][985]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:012][997]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:104][  8]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:216][ 21]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:307][ 32]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:415][ 45]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:492][ 54]Cmd: SELECT NONE
+[2017.12.19-16.35.34:508][ 56]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:607][ 68]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:708][ 80]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:807][ 92]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.34:918][105]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:008][116]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:117][129]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:209][140]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:303][148]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:409][155]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:506][162]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:603][169]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:714][182]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:805][193]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.35:911][202]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:005][208]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:108][221]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:208][233]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:302][242]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:410][251]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:507][259]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:617][272]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:709][283]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:813][295]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:913][307]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.36:914][307]Cmd: SELECT NONE
+[2017.12.19-16.35.37:008][318]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:110][329]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:211][341]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:311][353]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:411][365]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:502][376]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:604][388]Cmd: SELECT NONE
+[2017.12.19-16.35.37:612][389]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:702][400]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:814][413]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.37:903][424]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:013][437]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:103][448]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:213][461]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:309][472]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:352][477]Cmd: SELECT NONE
+[2017.12.19-16.35.38:416][485]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:507][496]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:609][508]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:708][520]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:719][521]Cmd: SELECT NONE
+[2017.12.19-16.35.38:808][532]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.38:908][544]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:008][556]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:111][568]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:211][580]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:312][592]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:411][604]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:507][615]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:605][627]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:708][639]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:807][651]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.39:914][664]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:006][675]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:113][687]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:232][698]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:312][708]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:403][719]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:512][732]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:603][743]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:713][756]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:804][767]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.40:912][780]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:007][790]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:114][803]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:207][814]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:314][827]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:408][838]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:507][850]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:608][862]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:708][874]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:807][886]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.41:907][898]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.42:008][910]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.42:107][922]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.35.42:184][930]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.35.42:184][930]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-16.35.42:184][930]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.35.42:184][930]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-16.36.02:360][341]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.36.02:371][341]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.36.02:371][341]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:36:02 PM)
+[2017.12.19-16.36.02:371][341]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.36.02:377][341]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005687s)
+[2017.12.19-16.36.02:378][341]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.36.02:379][341]LogPlayLevel: PIE: World Init took: (0.001146s)
+[2017.12.19-16.36.02:379][341]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007727s)
+[2017.12.19-16.36.02:391][341]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.36.02:413][341]LogInit: FAudioDevice initialized.
+[2017.12.19-16.36.02:453][341]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.36.02:454][341]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 0) at 2017.12.19-17.36.02
+[2017.12.19-16.36.02:455][341]LogWorld: Bringing up level for play took: 0.001099
+[2017.12.19-16.36.02:494][341]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.36.02:494][341]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.36.02:494][341]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-16.36.02:494][341]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.36.02:495][341]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.318
+[2017.12.19-16.36.02:542][343]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_202c_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_40cc_0///####STATCAT_Advanced####
+[2017.12.19-16.36.02:603][350]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.02:710][363]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.02:810][375]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.02:910][387]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:010][399]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:102][410]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:210][423]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:302][434]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:410][447]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:503][458]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:610][471]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:703][482]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:810][495]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.03:903][506]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:010][519]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:103][530]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:210][543]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:303][554]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:410][567]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:510][579]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:610][591]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:710][603]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:810][615]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.04:910][627]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:010][639]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:110][651]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:210][663]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:310][675]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:403][686]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:511][699]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:603][710]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:710][723]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:810][735]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.05:910][747]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:010][759]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:104][770]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:210][783]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:305][794]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:410][807]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:504][818]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:610][831]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:706][842]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:811][855]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.06:912][867]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:004][878]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:112][891]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:204][902]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:312][915]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:404][926]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:513][939]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:604][950]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:712][963]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:804][974]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.07:912][987]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:004][998]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:105][ 10]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:213][ 23]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:305][ 34]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:413][ 47]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:504][ 58]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:612][ 71]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:704][ 82]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:813][ 95]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.08:904][106]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:013][119]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:104][130]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:212][143]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:313][155]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:404][166]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:512][179]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:604][190]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:713][203]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:804][214]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.09:912][227]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:004][238]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:113][251]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:204][262]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:313][275]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:413][287]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:504][298]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:613][311]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:704][322]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:813][335]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.10:904][346]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:014][359]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:105][370]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:213][383]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:304][394]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:413][407]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:504][418]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:604][430]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:713][443]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.36.11:722][443]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.36.11:722][443]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-16.36.11:722][443]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.36.11:722][443]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-16.36.53:709][963]Candidate modules for hot reload:
+[2017.12.19-16.36.53:709][963]  HelloWorld
+[2017.12.19-16.36.53:709][963]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/DotNET/UnrealBuildTool.exe HelloWorld -ModuleWithSuffix HelloWorld 4434 Win64 Development -editorrecompile -canskiplink "D:/unreal engine/Unreal Projects/HelloWorld/HelloWorld.uproject" ]
+[2017.12.19-16.36.53:727][963]Warning: Starting HotReload took  0.4s.
+[2017.12.19-16.37.35:956][ 75]CompilerResultsLog: New page: Compilation - Dec 19, 2017, 6:37:35 PM
+[2017.12.19-16.37.35:957][ 75]CompilerResultsLog: Creating makefile for hot reloading HelloWorld (no existing makefile)
+[2017.12.19-16.37.35:957][ 75]CompilerResultsLog: Compiling game modules for hot reload
+[2017.12.19-16.37.35:957][ 75]CompilerResultsLog: Performing 3 actions (4 in parallel)
+[2017.12.19-16.37.35:957][ 75]CompilerResultsLog: FROSStringSubScriber.cpp
+[2017.12.19-16.37.35:957][ 75]CompilerResultsLog: [2/3] Link UE4Editor-HelloWorld-4434.dll
+[2017.12.19-16.37.35:957][ 75]CompilerResultsLog: [3/3] Link UE4Editor-HelloWorld-4434.lib
+[2017.12.19-16.37.35:958][ 75]CompilerResultsLog:    Creating library D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-4434.lib and object D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-4434.exp
+[2017.12.19-16.37.35:958][ 75]CompilerResultsLog:    Creating library D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-4434.suppressed.lib and object D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-4434.suppressed.exp
+[2017.12.19-16.37.35:958][ 75]CompilerResultsLog: Total build time: 41,50 seconds (Local executor: 2,82 seconds)
+[2017.12.19-16.37.35:971][ 75]LogMainFrame: MainFrame: Module compiling took 42.317 seconds
+[2017.12.19-16.37.36:054][ 75]LogContentBrowser: Native class hierarchy updated for 'HelloWorld' in 0.0006 seconds. Added 3 classes and 2 folders.
+[2017.12.19-16.37.36:056][ 75]Display: HotReload successful (0 functions remapped  0 scriptstructs remapped)
+[2017.12.19-16.37.36:390][ 75]LogContentBrowser: Native class hierarchy populated in 0.0114 seconds. Added 2374 classes and 528 folders.
+[2017.12.19-16.37.36:435][ 75]Display: HotReload took 43.1s.
+[2017.12.19-16.37.44:342][665]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.37.44:352][665]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.37.44:353][665]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:37:44 PM)
+[2017.12.19-16.37.44:353][665]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.37.44:358][665]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005073s)
+[2017.12.19-16.37.44:359][665]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.37.44:360][665]LogPlayLevel: PIE: World Init took: (0.001402s)
+[2017.12.19-16.37.44:360][665]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007506s)
+[2017.12.19-16.37.44:372][665]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.37.44:393][665]LogInit: FAudioDevice initialized.
+[2017.12.19-16.37.44:430][665]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.37.44:432][665]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 0) at 2017.12.19-17.37.44
+[2017.12.19-16.37.44:432][665]LogWorld: Bringing up level for play took: 0.000938
+[2017.12.19-16.37.44:473][665]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.37.44:473][665]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.37.44:473][665]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-16.37.44:473][665]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.37.44:474][665]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.297
+[2017.12.19-16.37.44:512][666]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.44:519][667]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_4630_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_40cc_0///####STATCAT_Advanced####
+[2017.12.19-16.37.44:603][677]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.44:709][690]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.44:810][702]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.44:902][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:011][726]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:109][738]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:210][750]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:309][762]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:410][774]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:502][785]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:610][798]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:709][810]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:810][822]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.45:909][834]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:010][846]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:110][858]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:201][869]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:313][882]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:403][893]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:511][906]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:603][917]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:711][930]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:803][941]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.46:912][954]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:005][965]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:110][977]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:208][989]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:300][  0]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:409][ 13]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:501][ 24]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:608][ 37]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:710][ 49]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:810][ 61]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.47:901][ 72]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:010][ 85]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:101][ 96]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:209][109]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:301][120]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:410][133]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:502][144]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:610][157]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:702][168]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:810][181]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.48:902][192]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:011][205]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:112][217]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:211][229]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:311][241]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:411][253]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:511][265]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:602][276]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:711][289]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:801][300]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.49:913][313]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:002][324]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:111][337]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:210][349]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:311][361]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:411][373]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:512][385]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:610][397]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:711][409]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:811][421]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.50:911][433]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:010][445]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:111][457]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:211][469]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:311][481]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:411][493]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:511][505]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:611][517]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:711][529]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:802][540]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.51:911][553]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:004][564]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:112][577]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:203][588]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:312][601]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:412][613]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:503][624]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:612][637]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:703][648]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:812][661]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.52:902][672]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:012][685]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:111][697]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:203][708]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:311][721]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:412][733]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:512][745]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:612][757]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:711][769]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:803][780]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.53:911][793]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:004][804]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:111][817]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:212][829]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:312][841]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:403][852]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:511][865]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:603][876]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:711][889]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:812][901]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.54:902][912]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:012][925]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:103][936]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:211][949]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:302][960]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:411][973]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:503][984]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:611][997]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:703][  8]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:811][ 21]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.55:903][ 32]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:011][ 45]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:111][ 57]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:211][ 69]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:303][ 80]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:411][ 93]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:505][104]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:604][116]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:711][129]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:804][140]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.56:911][153]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:004][164]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:117][177]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:210][188]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:318][201]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:408][212]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:509][224]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:609][236]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:712][248]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:809][260]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.57:903][271]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:009][284]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:109][296]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:210][308]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:309][320]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:410][332]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:510][344]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:622][356]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:707][367]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:815][380]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.37.58:882][387]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.37.58:883][387]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-16.37.58:883][387]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.37.58:883][387]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
