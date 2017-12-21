@@ -1,4 +1,4 @@
-[![](Documentation/Img/RobCoG.png)](http://robcog.org/)
+
 
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames 
 
