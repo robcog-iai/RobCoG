@@ -14,6 +14,10 @@ An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to co
 
    ```roslaunch rosbridge_server rosbridge_websocket.launch```
    
+* Run the following command to publish a String Message 'Hello World' to a ROS topic.
+
+   ``` rostopic pub Ros_String std_msgs/String "Hello World"```
+   
 ### 2. Drag and drop the ```StringPublisher``` and ```RosStringSubscriber``` to your level Editor.
 
 * **```StringPublisher```** -- A Actor to publish FString Message to ROS topic. 
