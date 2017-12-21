@@ -1,6 +1,6 @@
 
 
-# RobCoG - Robot Commonsense Game
+# [UROSBridge](https://github.com/robcog-iai/UROSBridge) - Robot Commonsense Game
 
 Equipping robots with commonsense and naive physics knowledge.
 
