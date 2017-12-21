@@ -1,8 +1,8 @@
 
 
-# [UROSBridge](https://github.com/robcog-iai/UROSBridge) - Robot Commonsense Game
+# [UROSBridge](https://github.com/robcog-iai/UROSBridge) - Hello World
 
-Equipping robots with commonsense and naive physics knowledge.
+An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to communicate between Unreal and Ros with std-msgs/String. 
 
 # Usage
 
