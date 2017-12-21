@@ -16,8 +16,8 @@ An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to co
    
 ### 2. Drag and drop the ```StringPublisher``` and ```RosStringSubscriber``` to your level Editor.
 
-* ```StringPublisher``` -- A Actor to publish FString Message to ROS topic. 
+* **```StringPublisher```** -- A Actor to publish FString Message to ROS topic. 
 
-* ```RosStringSubscriber```  -- A Actor to subscribe String Message from another ROS topic.
+* **```RosStringSubscriber```**  -- A Actor to subscribe String Message from another ROS topic.
    Your need to set _WebsocketIPAddr_ to your linux IP in both Actor. You can get more details about how to compile publisher and subscriber in Unreal from this [Tutorial](https://github.com/robcog-iai/UROSBridge/blob/master/Documentation/Examples.md).
 
