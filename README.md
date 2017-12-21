@@ -4,7 +4,7 @@
 
 An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to communicate between Unreal and Ros with std-msgs/String. 
 
-# Usage
+# Quick Start
 
 See repository branches for various projects/versions:
 
