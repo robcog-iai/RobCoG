@@ -1,6 +1,6 @@
 
 
-# RobCoG - **Rob**ot **Co**mmonsense **G**ames 
+# RobCoG - Robot Commonsense Game
 
 Equipping robots with commonsense and naive physics knowledge.
 
