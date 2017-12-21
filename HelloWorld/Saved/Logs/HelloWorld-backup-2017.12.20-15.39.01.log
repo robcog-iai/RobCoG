@@ -1,0 +1,1205 @@
+﻿Log file open, 12/19/17 18:09:30
+LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
+LogWindows: File 'aqProf.dll' does not exist
+LogWindows: Failed to load 'VSPerf140.dll' (GetLastError=126)
+LogWindows: File 'VSPerf140.dll' does not exist
+LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi.dll' does not exist
+LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi32e.dll' does not exist
+LogInit: Display: Running engine for game: HelloWorld
+LogPlatformFile: Not using cached read wrapper
+LogInit: Display: RandInit(-399632931) SRandInit(-399632930).
+LogInit: Read version file with build ID '3709383'
+LogInit: Overriding engine version to CL 3794801, compatible CL 3709383
+LogInit: Registered custom module enumerator with build ID '3709383'
+LogTaskGraph: Started task graph with 5 named threads and 14 total threads with 3 sets of task threads.
+LogStats: Stats thread started at 3.506953
+LogD3D11RHI: Aftermath initialized
+LogPluginManager: Mounting plugin Paper2D
+LogPluginManager: Mounting plugin LightPropagationVolume
+LogPluginManager: Mounting plugin CodeLiteSourceCodeAccess
+LogPluginManager: Mounting plugin GitSourceControl
+LogPluginManager: Mounting plugin KDevelopSourceCodeAccess
+LogPluginManager: Mounting plugin NullSourceCodeAccess
+LogPluginManager: Mounting plugin PerforceSourceControl
+LogPluginManager: Mounting plugin SubversionSourceControl
+LogPluginManager: Mounting plugin UObjectPlugin
+LogPluginManager: Mounting plugin VisualStudioCodeSourceCodeAccess
+LogPluginManager: Mounting plugin VisualStudioSourceCodeAccess
+LogPluginManager: Mounting plugin XCodeSourceCodeAccess
+LogPluginManager: Mounting plugin AssetManagerEditor
+LogPluginManager: Mounting plugin AudioCapture
+LogPluginManager: Mounting plugin FacialAnimation
+LogPluginManager: Mounting plugin GameplayTagsEditor
+LogPluginManager: Mounting plugin MobileLauncherProfileWizard
+LogPluginManager: Mounting plugin PluginBrowser
+LogPluginManager: Mounting plugin SpeedTreeImporter
+LogPluginManager: Mounting plugin AlembicImporter
+LogPluginManager: Mounting plugin CharacterAI
+LogPluginManager: Mounting plugin HTML5Networking
+LogPluginManager: Mounting plugin AndroidMedia
+LogPluginManager: Mounting plugin AvfMedia
+LogPluginManager: Mounting plugin ImgMedia
+LogPluginManager: Mounting plugin MediaCompositing
+LogPluginManager: Mounting plugin MediaPlayerEditor
+LogPluginManager: Mounting plugin WmfMedia
+LogPluginManager: Mounting plugin TcpMessaging
+LogPluginManager: Mounting plugin UdpMessaging
+LogPluginManager: Mounting plugin ActorSequence
+LogPluginManager: Mounting plugin LevelSequenceEditor
+LogPluginManager: Mounting plugin MatineeToLevelSequence
+LogPluginManager: Mounting plugin OnlineSubsystemGooglePlay
+LogPluginManager: Mounting plugin OnlineSubsystemIOS
+LogPluginManager: Mounting plugin OnlineSubsystem
+LogPluginManager: Mounting plugin OnlineSubsystemNull
+LogPluginManager: Mounting plugin OnlineSubsystemUtils
+LogPluginManager: Mounting plugin AndroidDeviceProfileSelector
+LogPluginManager: Mounting plugin AndroidMoviePlayer
+LogPluginManager: Mounting plugin AndroidPermission
+LogPluginManager: Mounting plugin AppleARKit
+LogPluginManager: Mounting plugin AppleMoviePlayer
+LogPluginManager: Mounting plugin ArchVisCharacter
+LogPluginManager: Mounting plugin CableComponent
+LogPluginManager: Mounting plugin CustomMeshComponent
+LogPluginManager: Mounting plugin ExampleDeviceProfileSelector
+LogPluginManager: Mounting plugin GoogleCloudMessaging
+LogPluginManager: Mounting plugin ImmediatePhysics
+LogPluginManager: Mounting plugin IOSDeviceProfileSelector
+LogPluginManager: Mounting plugin LinuxDeviceProfileSelector
+LogPluginManager: Mounting plugin LocationServicesBPLibrary
+LogPluginManager: Mounting plugin MobilePatchingUtils
+LogPluginManager: Mounting plugin OculusVR
+LogPluginManager: Plugin shader directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders found
+LogPluginManager: Mapping shader source directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders to virtual directory /Plugin/OculusVR
+LogPluginManager: Mounting plugin PhysXVehicles
+LogPluginManager: Mounting plugin ProceduralMeshComponent
+LogPluginManager: Mounting plugin RuntimePhysXCooking
+LogPluginManager: Mounting plugin SteamVR
+LogPluginManager: Mounting plugin WindowsMoviePlayer
+LogPluginManager: Mounting plugin URoboSim
+LogPluginManager: Mounting plugin UROSBridge
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Binaries/Win64/UE4Editor-HelloWorld.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2DEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperSpriteSheetImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperTiledImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-SmartSnapping.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeRuntime.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/GitSourceControl/Binaries/Win64/UE4Editor-GitSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/PerforceSourceControl/Binaries/Win64/UE4Editor-PerforceSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/SubversionSourceControl/Binaries/Win64/UE4Editor-SubversionSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/UObjectPlugin/Binaries/Win64/UE4Editor-UObjectPlugin.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioCodeSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioCodeSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AssetManagerEditor/Binaries/Win64/UE4Editor-AssetManagerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AudioCapture/Binaries/Win64/UE4Editor-AudioCapture.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimation.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimationEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/GameplayTagsEditor/Binaries/Win64/UE4Editor-GameplayTagsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/MobileLauncherProfileWizard/Binaries/Win64/UE4Editor-MobileLauncherProfileWizard.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/PluginBrowser/Binaries/Win64/UE4Editor-PluginBrowser.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/SpeedTreeImporter/Binaries/Win64/UE4Editor-SpeedTreeImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/CharacterAI/Binaries/Win64/UE4Editor-CharacterAI.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/HTML5Networking/Binaries/Win64/UE4Editor-HTML5Networking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-OpenExrWrapper.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositing.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositingEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaPlayerEditor/Binaries/Win64/UE4Editor-MediaPlayerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/TcpMessaging/Binaries/Win64/UE4Editor-TcpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/UdpMessaging/Binaries/Win64/UE4Editor-UdpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/ActorSequence/Binaries/Win64/UE4Editor-ActorSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/LevelSequenceEditor/Binaries/Win64/UE4Editor-LevelSequenceEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/MatineeToLevelSequence/Binaries/Win64/UE4Editor-MatineeToLevelSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystem/Binaries/Win64/UE4Editor-OnlineSubsystem.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemNull/Binaries/Win64/UE4Editor-OnlineSubsystemNull.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineSubsystemUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineBlueprintSupport.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidDeviceProfileSelector/Binaries/Win64/UE4Editor-AndroidDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidPermission/Binaries/Win64/UE4Editor-AndroidPermission.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AppleARKit/Binaries/Win64/UE4Editor-AppleARKit.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ArchVisCharacter/Binaries/Win64/UE4Editor-ArchVisCharacter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CableComponent/Binaries/Win64/UE4Editor-CableComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CustomMeshComponent/Binaries/Win64/UE4Editor-CustomMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ExampleDeviceProfileSelector/Binaries/Win64/UE4Editor-ExampleDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysics.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysicsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/LocationServicesBPLibrary/Binaries/Win64/UE4Editor-LocationServicesBPLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/MobilePatchingUtils/Binaries/Win64/UE4Editor-MobilePatchingUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusHMD.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusInput.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehicles.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehiclesEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponentEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/RuntimePhysXCooking/Binaries/Win64/UE4Editor-RuntimePhysXCooking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVR.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVRController.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/WindowsMoviePlayer/Binaries/Win64/UE4Editor-WindowsMoviePlayer.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSim.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSimEd.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/UROSBridge/Binaries/Win64/UE4Editor-UROSBridge.dll (API version 3709383).
+LogInit: Using libcurl 7.47.1
+LogInit:  - built for x86_64-pc-win32
+LogInit:  - supports SSL with OpenSSL/1.0.2g
+LogInit:  - supports HTTP deflate (compression) using libz 1.2.8
+LogInit:  - other features:
+LogInit:      CURL_VERSION_SSL
+LogInit:      CURL_VERSION_LIBZ
+LogInit:      CURL_VERSION_IPV6
+LogInit:      CURL_VERSION_ASYNCHDNS
+LogInit:      CURL_VERSION_LARGEFILE
+LogInit:      CURL_VERSION_IDN
+LogInit:  CurlRequestOptions (configurable via config and command line):
+LogInit:  - bVerifyPeer = false  - Libcurl will NOT verify peer certificate
+LogInit:  - bUseHttpProxy = false  - Libcurl will NOT use HTTP proxy
+LogInit:  - bDontReuseConnections = false  - Libcurl will reuse connections
+LogInit:  - CertBundlePath = nullptr  - Libcurl will use whatever was configured at build time.
+LogInit: Build: ++UE4+Release-4.18-CL-3794801
+LogInit: Engine Version: 4.18.2-3794801+++UE4+Release-4.18
+LogInit: Compatible Engine Version: 4.18.0-3709383+++UE4+Release-4.18
+LogInit: Net CL: 3709383
+LogDevObjectVersion: Number of dev versions registered: 16
+LogDevObjectVersion:   Dev-Blueprints (B0D832E4-1F89-4F0D-ACCF-7EB736FD4AA2): 10
+LogDevObjectVersion:   Dev-Build (E1C64328-A22C-4D53-A36C-8E866417BD8C): 0
+LogDevObjectVersion:   Dev-Core (375EC13C-06E4-48FB-B500-84F0262A717E): 2
+LogDevObjectVersion:   Dev-Editor (E4B068ED-F494-42E9-A231-DA0B2E46BB41): 20
+LogDevObjectVersion:   Dev-Framework (CFFC743F-43B0-4480-9391-14DF171D2073): 30
+LogDevObjectVersion:   Dev-Mobile (B02B49B5-BB20-44E9-A304-32B752E40360): 0
+LogDevObjectVersion:   Dev-Networking (A4E4105C-59A1-49B5-A7C5-40C4547EDFEE): 0
+LogDevObjectVersion:   Dev-Online (39C831C9-5AE6-47DC-9A44-9C173E1C8E7C): 0
+LogDevObjectVersion:   Dev-Physics (78F01B33-EBEA-4F98-B9B4-84EACCB95AA2): 0
+LogDevObjectVersion:   Dev-Platform (6631380F-2D4D-43E0-8009-CF276956A95A): 0
+LogDevObjectVersion:   Dev-Rendering (12F88B9F-8875-4AFC-A67C-D90C383ABD29): 20
+LogDevObjectVersion:   Dev-Sequencer (7B5AE74C-D270-4C10-A958-57980B212A5A): 4
+LogDevObjectVersion:   Dev-VR (D7296918-1DD6-4BDD-9DE2-64A83CC13884): 0
+LogDevObjectVersion:   Dev-LoadTimes (C2A15278-BFE7-4AFE-6C17-90FF531DF755): 1
+LogDevObjectVersion:   Private-Geometry (6EACA3D4-40EC-4CC1-B786-8BED09428FC5): 1
+LogDevObjectVersion:   Dev-AnimPhys (29E575DD-E0A3-4627-9D10-D276232CDCEA): 12
+LogInit: Compiled (64-bit): Dec  8 2017 02:04:53
+LogInit: Compiled with Visual C++: 19.00.24215.01
+LogInit: Build Configuration: Development
+LogInit: Branch Name: ++UE4+Release-4.18
+LogInit: Command line:  -skipcompile
+LogInit: Base directory: C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/Win64/
+LogInit: Installed Engine Build: 1
+LogInit: Presizing for max 8388607 objects, including 0 objects not considered by GC, pre-allocating 0 bytes for permanent pool.
+LogInit: Object subsystem initialized
+[2017.12.19-17.09.35:117][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-17.09.35:117][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2017.12.19-17.09.35:289][  0]LogInit: Computer: DESKTOP-INMJF5R
+[2017.12.19-17.09.35:289][  0]LogInit: User: guan
+[2017.12.19-17.09.35:289][  0]LogInit: CPU Page size=4096, Cores=4
+[2017.12.19-17.09.35:290][  0]LogInit: High frequency timer resolution =2.533209 MHz
+[2017.12.19-17.09.35:290][  0]LogMemory: Memory total: Physical=7.9GB (8GB approx)
+[2017.12.19-17.09.35:290][  0]LogMemory: Platform Memory Stats for Windows
+[2017.12.19-17.09.35:290][  0]LogMemory: Process Physical Memory: 273.86 MB used, 273.86 MB peak
+[2017.12.19-17.09.35:290][  0]LogMemory: Process Virtual Memory: 271.84 MB used, 271.84 MB peak
+[2017.12.19-17.09.35:290][  0]LogMemory: Physical Memory: 5432.90 MB used,  2648.15 MB free, 8081.05 MB total
+[2017.12.19-17.09.35:290][  0]LogMemory: Virtual Memory: 646.11 MB used,  2648.15 MB free, 134217728.00 MB total
+[2017.12.19-17.09.36:340][  0]LogInit: Using OS detected language (en-US).
+[2017.12.19-17.09.36:340][  0]LogInit: Using OS detected locale (en-DE).
+[2017.12.19-17.09.36:473][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2017.12.19-17.09.37:310][  0]LogInit: Setting process to per monitor DPI aware
+[2017.12.19-17.09.40:484][  0]LogD3D11RHI: D3D11 adapters:
+[2017.12.19-17.09.40:627][  0]LogD3D11RHI:    0. 'NVIDIA GeForce GTX 950M           ' (Feature Level 11_0)
+[2017.12.19-17.09.40:627][  0]LogD3D11RHI:       1995/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:1, VendorId:0x10de
+[2017.12.19-17.09.40:754][  0]LogD3D11RHI:    1. 'Intel(R) HD Graphics 4600' (Feature Level 11_0)
+[2017.12.19-17.09.40:754][  0]LogD3D11RHI:       112/0/2048 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x8086
+[2017.12.19-17.09.40:824][  0]LogD3D11RHI:    2. 'Microsoft Basic Render Driver' (Feature Level 11_0)
+[2017.12.19-17.09.40:824][  0]LogD3D11RHI:       0/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
+[2017.12.19-17.09.40:824][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
+[2017.12.19-17.09.40:836][  0]LogD3D11RHI: Creating new Direct3DDevice
+[2017.12.19-17.09.40:848][  0]LogD3D11RHI:     GPU DeviceId: 0x139a (for the marketing name, search the web for "GPU Device Id")
+[2017.12.19-17.09.40:848][  0]LogWindows: EnumDisplayDevices:
+[2017.12.19-17.09.40:849][  0]LogWindows:    0. 'Intel(R) HD Graphics 4600' (P:1 D:1)
+[2017.12.19-17.09.40:859][  0]LogWindows:    1. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-17.09.40:859][  0]LogWindows:    2. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-17.09.40:859][  0]LogWindows: DebugString: PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter FoundDriverCount:0 
+[2017.12.19-17.09.40:860][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce GTX 950M           
+[2017.12.19-17.09.40:860][  0]LogD3D11RHI:   Driver Version: Unknown (internal:Unknown, unified:Unknown)
+[2017.12.19-17.09.40:860][  0]LogD3D11RHI:      Driver Date: Unknown
+[2017.12.19-17.09.40:860][  0]LogRHI: Texture pool is 1397 MB (70% of 1995 MB)
+[2017.12.19-17.09.41:335][  0]LogD3D11RHI: NvAPI_D3D_GetCurrentSLIState failed: 0xfffffff7
+[2017.12.19-17.09.41:335][  0]LogD3D11RHI: Async texture creation enabled
+[2017.12.19-17.09.41:861][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 3)
+[2017.12.19-17.09.42:039][  0]LogShaderCompilers: Guid format shader working directory is 1 characters bigger than the processId version (D:/unreal engine/Unreal Projects/HelloWorld/Intermediate/Shaders/WorkingDirectory/12552/).
+[2017.12.19-17.09.42:039][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/guan/AppData/Local/Temp/UnrealShaderWorkingDir/CD53B94845C1CB3D025193A716C54474/'.
+[2017.12.19-17.09.42:062][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2017.12.19-17.09.47:686][  0]LogTemp: Display: Loaded TP AllDesktopTargetPlatform
+[2017.12.19-17.09.47:756][  0]LogTemp: Display: Loaded TP MacClientTargetPlatform
+[2017.12.19-17.09.47:816][  0]LogTemp: Display: Loaded TP MacNoEditorTargetPlatform
+[2017.12.19-17.09.47:878][  0]LogTemp: Display: Loaded TP MacServerTargetPlatform
+[2017.12.19-17.09.47:982][  0]LogTemp: Display: Loaded TP MacTargetPlatform
+[2017.12.19-17.09.48:054][  0]LogTemp: Display: Loaded TP WindowsClientTargetPlatform
+[2017.12.19-17.09.48:121][  0]LogTemp: Display: Loaded TP WindowsNoEditorTargetPlatform
+[2017.12.19-17.09.48:183][  0]LogTemp: Display: Loaded TP WindowsServerTargetPlatform
+[2017.12.19-17.09.48:245][  0]LogTemp: Display: Loaded TP WindowsTargetPlatform
+[2017.12.19-17.09.48:316][  0]LogTemp: Display: Loaded TP Android_ASTCTargetPlatform
+[2017.12.19-17.09.48:383][  0]LogTemp: Display: Loaded TP Android_ATCTargetPlatform
+[2017.12.19-17.09.48:452][  0]LogTemp: Display: Loaded TP Android_DXTTargetPlatform
+[2017.12.19-17.09.48:519][  0]LogTemp: Display: Loaded TP Android_ETC1TargetPlatform
+[2017.12.19-17.09.48:589][  0]LogTemp: Display: Loaded TP Android_ETC2TargetPlatform
+[2017.12.19-17.09.48:719][  0]LogTemp: Display: Loaded TP Android_MultiTargetPlatform
+[2017.12.19-17.09.48:719][  0]LogTemp: Display: Loaded TP Android_PVRTCTargetPlatform
+[2017.12.19-17.09.48:831][  0]LogTemp: Display: Loaded TP AndroidTargetPlatform
+[2017.12.19-17.09.48:889][  0]LogTemp: Display: Loaded TP HTML5TargetPlatform
+[2017.12.19-17.09.49:025][  0]LogTemp: Display: Loaded TP IOSTargetPlatform
+[2017.12.19-17.09.49:062][  0]LogTemp: Display: Loaded TP TVOSTargetPlatform
+[2017.12.19-17.09.49:130][  0]LogTemp: Display: Loaded TP LinuxClientTargetPlatform
+[2017.12.19-17.09.49:193][  0]LogTemp: Display: Loaded TP LinuxNoEditorTargetPlatform
+[2017.12.19-17.09.49:266][  0]LogTemp: Display: Loaded TP LinuxServerTargetPlatform
+[2017.12.19-17.09.49:389][  0]LogTemp: Display: Loaded TP LinuxTargetPlatform
+[2017.12.19-17.09.49:390][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2017.12.19-17.09.50:890][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2017.12.19-17.09.52:222][  0]LogDerivedDataCache: Loaded boot cache 1.32s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-17.09.52:222][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc
+[2017.12.19-17.09.52:223][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2017.12.19-17.09.52:223][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2017.12.19-17.09.52:223][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2017.12.19-17.09.52:223][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2017.12.19-17.09.52:283][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2017.12.19-17.09.52:322][  0]LogDerivedDataCache: Using Local data cache path C:/Users/guan/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2017.12.19-17.09.52:459][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
+[2017.12.19-17.09.52:527][  0]LogSlate: Using Freetype 2.6.0
+[2017.12.19-17.09.52:557][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-17.09.52:567][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-17.09.59:961][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-17.10.02:300][  0]LogSimplygon: Simplygon DLL not present - disabling.
+[2017.12.19-17.10.02:398][  0]LogMeshReduction: Using SimplygonSwarm for distributed automatic mesh merging
+[2017.12.19-17.10.02:423][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2017.12.19-17.10.02:424][  0]LogMeshReduction: No automatic skeletal mesh reduction module available
+[2017.12.19-17.10.02:424][  0]LogMeshReduction: No automatic mesh merging module available
+[2017.12.19-17.10.02:424][  0]LogMeshMerging: No automatic mesh merging module available
+[2017.12.19-17.10.03:023][  0]LogNetVersion: HelloWorld , NetCL: 3709383, EngineNetVer: 2, GameNetVer: 0 (Checksum: 5827342)
+[2017.12.19-17.10.04:898][  0]LogAssetRegistry: FAssetRegistry took 0.0372 seconds to start up
+[2017.12.19-17.10.11:621][  0]LogPackageLocalizationCache: Processed 9 localized package path(s) for 2 prioritized culture(s) in 0.164772 seconds
+[2017.12.19-17.10.11:680][  0]LogUObjectArray: 35900 objects as part of root set at end of initial load.
+[2017.12.19-17.10.11:680][  0]LogUObjectAllocator: 7372016 out of 0 bytes used by permanent object pool.
+[2017.12.19-17.10.11:680][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2017.12.19-17.10.11:772][  0]LogInit: WinSock: version 1.1 (2.2), MaxSocks=32767, MaxUdp=65467
+[2017.12.19-17.10.31:983][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2017.12.19-17.10.32:063][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2017.12.19-17.10.32:075][  0]FUdpSocketBuilder: Failed to subscribe UdpMessageMulticastSocket to multicast group 230.0.0.1
+[2017.12.19-17.10.32:075][  0]FUdpSocketBuilder: Failed to create and initialize socket UdpMessageMulticastSocket (last error: 0)
+[2017.12.19-17.10.32:075][  0]LogUdpMessaging: Warning: StartTransport failed to create multicast socket on 0.0.0.0:0, joined to 230.0.0.1:6666 with TTL 1
+[2017.12.19-17.10.34:786][  0]LogMaterial: Uniform references updated for custom material expression Custom.
+[2017.12.19-17.10.35:944][  0]SourceControl: Source control is disabled
+[2017.12.19-17.10.35:948][  0]SourceControl: Source control is disabled
+[2017.12.19-17.10.36:107][  0]SourceControl: Source control is disabled
+[2017.12.19-17.10.36:236][  0]SourceControl: Source control is disabled
+[2017.12.19-17.10.38:026][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2017.12.19-17.10.38:394][  0]LogOcInput: OculusInput pre-init called
+[2017.12.19-17.10.38:677][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-17.10.38:738][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-17.10.41:094][  0]LogEngine: Initializing Engine...
+[2017.12.19-17.10.41:220][  0]LogHMD: Failed to initialize OpenVR with code 110
+[2017.12.19-17.10.42:154][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: Construct from data asset -  0.000 s
+[2017.12.19-17.10.42:155][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: GameplayTagTreeChangedEvent.Broadcast -  0.000 s
+[2017.12.19-17.10.43:202][  0]LogAIModule: Creating AISystem for world Untitled
+[2017.12.19-17.10.43:676][  0]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-17.10.43:760][  0]LogInit: FAudioDevice initialized.
+[2017.12.19-17.10.44:053][  0]LogDerivedDataCache: Saved boot cache 0.25s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-17.10.44:100][  0]LogInit: Texture streaming: Enabled
+[2017.12.19-17.10.44:830][  0]LogEngineSessionManager: EngineSessionManager initialized
+[2017.12.19-17.10.44:831][  0]LogEngineSessionManager: EngineSessionManager sent abnormal shutdown report. Type=Debugger, SessionId={BFF036E4-4479-6BAF-7E9A-84B82C2882F2}
+[2017.12.19-17.10.45:321][  0]LogInit: Transaction tracking system initialized
+[2017.12.19-17.10.46:258][  0]BlueprintLog: New page: Editor Load
+[2017.12.19-17.10.49:181][  0]LocalizationService: Localization service is disabled
+[2017.12.19-17.10.51:531][  0]LogConsoleResponse: Display: 
+[2017.12.19-17.10.54:237][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/' took 0.02s
+[2017.12.19-17.10.54:237][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
+[2017.12.19-17.10.54:237][  0]LogCook: Display: Mobile HDR setting 1
+[2017.12.19-17.10.54:251][  0]LogGameplayTags: Display: UGameplayTagsManager::DoneAddingNativeTags. DelegateIsBound: 0
+[2017.12.19-17.10.57:457][  0]SourceControl: Source control is disabled
+[2017.12.19-17.10.57:506][  0]Cmd: MAP LOAD FILE="../../../Engine/Content/Maps/Templates/Template_Default.umap" TEMPLATE=1 SHOWPROGRESS=1 FEATURELEVEL=3
+[2017.12.19-17.10.57:544][  0]LightingResults: New page: Lighting Build
+[2017.12.19-17.10.57:963][  0]MapCheck: New page: Map Check
+[2017.12.19-17.10.57:963][  0]LightingResults: New page: Lighting Build
+[2017.12.19-17.11.01:507][  0]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-17.11.02:555][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2017.12.19-17.11.02:791][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2017.12.19-17.11.02:874][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 81.869ms to complete.
+[2017.12.19-17.11.02:916][  0]LogFileHelpers: Loading map 'Template_Default' took 5.425
+[2017.12.19-17.11.05:687][  0]LogCollectionManager: Loaded 0 collections in 0.002216 seconds
+[2017.12.19-17.11.06:074][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Saved/Collections/' took 0.01s
+[2017.12.19-17.11.06:074][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Developers/guan/Collections/' took 0.01s
+[2017.12.19-17.11.06:074][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Collections/' took 0.01s
+[2017.12.19-17.11.06:074][  0]LogCollectionManager: Rebuilt the GUID cache for 0 collections in 0.000000 seconds
+[2017.12.19-17.11.06:178][  0]LogContentBrowser: Native class hierarchy populated in 0.0568 seconds. Added 2372 classes and 524 folders.
+[2017.12.19-17.11.06:415][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0005 seconds. Added 0 classes and 0 folders.
+[2017.12.19-17.11.07:691][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0005 seconds. Added 0 classes and 0 folders.
+[2017.12.19-17.11.07:902][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0006 seconds. Added 1 classes and 2 folders.
+[2017.12.19-17.11.10:042][  0]LogSlate: Took 0.013131 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2017.12.19-17.11.10:079][  0]LogSlate: Took 0.012408 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2017.12.19-17.11.10:157][  0]LogSlate: Took 0.012549 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2017.12.19-17.11.10:191][  0]LogSlate: Took 0.014061 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/DroidSansMono.ttf' (77K)
+[2017.12.19-17.11.11:414][  0]LogRenderer: Reallocating scene render targets to support 968x436 Format 9 NumSamples 1 (Frame:1).
+[2017.12.19-17.11.13:892][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0005 seconds. Added 1 classes and 2 folders.
+[2017.12.19-17.11.13:892][  0]LogLoad: (Engine Initialization) Total time: 122.27 seconds
+[2017.12.19-17.11.13:892][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2017.12.19-17.11.13:908][  0]LogExternalProfiler: No external profilers were discovered.  External profiling features will not be available.
+[2017.12.19-17.11.14:992][  0]LogContentStreaming: Texture pool size now 800 MB
+[2017.12.19-17.11.15:622][  2]LogAssetRegistry: Asset discovery search completed in 70.7488 seconds
+[2017.12.19-17.11.15:661][  2]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000001 seconds (found 0 objects)
+[2017.12.19-17.11.15:662][  2]LogCollectionManager: Fixed up redirectors for 0 collections in 0.016229 seconds (updated 0 objects)
+[2017.12.19-17.11.18:403][109]LogSlate: Took 0.014023 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (159K)
+[2017.12.19-17.11.20:986][229]LogEditor: Attempting to add actor of class 'StringPublisher' to level at -390.00,-150.00,20.00
+[2017.12.19-17.11.21:431][229]LogEditor: Attempting to add actor of class 'StringPublisher' to level at -260.00,-70.00,20.00
+[2017.12.19-17.11.23:697][303]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-17.11.23:778][303]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-17.11.23:985][303]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 7:11:23 PM)
+[2017.12.19-17.11.24:002][303]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-17.11.24:047][303]LogPlayLevel: PIE: StaticDuplicateObject took: (0.044156s)
+[2017.12.19-17.11.24:048][303]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-17.11.24:066][303]LogPlayLevel: PIE: World Init took: (0.018235s)
+[2017.12.19-17.11.24:072][303]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.070168s)
+[2017.12.19-17.11.24:181][303]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-17.11.24:199][303]LogInit: FAudioDevice initialized.
+[2017.12.19-17.11.24:359][303]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-17.11.24:633][303]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-18.11.24
+[2017.12.19-17.11.24:681][303]LogWorld: Bringing up level for play took: 0.061861
+[2017.12.19-17.11.25:052][303]LogContentBrowser: Native class hierarchy updated for 'MovieSceneCapture' in 0.0115 seconds. Added 11 classes and 0 folders.
+[2017.12.19-17.11.25:686][303]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-17.11.25:686][303]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-17.11.25:687][303]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-17.11.25:687][303]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-17.11.25:687][303]LogROS: Warning: [FROSBridgeHandler::Connect] Advertising Topic Unreal_String
+[2017.12.19-17.11.25:854][303]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 1.677
+[2017.12.19-17.11.25:924][303]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.25:924][303]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.25:925][303]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.25:925][303]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.25:925][303]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:217][304]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:217][304]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:217][304]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:272][304]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:272][304]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:272][304]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:273][304]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:300][304]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:359][305]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:360][305]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:375][306]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:392][307]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:399][308]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:409][308]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:409][308]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:425][309]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:442][310]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:459][311]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:475][312]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:492][313]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:509][314]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:510][314]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:510][314]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:526][315]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:542][316]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:559][317]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:576][318]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:593][319]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:599][320]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:609][320]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:610][320]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:626][321]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:643][322]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:659][323]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:676][324]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:692][325]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:693][325]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:693][325]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:709][326]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:726][327]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:743][328]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:759][329]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:776][330]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:793][331]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:810][332]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:810][332]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:811][332]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:826][333]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:843][334]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:860][335]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:876][336]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:893][337]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:899][338]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.26:910][338]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.26:911][338]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:926][339]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:943][340]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:960][341]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:976][342]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:993][343]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.26:999][344]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:010][344]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:010][344]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:026][345]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:044][346]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:060][347]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:076][348]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:094][349]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:100][350]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:110][350]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:110][350]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:126][351]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:143][352]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:159][353]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:176][354]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:193][355]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:198][356]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:209][356]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:210][356]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:226][357]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:243][358]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:260][359]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:276][360]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:294][361]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:294][361]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:295][361]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:310][362]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:326][363]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:343][364]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:359][365]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:376][366]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:393][367]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:398][368]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:410][368]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:410][368]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:426][369]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:443][370]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:459][371]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:476][372]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:493][373]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:498][374]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:509][374]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:510][374]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:526][375]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:542][376]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:559][377]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:576][378]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:593][379]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:609][380]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:610][380]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:610][380]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:626][381]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:643][382]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:659][383]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:676][384]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:693][385]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:698][386]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:709][386]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:710][386]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:726][387]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:742][388]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:759][389]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:776][390]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:793][391]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:798][392]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:809][392]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:810][392]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:826][393]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:843][394]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:859][395]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:876][396]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:893][397]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:909][398]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.27:910][398]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.27:910][398]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:926][399]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:943][400]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:960][401]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:976][402]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:993][403]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.27:998][404]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.28:010][404]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.28:010][404]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:026][405]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:043][406]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:060][407]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:076][408]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:093][409]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:109][410]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.28:110][410]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.28:110][410]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:126][411]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:143][412]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:159][413]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.28:232][413]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.28:232][413]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-17.11.28:232][413]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-17.11.28:233][413]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-17.11.28:233][413]LogROS: [FROSBridgeHandler::Disconnect] Unadvertising Topic Unreal_String
+[2017.12.19-17.11.28:233][413]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-17.11.42:475][243]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-17.11.42:486][243]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-17.11.42:486][243]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 7:11:42 PM)
+[2017.12.19-17.11.42:486][243]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-17.11.42:492][243]LogPlayLevel: PIE: StaticDuplicateObject took: (0.004956s)
+[2017.12.19-17.11.42:492][243]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-17.11.42:493][243]LogPlayLevel: PIE: World Init took: (0.001123s)
+[2017.12.19-17.11.42:493][243]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.006939s)
+[2017.12.19-17.11.42:504][243]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-17.11.42:522][243]LogInit: FAudioDevice initialized.
+[2017.12.19-17.11.42:599][243]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-17.11.42:601][243]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-18.11.42
+[2017.12.19-17.11.42:601][243]LogWorld: Bringing up level for play took: 0.000998
+[2017.12.19-17.11.42:641][243]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-17.11.42:641][243]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-17.11.42:641][243]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-17.11.42:641][243]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-17.11.42:641][243]LogROS: Warning: [FROSBridgeHandler::Connect] Advertising Topic Unreal_String
+[2017.12.19-17.11.42:641][243]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.465
+[2017.12.19-17.11.42:644][243]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:681][244]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_2a78_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_204_0///####STATCAT_Advanced####
+[2017.12.19-17.11.42:682][244]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:698][245]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.42:698][245]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.42:698][245]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:715][246]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:731][247]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:748][248]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:764][249]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:781][250]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:798][251]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:802][252]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.42:814][252]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.42:815][252]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:831][253]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:848][254]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:864][255]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:881][256]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:898][257]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.42:898][257]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.42:898][257]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:914][258]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:931][259]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:948][260]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:964][261]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:981][262]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.42:998][263]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.42:998][263]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.42:999][263]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:015][264]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:031][265]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:048][266]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:064][267]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:081][268]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:098][269]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:102][270]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:114][270]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:115][270]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:131][271]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:148][272]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:164][273]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:181][274]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:198][275]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:198][275]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:199][275]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:215][276]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:231][277]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:248][278]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:264][279]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:281][280]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:298][281]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:303][282]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:314][282]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:315][282]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:331][283]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:348][284]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:365][285]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:381][286]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:398][287]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:398][287]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:398][287]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:414][288]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:431][289]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:448][290]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:464][291]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:481][292]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:498][293]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:503][294]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:515][294]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:515][294]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:531][295]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:548][296]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:565][297]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:581][298]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:598][299]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:598][299]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:598][299]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:615][300]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:631][301]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:648][302]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:664][303]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:681][304]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:699][305]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:704][306]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:714][306]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:715][306]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:731][307]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:748][308]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:765][309]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:781][310]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:798][311]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:798][311]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:798][311]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:814][312]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:831][313]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:848][314]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:864][315]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:881][316]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:898][317]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:902][318]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:915][318]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:915][318]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:931][319]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:948][320]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:964][321]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:981][322]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.43:997][323]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.43:998][323]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.43:998][323]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:015][324]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:031][325]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:048][326]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:064][327]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:081][328]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:098][329]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:102][330]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:115][330]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:115][330]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:131][331]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:148][332]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:164][333]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:181][334]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:198][335]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:198][335]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:198][335]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:214][336]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:231][337]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:248][338]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:264][339]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:281][340]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:298][341]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:298][341]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:299][341]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:315][342]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:331][343]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:348][344]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:364][345]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:381][346]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:398][347]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:398][347]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:398][347]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:415][348]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:431][349]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:449][350]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:465][351]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:481][352]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:498][353]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:498][353]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:498][353]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:515][354]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:531][355]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:548][356]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:564][357]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:581][358]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:598][359]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:602][360]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:615][360]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:615][360]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:631][361]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:648][362]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:665][363]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:681][364]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:698][365]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:698][365]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:698][365]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:714][366]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:731][367]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:748][368]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:764][369]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:781][370]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:798][371]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:803][372]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:815][372]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:815][372]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:831][373]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:848][374]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:864][375]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:881][376]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:898][377]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.44:898][377]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.44:898][377]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:915][378]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:931][379]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:948][380]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:965][381]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:981][382]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.44:998][383]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:003][384]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:015][384]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:015][384]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:031][385]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:048][386]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:064][387]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:081][388]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:098][389]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:098][389]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:099][389]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:114][390]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:131][391]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:148][392]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:165][393]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:181][394]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:198][395]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:198][395]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:198][395]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:214][396]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:231][397]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:248][398]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:264][399]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:281][400]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:298][401]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:302][402]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:315][402]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:315][402]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:331][403]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:348][404]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:365][405]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:381][406]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:398][407]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:398][407]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:398][407]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:414][408]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:431][409]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:448][410]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:465][411]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:481][412]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:498][413]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:498][413]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:499][413]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:514][414]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:531][415]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:548][416]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:564][417]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:581][418]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:598][419]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:598][419]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:598][419]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:614][420]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:631][421]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:648][422]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:664][423]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:681][424]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:698][425]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:698][425]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:698][425]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:714][426]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:731][427]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:748][428]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:764][429]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:781][430]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:798][431]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:802][432]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:814][432]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:815][432]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:831][433]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:848][434]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:864][435]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:881][436]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:898][437]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:898][437]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:898][437]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:914][438]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:932][439]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:948][440]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:965][441]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:982][442]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.45:998][443]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.45:998][443]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.45:999][443]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:015][444]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:031][445]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:048][446]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:065][447]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:081][448]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:098][449]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:098][449]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:099][449]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:115][450]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:131][451]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:148][452]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:165][453]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:181][454]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:198][455]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:198][455]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:198][455]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:215][456]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:232][457]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:248][458]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:265][459]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:281][460]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:298][461]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:302][462]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:314][462]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:315][462]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:331][463]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:348][464]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:364][465]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:381][466]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:398][467]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:398][467]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:398][467]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:414][468]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:431][469]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:448][470]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:464][471]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:481][472]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:498][473]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:502][474]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:514][474]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:514][474]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:531][475]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:548][476]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:564][477]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:581][478]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:598][479]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:598][479]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:598][479]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:614][480]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:631][481]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:648][482]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:664][483]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:681][484]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:698][485]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:703][486]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:714][486]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:715][486]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:731][487]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:748][488]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:764][489]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:781][490]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:798][491]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:798][491]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:798][491]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:815][492]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:831][493]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:848][494]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:864][495]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:881][496]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:898][497]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:898][497]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:898][497]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:915][498]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:931][499]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:948][500]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:965][501]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:981][502]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.46:998][503]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.46:998][503]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.46:998][503]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:015][504]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:031][505]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:048][506]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:065][507]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:081][508]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:098][509]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:098][509]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:098][509]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:115][510]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:131][511]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:148][512]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:165][513]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:181][514]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:198][515]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:203][516]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:214][516]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:215][516]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:231][517]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:248][518]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:264][519]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:281][520]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:298][521]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:298][521]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:299][521]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:315][522]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:331][523]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:348][524]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:364][525]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:381][526]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:398][527]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:403][528]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:414][528]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:414][528]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:431][529]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:448][530]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:465][531]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:481][532]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:498][533]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:498][533]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:498][533]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:514][534]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:531][535]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:548][536]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:565][537]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:581][538]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:598][539]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:598][539]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:598][539]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:614][540]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:631][541]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:648][542]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:664][543]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:681][544]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:698][545]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:698][545]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:698][545]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:715][546]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:732][547]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:748][548]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:764][549]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:781][550]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:798][551]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:798][551]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:798][551]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:815][552]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:831][553]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:848][554]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:865][555]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:881][556]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:898][557]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:902][558]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.11.47:914][558]LogTemp: Message received! Content: hello there
+[2017.12.19-17.11.47:915][558]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-17.11.47:920][558]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-17.11.47:920][558]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-17.11.47:920][558]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-17.11.47:920][558]LogROS: [FROSBridgeHandler::Disconnect] Unadvertising Topic Unreal_String
+[2017.12.19-17.11.47:921][558]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-17.12.06:857][686]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at 170.00,-90.00,20.00
+[2017.12.19-17.12.07:462][722]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at 280.00,-120.00,20.00
+[2017.12.19-17.12.15:040][161]LogEditorActor: Deleted Actor: StringPublisher
+[2017.12.19-17.12.15:050][161]LogEditorActor: Deleted 1 Actors (0.099 secs)
+[2017.12.19-17.12.16:590][254]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-17.12.16:601][254]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-17.12.16:601][254]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 7:12:16 PM)
+[2017.12.19-17.12.16:601][254]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-17.12.16:607][254]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005201s)
+[2017.12.19-17.12.16:608][254]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-17.12.16:608][254]LogPlayLevel: PIE: World Init took: (0.001212s)
+[2017.12.19-17.12.16:609][254]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007318s)
+[2017.12.19-17.12.16:620][254]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-17.12.16:639][254]LogInit: FAudioDevice initialized.
+[2017.12.19-17.12.16:676][254]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-17.12.16:677][254]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-18.12.16
+[2017.12.19-17.12.16:678][254]LogWorld: Bringing up level for play took: 0.001110
+[2017.12.19-17.12.16:717][254]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-17.12.16:717][254]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-17.12.16:717][254]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-17.12.16:717][254]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-17.12.16:717][254]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.541
+[2017.12.19-17.12.16:762][256]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_206c_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_204_0///####STATCAT_Advanced####
+[2017.12.19-17.12.16:796][258]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.16:896][264]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.16:996][270]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:113][277]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:196][282]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:296][288]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:396][294]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:512][301]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:595][306]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:712][313]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:795][318]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.17:895][324]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.18:012][331]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.18:095][336]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.18:212][343]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.18:296][348]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.18:412][354]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.12.18:413][354]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-17.12.18:413][354]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-17.12.18:413][354]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-17.12.18:413][354]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-17.13.02:635][874]Candidate modules for hot reload:
+[2017.12.19-17.13.02:636][874]  HelloWorld
+[2017.12.19-17.13.02:643][874]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/DotNET/UnrealBuildTool.exe HelloWorld -ModuleWithSuffix HelloWorld 9873 Win64 Development -editorrecompile -canskiplink "D:/unreal engine/Unreal Projects/HelloWorld/HelloWorld.uproject" ]
+[2017.12.19-17.13.02:670][874]Warning: Starting HotReload took  0.3s.
+[2017.12.19-17.13.51:868][797]CompilerResultsLog: New page: Compilation - Dec 19, 2017, 7:13:51 PM
+[2017.12.19-17.13.51:869][797]CompilerResultsLog: Creating makefile for hot reloading HelloWorld (no existing makefile)
+[2017.12.19-17.13.51:869][797]CompilerResultsLog: Compiling game modules for hot reload
+[2017.12.19-17.13.51:870][797]CompilerResultsLog: Performing 3 actions (4 in parallel)
+[2017.12.19-17.13.51:870][797]CompilerResultsLog: RosStringSubScriber.cpp
+[2017.12.19-17.13.51:870][797]CompilerResultsLog: [2/3] Link UE4Editor-HelloWorld-9873.dll
+[2017.12.19-17.13.51:870][797]CompilerResultsLog: [3/3] Link UE4Editor-HelloWorld-9873.lib
+[2017.12.19-17.13.51:870][797]CompilerResultsLog:    Creating library D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-9873.lib and object D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-9873.exp
+[2017.12.19-17.13.51:871][797]CompilerResultsLog:    Creating library D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-9873.suppressed.lib and object D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-9873.suppressed.exp
+[2017.12.19-17.13.51:871][797]CompilerResultsLog: Total build time: 48,43 seconds (Local executor: 5,33 seconds)
+[2017.12.19-17.13.51:884][797]LogMainFrame: MainFrame: Module compiling took 49.324 seconds
+[2017.12.19-17.13.51:980][797]LogContentBrowser: Native class hierarchy updated for 'HelloWorld' in 0.0005 seconds. Added 3 classes and 2 folders.
+[2017.12.19-17.13.51:982][797]Display: HotReload successful (0 functions remapped  0 scriptstructs remapped)
+[2017.12.19-17.13.52:355][797]LogContentBrowser: Native class hierarchy populated in 0.0095 seconds. Added 2374 classes and 528 folders.
+[2017.12.19-17.13.52:404][797]Display: HotReload took 50.0s.
+[2017.12.19-17.13.55:595][989]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-17.13.55:605][989]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-17.13.55:606][989]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 7:13:55 PM)
+[2017.12.19-17.13.55:606][989]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-17.13.55:612][989]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005786s)
+[2017.12.19-17.13.55:613][989]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-17.13.55:614][989]LogPlayLevel: PIE: World Init took: (0.001557s)
+[2017.12.19-17.13.55:614][989]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.008186s)
+[2017.12.19-17.13.55:624][989]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-17.13.55:643][989]LogInit: FAudioDevice initialized.
+[2017.12.19-17.13.55:677][989]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-17.13.55:679][989]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-18.13.55
+[2017.12.19-17.13.55:679][989]LogWorld: Bringing up level for play took: 0.001160
+[2017.12.19-17.13.55:719][989]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-17.13.55:719][989]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-17.13.55:720][989]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-17.13.55:720][989]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-17.13.55:720][989]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 -0.456
+[2017.12.19-17.13.55:769][991]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_a10_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_204_0///####STATCAT_Advanced####
+[2017.12.19-17.13.55:801][993]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.55:901][999]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:001][  5]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:101][ 11]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:201][ 17]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:301][ 23]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:401][ 29]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:501][ 35]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:601][ 41]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:701][ 47]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:801][ 53]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.56:901][ 59]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:001][ 65]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:101][ 71]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:201][ 77]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:301][ 83]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:401][ 89]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:501][ 95]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:601][101]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:701][107]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:801][113]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.57:901][119]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:001][125]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:101][131]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:201][137]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:303][143]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:401][149]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:501][155]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:601][161]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:701][167]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:801][173]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.58:901][179]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:001][185]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:101][191]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:201][197]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:301][203]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:401][209]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:501][215]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:601][221]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:701][227]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:801][233]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.13.59:885][237]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-17.13.59:885][237]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-17.13.59:885][237]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-17.13.59:886][237]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-17.15.46:142][899]Candidate modules for hot reload:
+[2017.12.19-17.15.46:142][899]  HelloWorld
+[2017.12.19-17.15.46:143][899]Launching UnrealBuildTool... [C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/DotNET/UnrealBuildTool.exe HelloWorld -ModuleWithSuffix HelloWorld 1448 Win64 Development -editorrecompile -canskiplink "D:/unreal engine/Unreal Projects/HelloWorld/HelloWorld.uproject" ]
+[2017.12.19-17.15.46:158][899]Warning: Starting HotReload took  0.1s.
+[2017.12.19-17.16.06:236][102]CompilerResultsLog: New page: Compilation - Dec 19, 2017, 7:16:06 PM
+[2017.12.19-17.16.06:237][102]CompilerResultsLog: Compiling game modules for hot reload
+[2017.12.19-17.16.06:237][102]CompilerResultsLog: Parsing headers for HelloWorldEditor
+[2017.12.19-17.16.06:237][102]CompilerResultsLog:   Running UnrealHeaderTool "D:\unreal engine\Unreal Projects\HelloWorld\HelloWorld.uproject" "D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\HelloWorldEditor\Development\HelloWorldEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
+[2017.12.19-17.16.06:238][102]CompilerResultsLog: Reflection code generated for HelloWorldEditor in 12,4012136 seconds
+[2017.12.19-17.16.06:238][102]CompilerResultsLog: Performing 4 actions (4 in parallel)
+[2017.12.19-17.16.06:238][102]CompilerResultsLog: RosStringSubScriber.gen.cpp
+[2017.12.19-17.16.06:238][102]CompilerResultsLog: RosStringSubScriber.cpp
+[2017.12.19-17.16.06:238][102]CompilerResultsLog: [3/4] Link UE4Editor-HelloWorld-1448.dll
+[2017.12.19-17.16.06:238][102]CompilerResultsLog: [4/4] Link UE4Editor-HelloWorld-1448.lib
+[2017.12.19-17.16.06:238][102]CompilerResultsLog:    Creating library D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-1448.lib and object D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-1448.exp
+[2017.12.19-17.16.06:239][102]CompilerResultsLog:    Creating library D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-1448.suppressed.lib and object D:\unreal engine\Unreal Projects\HelloWorld\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-HelloWorld-1448.suppressed.exp
+[2017.12.19-17.16.06:239][102]CompilerResultsLog: Total build time: 19,52 seconds (Local executor: 5,83 seconds)
+[2017.12.19-17.16.06:239][102]LogMainFrame: MainFrame: Module compiling took 20.101 seconds
+[2017.12.19-17.16.06:317][102]LogClass: Could not find existing class RosStringSubScriber in package /Script/HelloWorld for HotReload, assuming new class
+[2017.12.19-17.16.06:346][102]LogHotReload: Re-instancing RosStringSubScriber after hot-reload.
+[2017.12.19-17.16.06:626][102]LogContentBrowser: Native class hierarchy updated for 'HelloWorld' in 0.0006 seconds. Added 3 classes and 2 folders.
+[2017.12.19-17.16.06:628][102]Display: HotReload successful (0 functions remapped  0 scriptstructs remapped)
+[2017.12.19-17.16.06:672][102]LogContentBrowser: Native class hierarchy populated in 0.0093 seconds. Added 2374 classes and 528 folders.
+[2017.12.19-17.16.06:672][102]Display: HotReload took 20.6s.
+[2017.12.19-17.16.09:013][243]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-17.16.09:023][243]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-17.16.09:024][243]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 7:16:09 PM)
+[2017.12.19-17.16.09:024][243]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-17.16.09:030][243]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005212s)
+[2017.12.19-17.16.09:031][243]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-17.16.09:031][243]LogPlayLevel: PIE: World Init took: (0.001318s)
+[2017.12.19-17.16.09:032][243]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007476s)
+[2017.12.19-17.16.09:042][243]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-17.16.09:061][243]LogInit: FAudioDevice initialized.
+[2017.12.19-17.16.09:094][243]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-17.16.09:096][243]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-18.16.09
+[2017.12.19-17.16.09:096][243]LogWorld: Bringing up level for play took: 0.000966
+[2017.12.19-17.16.09:136][243]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-17.16.09:136][243]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-17.16.09:136][243]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-17.16.09:136][243]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-17.16.09:137][243]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.96
+[2017.12.19-17.16.09:183][245]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_40c4_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_204_0///####STATCAT_Advanced####
+[2017.12.19-17.16.09:200][246]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:299][252]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:416][259]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:500][264]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:601][270]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:699][276]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:799][282]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:899][288]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.09:999][294]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:099][300]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:200][306]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:300][312]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:399][318]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:499][324]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:599][330]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:700][336]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:799][342]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:899][348]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.10:999][354]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:099][360]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:216][367]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:299][372]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:399][378]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:499][384]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:616][391]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:699][396]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:799][402]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:898][408]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.11:998][414]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-17.16.12:066][417]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-17.16.12:066][417]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-17.16.12:066][417]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-17.16.12:067][417]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-17.16.18:276][524]Cmd: QUIT_EDITOR
+[2017.12.19-17.16.19:495][524]LogWindowsTextInputMethodSystem: Display: IME system now deactivated.
+[2017.12.19-17.16.19:997][524]LogExit: Preparing to exit.
+[2017.12.19-17.16.22:164][524]LogExit: Editor shut down
+[2017.12.19-17.16.22:168][524]LogExit: Transaction tracking system shut down

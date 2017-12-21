@@ -1,0 +1,1994 @@
+﻿Log file open, 12/19/17 17:45:58
+LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
+LogWindows: File 'aqProf.dll' does not exist
+LogWindows: Failed to load 'VSPerf140.dll' (GetLastError=126)
+LogWindows: File 'VSPerf140.dll' does not exist
+LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi.dll' does not exist
+LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi32e.dll' does not exist
+LogInit: Display: Running engine for game: HelloWorld
+LogPlatformFile: Not using cached read wrapper
+LogInit: Display: RandInit(336389746) SRandInit(336389746).
+LogInit: Read version file with build ID '3709383'
+LogInit: Overriding engine version to CL 3794801, compatible CL 3709383
+LogInit: Registered custom module enumerator with build ID '3709383'
+LogTaskGraph: Started task graph with 5 named threads and 14 total threads with 3 sets of task threads.
+LogStats: Stats thread started at 0.725247
+LogD3D11RHI: Aftermath initialized
+LogPluginManager: Mounting plugin Paper2D
+LogPluginManager: Mounting plugin LightPropagationVolume
+LogPluginManager: Mounting plugin CodeLiteSourceCodeAccess
+LogPluginManager: Mounting plugin GitSourceControl
+LogPluginManager: Mounting plugin KDevelopSourceCodeAccess
+LogPluginManager: Mounting plugin NullSourceCodeAccess
+LogPluginManager: Mounting plugin PerforceSourceControl
+LogPluginManager: Mounting plugin SubversionSourceControl
+LogPluginManager: Mounting plugin UObjectPlugin
+LogPluginManager: Mounting plugin VisualStudioCodeSourceCodeAccess
+LogPluginManager: Mounting plugin VisualStudioSourceCodeAccess
+LogPluginManager: Mounting plugin XCodeSourceCodeAccess
+LogPluginManager: Mounting plugin AssetManagerEditor
+LogPluginManager: Mounting plugin AudioCapture
+LogPluginManager: Mounting plugin FacialAnimation
+LogPluginManager: Mounting plugin GameplayTagsEditor
+LogPluginManager: Mounting plugin MobileLauncherProfileWizard
+LogPluginManager: Mounting plugin PluginBrowser
+LogPluginManager: Mounting plugin SpeedTreeImporter
+LogPluginManager: Mounting plugin AlembicImporter
+LogPluginManager: Mounting plugin CharacterAI
+LogPluginManager: Mounting plugin HTML5Networking
+LogPluginManager: Mounting plugin AndroidMedia
+LogPluginManager: Mounting plugin AvfMedia
+LogPluginManager: Mounting plugin ImgMedia
+LogPluginManager: Mounting plugin MediaCompositing
+LogPluginManager: Mounting plugin MediaPlayerEditor
+LogPluginManager: Mounting plugin WmfMedia
+LogPluginManager: Mounting plugin TcpMessaging
+LogPluginManager: Mounting plugin UdpMessaging
+LogPluginManager: Mounting plugin ActorSequence
+LogPluginManager: Mounting plugin LevelSequenceEditor
+LogPluginManager: Mounting plugin MatineeToLevelSequence
+LogPluginManager: Mounting plugin OnlineSubsystemGooglePlay
+LogPluginManager: Mounting plugin OnlineSubsystemIOS
+LogPluginManager: Mounting plugin OnlineSubsystem
+LogPluginManager: Mounting plugin OnlineSubsystemNull
+LogPluginManager: Mounting plugin OnlineSubsystemUtils
+LogPluginManager: Mounting plugin AndroidDeviceProfileSelector
+LogPluginManager: Mounting plugin AndroidMoviePlayer
+LogPluginManager: Mounting plugin AndroidPermission
+LogPluginManager: Mounting plugin AppleARKit
+LogPluginManager: Mounting plugin AppleMoviePlayer
+LogPluginManager: Mounting plugin ArchVisCharacter
+LogPluginManager: Mounting plugin CableComponent
+LogPluginManager: Mounting plugin CustomMeshComponent
+LogPluginManager: Mounting plugin ExampleDeviceProfileSelector
+LogPluginManager: Mounting plugin GoogleCloudMessaging
+LogPluginManager: Mounting plugin ImmediatePhysics
+LogPluginManager: Mounting plugin IOSDeviceProfileSelector
+LogPluginManager: Mounting plugin LinuxDeviceProfileSelector
+LogPluginManager: Mounting plugin LocationServicesBPLibrary
+LogPluginManager: Mounting plugin MobilePatchingUtils
+LogPluginManager: Mounting plugin OculusVR
+LogPluginManager: Plugin shader directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders found
+LogPluginManager: Mapping shader source directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders to virtual directory /Plugin/OculusVR
+LogPluginManager: Mounting plugin PhysXVehicles
+LogPluginManager: Mounting plugin ProceduralMeshComponent
+LogPluginManager: Mounting plugin RuntimePhysXCooking
+LogPluginManager: Mounting plugin SteamVR
+LogPluginManager: Mounting plugin WindowsMoviePlayer
+LogPluginManager: Mounting plugin URoboSim
+LogPluginManager: Mounting plugin UROSBridge
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Binaries/Win64/UE4Editor-HelloWorld.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2DEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperSpriteSheetImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperTiledImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-SmartSnapping.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeRuntime.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/GitSourceControl/Binaries/Win64/UE4Editor-GitSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/PerforceSourceControl/Binaries/Win64/UE4Editor-PerforceSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/SubversionSourceControl/Binaries/Win64/UE4Editor-SubversionSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/UObjectPlugin/Binaries/Win64/UE4Editor-UObjectPlugin.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioCodeSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioCodeSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AssetManagerEditor/Binaries/Win64/UE4Editor-AssetManagerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AudioCapture/Binaries/Win64/UE4Editor-AudioCapture.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimation.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimationEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/GameplayTagsEditor/Binaries/Win64/UE4Editor-GameplayTagsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/MobileLauncherProfileWizard/Binaries/Win64/UE4Editor-MobileLauncherProfileWizard.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/PluginBrowser/Binaries/Win64/UE4Editor-PluginBrowser.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/SpeedTreeImporter/Binaries/Win64/UE4Editor-SpeedTreeImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/CharacterAI/Binaries/Win64/UE4Editor-CharacterAI.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/HTML5Networking/Binaries/Win64/UE4Editor-HTML5Networking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-OpenExrWrapper.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositing.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositingEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaPlayerEditor/Binaries/Win64/UE4Editor-MediaPlayerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/TcpMessaging/Binaries/Win64/UE4Editor-TcpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/UdpMessaging/Binaries/Win64/UE4Editor-UdpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/ActorSequence/Binaries/Win64/UE4Editor-ActorSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/LevelSequenceEditor/Binaries/Win64/UE4Editor-LevelSequenceEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/MatineeToLevelSequence/Binaries/Win64/UE4Editor-MatineeToLevelSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystem/Binaries/Win64/UE4Editor-OnlineSubsystem.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemNull/Binaries/Win64/UE4Editor-OnlineSubsystemNull.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineSubsystemUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineBlueprintSupport.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidDeviceProfileSelector/Binaries/Win64/UE4Editor-AndroidDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidPermission/Binaries/Win64/UE4Editor-AndroidPermission.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AppleARKit/Binaries/Win64/UE4Editor-AppleARKit.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ArchVisCharacter/Binaries/Win64/UE4Editor-ArchVisCharacter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CableComponent/Binaries/Win64/UE4Editor-CableComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CustomMeshComponent/Binaries/Win64/UE4Editor-CustomMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ExampleDeviceProfileSelector/Binaries/Win64/UE4Editor-ExampleDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysics.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysicsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/LocationServicesBPLibrary/Binaries/Win64/UE4Editor-LocationServicesBPLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/MobilePatchingUtils/Binaries/Win64/UE4Editor-MobilePatchingUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusHMD.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusInput.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehicles.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehiclesEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponentEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/RuntimePhysXCooking/Binaries/Win64/UE4Editor-RuntimePhysXCooking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVR.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVRController.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/WindowsMoviePlayer/Binaries/Win64/UE4Editor-WindowsMoviePlayer.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSim.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSimEd.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/UROSBridge/Binaries/Win64/UE4Editor-UROSBridge.dll (API version 3709383).
+LogInit: Using libcurl 7.47.1
+LogInit:  - built for x86_64-pc-win32
+LogInit:  - supports SSL with OpenSSL/1.0.2g
+LogInit:  - supports HTTP deflate (compression) using libz 1.2.8
+LogInit:  - other features:
+LogInit:      CURL_VERSION_SSL
+LogInit:      CURL_VERSION_LIBZ
+LogInit:      CURL_VERSION_IPV6
+LogInit:      CURL_VERSION_ASYNCHDNS
+LogInit:      CURL_VERSION_LARGEFILE
+LogInit:      CURL_VERSION_IDN
+LogInit:  CurlRequestOptions (configurable via config and command line):
+LogInit:  - bVerifyPeer = false  - Libcurl will NOT verify peer certificate
+LogInit:  - bUseHttpProxy = false  - Libcurl will NOT use HTTP proxy
+LogInit:  - bDontReuseConnections = false  - Libcurl will reuse connections
+LogInit:  - CertBundlePath = nullptr  - Libcurl will use whatever was configured at build time.
+LogInit: Build: ++UE4+Release-4.18-CL-3794801
+LogInit: Engine Version: 4.18.2-3794801+++UE4+Release-4.18
+LogInit: Compatible Engine Version: 4.18.0-3709383+++UE4+Release-4.18
+LogInit: Net CL: 3709383
+LogDevObjectVersion: Number of dev versions registered: 16
+LogDevObjectVersion:   Dev-Blueprints (B0D832E4-1F89-4F0D-ACCF-7EB736FD4AA2): 10
+LogDevObjectVersion:   Dev-Build (E1C64328-A22C-4D53-A36C-8E866417BD8C): 0
+LogDevObjectVersion:   Dev-Core (375EC13C-06E4-48FB-B500-84F0262A717E): 2
+LogDevObjectVersion:   Dev-Editor (E4B068ED-F494-42E9-A231-DA0B2E46BB41): 20
+LogDevObjectVersion:   Dev-Framework (CFFC743F-43B0-4480-9391-14DF171D2073): 30
+LogDevObjectVersion:   Dev-Mobile (B02B49B5-BB20-44E9-A304-32B752E40360): 0
+LogDevObjectVersion:   Dev-Networking (A4E4105C-59A1-49B5-A7C5-40C4547EDFEE): 0
+LogDevObjectVersion:   Dev-Online (39C831C9-5AE6-47DC-9A44-9C173E1C8E7C): 0
+LogDevObjectVersion:   Dev-Physics (78F01B33-EBEA-4F98-B9B4-84EACCB95AA2): 0
+LogDevObjectVersion:   Dev-Platform (6631380F-2D4D-43E0-8009-CF276956A95A): 0
+LogDevObjectVersion:   Dev-Rendering (12F88B9F-8875-4AFC-A67C-D90C383ABD29): 20
+LogDevObjectVersion:   Dev-Sequencer (7B5AE74C-D270-4C10-A958-57980B212A5A): 4
+LogDevObjectVersion:   Dev-VR (D7296918-1DD6-4BDD-9DE2-64A83CC13884): 0
+LogDevObjectVersion:   Dev-LoadTimes (C2A15278-BFE7-4AFE-6C17-90FF531DF755): 1
+LogDevObjectVersion:   Private-Geometry (6EACA3D4-40EC-4CC1-B786-8BED09428FC5): 1
+LogDevObjectVersion:   Dev-AnimPhys (29E575DD-E0A3-4627-9D10-D276232CDCEA): 12
+LogInit: Compiled (64-bit): Dec  8 2017 02:04:53
+LogInit: Compiled with Visual C++: 19.00.24215.01
+LogInit: Build Configuration: Development
+LogInit: Branch Name: ++UE4+Release-4.18
+LogInit: Command line:  -skipcompile
+LogInit: Base directory: C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/Win64/
+LogInit: Installed Engine Build: 1
+LogInit: Presizing for max 8388607 objects, including 0 objects not considered by GC, pre-allocating 0 bytes for permanent pool.
+LogInit: Object subsystem initialized
+[2017.12.19-16.46.02:772][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-16.46.02:772][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2017.12.19-16.46.02:842][  0]LogInit: Computer: DESKTOP-INMJF5R
+[2017.12.19-16.46.02:842][  0]LogInit: User: guan
+[2017.12.19-16.46.02:842][  0]LogInit: CPU Page size=4096, Cores=4
+[2017.12.19-16.46.02:843][  0]LogInit: High frequency timer resolution =2.533209 MHz
+[2017.12.19-16.46.02:843][  0]LogMemory: Memory total: Physical=7.9GB (8GB approx)
+[2017.12.19-16.46.02:843][  0]LogMemory: Platform Memory Stats for Windows
+[2017.12.19-16.46.02:843][  0]LogMemory: Process Physical Memory: 273.70 MB used, 273.70 MB peak
+[2017.12.19-16.46.02:843][  0]LogMemory: Process Virtual Memory: 271.64 MB used, 271.64 MB peak
+[2017.12.19-16.46.02:843][  0]LogMemory: Physical Memory: 5469.61 MB used,  2611.44 MB free, 8081.05 MB total
+[2017.12.19-16.46.02:843][  0]LogMemory: Virtual Memory: 646.11 MB used,  2611.44 MB free, 134217728.00 MB total
+[2017.12.19-16.46.03:314][  0]LogInit: Using OS detected language (en-US).
+[2017.12.19-16.46.03:314][  0]LogInit: Using OS detected locale (en-DE).
+[2017.12.19-16.46.03:491][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2017.12.19-16.46.04:320][  0]LogInit: Setting process to per monitor DPI aware
+[2017.12.19-16.46.08:017][  0]LogD3D11RHI: D3D11 adapters:
+[2017.12.19-16.46.08:090][  0]LogD3D11RHI:    0. 'NVIDIA GeForce GTX 950M           ' (Feature Level 11_0)
+[2017.12.19-16.46.08:090][  0]LogD3D11RHI:       1995/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:1, VendorId:0x10de
+[2017.12.19-16.46.08:141][  0]LogD3D11RHI:    1. 'Intel(R) HD Graphics 4600' (Feature Level 11_0)
+[2017.12.19-16.46.08:141][  0]LogD3D11RHI:       112/0/2048 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x8086
+[2017.12.19-16.46.08:187][  0]LogD3D11RHI:    2. 'Microsoft Basic Render Driver' (Feature Level 11_0)
+[2017.12.19-16.46.08:187][  0]LogD3D11RHI:       0/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
+[2017.12.19-16.46.08:187][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
+[2017.12.19-16.46.08:193][  0]LogD3D11RHI: Creating new Direct3DDevice
+[2017.12.19-16.46.08:193][  0]LogD3D11RHI:     GPU DeviceId: 0x139a (for the marketing name, search the web for "GPU Device Id")
+[2017.12.19-16.46.08:194][  0]LogWindows: EnumDisplayDevices:
+[2017.12.19-16.46.08:194][  0]LogWindows:    0. 'Intel(R) HD Graphics 4600' (P:1 D:1)
+[2017.12.19-16.46.08:194][  0]LogWindows:    1. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-16.46.08:195][  0]LogWindows:    2. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-16.46.08:195][  0]LogWindows: DebugString: PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter FoundDriverCount:0 
+[2017.12.19-16.46.08:195][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce GTX 950M           
+[2017.12.19-16.46.08:195][  0]LogD3D11RHI:   Driver Version: Unknown (internal:Unknown, unified:Unknown)
+[2017.12.19-16.46.08:195][  0]LogD3D11RHI:      Driver Date: Unknown
+[2017.12.19-16.46.08:195][  0]LogRHI: Texture pool is 1397 MB (70% of 1995 MB)
+[2017.12.19-16.46.08:427][  0]LogD3D11RHI: NvAPI_D3D_GetCurrentSLIState failed: 0xfffffff7
+[2017.12.19-16.46.08:428][  0]LogD3D11RHI: Async texture creation enabled
+[2017.12.19-16.46.08:444][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 2)
+[2017.12.19-16.46.08:445][  0]LogShaderCompilers: Guid format shader working directory is 1 characters bigger than the processId version (D:/unreal engine/Unreal Projects/HelloWorld/Intermediate/Shaders/WorkingDirectory/16552/).
+[2017.12.19-16.46.08:445][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/guan/AppData/Local/Temp/UnrealShaderWorkingDir/A77CE5CC4E209A50624192AD6C6E6985/'.
+[2017.12.19-16.46.08:445][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2017.12.19-16.46.13:676][  0]LogTemp: Display: Loaded TP AllDesktopTargetPlatform
+[2017.12.19-16.46.13:753][  0]LogTemp: Display: Loaded TP MacClientTargetPlatform
+[2017.12.19-16.46.13:839][  0]LogTemp: Display: Loaded TP MacNoEditorTargetPlatform
+[2017.12.19-16.46.13:919][  0]LogTemp: Display: Loaded TP MacServerTargetPlatform
+[2017.12.19-16.46.14:067][  0]LogTemp: Display: Loaded TP MacTargetPlatform
+[2017.12.19-16.46.14:137][  0]LogTemp: Display: Loaded TP WindowsClientTargetPlatform
+[2017.12.19-16.46.14:206][  0]LogTemp: Display: Loaded TP WindowsNoEditorTargetPlatform
+[2017.12.19-16.46.14:282][  0]LogTemp: Display: Loaded TP WindowsServerTargetPlatform
+[2017.12.19-16.46.14:341][  0]LogTemp: Display: Loaded TP WindowsTargetPlatform
+[2017.12.19-16.46.14:411][  0]LogTemp: Display: Loaded TP Android_ASTCTargetPlatform
+[2017.12.19-16.46.14:483][  0]LogTemp: Display: Loaded TP Android_ATCTargetPlatform
+[2017.12.19-16.46.14:557][  0]LogTemp: Display: Loaded TP Android_DXTTargetPlatform
+[2017.12.19-16.46.14:628][  0]LogTemp: Display: Loaded TP Android_ETC1TargetPlatform
+[2017.12.19-16.46.14:698][  0]LogTemp: Display: Loaded TP Android_ETC2TargetPlatform
+[2017.12.19-16.46.14:829][  0]LogTemp: Display: Loaded TP Android_MultiTargetPlatform
+[2017.12.19-16.46.14:829][  0]LogTemp: Display: Loaded TP Android_PVRTCTargetPlatform
+[2017.12.19-16.46.14:939][  0]LogTemp: Display: Loaded TP AndroidTargetPlatform
+[2017.12.19-16.46.14:997][  0]LogTemp: Display: Loaded TP HTML5TargetPlatform
+[2017.12.19-16.46.15:198][  0]LogTemp: Display: Loaded TP IOSTargetPlatform
+[2017.12.19-16.46.15:228][  0]LogTemp: Display: Loaded TP TVOSTargetPlatform
+[2017.12.19-16.46.15:295][  0]LogTemp: Display: Loaded TP LinuxClientTargetPlatform
+[2017.12.19-16.46.15:390][  0]LogTemp: Display: Loaded TP LinuxNoEditorTargetPlatform
+[2017.12.19-16.46.15:473][  0]LogTemp: Display: Loaded TP LinuxServerTargetPlatform
+[2017.12.19-16.46.15:585][  0]LogTemp: Display: Loaded TP LinuxTargetPlatform
+[2017.12.19-16.46.15:585][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2017.12.19-16.46.16:874][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2017.12.19-16.46.18:492][  0]LogDerivedDataCache: Loaded boot cache 1.62s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-16.46.18:493][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc
+[2017.12.19-16.46.18:493][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2017.12.19-16.46.18:493][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2017.12.19-16.46.18:493][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2017.12.19-16.46.18:493][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2017.12.19-16.46.18:509][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2017.12.19-16.46.18:524][  0]LogDerivedDataCache: Using Local data cache path C:/Users/guan/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2017.12.19-16.46.18:535][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
+[2017.12.19-16.46.18:536][  0]LogSlate: Using Freetype 2.6.0
+[2017.12.19-16.46.18:698][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-16.46.18:698][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-16.46.24:131][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-16.46.24:823][  0]LogSimplygon: Simplygon DLL not present - disabling.
+[2017.12.19-16.46.24:900][  0]LogMeshReduction: Using SimplygonSwarm for distributed automatic mesh merging
+[2017.12.19-16.46.24:900][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2017.12.19-16.46.24:900][  0]LogMeshReduction: No automatic skeletal mesh reduction module available
+[2017.12.19-16.46.24:900][  0]LogMeshReduction: No automatic mesh merging module available
+[2017.12.19-16.46.24:901][  0]LogMeshMerging: No automatic mesh merging module available
+[2017.12.19-16.46.24:931][  0]LogNetVersion: HelloWorld , NetCL: 3709383, EngineNetVer: 2, GameNetVer: 0 (Checksum: 5827342)
+[2017.12.19-16.46.25:099][  0]LogAssetRegistry: FAssetRegistry took 0.0286 seconds to start up
+[2017.12.19-16.46.25:659][  0]LogPackageLocalizationCache: Processed 9 localized package path(s) for 2 prioritized culture(s) in 0.084289 seconds
+[2017.12.19-16.46.25:665][  0]LogUObjectArray: 35900 objects as part of root set at end of initial load.
+[2017.12.19-16.46.25:665][  0]LogUObjectAllocator: 7372016 out of 0 bytes used by permanent object pool.
+[2017.12.19-16.46.25:665][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2017.12.19-16.46.25:753][  0]LogInit: WinSock: version 1.1 (2.2), MaxSocks=32767, MaxUdp=65467
+[2017.12.19-16.46.43:334][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2017.12.19-16.46.43:447][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2017.12.19-16.46.43:450][  0]FUdpSocketBuilder: Failed to subscribe UdpMessageMulticastSocket to multicast group 230.0.0.1
+[2017.12.19-16.46.43:450][  0]FUdpSocketBuilder: Failed to create and initialize socket UdpMessageMulticastSocket (last error: 0)
+[2017.12.19-16.46.43:450][  0]LogUdpMessaging: Warning: StartTransport failed to create multicast socket on 0.0.0.0:0, joined to 230.0.0.1:6666 with TTL 1
+[2017.12.19-16.46.45:013][  0]LogMaterial: Uniform references updated for custom material expression Custom.
+[2017.12.19-16.46.45:663][  0]SourceControl: Source control is disabled
+[2017.12.19-16.46.45:664][  0]SourceControl: Source control is disabled
+[2017.12.19-16.46.45:764][  0]SourceControl: Source control is disabled
+[2017.12.19-16.46.45:886][  0]SourceControl: Source control is disabled
+[2017.12.19-16.46.47:322][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2017.12.19-16.46.47:709][  0]LogOcInput: OculusInput pre-init called
+[2017.12.19-16.46.48:143][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-16.46.48:151][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-16.46.49:435][  0]LogEngine: Initializing Engine...
+[2017.12.19-16.46.49:439][  0]LogHMD: Failed to initialize OpenVR with code 110
+[2017.12.19-16.46.49:665][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: Construct from data asset -  0.000 s
+[2017.12.19-16.46.49:665][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: GameplayTagTreeChangedEvent.Broadcast -  0.000 s
+[2017.12.19-16.46.49:886][  0]LogAIModule: Creating AISystem for world Untitled
+[2017.12.19-16.46.49:911][  0]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.46.49:997][  0]LogInit: FAudioDevice initialized.
+[2017.12.19-16.46.50:247][  0]LogDerivedDataCache: Saved boot cache 0.25s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-16.46.50:258][  0]LogInit: Texture streaming: Enabled
+[2017.12.19-16.46.50:522][  0]LogEngineSessionManager: EngineSessionManager initialized
+[2017.12.19-16.46.50:549][  0]LogEngineSessionManager: EngineSessionManager sent abnormal shutdown report. Type=Debugger, SessionId={AC7EBBD7-479F-8A9F-0D04-2C90D38DC1EA}
+[2017.12.19-16.46.50:714][  0]LogInit: Transaction tracking system initialized
+[2017.12.19-16.46.51:595][  0]BlueprintLog: New page: Editor Load
+[2017.12.19-16.46.53:360][  0]LocalizationService: Localization service is disabled
+[2017.12.19-16.46.55:580][  0]LogConsoleResponse: Display: 
+[2017.12.19-16.46.56:601][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
+[2017.12.19-16.46.56:601][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/' took 0.01s
+[2017.12.19-16.46.56:601][  0]LogCook: Display: Mobile HDR setting 1
+[2017.12.19-16.46.56:601][  0]LogGameplayTags: Display: UGameplayTagsManager::DoneAddingNativeTags. DelegateIsBound: 0
+[2017.12.19-16.46.58:879][  0]SourceControl: Source control is disabled
+[2017.12.19-16.46.58:879][  0]Cmd: MAP LOAD FILE="../../../Engine/Content/Maps/Templates/Template_Default.umap" TEMPLATE=1 SHOWPROGRESS=1 FEATURELEVEL=3
+[2017.12.19-16.46.58:880][  0]LightingResults: New page: Lighting Build
+[2017.12.19-16.46.58:927][  0]MapCheck: New page: Map Check
+[2017.12.19-16.46.58:927][  0]LightingResults: New page: Lighting Build
+[2017.12.19-16.46.59:288][  0]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.46.59:299][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2017.12.19-16.46.59:310][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2017.12.19-16.46.59:354][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 44.214ms to complete.
+[2017.12.19-16.46.59:354][  0]LogFileHelpers: Loading map 'Template_Default' took 0.475
+[2017.12.19-16.46.59:714][  0]LogCollectionManager: Loaded 0 collections in 0.001766 seconds
+[2017.12.19-16.46.59:806][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Saved/Collections/' took 0.01s
+[2017.12.19-16.46.59:806][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Developers/guan/Collections/' took 0.01s
+[2017.12.19-16.46.59:806][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Collections/' took 0.01s
+[2017.12.19-16.46.59:806][  0]LogCollectionManager: Rebuilt the GUID cache for 0 collections in 0.000000 seconds
+[2017.12.19-16.46.59:815][  0]LogContentBrowser: Native class hierarchy populated in 0.0090 seconds. Added 2372 classes and 524 folders.
+[2017.12.19-16.46.59:901][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0005 seconds. Added 0 classes and 0 folders.
+[2017.12.19-16.47.01:098][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0005 seconds. Added 0 classes and 0 folders.
+[2017.12.19-16.47.01:212][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0005 seconds. Added 1 classes and 2 folders.
+[2017.12.19-16.47.01:369][  0]LogSlate: Took 0.016930 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2017.12.19-16.47.01:373][  0]LogSlate: Took 0.002997 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2017.12.19-16.47.01:396][  0]LogSlate: Took 0.017515 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2017.12.19-16.47.01:408][  0]LogSlate: Took 0.011046 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/DroidSansMono.ttf' (77K)
+[2017.12.19-16.47.01:683][  0]LogRenderer: Reallocating scene render targets to support 968x436 Format 9 NumSamples 1 (Frame:1).
+[2017.12.19-16.47.01:989][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0005 seconds. Added 1 classes and 2 folders.
+[2017.12.19-16.47.01:990][  0]LogLoad: (Engine Initialization) Total time: 72.65 seconds
+[2017.12.19-16.47.01:990][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2017.12.19-16.47.01:990][  0]LogExternalProfiler: No external profilers were discovered.  External profiling features will not be available.
+[2017.12.19-16.47.02:347][  0]LogAssetRegistry: Asset discovery search completed in 37.2716 seconds
+[2017.12.19-16.47.02:349][  0]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000000 seconds (found 0 objects)
+[2017.12.19-16.47.02:349][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000331 seconds (updated 0 objects)
+[2017.12.19-16.47.02:352][  0]LogContentStreaming: Texture pool size now 800 MB
+[2017.12.19-16.48.27:235][520]LogSlate: Took 0.008508 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (159K)
+[2017.12.19-16.48.30:320][868]LogEditor: Attempting to add actor of class 'StringPublisher' to level at -500.00,-190.00,20.00
+[2017.12.19-16.48.30:900][931]LogEditor: Attempting to add actor of class 'StringPublisher' to level at -200.00,30.00,20.00
+[2017.12.19-16.48.32:433][ 92]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.48.32:449][ 92]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.48.32:561][ 92]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:48:32 PM)
+[2017.12.19-16.48.32:562][ 92]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.48.32:568][ 92]LogPlayLevel: PIE: StaticDuplicateObject took: (0.006348s)
+[2017.12.19-16.48.32:569][ 92]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.48.32:570][ 92]LogPlayLevel: PIE: World Init took: (0.001423s)
+[2017.12.19-16.48.32:570][ 92]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.008893s)
+[2017.12.19-16.48.32:596][ 92]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.48.32:615][ 92]LogInit: FAudioDevice initialized.
+[2017.12.19-16.48.32:667][ 92]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.48.32:670][ 92]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 0) at 2017.12.19-17.48.32
+[2017.12.19-16.48.32:670][ 92]LogWorld: Bringing up level for play took: 0.001034
+[2017.12.19-16.48.32:727][ 92]LogContentBrowser: Native class hierarchy updated for 'MovieSceneCapture' in 0.0094 seconds. Added 11 classes and 0 folders.
+[2017.12.19-16.48.33:050][ 92]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.48.33:050][ 92]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.48.33:051][ 92]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.48.33:051][ 92]LogROS: Warning: [FROSBridgeHandler::Connect] Advertising Topic Unreal_String
+[2017.12.19-16.48.33:051][ 92]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.875
+[2017.12.19-16.48.33:054][ 92]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:100][ 93]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:113][ 94]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:121][ 95]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:136][ 96]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:145][ 97]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:154][ 98]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:162][ 99]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:170][100]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:179][101]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:187][102]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:196][103]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:204][104]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:213][105]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:220][106]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:229][107]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:237][108]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:246][109]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:253][110]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:263][111]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:271][112]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:280][113]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:287][114]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:296][115]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:304][116]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:313][117]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:321][118]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:330][119]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:337][120]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:346][121]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:354][122]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:363][123]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:371][124]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:380][125]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:387][126]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:396][127]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:404][128]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:413][129]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:421][130]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:430][131]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:437][132]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:447][133]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:455][134]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:463][135]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:472][136]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:480][137]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:488][138]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:498][139]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:505][140]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:513][141]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:522][142]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:530][143]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:538][144]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:547][145]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:555][146]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:563][147]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:571][148]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:580][149]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:588][150]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:597][151]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:605][152]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:613][153]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:621][154]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:630][155]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:638][156]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:647][157]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:655][158]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:663][159]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:671][160]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:680][161]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:688][162]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:697][163]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:705][164]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:714][165]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:721][166]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:730][167]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:738][168]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:746][169]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:755][170]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:763][171]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:771][172]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:780][173]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:788][174]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:797][175]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:805][176]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:814][177]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:821][178]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:830][179]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:838][180]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:847][181]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:855][182]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:864][183]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:872][184]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:880][185]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:888][186]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:897][187]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:905][188]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:913][189]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:922][190]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:930][191]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:938][192]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:947][193]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:955][194]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:963][195]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:972][196]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:980][197]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:988][198]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.33:997][199]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:005][200]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:013][201]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:022][202]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:031][203]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:038][204]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:047][205]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:055][206]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:063][207]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:072][208]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:081][209]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:089][210]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:098][211]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:106][212]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:117][213]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:125][214]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:133][215]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:142][216]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:150][217]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:158][218]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:167][219]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:175][220]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:183][221]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:192][222]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:200][223]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:209][224]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:217][225]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:225][226]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:233][227]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:242][228]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:250][229]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:258][230]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:267][231]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:275][232]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:283][233]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:292][234]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:301][235]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:310][236]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:318][237]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:327][238]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:335][239]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:343][240]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:351][241]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:360][242]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:368][243]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:376][244]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:385][245]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:393][246]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:401][247]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:410][248]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:418][249]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:427][250]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:435][251]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:443][252]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:451][253]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:460][254]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:468][255]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:477][256]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:485][257]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:494][258]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:502][259]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:511][260]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:519][261]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:528][262]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:536][263]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:544][264]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:552][265]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:562][266]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:569][267]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:578][268]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:586][269]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:595][270]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:602][271]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:611][272]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:619][273]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:628][274]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:636][275]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:645][276]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:652][277]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:661][278]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:669][279]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:678][280]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:686][281]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:695][282]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:703][283]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:711][284]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:719][285]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:728][286]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:736][287]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:745][288]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:752][289]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:762][290]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:769][291]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:778][292]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:786][293]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:795][294]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:802][295]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:811][296]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:819][297]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:828][298]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:835][299]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:845][300]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:852][301]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:862][302]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:869][303]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:878][304]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:885][305]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:895][306]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:902][307]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:911][308]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:919][309]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:928][310]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:935][311]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:945][312]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:952][313]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:962][314]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:969][315]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:978][316]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:985][317]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.34:995][318]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:003][319]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:011][320]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:019][321]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:029][322]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:036][323]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:045][324]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:053][325]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:062][326]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:069][327]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:078][328]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:086][329]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:095][330]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:103][331]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:111][332]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:119][333]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:128][334]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:136][335]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.35:142][335]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.48.35:142][335]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.48.35:142][335]LogROS: [FROSBridgeHandler::Disconnect] Unadvertising Topic Unreal_String
+[2017.12.19-16.48.35:142][335]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-16.48.39:625][857]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.48.39:635][857]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.48.39:636][857]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:48:39 PM)
+[2017.12.19-16.48.39:636][857]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.48.39:642][857]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005374s)
+[2017.12.19-16.48.39:643][857]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.48.39:643][857]LogPlayLevel: PIE: World Init took: (0.001512s)
+[2017.12.19-16.48.39:644][857]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.008040s)
+[2017.12.19-16.48.39:657][857]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.48.39:675][857]LogInit: FAudioDevice initialized.
+[2017.12.19-16.48.39:709][857]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.48.39:711][857]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 0) at 2017.12.19-17.48.39
+[2017.12.19-16.48.39:711][857]LogWorld: Bringing up level for play took: 0.000962
+[2017.12.19-16.48.39:751][857]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.48.39:751][857]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.48.39:752][857]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.48.39:752][857]LogROS: Warning: [FROSBridgeHandler::Connect] Advertising Topic Unreal_String
+[2017.12.19-16.48.39:752][857]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 -0.424
+[2017.12.19-16.48.39:754][857]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:789][858]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_39c0_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_3b10_0///####STATCAT_Advanced####
+[2017.12.19-16.48.39:790][858]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:797][859]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:806][860]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:815][861]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:823][862]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:831][863]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:840][864]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:848][865]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:857][866]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:865][867]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:874][868]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:881][869]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:890][870]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:898][871]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:907][872]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:915][873]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:924][874]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:931][875]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:940][876]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:948][877]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:957][878]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:965][879]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:974][880]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:981][881]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:990][882]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.39:998][883]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:007][884]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:015][885]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:023][886]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:031][887]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:040][888]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:048][889]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:057][890]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:065][891]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:074][892]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:081][893]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:091][894]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:098][895]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:107][896]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:115][897]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:124][898]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:131][899]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:140][900]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:148][901]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:157][902]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:165][903]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:174][904]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:181][905]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:190][906]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:198][907]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:207][908]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:215][909]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:224][910]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:231][911]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:240][912]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:248][913]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:257][914]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:265][915]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:274][916]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:282][917]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:291][918]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:298][919]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:308][920]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:315][921]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:324][922]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:332][923]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:340][924]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:348][925]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:357][926]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:365][927]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:374][928]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:382][929]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:391][930]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:398][931]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:407][932]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:415][933]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:424][934]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:432][935]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:441][936]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:448][937]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:457][938]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:465][939]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:474][940]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:482][941]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:491][942]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:498][943]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:507][944]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:515][945]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:524][946]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:532][947]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:540][948]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:548][949]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:557][950]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:565][951]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:574][952]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:582][953]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:590][954]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:598][955]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:607][956]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:615][957]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:624][958]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:632][959]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:640][960]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:648][961]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:657][962]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:665][963]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:673][964]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:681][965]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:690][966]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:698][967]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:707][968]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:715][969]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:724][970]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:732][971]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:741][972]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:748][973]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:757][974]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:765][975]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:773][976]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:781][977]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:790][978]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:798][979]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:807][980]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:815][981]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:824][982]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:831][983]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:841][984]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:848][985]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:857][986]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:865][987]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:873][988]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:881][989]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:890][990]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:899][991]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:907][992]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:915][993]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:924][994]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:931][995]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:940][996]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:949][997]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:957][998]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:965][999]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:973][  0]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:981][  1]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:990][  2]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.40:999][  3]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:007][  4]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:015][  5]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:024][  6]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:031][  7]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:040][  8]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:048][  9]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:057][ 10]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:065][ 11]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:073][ 12]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:082][ 13]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:091][ 14]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:098][ 15]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:107][ 16]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:115][ 17]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:124][ 18]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:132][ 19]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:141][ 20]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:149][ 21]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:157][ 22]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:166][ 23]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:174][ 24]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:182][ 25]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:191][ 26]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:199][ 27]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:207][ 28]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:215][ 29]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:224][ 30]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:232][ 31]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:240][ 32]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:250][ 33]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:257][ 34]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:265][ 35]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:274][ 36]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:282][ 37]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:290][ 38]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:299][ 39]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:307][ 40]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:315][ 41]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:323][ 42]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:332][ 43]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:340][ 44]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:349][ 45]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:357][ 46]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:366][ 47]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:374][ 48]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:382][ 49]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:391][ 50]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:399][ 51]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:407][ 52]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:416][ 53]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:424][ 54]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:433][ 55]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:441][ 56]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:449][ 57]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:457][ 58]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:466][ 59]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:474][ 60]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:482][ 61]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:490][ 62]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:499][ 63]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:507][ 64]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:515][ 65]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:524][ 66]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:532][ 67]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:540][ 68]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:549][ 69]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:557][ 70]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:565][ 71]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:574][ 72]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:582][ 73]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:590][ 74]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:599][ 75]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:607][ 76]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:615][ 77]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:624][ 78]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:632][ 79]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:640][ 80]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:649][ 81]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:657][ 82]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:665][ 83]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:674][ 84]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:682][ 85]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:690][ 86]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:699][ 87]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:707][ 88]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:715][ 89]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:724][ 90]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:732][ 91]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:740][ 92]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:749][ 93]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:757][ 94]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:766][ 95]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:774][ 96]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:782][ 97]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:790][ 98]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:799][ 99]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:807][100]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:815][101]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:824][102]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:832][103]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:841][104]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:849][105]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:857][106]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:865][107]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:874][108]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:882][109]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:890][110]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:899][111]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:907][112]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:915][113]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:924][114]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:932][115]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:940][116]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:949][117]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:957][118]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:966][119]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:974][120]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:982][121]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:990][122]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.41:999][123]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:007][124]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:015][125]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:024][126]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:032][127]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:040][128]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:049][129]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:057][130]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:066][131]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:074][132]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:082][133]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:090][134]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:099][135]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:108][136]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:115][137]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:124][138]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:132][139]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:140][140]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:149][141]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:157][142]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:166][143]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:174][144]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:182][145]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:190][146]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:199][147]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:207][148]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:215][149]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:224][150]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:232][151]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:240][152]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:249][153]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:257][154]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:265][155]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:274][156]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:282][157]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:291][158]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:299][159]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:307][160]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:315][161]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:324][162]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:332][163]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:340][164]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:349][165]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:357][166]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:365][167]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:374][168]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:382][169]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:390][170]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:398][171]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:408][172]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:415][173]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:425][174]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:433][175]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:441][176]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:450][177]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:458][178]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:466][179]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:475][180]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:483][181]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:491][182]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:500][183]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:508][184]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:517][185]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:525][186]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:533][187]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:541][188]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:550][189]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:558][190]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:566][191]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:575][192]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:583][193]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:591][194]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:600][195]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:608][196]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:616][197]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:625][198]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:633][199]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:641][200]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:650][201]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:658][202]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:666][203]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:675][204]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:683][205]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:691][206]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:700][207]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:708][208]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:716][209]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:725][210]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:733][211]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:741][212]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:750][213]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:759][214]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:766][215]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:775][216]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:783][217]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:791][218]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:800][219]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:808][220]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:816][221]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:825][222]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:833][223]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:842][224]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:850][225]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:858][226]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:866][227]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:875][228]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:883][229]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:891][230]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:899][231]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:908][232]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:916][233]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:924][234]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:933][235]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:941][236]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:949][237]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:958][238]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:966][239]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:975][240]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:983][241]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.42:991][242]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:000][243]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:008][244]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:016][245]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:024][246]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:033][247]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:042][248]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:049][249]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:058][250]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:066][251]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:075][252]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:083][253]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:091][254]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:100][255]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:108][256]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:116][257]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:124][258]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:133][259]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:141][260]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:149][261]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:158][262]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:166][263]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:175][264]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:183][265]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:191][266]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:199][267]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:209][268]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:216][269]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:225][270]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:234][271]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:241][272]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:250][273]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:258][274]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:267][275]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:275][276]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:283][277]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:291][278]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:300][279]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:309][280]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:316][281]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:325][282]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:333][283]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:341][284]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:350][285]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:359][286]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:367][287]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:375][288]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:383][289]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:392][290]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:400][291]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:409][292]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:417][293]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:425][294]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:434][295]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:443][296]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:451][297]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:459][298]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:467][299]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:476][300]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:484][301]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:492][302]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:501][303]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:509][304]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:517][305]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:526][306]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:534][307]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:542][308]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:551][309]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:559][310]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:567][311]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:576][312]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:584][313]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:592][314]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:601][315]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:610][316]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:618][317]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:626][318]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:634][319]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:643][320]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:651][321]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:659][322]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:668][323]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:676][324]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:684][325]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:693][326]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:701][327]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:709][328]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:718][329]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:726][330]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:734][331]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:743][332]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:751][333]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:759][334]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:768][335]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:777][336]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:785][337]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:793][338]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:801][339]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:809][340]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:818][341]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:827][342]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:835][343]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:845][344]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:854][345]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:862][346]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:870][347]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:878][348]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:887][349]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:895][350]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:904][351]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:912][352]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:921][353]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:928][354]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:937][355]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:945][356]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:954][357]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:962][358]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:971][359]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:979][360]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:987][361]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.43:996][362]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:004][363]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:012][364]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:021][365]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:029][366]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:037][367]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:045][368]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:054][369]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:062][370]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:071][371]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:078][372]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:088][373]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:095][374]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:104][375]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:112][376]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:121][377]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:128][378]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:137][379]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:145][380]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:154][381]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:162][382]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:170][383]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:178][384]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:187][385]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:195][386]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:204][387]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:212][388]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:221][389]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:228][390]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:237][391]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:245][392]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:254][393]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:263][394]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:271][395]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:280][396]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:287][397]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:295][398]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:304][399]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:313][400]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:322][401]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:329][402]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:338][403]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:346][404]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:354][405]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:363][406]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:371][407]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:379][408]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:388][409]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:396][410]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:404][411]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:413][412]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:421][413]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:429][414]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:437][415]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:446][416]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:454][417]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:462][418]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:471][419]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:479][420]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:487][421]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:495][422]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:504][423]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:513][424]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:521][425]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:529][426]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:538][427]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:546][428]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:554][429]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:563][430]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:571][431]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:579][432]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:588][433]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:596][434]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:604][435]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:613][436]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:621][437]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:629][438]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:638][439]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:646][440]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:654][441]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:663][442]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:671][443]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:679][444]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:688][445]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:696][446]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:705][447]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:712][448]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:721][449]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:729][450]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:738][451]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:746][452]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:754][453]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:763][454]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:771][455]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:779][456]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:788][457]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:796][458]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:804][459]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:813][460]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:821][461]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:829][462]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:838][463]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:846][464]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:854][465]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:862][466]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:871][467]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:879][468]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:887][469]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:896][470]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:904][471]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:912][472]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:921][473]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:929][474]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:937][475]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:946][476]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:954][477]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:962][478]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:970][479]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:979][480]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:987][481]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.44:996][482]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:004][483]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:013][484]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:021][485]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:029][486]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:038][487]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:046][488]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:055][489]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:063][490]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:071][491]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:080][492]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:088][493]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:096][494]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:104][495]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:113][496]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:121][497]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:130][498]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:138][499]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:146][500]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:154][501]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:163][502]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:171][503]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:179][504]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:188][505]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:196][506]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:204][507]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:212][508]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:221][509]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:229][510]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:237][511]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:246][512]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:254][513]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:262][514]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:271][515]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:279][516]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:288][517]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:297][518]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:306][519]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:315][520]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:322][521]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:331][522]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:339][523]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:348][524]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:356][525]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:364][526]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:372][527]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:381][528]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:389][529]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:398][530]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:406][531]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:414][532]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:423][533]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:431][534]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:439][535]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:448][536]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:456][537]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:464][538]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:473][539]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:482][540]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:489][541]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:498][542]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:506][543]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:514][544]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:523][545]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:531][546]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:539][547]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:548][548]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:556][549]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:564][550]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:573][551]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:581][552]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:590][553]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:598][554]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:606][555]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:614][556]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:623][557]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:631][558]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:639][559]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:648][560]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:656][561]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:664][562]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:673][563]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:681][564]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:689][565]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:698][566]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:706][567]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:714][568]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:723][569]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:731][570]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:739][571]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:748][572]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.45:755][572]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.48.45:755][572]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.48.45:755][572]LogROS: [FROSBridgeHandler::Disconnect] Unadvertising Topic Unreal_String
+[2017.12.19-16.48.45:756][572]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-16.48.48:715][912]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at 190.00,-100.00,20.00
+[2017.12.19-16.48.50:550][129]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at 280.00,-120.00,20.00
+[2017.12.19-16.48.54:307][557]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.48.54:317][557]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.48.54:318][557]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:48:54 PM)
+[2017.12.19-16.48.54:318][557]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.48.54:323][557]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005232s)
+[2017.12.19-16.48.54:324][557]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.48.54:325][557]LogPlayLevel: PIE: World Init took: (0.001220s)
+[2017.12.19-16.48.54:325][557]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007294s)
+[2017.12.19-16.48.54:337][557]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.48.54:354][557]LogInit: FAudioDevice initialized.
+[2017.12.19-16.48.54:392][557]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.48.54:393][557]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 0) at 2017.12.19-17.48.54
+[2017.12.19-16.48.54:394][557]LogWorld: Bringing up level for play took: 0.001003
+[2017.12.19-16.48.54:433][557]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.48.54:433][557]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.48.54:433][557]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-16.48.54:434][557]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.48.54:471][557]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.48.54:471][557]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.48.54:472][557]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.48.54:472][557]LogROS: Warning: [FROSBridgeHandler::Connect] Advertising Topic Unreal_String
+[2017.12.19-16.48.54:472][557]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.295
+[2017.12.19-16.48.54:474][557]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:498][557]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.54:511][558]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_4664_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_3b10_0///####STATCAT_Advanced####
+[2017.12.19-16.48.54:511][558]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_2c54_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_3b10_0///####STATCAT_Advanced####
+[2017.12.19-16.48.54:511][558]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:518][559]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:527][560]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:535][561]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:544][562]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:552][563]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:561][564]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:568][565]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:577][566]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:585][567]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:594][568]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:602][569]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:607][570]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.54:611][570]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:618][571]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:627][572]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:635][573]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:644][574]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:652][575]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:661][576]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:668][577]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:677][578]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:685][579]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:694][580]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:702][581]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:707][582]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.54:711][582]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:718][583]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:727][584]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:735][585]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:744][586]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:751][587]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:761][588]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:768][589]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:777][590]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:785][591]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:794][592]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:799][593]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.54:801][593]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:811][594]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:818][595]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:827][596]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:835][597]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:844][598]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:851][599]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:861][600]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:868][601]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:878][602]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:885][603]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:895][604]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:900][605]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.54:902][605]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:910][606]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:918][607]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:928][608]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:935][609]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:944][610]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:952][611]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:960][612]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:968][613]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:978][614]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:985][615]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.54:994][616]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:001][617]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:007][618]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:010][618]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:018][619]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:027][620]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:035][621]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:044][622]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:051][623]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:060][624]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:068][625]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:077][626]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:085][627]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:093][628]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:099][629]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:101][629]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:110][630]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:118][631]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:127][632]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:135][633]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:144][634]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:151][635]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:160][636]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:168][637]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:177][638]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:185][639]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:194][640]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:201][641]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:207][642]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:210][642]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:218][643]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:227][644]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:235][645]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:244][646]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:251][647]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:260][648]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:268][649]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:278][650]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:286][651]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:295][652]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:301][653]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:302][653]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:311][654]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:319][655]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:327][656]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:335][657]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:344][658]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:352][659]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:361][660]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:369][661]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:378][662]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:385][663]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:394][664]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:399][665]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:402][665]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:411][666]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:419][667]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:427][668]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:435][669]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:444][670]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:452][671]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:461][672]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:470][673]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:478][674]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:486][675]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:495][676]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:502][677]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:503][677]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:512][678]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:519][679]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:528][680]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:537][681]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:545][682]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:553][683]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:561][684]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:569][685]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:578][686]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:586][687]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:594][688]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:603][689]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:607][690]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:612][690]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:619][691]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:628][692]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:636][693]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:645][694]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:653][695]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:661][696]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:669][697]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:678][698]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:686][699]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:694][700]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:701][701]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:703][701]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:711][702]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:719][703]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:728][704]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:736][705]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:745][706]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:753][707]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:761][708]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:769][709]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:778][710]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:786][711]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:794][712]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:799][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:802][713]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:811][714]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:819][715]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:828][716]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:836][717]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:844][718]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:852][719]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:861][720]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:869][721]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:878][722]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:886][723]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:894][724]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:903][725]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.55:903][725]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:911][726]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:920][727]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:928][728]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:936][729]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:944][730]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:953][731]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:961][732]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:969][733]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:978][734]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:986][735]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:994][736]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.55:999][737]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:003][737]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:011][738]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:019][739]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:028][740]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:036][741]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:045][742]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:053][743]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:061][744]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:069][745]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:078][746]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:086][747]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:094][748]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:100][749]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:103][749]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:111][750]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:119][751]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:128][752]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:137][753]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:145][754]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:153][755]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:161][756]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:170][757]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:178][758]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:186][759]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:195][760]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:203][761]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:203][761]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:211][762]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:220][763]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:228][764]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:236][765]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:245][766]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:253][767]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:261][768]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:270][769]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:278][770]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:286][771]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:295][772]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:300][773]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:303][773]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:312][774]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:320][775]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:328][776]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:336][777]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:345][778]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:353][779]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:361][780]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:370][781]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:378][782]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:387][783]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:395][784]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:400][785]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:403][785]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:411][786]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:420][787]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:428][788]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:436][789]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:445][790]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:453][791]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:461][792]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:470][793]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:478][794]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:486][795]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:495][796]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:503][797]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:509][798]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:511][798]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:520][799]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:528][800]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:537][801]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:545][802]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:553][803]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:561][804]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:570][805]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:578][806]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:586][807]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:595][808]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:603][809]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:603][809]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:611][810]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:620][811]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:628][812]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:636][813]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:645][814]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:653][815]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:661][816]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:670][817]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:678][818]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:687][819]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:695][820]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:700][821]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:703][821]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:711][822]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:720][823]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:728][824]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:736][825]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:745][826]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:753][827]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:764][828]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:772][829]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:780][830]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:789][831]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:797][832]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:806][833]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:806][833]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:814][834]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:822][835]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:830][836]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:839][837]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:847][838]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:856][839]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:864][840]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:873][841]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:880][842]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:889][843]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:897][844]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:902][845]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:906][845]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:914][846]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:922][847]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:930][848]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:939][849]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:947][850]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:955][851]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:966][852]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:974][853]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:982][854]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:991][855]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.56:997][856]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.56:999][856]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:007][857]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:015][858]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:024][859]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:033][860]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:041][861]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:050][862]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:058][863]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:067][864]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:076][865]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:085][866]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:095][867]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:104][868]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:113][869]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:115][869]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:123][870]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:133][871]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:141][872]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:149][873]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:158][874]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:166][875]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:175][876]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:182][877]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:192][878]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:199][879]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:204][880]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:208][880]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:216][881]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:225][882]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:232][883]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:241][884]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:249][885]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:258][886]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:266][887]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:275][888]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:282][889]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:291][890]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:299][891]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:308][892]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:309][892]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:316][893]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:325][894]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:332][895]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:342][896]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:349][897]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:358][898]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:366][899]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:374][900]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:382][901]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:391][902]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:399][903]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:405][904]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:408][904]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:416][905]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:425][906]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:432][907]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:441][908]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:449][909]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:458][910]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:466][911]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:475][912]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:482][913]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:491][914]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:499][915]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:504][916]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:508][916]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:516][917]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:525][918]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:532][919]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:541][920]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:549][921]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:558][922]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:566][923]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:575][924]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:582][925]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:591][926]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:598][927]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:599][927]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:607][928]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:616][929]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:625][930]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:632][931]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:641][932]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:649][933]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:658][934]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:666][935]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:674][936]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:682][937]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:691][938]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:699][939]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:708][940]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:708][940]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:716][941]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:725][942]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:733][943]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:741][944]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:749][945]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:758][946]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:766][947]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:775][948]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:783][949]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:791][950]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:799][951]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:806][952]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:808][952]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:815][953]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:825][954]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:833][955]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:841][956]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:849][957]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:858][958]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:866][959]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:875][960]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:883][961]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:892][962]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:900][963]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:905][964]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.57:908][964]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:917][965]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:925][966]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:933][967]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:942][968]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:950][969]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:958][970]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:966][971]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:975][972]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:983][973]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.57:992][974]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:000][975]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:000][975]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:009][976]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:016][977]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:025][978]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:033][979]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:042][980]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:050][981]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:058][982]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:066][983]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:075][984]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:083][985]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:092][986]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:100][987]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:109][988]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:109][988]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:116][989]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:125][990]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:133][991]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:142][992]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:149][993]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:158][994]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:166][995]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:175][996]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:183][997]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:192][998]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:201][999]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:209][  0]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:210][  0]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:218][  1]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:226][  2]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:235][  3]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:243][  4]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:251][  5]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:260][  6]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:268][  7]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:276][  8]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:284][  9]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:293][ 10]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:299][ 11]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:301][ 11]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:310][ 12]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:318][ 13]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:327][ 14]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:335][ 15]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:343][ 16]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:351][ 17]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:360][ 18]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:368][ 19]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:376][ 20]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:385][ 21]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:393][ 22]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:401][ 23]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:409][ 24]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:410][ 24]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:418][ 25]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:426][ 26]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:435][ 27]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:443][ 28]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:451][ 29]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:459][ 30]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:468][ 31]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:476][ 32]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:484][ 33]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:493][ 34]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:501][ 35]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:502][ 35]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:509][ 36]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:518][ 37]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:526][ 38]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:534][ 39]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:543][ 40]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:551][ 41]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:559][ 42]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:568][ 43]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:576][ 44]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:584][ 45]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:593][ 46]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:599][ 47]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:601][ 47]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:609][ 48]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:618][ 49]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:626][ 50]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:635][ 51]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:643][ 52]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:651][ 53]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:659][ 54]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:668][ 55]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:676][ 56]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:685][ 57]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:693][ 58]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:701][ 59]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:707][ 60]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:709][ 60]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:718][ 61]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:727][ 62]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:735][ 63]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:743][ 64]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:751][ 65]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:760][ 66]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:768][ 67]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:776][ 68]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:785][ 69]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:793][ 70]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:802][ 71]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:808][ 72]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:810][ 72]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:819][ 73]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:827][ 74]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:835][ 75]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:843][ 76]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:851][ 77]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:860][ 78]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:868][ 79]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:876][ 80]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:885][ 81]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:893][ 82]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:902][ 83]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.58:902][ 83]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:910][ 84]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:918][ 85]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:926][ 86]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:935][ 87]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:943][ 88]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:952][ 89]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:960][ 90]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:968][ 91]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:976][ 92]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:985][ 93]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:993][ 94]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.58:999][ 95]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.48.59:001][ 95]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.59:010][ 96]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.59:018][ 97]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.59:026][ 98]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.59:035][ 99]LogTemp: StringMessage = String { data = "Hello World" }
+[2017.12.19-16.48.59:040][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.48.59:041][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-16.48.59:041][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.48.59:041][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-16.48.59:052][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.48.59:052][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.48.59:052][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unadvertising Topic Unreal_String
+[2017.12.19-16.48.59:052][ 99]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 

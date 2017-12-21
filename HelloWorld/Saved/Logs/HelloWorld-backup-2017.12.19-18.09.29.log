@@ -1,0 +1,574 @@
+﻿Log file open, 12/19/17 17:57:36
+LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
+LogWindows: File 'aqProf.dll' does not exist
+LogWindows: Failed to load 'VSPerf140.dll' (GetLastError=126)
+LogWindows: File 'VSPerf140.dll' does not exist
+LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi.dll' does not exist
+LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)
+LogWindows: File 'VtuneApi32e.dll' does not exist
+LogInit: Display: Running engine for game: HelloWorld
+LogPlatformFile: Not using cached read wrapper
+LogInit: Display: RandInit(2123220265) SRandInit(2123220265).
+LogInit: Read version file with build ID '3709383'
+LogInit: Overriding engine version to CL 3794801, compatible CL 3709383
+LogInit: Registered custom module enumerator with build ID '3709383'
+LogTaskGraph: Started task graph with 5 named threads and 14 total threads with 3 sets of task threads.
+LogStats: Stats thread started at 0.507856
+LogD3D11RHI: Aftermath initialized
+LogPluginManager: Mounting plugin Paper2D
+LogPluginManager: Mounting plugin LightPropagationVolume
+LogPluginManager: Mounting plugin CodeLiteSourceCodeAccess
+LogPluginManager: Mounting plugin GitSourceControl
+LogPluginManager: Mounting plugin KDevelopSourceCodeAccess
+LogPluginManager: Mounting plugin NullSourceCodeAccess
+LogPluginManager: Mounting plugin PerforceSourceControl
+LogPluginManager: Mounting plugin SubversionSourceControl
+LogPluginManager: Mounting plugin UObjectPlugin
+LogPluginManager: Mounting plugin VisualStudioCodeSourceCodeAccess
+LogPluginManager: Mounting plugin VisualStudioSourceCodeAccess
+LogPluginManager: Mounting plugin XCodeSourceCodeAccess
+LogPluginManager: Mounting plugin AssetManagerEditor
+LogPluginManager: Mounting plugin AudioCapture
+LogPluginManager: Mounting plugin FacialAnimation
+LogPluginManager: Mounting plugin GameplayTagsEditor
+LogPluginManager: Mounting plugin MobileLauncherProfileWizard
+LogPluginManager: Mounting plugin PluginBrowser
+LogPluginManager: Mounting plugin SpeedTreeImporter
+LogPluginManager: Mounting plugin AlembicImporter
+LogPluginManager: Mounting plugin CharacterAI
+LogPluginManager: Mounting plugin HTML5Networking
+LogPluginManager: Mounting plugin AndroidMedia
+LogPluginManager: Mounting plugin AvfMedia
+LogPluginManager: Mounting plugin ImgMedia
+LogPluginManager: Mounting plugin MediaCompositing
+LogPluginManager: Mounting plugin MediaPlayerEditor
+LogPluginManager: Mounting plugin WmfMedia
+LogPluginManager: Mounting plugin TcpMessaging
+LogPluginManager: Mounting plugin UdpMessaging
+LogPluginManager: Mounting plugin ActorSequence
+LogPluginManager: Mounting plugin LevelSequenceEditor
+LogPluginManager: Mounting plugin MatineeToLevelSequence
+LogPluginManager: Mounting plugin OnlineSubsystemGooglePlay
+LogPluginManager: Mounting plugin OnlineSubsystemIOS
+LogPluginManager: Mounting plugin OnlineSubsystem
+LogPluginManager: Mounting plugin OnlineSubsystemNull
+LogPluginManager: Mounting plugin OnlineSubsystemUtils
+LogPluginManager: Mounting plugin AndroidDeviceProfileSelector
+LogPluginManager: Mounting plugin AndroidMoviePlayer
+LogPluginManager: Mounting plugin AndroidPermission
+LogPluginManager: Mounting plugin AppleARKit
+LogPluginManager: Mounting plugin AppleMoviePlayer
+LogPluginManager: Mounting plugin ArchVisCharacter
+LogPluginManager: Mounting plugin CableComponent
+LogPluginManager: Mounting plugin CustomMeshComponent
+LogPluginManager: Mounting plugin ExampleDeviceProfileSelector
+LogPluginManager: Mounting plugin GoogleCloudMessaging
+LogPluginManager: Mounting plugin ImmediatePhysics
+LogPluginManager: Mounting plugin IOSDeviceProfileSelector
+LogPluginManager: Mounting plugin LinuxDeviceProfileSelector
+LogPluginManager: Mounting plugin LocationServicesBPLibrary
+LogPluginManager: Mounting plugin MobilePatchingUtils
+LogPluginManager: Mounting plugin OculusVR
+LogPluginManager: Plugin shader directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders found
+LogPluginManager: Mapping shader source directory ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Shaders to virtual directory /Plugin/OculusVR
+LogPluginManager: Mounting plugin PhysXVehicles
+LogPluginManager: Mounting plugin ProceduralMeshComponent
+LogPluginManager: Mounting plugin RuntimePhysXCooking
+LogPluginManager: Mounting plugin SteamVR
+LogPluginManager: Mounting plugin WindowsMoviePlayer
+LogPluginManager: Mounting plugin URoboSim
+LogPluginManager: Mounting plugin UROSBridge
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Binaries/Win64/UE4Editor-HelloWorld.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2DEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperSpriteSheetImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperTiledImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-SmartSnapping.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeRuntime.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Blendables/LightPropagationVolume/Binaries/Win64/UE4Editor-LightPropagationVolumeEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/GitSourceControl/Binaries/Win64/UE4Editor-GitSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/PerforceSourceControl/Binaries/Win64/UE4Editor-PerforceSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/SubversionSourceControl/Binaries/Win64/UE4Editor-SubversionSourceControl.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/UObjectPlugin/Binaries/Win64/UE4Editor-UObjectPlugin.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioCodeSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioCodeSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Developer/VisualStudioSourceCodeAccess/Binaries/Win64/UE4Editor-VisualStudioSourceCodeAccess.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AssetManagerEditor/Binaries/Win64/UE4Editor-AssetManagerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/AudioCapture/Binaries/Win64/UE4Editor-AudioCapture.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimation.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/FacialAnimation/Binaries/Win64/UE4Editor-FacialAnimationEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/GameplayTagsEditor/Binaries/Win64/UE4Editor-GameplayTagsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/MobileLauncherProfileWizard/Binaries/Win64/UE4Editor-MobileLauncherProfileWizard.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/PluginBrowser/Binaries/Win64/UE4Editor-PluginBrowser.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Editor/SpeedTreeImporter/Binaries/Win64/UE4Editor-SpeedTreeImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicImporter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/AlembicImporter/Binaries/Win64/UE4Editor-AlembicLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/CharacterAI/Binaries/Win64/UE4Editor-CharacterAI.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Experimental/HTML5Networking/Binaries/Win64/UE4Editor-HTML5Networking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AndroidMedia/Binaries/Win64/UE4Editor-AndroidMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/AvfMedia/Binaries/Win64/UE4Editor-AvfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-ImgMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/ImgMedia/Binaries/Win64/UE4Editor-OpenExrWrapper.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositing.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaCompositing/Binaries/Win64/UE4Editor-MediaCompositingEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/MediaPlayerEditor/Binaries/Win64/UE4Editor-MediaPlayerEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMedia.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Media/WmfMedia/Binaries/Win64/UE4Editor-WmfMediaFactory.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/TcpMessaging/Binaries/Win64/UE4Editor-TcpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Messaging/UdpMessaging/Binaries/Win64/UE4Editor-UdpMessaging.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/ActorSequence/Binaries/Win64/UE4Editor-ActorSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/LevelSequenceEditor/Binaries/Win64/UE4Editor-LevelSequenceEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/MovieScene/MatineeToLevelSequence/Binaries/Win64/UE4Editor-MatineeToLevelSequence.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystem/Binaries/Win64/UE4Editor-OnlineSubsystem.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemNull/Binaries/Win64/UE4Editor-OnlineSubsystemNull.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineSubsystemUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UE4Editor-OnlineBlueprintSupport.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidDeviceProfileSelector/Binaries/Win64/UE4Editor-AndroidDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AndroidPermission/Binaries/Win64/UE4Editor-AndroidPermission.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/AppleARKit/Binaries/Win64/UE4Editor-AppleARKit.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ArchVisCharacter/Binaries/Win64/UE4Editor-ArchVisCharacter.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CableComponent/Binaries/Win64/UE4Editor-CableComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/CustomMeshComponent/Binaries/Win64/UE4Editor-CustomMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ExampleDeviceProfileSelector/Binaries/Win64/UE4Editor-ExampleDeviceProfileSelector.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysics.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ImmediatePhysics/Binaries/Win64/UE4Editor-ImmediatePhysicsEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/LocationServicesBPLibrary/Binaries/Win64/UE4Editor-LocationServicesBPLibrary.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/MobilePatchingUtils/Binaries/Win64/UE4Editor-MobilePatchingUtils.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusHMD.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusInput.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Oculus/OculusVR/Binaries/Win64/UE4Editor-OculusEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehicles.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/PhysXVehicles/Binaries/Win64/UE4Editor-PhysXVehiclesEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponent.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/ProceduralMeshComponent/Binaries/Win64/UE4Editor-ProceduralMeshComponentEditor.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/RuntimePhysXCooking/Binaries/Win64/UE4Editor-RuntimePhysXCooking.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVR.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/Steam/SteamVR/Binaries/Win64/UE4Editor-SteamVRController.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/Runtime/WindowsMoviePlayer/Binaries/Win64/UE4Editor-WindowsMoviePlayer.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSim.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/URoboSim/Binaries/Win64/UE4Editor-URoboSimEd.dll (API version 3709383).
+LogModuleManager: Display: Found up-to-date module file D:/unreal engine/Unreal Projects/HelloWorld/Plugins/UROSBridge/Binaries/Win64/UE4Editor-UROSBridge.dll (API version 3709383).
+LogInit: Using libcurl 7.47.1
+LogInit:  - built for x86_64-pc-win32
+LogInit:  - supports SSL with OpenSSL/1.0.2g
+LogInit:  - supports HTTP deflate (compression) using libz 1.2.8
+LogInit:  - other features:
+LogInit:      CURL_VERSION_SSL
+LogInit:      CURL_VERSION_LIBZ
+LogInit:      CURL_VERSION_IPV6
+LogInit:      CURL_VERSION_ASYNCHDNS
+LogInit:      CURL_VERSION_LARGEFILE
+LogInit:      CURL_VERSION_IDN
+LogInit:  CurlRequestOptions (configurable via config and command line):
+LogInit:  - bVerifyPeer = false  - Libcurl will NOT verify peer certificate
+LogInit:  - bUseHttpProxy = false  - Libcurl will NOT use HTTP proxy
+LogInit:  - bDontReuseConnections = false  - Libcurl will reuse connections
+LogInit:  - CertBundlePath = nullptr  - Libcurl will use whatever was configured at build time.
+LogInit: Build: ++UE4+Release-4.18-CL-3794801
+LogInit: Engine Version: 4.18.2-3794801+++UE4+Release-4.18
+LogInit: Compatible Engine Version: 4.18.0-3709383+++UE4+Release-4.18
+LogInit: Net CL: 3709383
+LogDevObjectVersion: Number of dev versions registered: 16
+LogDevObjectVersion:   Dev-Blueprints (B0D832E4-1F89-4F0D-ACCF-7EB736FD4AA2): 10
+LogDevObjectVersion:   Dev-Build (E1C64328-A22C-4D53-A36C-8E866417BD8C): 0
+LogDevObjectVersion:   Dev-Core (375EC13C-06E4-48FB-B500-84F0262A717E): 2
+LogDevObjectVersion:   Dev-Editor (E4B068ED-F494-42E9-A231-DA0B2E46BB41): 20
+LogDevObjectVersion:   Dev-Framework (CFFC743F-43B0-4480-9391-14DF171D2073): 30
+LogDevObjectVersion:   Dev-Mobile (B02B49B5-BB20-44E9-A304-32B752E40360): 0
+LogDevObjectVersion:   Dev-Networking (A4E4105C-59A1-49B5-A7C5-40C4547EDFEE): 0
+LogDevObjectVersion:   Dev-Online (39C831C9-5AE6-47DC-9A44-9C173E1C8E7C): 0
+LogDevObjectVersion:   Dev-Physics (78F01B33-EBEA-4F98-B9B4-84EACCB95AA2): 0
+LogDevObjectVersion:   Dev-Platform (6631380F-2D4D-43E0-8009-CF276956A95A): 0
+LogDevObjectVersion:   Dev-Rendering (12F88B9F-8875-4AFC-A67C-D90C383ABD29): 20
+LogDevObjectVersion:   Dev-Sequencer (7B5AE74C-D270-4C10-A958-57980B212A5A): 4
+LogDevObjectVersion:   Dev-VR (D7296918-1DD6-4BDD-9DE2-64A83CC13884): 0
+LogDevObjectVersion:   Dev-LoadTimes (C2A15278-BFE7-4AFE-6C17-90FF531DF755): 1
+LogDevObjectVersion:   Private-Geometry (6EACA3D4-40EC-4CC1-B786-8BED09428FC5): 1
+LogDevObjectVersion:   Dev-AnimPhys (29E575DD-E0A3-4627-9D10-D276232CDCEA): 12
+LogInit: Compiled (64-bit): Dec  8 2017 02:04:53
+LogInit: Compiled with Visual C++: 19.00.24215.01
+LogInit: Build Configuration: Development
+LogInit: Branch Name: ++UE4+Release-4.18
+LogInit: Command line:  -skipcompile
+LogInit: Base directory: C:/Program Files/Epic Games/UE_4.18/Engine/Binaries/Win64/
+LogInit: Installed Engine Build: 1
+LogInit: Presizing for max 8388607 objects, including 0 objects not considered by GC, pre-allocating 0 bytes for permanent pool.
+LogInit: Object subsystem initialized
+[2017.12.19-16.57.38:297][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-16.57.38:297][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2017.12.19-16.57.38:306][  0]LogInit: Computer: DESKTOP-INMJF5R
+[2017.12.19-16.57.38:306][  0]LogInit: User: guan
+[2017.12.19-16.57.38:306][  0]LogInit: CPU Page size=4096, Cores=4
+[2017.12.19-16.57.38:306][  0]LogInit: High frequency timer resolution =2.533209 MHz
+[2017.12.19-16.57.38:307][  0]LogMemory: Memory total: Physical=7.9GB (8GB approx)
+[2017.12.19-16.57.38:307][  0]LogMemory: Platform Memory Stats for Windows
+[2017.12.19-16.57.38:307][  0]LogMemory: Process Physical Memory: 273.85 MB used, 273.85 MB peak
+[2017.12.19-16.57.38:307][  0]LogMemory: Process Virtual Memory: 271.74 MB used, 271.74 MB peak
+[2017.12.19-16.57.38:307][  0]LogMemory: Physical Memory: 5148.99 MB used,  2932.06 MB free, 8081.05 MB total
+[2017.12.19-16.57.38:307][  0]LogMemory: Virtual Memory: 646.11 MB used,  2932.06 MB free, 134217728.00 MB total
+[2017.12.19-16.57.38:497][  0]LogInit: Using OS detected language (en-US).
+[2017.12.19-16.57.38:497][  0]LogInit: Using OS detected locale (en-DE).
+[2017.12.19-16.57.38:500][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2017.12.19-16.57.38:912][  0]LogInit: Setting process to per monitor DPI aware
+[2017.12.19-16.57.39:186][  0]LogD3D11RHI: D3D11 adapters:
+[2017.12.19-16.57.39:211][  0]LogD3D11RHI:    0. 'NVIDIA GeForce GTX 950M           ' (Feature Level 11_0)
+[2017.12.19-16.57.39:211][  0]LogD3D11RHI:       1995/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:1, VendorId:0x10de
+[2017.12.19-16.57.39:225][  0]LogD3D11RHI:    1. 'Intel(R) HD Graphics 4600' (Feature Level 11_0)
+[2017.12.19-16.57.39:225][  0]LogD3D11RHI:       112/0/2048 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x8086
+[2017.12.19-16.57.39:229][  0]LogD3D11RHI:    2. 'Microsoft Basic Render Driver' (Feature Level 11_0)
+[2017.12.19-16.57.39:229][  0]LogD3D11RHI:       0/0/4040 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
+[2017.12.19-16.57.39:230][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
+[2017.12.19-16.57.39:236][  0]LogD3D11RHI: Creating new Direct3DDevice
+[2017.12.19-16.57.39:236][  0]LogD3D11RHI:     GPU DeviceId: 0x139a (for the marketing name, search the web for "GPU Device Id")
+[2017.12.19-16.57.39:236][  0]LogWindows: EnumDisplayDevices:
+[2017.12.19-16.57.39:236][  0]LogWindows:    0. 'Intel(R) HD Graphics 4600' (P:1 D:1)
+[2017.12.19-16.57.39:237][  0]LogWindows:    1. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-16.57.39:237][  0]LogWindows:    2. 'Intel(R) HD Graphics 4600' (P:0 D:0)
+[2017.12.19-16.57.39:238][  0]LogWindows: DebugString: PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter PrimaryIsNotTheChoosenAdapter FoundDriverCount:0 
+[2017.12.19-16.57.39:238][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce GTX 950M           
+[2017.12.19-16.57.39:238][  0]LogD3D11RHI:   Driver Version: Unknown (internal:Unknown, unified:Unknown)
+[2017.12.19-16.57.39:238][  0]LogD3D11RHI:      Driver Date: Unknown
+[2017.12.19-16.57.39:238][  0]LogRHI: Texture pool is 1397 MB (70% of 1995 MB)
+[2017.12.19-16.57.39:405][  0]LogD3D11RHI: NvAPI_D3D_GetCurrentSLIState failed: 0xfffffff7
+[2017.12.19-16.57.39:405][  0]LogD3D11RHI: Async texture creation enabled
+[2017.12.19-16.57.39:417][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 1)
+[2017.12.19-16.57.39:417][  0]LogShaderCompilers: Guid format shader working directory is 1 characters bigger than the processId version (D:/unreal engine/Unreal Projects/HelloWorld/Intermediate/Shaders/WorkingDirectory/16472/).
+[2017.12.19-16.57.39:418][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/guan/AppData/Local/Temp/UnrealShaderWorkingDir/ED625F30429693AF80886EACF9884ED6/'.
+[2017.12.19-16.57.39:418][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2017.12.19-16.57.40:397][  0]LogTemp: Display: Loaded TP AllDesktopTargetPlatform
+[2017.12.19-16.57.40:455][  0]LogTemp: Display: Loaded TP MacClientTargetPlatform
+[2017.12.19-16.57.40:516][  0]LogTemp: Display: Loaded TP MacNoEditorTargetPlatform
+[2017.12.19-16.57.40:577][  0]LogTemp: Display: Loaded TP MacServerTargetPlatform
+[2017.12.19-16.57.40:635][  0]LogTemp: Display: Loaded TP MacTargetPlatform
+[2017.12.19-16.57.40:696][  0]LogTemp: Display: Loaded TP WindowsClientTargetPlatform
+[2017.12.19-16.57.40:756][  0]LogTemp: Display: Loaded TP WindowsNoEditorTargetPlatform
+[2017.12.19-16.57.40:814][  0]LogTemp: Display: Loaded TP WindowsServerTargetPlatform
+[2017.12.19-16.57.40:867][  0]LogTemp: Display: Loaded TP WindowsTargetPlatform
+[2017.12.19-16.57.40:926][  0]LogTemp: Display: Loaded TP Android_ASTCTargetPlatform
+[2017.12.19-16.57.40:983][  0]LogTemp: Display: Loaded TP Android_ATCTargetPlatform
+[2017.12.19-16.57.41:040][  0]LogTemp: Display: Loaded TP Android_DXTTargetPlatform
+[2017.12.19-16.57.41:098][  0]LogTemp: Display: Loaded TP Android_ETC1TargetPlatform
+[2017.12.19-16.57.41:155][  0]LogTemp: Display: Loaded TP Android_ETC2TargetPlatform
+[2017.12.19-16.57.41:271][  0]LogTemp: Display: Loaded TP Android_MultiTargetPlatform
+[2017.12.19-16.57.41:271][  0]LogTemp: Display: Loaded TP Android_PVRTCTargetPlatform
+[2017.12.19-16.57.41:330][  0]LogTemp: Display: Loaded TP AndroidTargetPlatform
+[2017.12.19-16.57.41:378][  0]LogTemp: Display: Loaded TP HTML5TargetPlatform
+[2017.12.19-16.57.41:487][  0]LogTemp: Display: Loaded TP IOSTargetPlatform
+[2017.12.19-16.57.41:520][  0]LogTemp: Display: Loaded TP TVOSTargetPlatform
+[2017.12.19-16.57.41:580][  0]LogTemp: Display: Loaded TP LinuxClientTargetPlatform
+[2017.12.19-16.57.41:637][  0]LogTemp: Display: Loaded TP LinuxNoEditorTargetPlatform
+[2017.12.19-16.57.41:694][  0]LogTemp: Display: Loaded TP LinuxServerTargetPlatform
+[2017.12.19-16.57.41:754][  0]LogTemp: Display: Loaded TP LinuxTargetPlatform
+[2017.12.19-16.57.41:754][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2017.12.19-16.57.42:334][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2017.12.19-16.57.42:422][  0]LogDerivedDataCache: Loaded boot cache 0.09s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-16.57.42:422][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc
+[2017.12.19-16.57.42:422][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2017.12.19-16.57.42:422][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2017.12.19-16.57.42:422][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file D:/unreal engine/Unreal Projects/HelloWorld/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2017.12.19-16.57.42:423][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2017.12.19-16.57.42:439][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2017.12.19-16.57.42:455][  0]LogDerivedDataCache: Using Local data cache path C:/Users/guan/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2017.12.19-16.57.42:465][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
+[2017.12.19-16.57.42:466][  0]LogSlate: Using Freetype 2.6.0
+[2017.12.19-16.57.42:466][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-16.57.42:467][  0]LogSlate: SlateFontCache - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2017.12.19-16.57.42:832][  0]LogInit: Selected Device Profile: [Windows]
+[2017.12.19-16.57.43:205][  0]LogSimplygon: Simplygon DLL not present - disabling.
+[2017.12.19-16.57.43:254][  0]LogMeshReduction: Using SimplygonSwarm for distributed automatic mesh merging
+[2017.12.19-16.57.43:254][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2017.12.19-16.57.43:254][  0]LogMeshReduction: No automatic skeletal mesh reduction module available
+[2017.12.19-16.57.43:254][  0]LogMeshReduction: No automatic mesh merging module available
+[2017.12.19-16.57.43:254][  0]LogMeshMerging: No automatic mesh merging module available
+[2017.12.19-16.57.43:285][  0]LogNetVersion: HelloWorld , NetCL: 3709383, EngineNetVer: 2, GameNetVer: 0 (Checksum: 5827342)
+[2017.12.19-16.57.43:464][  0]LogAssetRegistry: FAssetRegistry took 0.0285 seconds to start up
+[2017.12.19-16.57.44:010][  0]LogPackageLocalizationCache: Processed 9 localized package path(s) for 2 prioritized culture(s) in 0.080441 seconds
+[2017.12.19-16.57.44:017][  0]LogUObjectArray: 35900 objects as part of root set at end of initial load.
+[2017.12.19-16.57.44:017][  0]LogUObjectAllocator: 7372016 out of 0 bytes used by permanent object pool.
+[2017.12.19-16.57.44:017][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2017.12.19-16.57.44:078][  0]LogInit: WinSock: version 1.1 (2.2), MaxSocks=32767, MaxUdp=65467
+[2017.12.19-16.57.47:039][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2017.12.19-16.57.47:096][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2017.12.19-16.57.47:098][  0]FUdpSocketBuilder: Failed to subscribe UdpMessageMulticastSocket to multicast group 230.0.0.1
+[2017.12.19-16.57.47:098][  0]FUdpSocketBuilder: Failed to create and initialize socket UdpMessageMulticastSocket (last error: 0)
+[2017.12.19-16.57.47:098][  0]LogUdpMessaging: Warning: StartTransport failed to create multicast socket on 0.0.0.0:0, joined to 230.0.0.1:6666 with TTL 1
+[2017.12.19-16.57.47:976][  0]LogMaterial: Uniform references updated for custom material expression Custom.
+[2017.12.19-16.57.48:464][  0]SourceControl: Source control is disabled
+[2017.12.19-16.57.48:464][  0]SourceControl: Source control is disabled
+[2017.12.19-16.57.48:524][  0]SourceControl: Source control is disabled
+[2017.12.19-16.57.48:587][  0]SourceControl: Source control is disabled
+[2017.12.19-16.57.49:537][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2017.12.19-16.57.49:848][  0]LogOcInput: OculusInput pre-init called
+[2017.12.19-16.57.50:101][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-16.57.50:108][  0]LogTemp: Warning: Root - Rotation = [P=0.000000 Y=0.000000 R=0.000000]
+[2017.12.19-16.57.51:203][  0]LogEngine: Initializing Engine...
+[2017.12.19-16.57.51:206][  0]LogHMD: Failed to initialize OpenVR with code 110
+[2017.12.19-16.57.51:429][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: Construct from data asset -  0.000 s
+[2017.12.19-16.57.51:430][  0]LogStats: UGameplayTagsManager::ConstructGameplayTagTree: GameplayTagTreeChangedEvent.Broadcast -  0.000 s
+[2017.12.19-16.57.51:592][  0]LogAIModule: Creating AISystem for world Untitled
+[2017.12.19-16.57.51:611][  0]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.57.51:648][  0]LogInit: FAudioDevice initialized.
+[2017.12.19-16.57.51:968][  0]LogDerivedDataCache: Saved boot cache 0.32s 78MB C:/Users/guan/AppData/Local/UnrealEngine/4.18/DerivedDataCache/Boot.ddc.
+[2017.12.19-16.57.51:979][  0]LogInit: Texture streaming: Enabled
+[2017.12.19-16.57.52:108][  0]LogEngineSessionManager: EngineSessionManager initialized
+[2017.12.19-16.57.52:108][  0]LogEngineSessionManager: EngineSessionManager sent abnormal shutdown report. Type=Debugger, SessionId={ABF856BC-4296-F210-0A0D-1ABA64CF2B0A}
+[2017.12.19-16.57.52:254][  0]LogInit: Transaction tracking system initialized
+[2017.12.19-16.57.52:622][  0]BlueprintLog: New page: Editor Load
+[2017.12.19-16.57.53:672][  0]LocalizationService: Localization service is disabled
+[2017.12.19-16.57.54:563][  0]LogConsoleResponse: Display: 
+[2017.12.19-16.57.54:756][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
+[2017.12.19-16.57.54:756][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/' took 0.01s
+[2017.12.19-16.57.54:756][  0]LogCook: Display: Mobile HDR setting 1
+[2017.12.19-16.57.54:756][  0]LogGameplayTags: Display: UGameplayTagsManager::DoneAddingNativeTags. DelegateIsBound: 0
+[2017.12.19-16.57.56:140][  0]SourceControl: Source control is disabled
+[2017.12.19-16.57.56:140][  0]Cmd: MAP LOAD FILE="../../../Engine/Content/Maps/Templates/Template_Default.umap" TEMPLATE=1 SHOWPROGRESS=1 FEATURELEVEL=3
+[2017.12.19-16.57.56:141][  0]LightingResults: New page: Lighting Build
+[2017.12.19-16.57.56:192][  0]MapCheck: New page: Map Check
+[2017.12.19-16.57.56:192][  0]LightingResults: New page: Lighting Build
+[2017.12.19-16.57.56:423][  0]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.57.56:429][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2017.12.19-16.57.56:444][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2017.12.19-16.57.56:487][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 43.304ms to complete.
+[2017.12.19-16.57.56:487][  0]LogFileHelpers: Loading map 'Template_Default' took 0.347
+[2017.12.19-16.57.56:543][  0]LogWindowsTextInputMethodSystem: Display: IME system now deactivated.
+[2017.12.19-16.57.56:641][  0]LogCollectionManager: Loaded 0 collections in 0.001755 seconds
+[2017.12.19-16.57.56:732][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Saved/Collections/' took 0.01s
+[2017.12.19-16.57.56:733][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Developers/guan/Collections/' took 0.01s
+[2017.12.19-16.57.56:733][  0]LogFileCache: Scanning file cache for directory 'D:/unreal engine/Unreal Projects/HelloWorld/Content/Collections/' took 0.01s
+[2017.12.19-16.57.56:733][  0]LogCollectionManager: Rebuilt the GUID cache for 0 collections in 0.000000 seconds
+[2017.12.19-16.57.56:742][  0]LogContentBrowser: Native class hierarchy populated in 0.0088 seconds. Added 2372 classes and 524 folders.
+[2017.12.19-16.57.56:816][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0005 seconds. Added 0 classes and 0 folders.
+[2017.12.19-16.57.56:853][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0004 seconds. Added 0 classes and 0 folders.
+[2017.12.19-16.57.56:907][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0005 seconds. Added 1 classes and 2 folders.
+[2017.12.19-16.57.57:003][  0]LogSlate: Took 0.000226 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2017.12.19-16.57.57:005][  0]LogSlate: Took 0.000229 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2017.12.19-16.57.57:010][  0]LogSlate: Took 0.000187 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2017.12.19-16.57.57:011][  0]LogSlate: Took 0.000161 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/DroidSansMono.ttf' (77K)
+[2017.12.19-16.57.57:150][  0]LogRenderer: Reallocating scene render targets to support 968x436 Format 9 NumSamples 1 (Frame:1).
+[2017.12.19-16.57.57:362][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0006 seconds. Added 1 classes and 2 folders.
+[2017.12.19-16.57.57:362][  0]LogLoad: (Engine Initialization) Total time: 22.45 seconds
+[2017.12.19-16.57.57:363][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2017.12.19-16.57.57:363][  0]LogExternalProfiler: No external profilers were discovered.  External profiling features will not be available.
+[2017.12.19-16.57.57:400][  0]LogAssetRegistry: Asset discovery search completed in 13.9598 seconds
+[2017.12.19-16.57.57:402][  0]LogCollectionManager: Rebuilt the object cache for 0 collections in 0.000001 seconds (found 0 objects)
+[2017.12.19-16.57.57:402][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000321 seconds (updated 0 objects)
+[2017.12.19-16.57.57:406][  0]LogContentStreaming: Texture pool size now 800 MB
+[2017.12.19-16.58.02:233][283]LogSlate: Took 0.000208 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (159K)
+[2017.12.19-16.58.03:577][364]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at -490.00,-300.00,20.00
+[2017.12.19-16.58.04:248][404]LogEditor: Attempting to add actor of class 'RosStringSubScriber' to level at -190.00,-170.00,20.00
+[2017.12.19-16.58.08:448][655]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.58.08:463][655]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.58.08:464][655]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:58:08 PM)
+[2017.12.19-16.58.08:464][655]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.58.08:470][655]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005778s)
+[2017.12.19-16.58.08:471][655]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.58.08:471][655]LogPlayLevel: PIE: World Init took: (0.001113s)
+[2017.12.19-16.58.08:472][655]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007802s)
+[2017.12.19-16.58.08:483][655]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.58.08:501][655]LogInit: FAudioDevice initialized.
+[2017.12.19-16.58.08:550][655]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.58.08:553][655]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-17.58.08
+[2017.12.19-16.58.08:553][655]LogWorld: Bringing up level for play took: 0.001100
+[2017.12.19-16.58.08:602][655]LogContentBrowser: Native class hierarchy updated for 'MovieSceneCapture' in 0.0005 seconds. Added 11 classes and 0 folders.
+[2017.12.19-16.58.08:655][655]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.58.08:655][655]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.58.08:655][655]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-16.58.08:655][655]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.58.08:656][655]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.479
+[2017.12.19-16.58.08:697][656]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.08:802][663]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.08:903][669]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:002][675]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:103][681]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:203][687]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:303][693]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:402][699]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:502][705]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:603][711]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:703][717]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:821][724]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.09:903][729]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:003][735]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:103][741]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:219][748]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:302][753]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:402][759]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:503][765]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:603][771]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:702][777]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.10:787][781]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.58.10:787][781]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-16.58.10:787][781]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.58.10:788][781]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
+[2017.12.19-16.58.16:848][141]LogTemp: Repeating last play command: Selected Viewport
+[2017.12.19-16.58.16:858][141]LogPlayLevel: PlayLevel: No blueprints needed recompiling
+[2017.12.19-16.58.16:858][141]PIE: New page: PIE session: Untitled_1 (Dec 19, 2017, 6:58:16 PM)
+[2017.12.19-16.58.16:859][141]LogPlayLevel: Creating play world package: /Temp/UEDPIE_0_Untitled_1
+[2017.12.19-16.58.16:864][141]LogPlayLevel: PIE: StaticDuplicateObject took: (0.005383s)
+[2017.12.19-16.58.16:865][141]LogAIModule: Creating AISystem for world Untitled_1
+[2017.12.19-16.58.16:866][141]LogPlayLevel: PIE: World Init took: (0.001126s)
+[2017.12.19-16.58.16:866][141]LogPlayLevel: PIE: Created PIE world by copying editor world from /Temp/Untitled_1.Untitled_1 to /Temp/UEDPIE_0_Untitled_1.Untitled_1 (0.007418s)
+[2017.12.19-16.58.16:876][141]LogInit: XAudio2 using 'Speakers (Conexant SmartAudio HD)' : 2 channels at 48 kHz using 32 bits per sample (channel mask 0x3)
+[2017.12.19-16.58.16:894][141]LogInit: FAudioDevice initialized.
+[2017.12.19-16.58.16:929][141]LogLoad: Game class is 'GameModeBase'
+[2017.12.19-16.58.16:930][141]LogWorld: Bringing World /Temp/UEDPIE_0_Untitled_1.Untitled_1 up for play (max tick rate 60) at 2017.12.19-17.58.16
+[2017.12.19-16.58.16:931][141]LogWorld: Bringing up level for play took: 0.001039
+[2017.12.19-16.58.16:970][141]LogROS: [FROSBridgeHandler] Websocket server connected.
+[2017.12.19-16.58.16:970][141]LogROS: [FROSBridgeHandler::Connect] Subscribe all topics. 
+[2017.12.19-16.58.16:970][141]LogROS: Warning: [FROSBridgeHandler::Connect] Subscribing Topic Ros_String
+[2017.12.19-16.58.16:971][141]LogROS: [FROSBridgeHandler::Connect] Advertise all topics. 
+[2017.12.19-16.58.16:971][141]PIE: Play in editor start time for /Temp/UEDPIE_0_Untitled_1 0.795
+[2017.12.19-16.58.17:023][143]LogStats: Warning: MetaData mismatch. Did you assign a stat to two groups? New //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_4798_0///####STATCAT_Advanced#### old //STATGROUP_Threads//ROSBridgeHandlerRunnable///Thread_33b8_0///####STATCAT_Advanced####
+[2017.12.19-16.58.17:099][148]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:216][155]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:299][160]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:418][167]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:500][172]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:600][178]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:699][184]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:801][190]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.17:918][197]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:001][202]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:117][209]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:201][214]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:317][221]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:400][226]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:517][233]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:601][238]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:700][244]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:800][250]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.18:900][256]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:000][262]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:100][268]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:200][274]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:301][280]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:417][287]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:500][292]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:617][299]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:700][304]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:800][310]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.19:917][317]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:001][322]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:117][329]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:200][334]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:317][341]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:401][346]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:500][352]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:600][358]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:700][364]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:801][370]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.20:900][376]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:000][382]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:117][389]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:200][394]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:317][401]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:400][406]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:517][413]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:601][418]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:718][425]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:800][430]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.21:917][437]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:001][442]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:101][448]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:200][454]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:303][460]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:400][466]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:500][472]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:601][478]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:700][484]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:817][491]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.22:900][496]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:017][503]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:102][508]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:200][514]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:301][520]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:400][526]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:501][532]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:600][538]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:700][544]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:816][551]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.23:901][556]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:000][562]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:100][568]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:200][574]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:300][580]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:399][586]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:517][593]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:600][598]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:716][605]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:800][610]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.24:916][617]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:000][622]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:116][629]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:199][634]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:300][640]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:417][647]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:500][652]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:600][658]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:700][664]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:800][670]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:900][676]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.25:999][682]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:100][688]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:200][694]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:316][701]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:399][706]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:516][713]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:600][718]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:717][725]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:800][730]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.26:899][736]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:001][742]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:116][749]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:200][754]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:299][760]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:416][767]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:500][772]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:616][779]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:700][784]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:816][791]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.27:900][796]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:017][803]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:100][808]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:201][814]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:300][820]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:401][826]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:516][833]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:599][838]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:716][845]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:800][850]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.28:916][857]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:000][862]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:116][869]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:200][874]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:316][881]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:400][886]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:501][892]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:616][899]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:700][904]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:817][911]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.29:900][916]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:016][923]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:099][928]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:200][934]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:300][940]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:417][947]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:500][952]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:600][958]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:717][965]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:800][970]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.30:917][977]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.31:000][982]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.31:100][988]LogROS: [FROSBridgeHandler::OnMessage] Received message at Topic [Ros_String]. 
+[2017.12.19-16.58.31:134][989]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribe all topics. 
+[2017.12.19-16.58.31:134][989]LogROS: [FROSBridgeHandler::Disconnect] Unsubscribing Topic Ros_String
+[2017.12.19-16.58.31:135][989]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all topics. 
+[2017.12.19-16.58.31:135][989]LogROS: [FROSBridgeHandler::Disconnect] Unadvertise all services. 
