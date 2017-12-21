@@ -1,7 +1,7 @@
  
 # [UROSBridge](https://github.com/robcog-iai/UROSBridge) - Hello World
 
-...An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to communicate between Unreal and Ros with std-msgs/String. 
+An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to communicate between Unreal and Ros with std-msgs/String. 
 
 # Quick Start
 
