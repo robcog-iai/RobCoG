@@ -8,9 +8,6 @@ An example of using [UROSBridge](https://github.com/robcog-iai/UROSBridge) to co
 
 See repository branches for various projects/versions:
 
- * [dev-env](https://github.com/robcog-iai/RobCoG/tree/dev-env) - default project with assets and maps
- * [game-VRKitchen](https://github.com/robcog-iai/RobCoG/tree/game-VRKitchen) - IAI Kitchen with VR interaction and semantic logging.
- * [dev-flex](https://github.com/robcog-iai/RobCoG/tree/dev-flex) - NVIDIA FleX development of particle based models
- * [robosim](https://github.com/robcog-iai/RobCoG/tree/robosim) - experimental integration project of PR2 with ROS
- * [grasp-dev](https://github.com/robcog-iai/RobCoG/tree/grasp-dev) - realistic force based grasping
- * [mc-dev](https://github.com/robcog-iai/RobCoG/tree/mc-dev) - motion controller integration example
+###1.Install [rosbridge_suite ](http://wiki.ros.org/rosbridge_suite) package in linux system.
+..* After installation, set up your environment for ROS and rosbridge: 
+....source /opt/ros/<rosdistro>/setup.bash
