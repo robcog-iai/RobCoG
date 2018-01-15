@@ -45,8 +45,14 @@ public:
 	// Updates the Grasp Orientation of the gven Hand
 	void UpdateGrasp(const float Alpha, const float VelocityThreshold, AHand * const Hand);
 
-	// Switches the Grasping Style
-	void SwitchGraspStyle(const AHand * const Hand, EGraspType GraspType);
+	// Switches the Grasping Type
+	void SwitchGraspType(const AHand * const Hand, EGraspType GraspType);
+
+	// Switches the Grasping Type
+	void SwitchToPreviousGraspType(const AHand * const Hand, FText & GraspTypeName);
+
+	// Switches the Grasping Type
+	void SwitchToNextGraspType(const AHand * const Hand, FText & GraspTypeName);
 
 	// Switches the Grasping Process
 	void SwitchGraspProcess(AHand * const Hand, const float InSpring, const float InDamping, const float ForceLimit);

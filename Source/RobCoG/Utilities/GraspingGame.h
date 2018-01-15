@@ -81,11 +81,12 @@ private:
 	// Called when the start timer has finished
 	void StartTimerHasFinished();
 
-	// Updates the game timer
-	void UpdateGameTimer();
+	// If an Actor Overlaps
+	UFUNCTION()
+		void ActorOverlaped(AActor* OverlappedActor, AActor* OtherActor);
 
 	// Called when the game tmer has finished
-	void GameTimerHasFinished();
+	void RoundFinished();
 
 	// Writes all assetnames into a list
 	void GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets);

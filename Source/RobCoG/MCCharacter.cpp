@@ -8,11 +8,11 @@
 #include "Components/ArrowComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "HeadMountedDisplay.h"
 #include "IHeadMountedDisplay.h"
 #include "Kismet/GameplayStatics.h"
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Engine/Engine.h"
+#include "IXRTrackingSystem.h"
 
 // Sets default values
 AMCCharacter::AMCCharacter()
@@ -73,6 +73,18 @@ AMCCharacter::AMCCharacter()
 	LeftHandRotationOffset = FQuat::Identity;
 	RightHandRotationOffset = FQuat::Identity;
 
+	// Init TextComponent
+	TextComponent = CreateDefaultSubobject<UTextRenderComponent>(TEXT("TextComponent"));
+	TextComponent->SetupAttachment(CharCamera);
+	TextComponent->SetRelativeLocationAndRotation(FVector(20, 0, 7), FRotator(180, 0, 0));
+	TextComponent->SetText(FText::FromString("Current Grasp"));
+	TextComponent->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
+	TextComponent->SetTextRenderColor(FColor::Black);
+	TextComponent->SetXScale(0.1f);
+	TextComponent->SetYScale(0.1f);
+	TextComponent->SetWorldSize(10.0f);
+
+
 	bShowUserInterface = false;
 }
 
@@ -90,20 +102,22 @@ void AMCCharacter::BeginPlay()
 	RightPIDController.SetValues(PGain, IGain, DGain, MaxOutput, -MaxOutput);
 
 	// Check if VR is enabled
-	IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->HMDDevice.Get());
-	if (HMD && HMD->IsStereoEnabled())
-	{
-		// VR MODE
-		//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
-	}
-	else
-	{
-		GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
-		CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
-		CharCamera->bUsePawnControlRotation = true;
-		MCOriginComponent->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
-		MCLeft->SetRelativeLocation(FVector(75.f, -30.f, 30.f));
-		MCRight->SetRelativeLocation(FVector(75.f, 30.f, 30.f));
+	if (GEngine && GEngine->XRSystem.IsValid()) {
+		IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->XRSystem->GetHMDDevice());
+		if (HMD && HMD->IsHMDEnabled())
+		{
+			// VR MODE
+			//CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
+		}
+		else
+		{
+			GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
+			CharCamera->SetRelativeLocation(FVector(0.0f, 0.0f, BaseEyeHeight));
+			CharCamera->bUsePawnControlRotation = true;
+			MCOriginComponent->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
+			MCLeft->SetRelativeLocation(FVector(75.f, -30.f, 30.f));
+			MCRight->SetRelativeLocation(FVector(75.f, 30.f, 30.f));
+		}
 	}
 
 	if (LeftSkelActor)
@@ -152,12 +166,14 @@ void AMCCharacter::BeginPlay()
 	UserInterface = CreateWidget<UGraspTypeWidget>(GetWorld(), UGraspTypeWidget::StaticClass());
 	if (UserInterface) UserInterface->SetupWidget(this);
 
-	FStringClassReference HandForceWidgetClassRef(TEXT("/Game/Widget/WB_HandForce.WB_HandForce_C"));
-	if (UClass* HandForceClass = HandForceWidgetClassRef.TryLoadClass<UUserWidget>())
-	{
-		UUserWidget* HandForceWidget = CreateWidget<UUserWidget>(GetWorld(), HandForceClass);
-		HandForceWidget->AddToViewport(10);
-	}
+	// Currently used as VR 3D Widget
+	//
+	//FStringClassReference HandForceWidgetClassRef(TEXT("/Game/Widget/WB_HandForce.WB_HandForce_C"));
+	//if (UClass* HandForceClass = HandForceWidgetClassRef.TryLoadClass<UUserWidget>())
+	//{
+	//	UUserWidget* HandForceWidget = CreateWidget<UUserWidget>(GetWorld(), HandForceClass);
+	//	HandForceWidget->AddToViewport(10);
+	//}
 }
 
 // Called every frame
@@ -198,7 +214,9 @@ void AMCCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis("GraspWithLeftHand", this, &AMCCharacter::GraspWithLeftHand);
 	PlayerInputComponent->BindAxis("GraspWithRightHand", this, &AMCCharacter::GraspWithRightHand);
 
-	PlayerInputComponent->BindAction("SwitchGraspStyle", IE_Pressed, this, &AMCCharacter::ToggleUserInterface);
+	PlayerInputComponent->BindAction("SwitchGraspType", IE_Pressed, this, &AMCCharacter::ToggleUserInterface);
+	PlayerInputComponent->BindAction("NextGraspType", IE_Pressed, this, &AMCCharacter::SwitchToNextGraspType);
+	PlayerInputComponent->BindAction("PreviousGraspType", IE_Pressed, this, &AMCCharacter::SwitchToPreviousGraspType);
 	PlayerInputComponent->BindAction("SwitchGraspProcess", IE_Pressed, this, &AMCCharacter::SwitchGraspProcess);
 
 	// Hand action binding
@@ -247,8 +265,8 @@ void AMCCharacter::MoveHandsOnZ(const float Value)
 	if (Value != 0)
 	{
 		// Check if VR is enabled
-		IHeadMountedDisplay* HMD = (IHeadMountedDisplay*)(GEngine->HMDDevice.Get());
-		if (!(HMD && HMD->IsStereoEnabled()))
+		IHeadMountedDisplay* HMD = static_cast<IHeadMountedDisplay*>(GEngine->XRSystem->GetHMDDevice());
+		if (HMD && HMD->IsHMDEnabled())
 		{
 			MCLeft->AddLocalOffset(FVector(0.f, 0.f, Value));
 			MCRight->AddLocalOffset(FVector(0.f, 0.f, Value));
@@ -290,17 +308,55 @@ FORCEINLINE void AMCCharacter::UpdateHandLocationAndRotation(
 	SkelMesh->SetAllPhysicsAngularVelocity(RotOutput);
 }
 
-// Switch Grasp style
-void AMCCharacter::SwitchGraspStyle(EGraspType GraspType)
+
+// Switch to the last grasping type
+void AMCCharacter::SwitchToPreviousGraspType()
 {
+	FText GraspTypeName = FText::FromName("");
+	
 	if (RightHand)
 	{
-		RightHand->SwitchGraspStyle(GraspType);
+		RightHand->SwitchToPreviousGraspType(GraspTypeName);
 	}
 
 	if (LeftHand)
 	{
-		LeftHand->SwitchGraspStyle(GraspType);
+		LeftHand->SwitchToPreviousGraspType(GraspTypeName);
+	}
+
+	TextComponent->SetText(GraspTypeName);
+
+}
+
+// Switch to the next grasping type
+void AMCCharacter::SwitchToNextGraspType()
+{
+	FText GraspTypeName = FText::FromName("");
+
+	if (RightHand)
+	{
+		RightHand->SwitchToNextGraspType(GraspTypeName);
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchToNextGraspType(GraspTypeName);
+	}
+
+	TextComponent->SetText(GraspTypeName);
+}
+
+// Switch Grasp style
+void AMCCharacter::SwitchGraspType(EGraspType GraspType)
+{
+	if (RightHand)
+	{
+		RightHand->SwitchGraspType(GraspType);
+	}
+
+	if (LeftHand)
+	{
+		LeftHand->SwitchGraspType(GraspType);
 	}
 }
 
@@ -323,9 +379,9 @@ void AMCCharacter::GraspWithLeftHand(const float Val)
 {
 	if (LeftHand)
 	{
-		LeftHand->UpdateGrasp(Val);
+		//LeftHand->UpdateGrasp(Val);
 		// For the realisitc grasping part
-		//LeftHand->UpdateGrasp2(Val);
+		LeftHand->UpdateGrasp2(Val);
 	}
 }
 

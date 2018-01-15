@@ -42,7 +42,12 @@ AGraspingGame::AGraspingGame()
 // Called when the game starts or when spawned
 void AGraspingGame::BeginPlay()
 {
+	UE_LOG(LogTemp, Warning, TEXT("BEGIN"));
 	Super::BeginPlay();
+
+	if (TargetBox) {
+		TargetBox->OnActorBeginOverlap.AddDynamic(this, &AGraspingGame::ActorOverlaped);
+	}
 
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	if (PlayerController)
@@ -67,7 +72,6 @@ void AGraspingGame::BeginPlay()
 void AGraspingGame::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AGraspingGame::GetAllAssetsInFolder(const FString & Directory, TArray<FString> & Assets)
@@ -141,13 +145,12 @@ void AGraspingGame::SpawnRandomItem(TArray<FString> & Assets)
 	{
 		SpawnedMesh->SetWorldRotation(FRotator(0, 0, 0), false, nullptr, ETeleportType::TeleportPhysics);
 		SpawnedMesh->SetWorldLocation(SpawningBox->GetActorLocation(), false, nullptr, ETeleportType::TeleportPhysics);
-
 	}
 }
 
 void AGraspingGame::ControlGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ControlGame"));
+	//UE_LOG(LogTemp, Warning, TEXT("ControlGame"));
 	if (bGameRunning)
 	{
 		ResetGame();
@@ -161,7 +164,7 @@ void AGraspingGame::ControlGame()
 
 void AGraspingGame::StartGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("StartGame"));
+	//UE_LOG(LogTemp, Warning, TEXT("StartGame"));
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
 	bRoundSuccessfulFinished = false;
 	GetWorldTimerManager().SetTimer(StartTimerHandle, this, &AGraspingGame::UpdateStartTimer, 1.0f, true);
@@ -173,8 +176,8 @@ void AGraspingGame::StopGame()
 
 void AGraspingGame::ResetGame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ResetGame"));
-	ResetCharacterTransform();
+	//UE_LOG(LogTemp, Warning, TEXT("ResetGame"));
+	//ResetCharacterTransform();
 	StartGame();
 }
 
@@ -191,7 +194,7 @@ void AGraspingGame::ResetCharacterTransform()
 
 void AGraspingGame::UpdateStartTimer()
 {
-	UE_LOG(LogTemp, Warning, TEXT("UpdateStartTimer"));
+	//UE_LOG(LogTemp, Warning, TEXT("UpdateStartTimer"));
 
 	--StartTime;
 	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
@@ -206,41 +209,36 @@ void AGraspingGame::UpdateStartTimer()
 
 void AGraspingGame::StartTimerHasFinished()
 {
-	UE_LOG(LogTemp, Warning, TEXT("StartTimerHasFinished"));
+	//UE_LOG(LogTemp, Warning, TEXT("StartTimerHasFinished"));
 	//Change to a special readout
 	SpawnRandomItem(Items);
-	TimerText->SetText(FText::FromName("GO!"));
-	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
-	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 1.0f, true);
-	StartTime = 3;
-}
-
-void AGraspingGame::UpdateGameTimer()
-{
-	UE_LOG(LogTemp, Warning, TEXT("UpdateGameTimer"));
-	TArray<UPrimitiveComponent*> Components;
-	TargetBox->GetOverlappingComponents(Components);
-	for (auto Component : Components)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Component: %s"), *Component->GetName());
-
-	}
-	bRoundSuccessfulFinished = Components.Contains(SpawnedMesh);
-
 	TimerText->SetText(FText::FromString("Round Running"));
+	TimerText->SetText(FText::AsNumber(FMath::Max(StartTime, 0)));
+	StartTime = 3;
+	//GetWorldTimerManager().SetTimer(GameTimerHandle, this, &AGraspingGame::UpdateGameTimer, 0.1f, true);
+	bGameRunning = true;
+}
 
-	if (bRoundSuccessfulFinished)
-	{
-		// We're done counting down, so stop running the timer.
-		GetWorldTimerManager().ClearTimer(GameTimerHandle);
-		//Perform any special actions we want to do when the timer ends.
-		GameTimerHasFinished();
+void AGraspingGame::ActorOverlaped(AActor* OverlappedActor, AActor* OtherActor)
+{
+	UE_LOG(LogTemp, Warning, TEXT("ActorOverlapped: %s - %s - %s"), *OtherActor->GetName(), *OverlappedActor->GetName(), *SpawnedMesh->GetName());
+
+	AGraspingGame* GraspingGame = Cast<AGraspingGame>(OtherActor);
+	if (GraspingGame) {
+		UE_LOG(LogTemp, Warning, TEXT("Cast Okay: CurrentItemNameCast: %s - CurrentItemName: %s"), *GraspingGame->CurrentItemName, *CurrentItemName);
+
+		if(GraspingGame->CurrentItemName.Equals(CurrentItemName))
+		{
+			bRoundSuccessfulFinished = true;
+			//Perform any special actions we want to do when the timer ends.
+			RoundFinished();
+		}
 	}
 }
 
-void AGraspingGame::GameTimerHasFinished()
+void AGraspingGame::RoundFinished()
 {
-	UE_LOG(LogTemp, Warning, TEXT("GameTimerHasFinished"));
-	//Change to a special readout
+	UE_LOG(LogTemp, Warning, TEXT("RoundFinished"));
+	bGameRunning = false;
 	TimerText->SetText(FText::FromName("Round Finished. <br> Press SPACE to reload"));
 }

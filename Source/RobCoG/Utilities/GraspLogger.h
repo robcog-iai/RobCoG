@@ -16,10 +16,8 @@ class ROBCOG_API AGraspLogger : public AActor
 	GENERATED_BODY()
 
 public:
-
-	// The grasping game
-	UPROPERTY(EditAnywhere)
-		AGraspingGame* GraspingGame;
+	// The filename of the file to be written
+	const FString ForceTableFilename;
 
 	// The Hand to be logged
 	UPROPERTY(EditAnywhere)
@@ -30,18 +28,27 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
+	// Should the Timer Update
+	bool bUpdateTimer;
 
+	// Is Logging Enabled
+	bool bLoggingEnabled;
+
+	// A counter to log just ever n-th tick
+	int LoggingCounter;
+
+	// The pointer to the file writer
 	TSharedPtr<ForceFileWriter> ForceFileWriterPtr;
 
-	FString CurrentItemName;
+	// The current log info
 	FLogInfo CurrentLogInfo;
-	// Saves the Itemname and the chosen 
-	TMap<FString, FLogInfo> ItemToGraspInfoMap;
 
 	// The start countdown timer
 	FTimerHandle TimerHandle;
@@ -49,9 +56,13 @@ private:
 	//The Last GraspType of the Hand
 	EGraspStatus LastGraspStatus;
 
+	// Updates the Log info
 	void UpdateTimer();
 
+	// Clears the current Grasp Info Map
 	void ClearCurrentGraspInfo();
-	void SaveValues();
+
+	// Toggles the logging
+	void ToggleHandLogging();
 
 };

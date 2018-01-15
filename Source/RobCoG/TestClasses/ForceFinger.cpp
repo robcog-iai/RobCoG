@@ -154,7 +154,7 @@ void AForceFinger::UpdateConstraintArrow(FConstraintInstance* const Constraint, 
 	{
 		if (ForceFileWriterPtr.IsValid() && bLogForceIntoFile)
 		{
-			ForceFileWriterPtr->AppendFloatToFile(OutAngularForce.Size(), FPaths::GameSavedDir() + "Force.csv");
+			//ForceFileWriterPtr->AppendFloatToFile(OutAngularForce.Size(), FPaths::GameSavedDir() + "Force.csv");
 		}
 		UE_LOG(LogTemp, Warning, TEXT("AngularForce: %s"), *OutAngularForce.ToString());
 		UE_LOG(LogTemp, Warning, TEXT("AngularForce.Size: %f"), OutAngularForce.Size());
