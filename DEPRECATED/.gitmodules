@@ -1,0 +1,4 @@
+[submodule "Plugins/UPIDController"]
+	path = Plugins/UPIDController
+	url = https://github.com/robcog-iai/UPIDController
+	branch = master

@@ -1,0 +1,33 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "UForceBasedGrasping",
+  "Description": "A Plugin for Realistic Grasping",
+  "Category": "Other",
+  "CreatedBy": "Marcel Meier",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "UForceBasedGrasping",
+      "Type": "Developer",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "UPIDController",
+      "Enabled": true
+    },
+    {
+      "Name": "SteamVR",
+      "Enabled": true
+    }
+  ]
+}
