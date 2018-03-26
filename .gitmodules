@@ -14,3 +14,7 @@
 	path = Plugins/UPIDController
 	url = https://github.com/robcog-iai/UPIDController.git
 	branch = master
+[submodule "Plugins/libmongo"]
+	path = Plugins/libmongo
+	url = https://github.com/robcog-iai/libmongo.git
+	branch = master
