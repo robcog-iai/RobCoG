@@ -22,4 +22,4 @@ Branch using FleX in RobCoG.
 | Particle System (Emitter)| FE_Bob                                                     |
 | Spawn Flex Shape         | FSM_Cylinder_10_20                                         |
 
-### Engine Version [4.17](https://github.com/NvPhysX/UnrealEngine/tree/FleX-4.17.1) 
+### Engine Version [4.19.2](https://github.com/NvPhysX/UnrealEngine/tree/FleX-4.19.2) 
