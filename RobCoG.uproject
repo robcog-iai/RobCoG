@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{CD5D5283-4294-8E9C-74BB-88A84F35B8F2}",
+	"EngineAssociation": "{4D103C6E-4DA1-776E-30D1-9A92560A7D31}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -11,13 +11,6 @@
 			"AdditionalDependencies": [
 				"Engine"
 			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "USemLog",
-			"Enabled": true,
-			"MarketplaceURL": "http://robcog.org/"
 		}
 	]
 }
