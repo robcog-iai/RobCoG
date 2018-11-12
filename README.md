@@ -2,6 +2,6 @@
 
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames
 
-Examples using the [UPhysicsBasedMC](https://github.com/robcog-iai/UPhysicsBasedMC) plugin.
+Examples project using the [UPhysicsBasedMC](https://github.com/robcog-iai/UPhysicsBasedMC) plugin.
 
 Supported engine version: **UE 4.20**
