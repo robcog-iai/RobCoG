@@ -1,7 +1,7 @@
 [![](Documentation/Img/env.jpg)](http://robcog.org/)
 
-# RobCoG - **Rob**ot **Co**mmonsense **G**ames 
+# RobCoG - **Rob**ot **Co**mmonsense **G**ames
 
 Environment branch of RobCoG. No functionalities just assets.
 
-Supported engine version: **UE 4.19**
+Supported engine version: **UE 4.20**
