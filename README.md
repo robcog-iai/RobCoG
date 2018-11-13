@@ -10,16 +10,16 @@ Supported engine version: **UE 4.20**
 
 * Load input config from plugin:
 
-![](Documentation/Img/MCInput.jpg)
+[](Documentation/Img/MCInput.JPG)
 
 * Add `MC Pawn` to world:
 
-![](Documentation/Img/MCPawn.jpg)
+![](Documentation/Img/MCPawn.JPG)
 
 * Add the left and right `MC 6D Target`'s (inherits from [UMotionControllerComponent](https://api.unrealengine.com/INT/API/Runtime/HeadMountedDisplay/UMotionControllerComponent/index.html)):
 
-![](Documentation/Img/MCTarget.jpg)
+![](Documentation/Img/MCTarget.JPG)
 
 * Add offset to the end effector (if needed):
 
-![](Documentation/Img/MCOffset.jpg)
+![](Documentation/Img/MCOffset.JPG)
