@@ -1,0 +1,8 @@
+[submodule "Plugins/UPhysicsBasedMC"]
+	path = Plugins/UPhysicsBasedMC
+	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
+	branch = dev
+[submodule "Plugins/UPIDController"]
+	path = Plugins/UPIDController
+	url = https://github.com/robcog-iai/UPIDController.git
+	branch = master
