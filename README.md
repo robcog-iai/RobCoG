@@ -1,6 +1,9 @@
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames
 
-Examples project using the [UPhysicsBasedMC](https://github.com/robcog-iai/UPhysicsBasedMC) plugin.
+Examples project using the [USemLog](https://github.com/robcog-iai/USemLog) and other related plugins:
+
+ * [UUtils](https://github.com/robcog-iai/UUtils)
+ * [UPhysicsBasedMC](https://github.com/robcog-iai/UPhysicsBasedMC)
 
 Supported engine version: **UE 4.20**
 
@@ -12,18 +15,10 @@ Supported engine version: **UE 4.20**
 
 ## Usage:
 
-* Load input config from plugin:
+### Semantic Map
 
-![](Documentation/Img/MCInput.JPG)
+* Coming soon
 
-* Add `MC Pawn` to world:
+### Runtime Logging
 
-![](Documentation/Img/MCPawn.JPG)
-
-* Add the left and right `MC 6D Target`'s (inherits from [UMotionControllerComponent](https://api.unrealengine.com/INT/API/Runtime/HeadMountedDisplay/UMotionControllerComponent/index.html)):
-
-![](Documentation/Img/MCTarget.JPG)
-
-* Add offset to the end effector (if needed):
-
-![](Documentation/Img/MCOffset.JPG)
+* Coming soon
