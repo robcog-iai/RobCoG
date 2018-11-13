@@ -10,3 +10,7 @@
 	path = Plugins/UUtils
 	url = https://github.com/robcog-iai/UUtils.git
 	branch = master
+[submodule "Plugins/USemLog"]
+	path = Plugins/USemLog
+	url = https://github.com/robcog-iai/USemLog.git
+	branch = dev-2.0
