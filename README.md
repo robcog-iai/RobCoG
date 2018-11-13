@@ -1,5 +1,3 @@
-[](http://robcog.org/)
-
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames
 
 Examples project using the [UPhysicsBasedMC](https://github.com/robcog-iai/UPhysicsBasedMC) plugin.
