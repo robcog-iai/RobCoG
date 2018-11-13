@@ -6,6 +6,12 @@ Examples project using the [UPhysicsBasedMC](https://github.com/robcog-iai/UPhys
 
 Supported engine version: **UE 4.20**
 
+## Submodules
+
+ * ```Plugins``` are added as submodules.
+
+```git submodule update --init --recursive```
+
 ## Usage:
 
 * Load input config from plugin:
