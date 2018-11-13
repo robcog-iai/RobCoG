@@ -14,7 +14,7 @@ Supported engine version: **UE 4.20**
 
 * Load input config from plugin:
 
-[](Documentation/Img/MCInput.JPG)
+![](Documentation/Img/MCInput.JPG)
 
 * Add `MC Pawn` to world:
 
