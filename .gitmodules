@@ -2,3 +2,7 @@
 	path = Content/Models/Private
 	url = https://github.com/robcog-iai/PrivateModels.git
 	branch = master
+[submodule "Content/Maps/Private"]
+	path = Content/Maps/Private
+	url = https://github.com/robcog-iai/PrivateMaps.git
+	branch = master
