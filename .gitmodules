@@ -1,0 +1,4 @@
+[submodule "Content/Models/Private"]
+	path = Content/Models/Private
+	url = https://github.com/robcog-iai/PrivateModels.git
+	branch = master
