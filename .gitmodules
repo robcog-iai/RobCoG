@@ -1,0 +1,16 @@
+[submodule "Content/Models/Private"]
+	path = Content/Models/Private
+	url = https://github.com/robcog-iai/PrivateModels.git
+	branch = master
+[submodule "Content/Maps/Private"]
+	path = Content/Maps/Private
+	url = https://github.com/robcog-iai/PrivateMaps.git
+	branch = master
+[submodule "Meshes/Private"]
+	path = Meshes/Private
+	url = https://github.com/robcog-iai/PrivateMeshes.git
+	branch = master
+[submodule "Meshes/Public"]
+	path = Meshes/Public
+	url = https://github.com/robcog-iai/PublicMeshes.git
+	branch = master
