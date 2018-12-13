@@ -1,12 +1,19 @@
-[![](Documentation/Img/env.jpg)](http://robcog.org/)
 
 # RobCoG - **Rob**ot **Co**mmonsense **G**ames
 
-Environment branch of RobCoG. No functionalities just assets.
+[![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
-Supported engine version: **UE 4.20**
 
-## Private Submodules
+# Environment branch of RobCoG.
+
+[![](Documentation/Img/env.jpg)](http://robcog.org/)
+
+
+* No functionalities only assets.
+
+Supported engine version: **UE 4.21**
+
+## Submodules
 
 If you have access to the private assets update the submodules as well:
 
