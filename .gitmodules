@@ -14,3 +14,19 @@
 	path = Content/Private
 	url = https://github.com/robcog-iai/PrivateContent.git
 	branch = master
+[submodule "Plugins/USemLog"]
+	path = Plugins/USemLog
+	url = https://github.com/robcog-iai/USemLog.git
+	branch = dev-2.0
+[submodule "Plugins/UUtils"]
+	path = Plugins/UUtils
+	url = https://github.com/robcog-iai/UUtils.git
+	branch = master
+[submodule "Plugins/UPhysicsBasedMC"]
+	path = Plugins/UPhysicsBasedMC
+	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
+	branch = dev
+[submodule "Plugins/UPIDController"]
+	path = Plugins/UPIDController
+	url = https://github.com/robcog-iai/UPIDController.git
+	branch = master
