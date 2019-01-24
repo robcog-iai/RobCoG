@@ -3,26 +3,24 @@
 
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
+Current engine version: **UE 4.21**
 
-# Environment branch of RobCoG.
+### Submodules
 
-[![](Documentation/Img/env.jpg)](http://robcog.org/)
+The project points to various submodules (plugins, assets, private assets etc.). If you want to clone the project with submodules, see the following git commands:
 
-
-* No functionalities only assets.
-
-Supported engine version: **UE 4.21**
-
-## Submodules
-
-If you have access to the private assets update the submodules as well:
+* you cloned the repo, and you want to add the submodules afterwards:
 
 ```
 git submodule update --init --recursive
 ```
 
-if the repository is not already cloned, you can do this in one step
+* you want to clone the repo with the submodules in one command:
 
 ```
 git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
 ```
+
+### Documentation
+
+* [MC](Documentation/MC.md)
