@@ -3,6 +3,31 @@
 
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
+### C++ Coding Standards:
+
+ * [Unreal Code Standard](https://docs.unrealengine.com/en-us/Programming/Development/CodingStandard)
+ * [Splash Damage Standard](https://github.com/splash-damage/coding-standards)
+
+### Asset Naming and Creation Convention:
+
+ * [Naming convention](https://github.com/Allar/ue4-style-guide)
+ * Due to the connection with `KnowRob` currently all the models are sandboxed and self contained
+   * They are always located in a top folder called `Models`
+   * The leaf folder is always the KnowRob class name:
+     * `Models/IAIKitchen/IAIFurniture/IAIDiningTable/*`
+      * `SM_IAIDiningTable`
+      * `T_IAIDiningTable_N`
+      * `T_IAIDiningTable_D`
+      * `T_IAIDiningTable_S`
+      * `T_IAIDiningTableTop`
+      * `T_IAIDiningTableTop_S`
+      * `M_IAIDiningTable`
+      * `M_IAIDiningTableTop`
+      * `M_IAIDiningTableFeet`
+      * `..`
+
+
+
 ### Submodules
 
 The project points to various submodules (plugins, assets, private assets etc.). If you want to clone the project with submodules, see the following git commands:
@@ -21,7 +46,7 @@ $ git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
 
 ### Documentation
 
-* Latest build on: **UE 4.21**
+* Currently building on: **UE 4.21**
 
 * [MC](Documentation/MC.md)
 
