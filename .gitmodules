@@ -38,11 +38,4 @@
 	path = Plugins/OrionStreamer
 	url = https://github.com/robcog-iai/OrionStreamer.git
 	branch = master
-[submodule "Plugins/UROSBridge"]
-	path = Plugins/UROSBridge
-	url = https://github.com/robcog-iai/UROSBridge.git
-	branch = dev
-[submodule "Plugins/UROSWorldControl"]
-	path = Plugins/UROSWorldControl
-	url = https://github.com/robcog-iai/UROSWorldControl.git
-	branch = master
+
