@@ -1,0 +1,48 @@
+[submodule "Meshes/Private"]
+	path = Meshes/Private
+	url = https://github.com/robcog-iai/PrivateMeshes.git
+	branch = master
+[submodule "Meshes/Public"]
+	path = Meshes/Public
+	url = https://github.com/robcog-iai/PublicMeshes.git
+	branch = master
+[submodule "Scripts"]
+	path = Scripts
+	url = https://github.com/robcog-iai/Scripts.git
+	branch = master
+[submodule "Content/Private"]
+	path = Content/Private
+	url = https://github.com/robcog-iai/PrivateContent.git
+	branch = master
+[submodule "Plugins/USemLog"]
+	path = Plugins/USemLog
+	url = https://github.com/robcog-iai/USemLog.git
+	branch = dev-2.0
+[submodule "Plugins/UUtils"]
+	path = Plugins/UUtils
+	url = https://github.com/robcog-iai/UUtils.git
+	branch = master
+[submodule "Plugins/UPhysicsBasedMC"]
+	path = Plugins/UPhysicsBasedMC
+	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
+	branch = dev
+[submodule "Plugins/UPIDController"]
+	path = Plugins/UPIDController
+	url = https://github.com/robcog-iai/UPIDController.git
+	branch = master
+[submodule "Plugins/libmongo"]
+	path = Plugins/libmongo
+	url = https://github.com/robcog-iai/libmongo.git
+	branch = master
+[submodule "Plugins/OrionStreamer"]
+	path = Plugins/OrionStreamer
+	url = https://github.com/robcog-iai/OrionStreamer.git
+	branch = master
+[submodule "Plugins/UROSBridge"]
+	path = Plugins/UROSBridge
+	url = https://github.com/robcog-iai/UROSBridge.git
+	branch = dev
+[submodule "Plugins/UROSWorldControl"]
+	path = Plugins/UROSWorldControl
+	url = https://github.com/robcog-iai/UROSWorldControl.git
+	branch = master
