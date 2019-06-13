@@ -3,6 +3,8 @@
 
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
+### UE Version: **4.21**
+
 ### C++ Coding Standards:
 
  * [Unreal Code Standard](https://docs.unrealengine.com/en-us/Programming/Development/CodingStandard)
@@ -45,9 +47,6 @@ $ git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
 ```
 
 ### Documentation
-
-* Currently building on: **UE 4.21**
-
 * [MC](Documentation/MC.md)
 
 ### Citations
@@ -57,8 +56,7 @@ $ git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
   author    = {Andrei Haidu, Michael Beetz},
   title     = {Automated Models of Human Everyday Activity based on Game and Virtual Reality Technology},
   booktitle = {International Conference on Robotics and Automation (ICRA)},
-  year      = {2019},
-  note      = {Accepted for publication.}
+  year      = {2019}
 }
 ```
 
