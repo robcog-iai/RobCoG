@@ -57,8 +57,7 @@ $ git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
   author    = {Andrei Haidu, Michael Beetz},
   title     = {Automated Models of Human Everyday Activity based on Game and Virtual Reality Technology},
   booktitle = {International Conference on Robotics and Automation (ICRA)},
-  year      = {2019},
-  note      = {Accepted for publication.}
+  year      = {2019}
 }
 ```
 
