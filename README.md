@@ -3,6 +3,8 @@
 
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
+### UE Version: **4.22**
+
 ### C++ Coding Standards:
 
  * [Unreal Code Standard](https://docs.unrealengine.com/en-us/Programming/Development/CodingStandard)
@@ -45,8 +47,6 @@ $ git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
 ```
 
 ### Documentation
-
-* Currently building on: **UE 4.21**
 
 * [MC](Documentation/MC.md)
 
