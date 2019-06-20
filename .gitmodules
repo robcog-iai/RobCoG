@@ -39,3 +39,7 @@
 	url = https://github.com/robcog-iai/OrionStreamer.git
 	branch = master
 
+[submodule "Plugins/UElectricalDevices"]
+	path = Plugins/UElectricalDevices
+	url = https://github.com/robcog-iai/UElectricalDevices.git
+	branch = master
