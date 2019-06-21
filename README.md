@@ -43,7 +43,7 @@ $ git submodule update --init --recursive
 * or in one command
 
 ```
-$ git clone --recursive -b dev-env https://github.com/robcog-iai/RobCoG.git
+$ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 ```
 
 ### Documentation
