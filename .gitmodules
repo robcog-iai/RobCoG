@@ -17,7 +17,7 @@
 [submodule "Plugins/USemLog"]
 	path = Plugins/USemLog
 	url = https://github.com/robcog-iai/USemLog.git
-	branch = dev-2.0
+	branch = master
 [submodule "Plugins/UUtils"]
 	path = Plugins/UUtils
 	url = https://github.com/robcog-iai/UUtils.git
@@ -25,7 +25,7 @@
 [submodule "Plugins/UPhysicsBasedMC"]
 	path = Plugins/UPhysicsBasedMC
 	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
-	branch = dev
+	branch = master
 [submodule "Plugins/UPIDController"]
 	path = Plugins/UPIDController
 	url = https://github.com/robcog-iai/UPIDController.git
@@ -38,7 +38,6 @@
 	path = Plugins/OrionStreamer
 	url = https://github.com/robcog-iai/OrionStreamer.git
 	branch = master
-
 [submodule "Plugins/UElectricalDevices"]
 	path = Plugins/UElectricalDevices
 	url = https://github.com/robcog-iai/UElectricalDevices.git
