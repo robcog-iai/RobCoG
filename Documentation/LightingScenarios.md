@@ -2,7 +2,7 @@ If you want to add different lighting scenarios, you need to add them as sub-lev
 
 * Open the level editor. By Default, you will find the IAIKitchen_Sunny as a sublevel/Lighting scenario.
 
-![](Img/AddExistingLevel.jpg)
+![](Img/OpenLevelEditor.jpg)
 
 * Click "Add Existing Level" and choose the lighting scenario you want. 
 
