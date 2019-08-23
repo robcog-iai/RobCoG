@@ -6,7 +6,7 @@ If you want to add different lighting scenarios, you need to add them as sub-lev
 
 * Click "Add Existing Level" and choose the lighting scenario you want. 
 
-![](Img/AddExistingLevel.JPG)
+![](Img/AddExistingLevel.jpg)
 
 * Right-click your scenario sub-level and Change Streaming Method to "Always Loaded". Then change the other sublevels to "Blueprint".
 
