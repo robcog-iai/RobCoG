@@ -10,7 +10,6 @@
 
 //Utils
 #include "Tags.h"
-
 static const FName UElectricalDevicesEdTabName("UElectricalDevicesEd");
 
 #define LOCTEXT_NAMESPACE "FUElectricalDevicesEdModule"
@@ -62,23 +61,22 @@ void FUElectricalDevicesEdModule::PluginButtonClicked()
 	LoopActor();
 }
 
-void FUElectricalDevicesEdModule::AddMenuExtension(FMenuBuilder& Builder)
-{
-	Builder.AddMenuEntry(FUElectricalDevicesEdCommands::Get().PluginAction);
-}
-
 FReply FUElectricalDevicesEdModule::LoopActor()
 {
-	UE_LOG(LogTemp, Warning, TEXT("11"));
 	for (TActorIterator<AActor> ActItr(GEditor->GetEditorWorldContext().World()); ActItr; ++ActItr)
 	{
 		int32 TagIndex = FTags::GetTagTypeIndex(*ActItr, "EDCookTopButtonController");
 		if (TagIndex != INDEX_NONE)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("%s"), ActItr->GetName());
+			UE_LOG(LogTemp, Warning, TEXT("%d"),TagIndex);
 		}
 	}
 	return FReply::Handled();
+}
+
+void FUElectricalDevicesEdModule::AddMenuExtension(FMenuBuilder& Builder)
+{
+	Builder.AddMenuEntry(FUElectricalDevicesEdCommands::Get().PluginAction);
 }
 
 void FUElectricalDevicesEdModule::AddToolbarExtension(FToolBarBuilder& Builder)
