@@ -42,3 +42,7 @@
 	path = Plugins/UElectricalDevices
 	url = https://github.com/robcog-iai/UElectricalDevices.git
 	branch = master
+[submodule "Plugins/SRanipal"]
+	path = Plugins/SRanipal
+	url = https://github.com/robcog-iai/SRanipal.git
+	branch = master
