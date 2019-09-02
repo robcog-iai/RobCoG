@@ -15,7 +15,7 @@
 
 If you want to add items to sublevel, not the main/persistent level:
 
-* In the Level Editor: Select your sub-level, Right-click > *Make Current*. You will see the name of the level change at the bottom-right of your viewport. Now you can add your objects/lights.
+* In the Level Editor: Select your sublevel, Right-click > *Make Current*. You will see the name of the level change at the bottom-right of your viewport. Now you can add your objects/lights.
 
 ![](Img/MakeCurrent.jpg)
 
@@ -24,7 +24,7 @@ If you want to add items to sublevel, not the main/persistent level:
 
 - You see all the items from your un-hidden levels in your World Outliner window, so be careful not to change something in another level accidentally.
 - If you want to be sure while making changes, you can hide all other levels, make your changes, then unhide them again. 
-Or you can open the sub-level normally as a level and make your changes. 
+Or you can open the sublevel normally as a level and make your changes. 
 
 
 ### For Lighting Scenarios:
@@ -35,7 +35,7 @@ If you want to add different lighting scenarios, you need to add them as subleve
 
 * Then place your lights in a seperate level. You can create a new level or Add an existing one, as shown above.
 
-* Right-click your sub-level > *Lighting Scenario* > *Change to Lighting Scenario*. Or toggle the light icon next to it.
+* Right-click your sublevel > *Lighting Scenario* > *Change to Lighting Scenario*. Or toggle the light icon next to it.
 
 ![](Img/ToggleLightingScenario.jpg)
 
@@ -47,7 +47,7 @@ If you want to add different lighting scenarios, you need to add them as subleve
 
 ### To Set which sublevels should run on Play:
 
-* Right-click the scenario/sub-level you want to run on Play > *Change Streaming Method* > *Always Loaded*. Then change the other sublevels you don't want to Play to *Blueprint*.
+* Right-click the scenario/sublevel you want to run on Play > *Change Streaming Method* > *Always Loaded*. Then change the other sublevels you don't want to Play to *Blueprint*.
 
 ![](Img/ChangeStreamingMethod.jpg)
 
