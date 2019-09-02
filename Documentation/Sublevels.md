@@ -63,6 +63,6 @@ To add the Motion Controller to a level, you also need to add it as a sublevel:
 
 * In the level editor> *Add Existing* > *IAIKitchen_MC* 
 
-* Right-Click on *IAIKitchen_MC* > *Change Streaming Method* > *Always Loaded.
+* Right-Click on *IAIKitchen_MC* > *Change Streaming Method* > *Always Loaded.*
 
 
