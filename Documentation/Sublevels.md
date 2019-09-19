@@ -65,4 +65,10 @@ To add the Motion Controller to a level, you also need to add it as a sublevel:
 
 * Right-Click on *IAIKitchen_MC* > *Change Streaming Method* > *Always Loaded.*
 
+## Sublevel Lighting Bug
+
+Sometimes after building the lighting, some meshes turn completely black. To fix this, Click the "Sun" icon next to your sublevel to Toggle *Off* then *On* again the lighting scenario and your meshes will go back to normal.
+
+![](Img/SublevelLightingBug.JPG)
+
 
