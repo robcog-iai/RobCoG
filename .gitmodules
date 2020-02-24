@@ -30,10 +30,6 @@
 	path = Plugins/UPIDController
 	url = https://github.com/robcog-iai/UPIDController.git
 	branch = master
-[submodule "Plugins/libmongo"]
-	path = Plugins/libmongo
-	url = https://github.com/robcog-iai/libmongo.git
-	branch = master
 [submodule "Plugins/OrionStreamer"]
 	path = Plugins/OrionStreamer
 	url = https://github.com/robcog-iai/OrionStreamer.git
@@ -45,4 +41,16 @@
 [submodule "Plugins/SRanipal"]
 	path = Plugins/SRanipal
 	url = https://github.com/robcog-iai/SRanipal.git
+	branch = master
+[submodule "Plugins/UMongoC"]
+	path = Plugins/UMongoC
+	url = https://github.com/robcog-iai/UMongoC.git
+	branch = master
+[submodule "Plugins/UMongoQA"]
+	path = Plugins/UMongoQA
+	url = https://github.com/robcog-iai/UMongoQA.git
+	branch = master
+[submodule "Plugins/UViz"]
+	path = Plugins/UViz
+	url = https://github.com/robcog-iai/UViz.git
 	branch = master
