@@ -1,6 +1,4 @@
 
-# RobCoG - **Rob**ot **Co**mmonsense **G**ames
-
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
 ### UE Version: **4.22**
