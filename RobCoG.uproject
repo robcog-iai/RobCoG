@@ -15,10 +15,6 @@
 			"Name": "USemLog",
 			"Enabled": true,
 			"MarketplaceURL": "http://robcog.org/"
-		},
-		{
-			"Name": "OrionStreamer",
-			"Enabled": true
 		}
 	]
 }
