@@ -53,11 +53,13 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 ### Citations
 
 ```bibtex
-@inproceedings{haiduameva19,
-  author    = {Andrei Haidu, Michael Beetz},
+@inproceedings{8793859,
+  author    = {A. {Haidu} and M. {Beetz}},
   title     = {Automated Models of Human Everyday Activity based on Game and Virtual Reality Technology},
-  booktitle = {International Conference on Robotics and Automation (ICRA)},
-  year      = {2019}
+  booktitle = {2019 International Conference on Robotics and Automation (ICRA)},
+  year      = {2019},
+  pages     = {2606-2612},
+  url       = { https://doi.org/10.1109/ICRA.2019.8793859}
 }
 ```
 
