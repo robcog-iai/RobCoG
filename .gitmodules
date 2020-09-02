@@ -54,3 +54,6 @@
 	path = Plugins/UViz
 	url = https://github.com/robcog-iai/UViz.git
 	branch = master
+[submodule "Plugins/UProtobuf"]
+	path = Plugins/UProtobuf
+	url = https://github.com/robcog-iai/UProtobuf.git
