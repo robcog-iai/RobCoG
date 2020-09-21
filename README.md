@@ -1,7 +1,7 @@
 
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
 
-### UE Version: **4.22**
+### UE Version: **4.23**
 
 ### C++ Coding Standards:
 
