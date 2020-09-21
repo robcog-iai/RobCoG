@@ -12,6 +12,22 @@
 	],
 	"Plugins": [
 		{
+			"Name": "OrionStreamer",
+			"Enabled": true
+		},
+		{
+			"Name": "PythonScriptPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "EditorScriptingUtilities",
+			"Enabled": true
+		},
+		{
+			"Name": "SequencerScripting",
+			"Enabled": true
+		},
+		{
 			"Name": "USemLog",
 			"Enabled": true,
 			"MarketplaceURL": "http://robcog.org/"
