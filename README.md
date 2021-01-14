@@ -3,6 +3,12 @@
 
 ### UE Version: **4.23**
 
+### Capabilities
+
+![](Documentation/GIF/robcog_interaction.gif)
+
+![](Documentation/GIF/robcog_pouring.gif)
+
 ### C++ Coding Standards:
 
  * [Unreal Code Standard](https://docs.unrealengine.com/en-us/Programming/Development/CodingStandard)
