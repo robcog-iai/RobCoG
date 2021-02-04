@@ -1,15 +1,4 @@
-[submodule "Meshes/Private"]
-	path = Meshes/Private
-	url = https://github.com/robcog-iai/PrivateMeshes.git
-	branch = master
-[submodule "Meshes/Public"]
-	path = Meshes/Public
-	url = https://github.com/robcog-iai/PublicMeshes.git
-	branch = master
-[submodule "Scripts"]
-	path = Scripts
-	url = https://github.com/robcog-iai/Scripts.git
-	branch = master
+
 [submodule "Content/Private"]
 	path = Content/Private
 	url = https://github.com/robcog-iai/PrivateContent.git
@@ -18,22 +7,10 @@
 	path = Plugins/USemLog
 	url = https://github.com/robcog-iai/USemLog.git
 	branch = master
-[submodule "Plugins/UPhysicsBasedMC"]
-	path = Plugins/UPhysicsBasedMC
-	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
-	branch = master
-[submodule "Plugins/OrionStreamer"]
-	path = Plugins/OrionStreamer
-	url = https://github.com/robcog-iai/OrionStreamer.git
-	branch = master
-[submodule "Plugins/SRanipal"]
-	path = Plugins/SRanipal
-	url = https://github.com/robcog-iai/SRanipal.git
-	branch = master
 [submodule "Plugins/UMongoC"]
 	path = Plugins/UMongoC
-	url = https://github.com/robcog-iai/UMongoC.git
-	branch = master
+	url = https://github.com/xxjunxx/UMongoC.git
+	branch = cloud-sim
 [submodule "Plugins/UProtobuf"]
 	path = Plugins/UProtobuf
 	url = https://github.com/robcog-iai/UProtobuf.git
