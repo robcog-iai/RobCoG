@@ -10,15 +10,19 @@
 			"LoadingPhase": "Default"
 		}
 	],
-	"Plugins": [
-		{
-			"Name": "USemLog",
-			"Enabled": true,
-			"MarketplaceURL": "http://robcog.org/"
-		},
-		{
-			"Name": "OrionStreamer",
-			"Enabled": false
-		}
-	]
+  "Plugins": [
+    {
+      "Name": "USemLog",
+      "Enabled": true,
+      "MarketplaceURL": "http://robcog.org/"
+    },
+    {
+      "Name": "OrionStreamer",
+      "Enabled": false
+    },
+    {
+      "Name": "PixelStreaming",
+      "Enabled": true
+    }
+  ]
 }
