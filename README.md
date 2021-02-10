@@ -56,6 +56,8 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 
 * [Sublevels](Documentation/Sublevels.md)
 
+* [Cloudsim](Documentation/CloudsimSetup.md)
+
 ### Citations
 
 ```bibtex
