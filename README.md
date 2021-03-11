@@ -58,7 +58,7 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 
 * [Cloudsim](Documentation/CloudsimSetup.md)
 
-### Citations
+### Related publications
 
 ```bibtex
 @inproceedings{haidu21ameva2,
