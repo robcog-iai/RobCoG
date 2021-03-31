@@ -58,10 +58,19 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 
 * [Cloudsim](Documentation/CloudsimSetup.md)
 
-### Citations
+### Related publications
 
 ```bibtex
-@inproceedings{8793859,
+@inproceedings{haidu21ameva2,
+   title={Automated acquisition of structured, semantic models of manipulation activities from human VR demonstration}, 
+   author={Andrei Haidu and Michael Beetz},
+   booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+   year={2021},
+   address = {Xi'an, China},
+   note = {Accepted for publication, available at \url{https://arxiv.org/pdf/2011.13689.pdf}},
+}
+
+@inproceedings{haidu19ameva,
   author    = {A. {Haidu} and M. {Beetz}},
   title     = {Automated Models of Human Everyday Activity based on Game and Virtual Reality Technology},
   booktitle = {2019 International Conference on Robotics and Automation (ICRA)},
@@ -69,10 +78,8 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
   pages     = {2606-2612},
   url       = { https://doi.org/10.1109/ICRA.2019.8793859}
 }
-```
 
-```bibtex
-@inproceedings{DBLP:conf/iros/HaiduBBB18,
+@inproceedings{haidu18krsim,
   author    = {Andrei Haidu, Daniel Bessler, Asil Kaan Bozcuoglu, Michael Beetz},
   title     = {KnowRob_SIM - Game Engine-Enabled Knowledge Processing Towards Cognition-Enabled Robot Control},
   booktitle = {2018 {IEEE/RSJ} International Conference on Intelligent Robots and Systems, {IROS} 2018, Madrid, Spain, October 1-5, 2018},
