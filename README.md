@@ -38,13 +38,22 @@
 
 The project points to various submodules (plugins, assets, private assets etc.). If you want to clone the project with submodules, see the following git commands:
 
-* after cloning the project, run
+* after cloning the project, clone specific submodules:
 
+```bash
+$ git submodule update --init Content/Private
+$ git submodule update --init Plugins/USemLog
+$ git submodule update --init Plugins/UMongoC
+[..]
 ```
+
+* all submodules:
+
+```bash
 $ git submodule update --init --recursive
 ```
 
-* or in one command
+* or clone the repository with all the submodules:
 
 ```
 $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
