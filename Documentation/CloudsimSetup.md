@@ -6,7 +6,7 @@ CloudSim is a robot simulation system that is deployed on the Kubernetes cluster
 
 The following image shows how CloudSim works. A GameServer Launcher is reponsible for creating and closing the Unreal Eninge Pixel Streaming applications in the cluster. Each Unreal Eninge Pixel Streaming application is wrap as an Agones GameServn r. A Pixel Streaming application is composed of three components, Unreal Engine application, WebRTC Proxy Server,  Signalling and Web Server.
 
-- ![cloudsim](./CloudSim.jpg)
+- ![cloudsim](./Img/CloudSim.jpg)
 
 
 
@@ -128,13 +128,47 @@ docker run --name mongo-server -d -p 17017:27017 mongo:latest
 
 The GameServer Launcher can create a Agones Game Server with three components, Signalling Server, WebRTC Server and Unreal Engine Application. Each component will be running in an image. In this section, we focus on how to build an image contains a packaged RobCoG project.
 
-### CloudSim Level Package Preparation(On Windows or Linux)
+### CloudSim Level Development
 
 1. make sure the KnowrobManager,  LoggerManager, SymbolicManager, WordStateManager in the level
 
-2. Generate SemanticMap OWL file which is used to loaded in KnowRob (Better to remove unnecessary individuals in the OWL file)
+2. Create individual components for the items in the level
 
-3.  Setup dependencies in RobCoG project. USemLog, Pixel Streaming Plugin are required for CloudSims
+   ![cloudsim](./Img/individual.png)
+
+3. Create event monitor for the certain items
+
+   Choose the item, and click `Add Component` and choose `ContactMonitorBox` or `ContactMonitorSphere` based on the shape of the object.
+
+4. KnowrobManagerSetup
+
+   Enable flag `LoadValuesFromCommand` and disable `Auto Convert World`
+
+   KRServer IP and other configuration don't need to be chage, they will be configured by gs-launcher.
+
+   ![cloudsim](./Img/knowrobmanager.png)
+
+5. Generate Task OWL file and SemanticMap OWL file which is used to loaded in KnowRob 
+
+   Click `Write Semantic Map Button` to generate Semantic Map OWL file. The OWL file will be under `RobCoG/SL`
+
+   Click `Write Task Button` to generate Task OWL file.
+
+   The semantic map can be loaded in `knowrob_ameva`. Copy the SemanticMap OWL file in knowrob_ameva/maps and load the semantic map using query  `am_load_semantic_map('utJDwYBP8CA', MapId)` 
+
+   Better to remove unnecessary individuals in the SemanticMap OWL file
+
+   Each level comes with one SemanticMap OWL representing the environment. Each Task can be performed in different environments, The combination of task id and semantic map id, allow us to define basic information of the episode. An episode can be understand  as executing a task in a given environment.
+
+   
+
+   ![cloudsim](./Img/semanticmap.png)
+
+
+
+### CloudSim Level Package Preparation(On Windows or Linux)
+
+1.  Setup dependencies in RobCoG project. USemLog, Pixel Streaming Plugin are required for CloudSims
 
    ```
    
@@ -151,7 +185,7 @@ The GameServer Launcher can create a Agones Game Server with three components, S
      ]
    ```
 
-4. Setup dependencies in USemLog. UMongoC and UProtobuf are required. You can remove the others
+2. Setup dependencies in USemLog. UMongoC and UProtobuf are required. You can remove the others
 
    USemLog.uplugin.
 
@@ -183,11 +217,11 @@ The GameServer Launcher can create a Agones Game Server with three components, S
    			)
    ```
 
-5. Choose the Level to package
+3. Choose the Level to package
 
    Project Settings > Packaging, add the levels you want to build into `List of maps to include in a packaged build`
 
-6. Save the project and move the project in Linux. It can only been compiled under Linux so far, Copy the project to Linux or commit the changes to github and download the project in Linux.
+4. Save the project and move the project in Linux. It can only been compiled under Linux so far, Copy the project to Linux or commit the changes to github and download the project in Linux.
 
    You can clean unecessary stuff like Binaries, Saved and ..
 
