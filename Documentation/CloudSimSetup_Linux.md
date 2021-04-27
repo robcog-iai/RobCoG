@@ -97,7 +97,7 @@
 
 
 * knowrob_ameva:
-* 
+
   * `$ sudo apt install libcurlpp-dev`
   * `$ cd ~/catkin_ws/src`
   * `$ git clone https://github.com/robcog-iai/knowrob_ameva.git`
