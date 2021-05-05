@@ -24,13 +24,47 @@
   
 ## Kubernetes
 
-* create cluster with `kubeadm` (https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/):
+### kubeadm, kubelet and kubectl
+
+* from https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
  
- * 
+  * `$ sudo apt-get update`
+  * `$ sudo apt-get install -y apt-transport-https ca-certificates curl`
+  * `$ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg`
+  * `$ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list`
+  * `$ sudo apt-get update`
+  * `$ sudo apt-get install -y kubelet kubeadm kubectl`
+  * `$ sudo apt-mark hold kubelet kubeadm kubectl`
+ 
+* init:
+
+ * `$ sudo swapoff -a`
+ * `$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16`
+ * `$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
+
+ * To start using your cluster, you need to run the following as a regular user:
+
+  * `$ mkdir -p $HOME/.kube`
+  * `$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config`
+  * `$ sudo chown $(id -u):$(id -g) $HOME/.kube/config`
+
+*  fix "master node doesn’t schedule pod"
+ * `$ kubectl taint nodes --all node-role.kubernetes.io/master-`
+
+
+### gpu (nvidia) support  
+
+* from https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/
+
+  * `$ nvidia-smi`
+  * `$ kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/1.0.0-beta4/nvidia-device-plugin.yml`
 
 ## Agones
 
-*
+* from https://agones.dev/site/docs/installation/install-agones/yaml/
+  
+  * `$ kubectl create namespace agones-system`
+  * `$ kubectl apply -f https://raw.githubusercontent.com/googleforgames/agones/release-1.13.0/install/yaml/install.yaml`
 
 ## MongoDB
 
@@ -64,6 +98,8 @@
   
 ## KnowRob
 
+* from https://github.com/knowrob/knowrob:
+
   * `$ sudo apt install python-rosdep2 python-wstool rosbash`
   * `$ cd ~ && mkdir catkin_ws && cd catkin_ws && rosdep update`
   * `$ wstool init src`
@@ -73,7 +109,9 @@
   * `$ rosdep install --ignore-src --from-paths .`
   * `$ cd ~/catkin_ws && catkin_make`
   * `$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc`  
+  * `$ echo "export SWI_HOME_DIR=/usr/lib/swi-prolog" >> ~/.bashrc`  
   * `$ source ~/.bashrc`
+
 
 ### knowrob_ameva
 
@@ -102,3 +140,4 @@
   * `$ cd ~/catkin_ws/src`
   * `$ git clone https://github.com/robcog-iai/knowrob_ameva.git`
   * `$ cd ~/catkin_ws && catkin_make knowrob_ameva`
+
