@@ -33,7 +33,7 @@
   * `$ sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg`
   * `$ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list`
   * `$ sudo apt-get update`
-  * `$ sudo apt-get install -y kubelet kubeadm kubectl`
+  * `$ sudo apt-get install -y kubelet=1.16.15-00 kubeadm=1.16.15-00 kubectl=1.19.2-00`
   * `$ sudo apt-mark hold kubelet kubeadm kubectl`
  
 * init:
@@ -48,7 +48,7 @@
   * `$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config`
   * `$ sudo chown $(id -u):$(id -g) $HOME/.kube/config`
 
-*  fix "master node doesn’t schedule pod"
+*  fix "master node doesnít schedule pod"
  * `$ kubectl taint nodes --all node-role.kubernetes.io/master-`
 
 
@@ -64,7 +64,27 @@
 * from https://agones.dev/site/docs/installation/install-agones/yaml/
   
   * `$ kubectl create namespace agones-system`
-  * `$ kubectl apply -f https://raw.githubusercontent.com/googleforgames/agones/release-1.13.0/install/yaml/install.yaml`
+  * `$ kubectl apply -f https://raw.githubusercontent.com/googleforgames/agones/release-1.10.0/install/yaml/install.yaml`
+
+### cloudsim_k8s_launcher
+* k8s access authority
+ 
+  * `$ kubectl create clusterrolebinding default-view --clusterrole=view --serviceaccount=default:default`
+  * `$ kubectl create clusterrolebinding serviceaccounts-cluster-admin --clusterrole=cluster-admin  --group=system:serviceaccounts`
+
+* from https://github.com/robcog-iai/cloudsim_k8s_launcher
+  * `$ git clone ttps://github.com/robcog-iai/cloudsim_k8s_launcher && cd loudsim_k8s_launcher`
+  * Edit Dockefile
+  
+   * PORT - the port the launcher listen to(no need to change)
+   * HOST - the ip address of the host running the k8s cluster. The host runs the cloudsim_k8s_launcher
+   * MONGO_IP - ip address of the mongodb for keeping world state data, usually the same host
+   * MONGO_PORT - port of mongodb
+   * IMAGE_REPO - when launcher create the resource, it will pull images from the docker hub. This specify where to pull the image.
+  
+ * `$ docker build -t robcog/cloudsim_k8s_launcher .`
+ * `$ docker push robcog/cloudsim_k8s_launcher .`
+ * `$ kubectl apply -f ./cloudsim_k8s_launcher.yaml`
 
 ## MongoDB
 
