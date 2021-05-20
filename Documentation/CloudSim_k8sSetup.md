@@ -11,7 +11,7 @@ Not available at the moment
 * Init k8s cluster with kubeadm
   * sudo swapoff -a
   * sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-* To start using your cluster, you need to run the following as a regular user:
+* To start using your cluster, you need to run the following as a regular user: (This is required each time you reset the k8s. This file keeps the randomly generated authentication token, therefore you need to replace the old config file if exists)
   * mkdir -p $HOME/.kube
   * sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   * sudo chown $(id -u):$(id -g) $HOME/.kube/config

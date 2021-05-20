@@ -12,7 +12,7 @@ The following image shows how CloudSim works. A GameServer Launcher is reponsibl
 
 ## CloudSim Tutorial
 
-1. Install required softwares for CloudSim [here](./CloudSim_Installation.md)
+1. Install required softwares for CloudSim (This step is only required when working with new PC) [here](./CloudSim_Installation.md)
 2. Setup k8s cluster for CloudSim [here](./CloudSim_k8sSetup.md)
 3. Deploy cloudsim_k8s_launcher on the cluster [here](./CloudSim_k8sLauncher.md)
 4. Test example queries in knowrob_ameva [here](./CloudSim_TestQueries.md)
