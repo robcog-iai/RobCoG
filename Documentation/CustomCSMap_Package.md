@@ -24,7 +24,7 @@ Notice: Compiling in Linux is more strict than in Windows. Some error will not o
   docker build -t robcog/map_name .
   ```
 
-* Upload the image to docker images repo. The cloudsim_k8s_launcher will pull the image from docker hub, therefore you need to push the image to docker hub.
+* Upload the image to docker images repo. The cloudsim_k8s_launcher will pull the image from docker hub, therefore you need to push the image to docker hub. Make sure the `map_name` is the same as the `LevelName` in the corresponding semantic map
 
   ```
   docker push robcog/map_name
