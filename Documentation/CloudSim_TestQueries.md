@@ -3,7 +3,7 @@
 ### Commands
 
 * terminal one
-  * sudo systemctl start mongod (You can skip this if you mongodb is already running in the PC)
+  * sudo systemctl start mongod  or  docker run --name mongo-server -d -p 27017:27017 mongo:latest  (You can skip this if you mongodb is already running in the PC. Or you can use docker container run mongo-server in haidu-vr)
   * source devel/setup.bash (You can skip this, if you have added `source devel/setup.bash` to `~/.basrhc` )
   * roslaunch knowrob knowrob.launch
 * terminal two

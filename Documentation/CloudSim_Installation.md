@@ -24,7 +24,47 @@
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`
   * `$ sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io` 
 
+## Nvidia Support
 
+- from https://phoenixnap.com/kb/install-nvidia-drivers-ubuntu
+
+  - ubuntu-drivers devices (Get supported driver)
+  - sudo apt install nvidia-driver-450 (Tested version)
+  - nvidia-smi (make sure you installed the driver, after reboot)
+
+- https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+
+  - distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+       && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
+       && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+  - sudo apt-get update
+  - sudo apt-get install -y nvidia-docker2
+  - sudo systemctl restart docker
+  - sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi （make sure you can use nvidia driver in container）
+
+- https://levelup.gitconnected.com/running-gpu-enabled-containers-in-kubernetes-cluster-f0a3d87a450c
+
+  - Edit docker runtime at /etc/docker/daemon.json
+
+    ```
+    {
+        "default-runtime": "nvidia",
+        "runtimes": {
+            "nvidia": {
+                "path": "/usr/bin/nvidia-container-runtime",
+                "runtimeArgs": []
+            }
+        }
+    }
+    ```
+
+  - sudo pkill -SIGHUP dockerd
+
+  - sudo systemctl daemon-reload
+
+  - sudo systemctl restart docker
+
+  - sudo docker run --rm  nvidia/cuda:11.0-base nvidia-smi (make sure the default runtime is nvidia)
 
 ## Kubernetes
 
