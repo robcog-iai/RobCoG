@@ -71,12 +71,13 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 
 ```bibtex
 @inproceedings{haidu21ameva2,
-   title={Automated acquisition of structured, semantic models of manipulation activities from human VR demonstration}, 
-   author={Andrei Haidu and Michael Beetz},
-   booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
-   year={2021},
-   address = {Xi'an, China},
-   note = {Accepted for publication, available at \url{https://arxiv.org/pdf/2011.13689.pdf}},
+  title     = {Automated acquisition of structured, semantic models of manipulation activities from human VR demonstration}, 
+  author    = {Andrei Haidu and Michael Beetz},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2021},
+  address   = {Xi'an, China},
+  url       = {https://arxiv.org/pdf/2011.13689.pdf}
+  note      = {Finalist for Best Paper Award on Human-Robot Interaction},
 }
 
 @inproceedings{haidu19ameva,
