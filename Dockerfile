@@ -6,7 +6,7 @@ COPY --chown=ue4:ue4 . /tmp/project
 
 # Build and package our Unreal project
 WORKDIR /tmp/project
-RUN ue4 package
+RUN ue4 package Development
 
 # Copy the packaged files into a runtime container image that doesn't include any Unreal Engine components
 FROM adamrehn/ue4-runtime:latest
