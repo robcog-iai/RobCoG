@@ -15,6 +15,8 @@
   * Enable flag `LoadValuesFromCommand`, 
 
   * Disable flag `Auto Convert World` 
+  
+  * Disable flag `ignore` 
 
   * No need to change KRServer IP and other configuration, they will be configured by cloudsim_k8s_lanuncher
 
