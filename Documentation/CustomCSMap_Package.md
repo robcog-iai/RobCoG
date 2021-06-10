@@ -2,6 +2,12 @@
 
 Notice: Compiling in Linux is more strict than in Windows. Some error will not occur in Windows. To compile the project we need to use the tool `ue4-docker` to build Unreal Engine in Linux and use the image to compile the project
 
+* Dependencies
+
+```
+$ sudo apt-get install python3-setuptools
+```
+
 * Install ue4-docker. https://pypi.org/project/ue4-docker/
 
   ```
