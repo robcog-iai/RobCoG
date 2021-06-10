@@ -18,11 +18,14 @@ $ pip3 install -U pip
 * Build container images for the Unreal Engine 4.23 version Pixel Streaming for Linux. https://docs.adamrehn.com/ue4-docker/commands/build
 
   ```
+  $ ue4-docker build custom:4.23.1-pixelstreaming -repo=https://github.com/adamrehn/UnrealEngine.git -branch=4.23.1-pixelstreaming --no-engine
+  
   ue4-docker build \
     custom:4.23.1-pixelstreaming \                        # Tag the image as adamrehn/ue4-full:4.23.1-pixelstreaming
     -repo=https://github.com/adamrehn/UnrealEngine.git \  # Use Adam's fork of the Unreal Engine
     -branch=4.23.1-pixelstreaming \                       # Use the branch for the Engine version we are targeting
     --no-engine                                           # Don't build the ue4-engine image, just source, minimal and full
+    
   ```
 
 * Use Dockerfile to build the image with RobCoG project. The project needs to be built with Linux with NVIDIA driver.
