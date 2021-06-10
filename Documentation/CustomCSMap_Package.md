@@ -6,6 +6,7 @@ Notice: Compiling in Linux is more strict than in Windows. Some error will not o
 
 ```
 $ sudo apt-get install python3-setuptools
+$ pip3 install -U pip
 ```
 
 * Install ue4-docker. https://pypi.org/project/ue4-docker/
