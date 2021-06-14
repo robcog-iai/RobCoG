@@ -11,5 +11,14 @@
 		}
 	],
 	"Plugins": [
-	]
+		{
+		  "Name": "USemLog",
+		  "Enabled": true,
+		  "MarketplaceURL": "http://robcog.org/"
+		},
+		{
+		  "Name": "PixelStreaming",
+		  "Enabled": true
+		}
+	  ]
 }
