@@ -1,13 +1,13 @@
 ## Test CloudSim queries in knowrob_ameva
 
-### Commands
+### Setup and testing
 
 * make sure mongodb is running
- ` $  sudo systemctl start mongod ` or ` $ docker run --name mongo-server -d -p 27017:27017 mongo:latest ` if you want to use the dockersized mongo
-* make sure ros is sourced (`$ source ~/catkin_ws/devel/setup.bash`) 
+ ` $  sudo systemctl start mongod ` or ` $ docker run --name mongo-server -d -p 27017:27017 mongo:latest ` if you want to use the dockerized version
+* make sure ROS is sourced (`$ source ~/catkin_ws/devel/setup.bash`) 
 
 * launch knowrob
- `$ roslaunch knowrob knowrob.launch`
+ `$ roslaunch knowrob knowrob.launch` 
  
 * in a new terminal start rosprolog
 
