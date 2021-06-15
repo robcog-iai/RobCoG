@@ -28,14 +28,17 @@ $ pip3 install -U pip
     
   ```
 
-* Use Dockerfile to build the image with RobCoG project. The project needs to be built with Linux with NVIDIA driver.
-* Goto `/path_to_proj/RobCoG/`
-* 
+* goto `/path_to_proj/RobCoG/`
+* `RobCoG/Dockerfile` will build the image with the RobCoG project (under linux with nvidia gpu)
+* make sure`docker_map_name` and the `LevelName` tag in the semantic map is the same
+
   ```
   docker build -t robcog/docker_map_name .
   ```
 
-* Upload the image to docker images repo. The cloudsim_k8s_launcher will pull the image from docker hub, therefore you need to push the image to docker hub. Make sure the `map_name` is the same as the `LevelName` in the corresponding semantic map
+* logint to docker (user robcog) with `$ docker login`
+* upload the image to docker hub, `cloudsim_k8s_launcher` will pull the image from docker hub
+
 
   ```
   docker push robcog/docker_map_name
