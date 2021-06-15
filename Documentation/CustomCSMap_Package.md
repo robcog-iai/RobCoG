@@ -36,7 +36,7 @@ $ pip3 install -U pip
   docker build -t robcog/docker_map_name .
   ```
 
-* logint to docker (user robcog) with `$ docker login`
+* login to docker (user robcog) with `$ docker login`
 * upload the image to docker hub, `cloudsim_k8s_launcher` will pull the image from docker hub
 
 
@@ -44,5 +44,13 @@ $ pip3 install -U pip
   docker push robcog/docker_map_name
   ```
 
-  
+# Issues
+
+* in case docker-eu is not recognized:
+
+```
+$ pip uninstall ue4-docker
+reboot PC
+$ pip install ue4-docker
+```
 
