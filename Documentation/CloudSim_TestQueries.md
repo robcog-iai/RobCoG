@@ -7,13 +7,16 @@
 * make sure ROS is sourced (`$ source ~/catkin_ws/devel/setup.bash`) 
 
 * launch knowrob
+
  `$ roslaunch knowrob knowrob.launch` 
  
 * in a new terminal start rosprolog
 
   `$ rosrun rosprolog rosprolog_commandline.py`
-  `register_ros_package('knowrob_ameva').`
-  `ue_start_srv`
+  
+  `?- register_ros_package('knowrob_ameva').`
+  
+  `?- ue_start_srv`
   
 * Test queries:
   
