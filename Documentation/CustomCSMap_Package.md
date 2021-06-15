@@ -18,7 +18,7 @@ $ pip3 install -U pip
 * Build container images for the Unreal Engine 4.23 version Pixel Streaming for Linux. https://docs.adamrehn.com/ue4-docker/commands/build
 
   ```
-  $ ue4-docker build custom:4.23.1-pixelstreaming -repo=https://github.com/adamrehn/UnrealEngine.git -branch=4.23.1-pixelstreaming --no-engine
+  ue4-docker build custom:4.23.1-pixelstreaming -repo=https://github.com/adamrehn/UnrealEngine.git -branch=4.23.1-pixelstreaming --no-engine
   
   ue4-docker build \
     custom:4.23.1-pixelstreaming \                        # Tag the image as adamrehn/ue4-full:4.23.1-pixelstreaming
@@ -29,15 +29,16 @@ $ pip3 install -U pip
   ```
 
 * Use Dockerfile to build the image with RobCoG project. The project needs to be built with Linux with NVIDIA driver.
-
+* Goto `/path_to_proj/RobCoG/`
+* 
   ```
-  docker build -t robcog/map_name .
+  docker build -t robcog/docker_map_name .
   ```
 
 * Upload the image to docker images repo. The cloudsim_k8s_launcher will pull the image from docker hub, therefore you need to push the image to docker hub. Make sure the `map_name` is the same as the `LevelName` in the corresponding semantic map
 
   ```
-  docker push robcog/map_name
+  docker push robcog/docker_map_name
   ```
 
   
