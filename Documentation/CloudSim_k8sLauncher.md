@@ -24,6 +24,8 @@ https://github.com/robcog-iai/cloudsim_k8s_launcher
     MONGO_PORT=27017 \
     IMAGE_REPO=robcog
   ```
+  HOST - IP address of knowrob_ameva
+  MONGO_IP - IP address of mongodb server
   * docker build -t robcog/cloudsim_k8s_launcher .
   * docker push robcog/cloudsim_k8s_launcher 
 * Deploy cloudsim_k8s_launcher in k8s
