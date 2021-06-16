@@ -53,3 +53,12 @@
 * ue_set_episode(ClienId, Episode)
 * ue_draw_marker(ClientId, CupId, 0, 100, 'sphere', 'red', 0.02, 'Translucent')
 
+## Trouble shooting
+
+* check if unreal engine running in k8s, make sure Pod ue-gs-xxxxx(xxx is random) is running
+ 
+ `kubectl get pods`
+ 
+* print unreal engine log in the Pod
+  
+  `kubectl logs ue-gs-xxxxx(xxx is random) ue-app`
