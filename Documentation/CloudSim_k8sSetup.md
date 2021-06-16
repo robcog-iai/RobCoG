@@ -24,6 +24,18 @@ Not available at the moment
   
   `sudo chown $(id -u):$(id -g) $HOME/.kube/config`
   
+* make sure you install the correct version of kubeadm and kubectl. kubeadm=1.16.15 kubectl=1.19.2
+  
+  `kubectl version`
+
+  * if version is correct, you can jump to “Install Pod network”, if version is not correct, reinstall them
+  
+    `sudo apt-get purge kubelet kubeadm kubectl`
+  
+    `sudo apt-get install -y kubelet=1.16.15-00 kubeadm=1.16.15-00 kubectl=1.19.2-00`
+  
+  * you can now go back to "Reset k8s cluster after reboot the PC", reset the k8s again
+  
 * Install Pod network
 
   `kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml`
