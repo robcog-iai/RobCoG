@@ -2,6 +2,8 @@
 
 ### Setup and testing
 
+* make sure k8s and the launcher is installed and setup: [k8s](CloudSim_k8sSetup.md), [cloudsim_k8s_launcher](CloudSim_k8sLauncher.md)
+
 * make sure mongodb is running
  ` $  sudo systemctl start mongod ` or ` $ docker run --name mongo-server -d -p 27017:27017 mongo:latest ` if you want to use the dockerized version
 * make sure ROS is sourced (`$ source ~/catkin_ws/devel/setup.bash`) 
