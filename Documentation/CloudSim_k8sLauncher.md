@@ -17,15 +17,17 @@ https://github.com/robcog-iai/cloudsim_k8s_launcher
   * git clone https://github.com/robcog-iai/cloudsim_k8s_launcher 
   * cd cloudsim_k8s_launcher (following commands execute under cloudsim_k8s_launcher project)
   * *EDIT DOCKERFILE* 
-  ```
-  ENV PORT=9090 \                  
-    HOST=192.168.102.25 \
-    MONGO_IP=192.168.102.25 \
-    MONGO_PORT=27017 \
-    IMAGE_REPO=robcog
-  ```
-  HOST - IP address of knowrob_ameva
-  MONGO_IP - IP address of mongodb server
+    ```
+    ENV PORT=9090 \                  
+      HOST=192.168.102.25 \
+      MONGO_IP=192.168.102.25 \
+      MONGO_PORT=27017 \
+      IMAGE_REPO=robcog
+    ```
+
+    HOST - IP address of knowrob_ameva
+    MONGO_IP - IP address of mongodb server
+ 
   * docker build -t robcog/cloudsim_k8s_launcher .
   * docker push robcog/cloudsim_k8s_launcher 
 * Deploy cloudsim_k8s_launcher in k8s
