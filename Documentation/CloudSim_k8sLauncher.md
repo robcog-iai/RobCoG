@@ -10,6 +10,7 @@
 * Build cloudsim_k8s_launcher image. (You can skip cloning the project if you have already the project in your PC)
 
   `git clone https://github.com/robcog-iai/cloudsim_k8s_launcher`
+  
   `cd cloudsim_k8s_launcher`
   
 * edit `cloudsim_k8s_launcher/Dockerfile`:
