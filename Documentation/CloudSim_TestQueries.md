@@ -74,3 +74,7 @@
 * print unreal engine log in the Pod
   
   `kubectl logs ue-gs-xxxxx(xxx is random) ue-app`
+  
+ * After knowrob load the semantic map, triples will be saved in the mongodb in the local machine. If knowrob return you wrong results(same individual multiple times). You can just delete the database *rosprolog* in the mongodb and restart knowrob. By doing this, you can reset the knowrob
+
+
