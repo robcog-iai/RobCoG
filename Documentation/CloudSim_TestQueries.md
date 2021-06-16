@@ -5,7 +5,19 @@
 * make sure k8s and the launcher is installed and setup: [k8s](CloudSim_k8sSetup.md), [cloudsim_k8s_launcher](CloudSim_k8sLauncher.md)
 
 * make sure mongodb is running
- ` $  sudo systemctl start mongod ` or ` $ docker run --name mongo-server -d -p 27017:27017 mongo:latest ` if you want to use the dockerized version
+
+  * you can use mongodb installed in your PC
+ 
+    * Edit /etc/mongod.conf. Change ` bindIp: 127.0.0.1 ` to ` bindIp: 0.0.0.0 `
+
+    ` $  sudo systemctl start mongod ` 
+    
+  * or you can use dockerized version of mongodb
+   
+    ` $ docker run --name mongo-server -d -p 27017:27017 mongo:latest ` This will start a new container for the first time. 
+    
+    ` $ docker container start mongo-server ` This will restart the container after reboot. You still have the data
+
 * make sure ROS is sourced (`$ source ~/catkin_ws/devel/setup.bash`) 
 
 * launch knowrob
@@ -57,7 +69,7 @@
 
 * check if unreal engine running in k8s, make sure Pod ue-gs-xxxxx(xxx is random) is running
  
- `kubectl get pods`
+  `kubectl get pods`
  
 * print unreal engine log in the Pod
   
