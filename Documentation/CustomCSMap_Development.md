@@ -82,5 +82,10 @@
     ```
 
 * Choose the Level to package. Project Settings > Packaging, add the levels you want to build into `List of maps to include in a packaged build`
+
+* Choose the default map. Project Settings > Default Maps, choose the level as `Editor Startup Map` and `Game Default Map`
+  ![defaultmap](./Img/default_map.png)
+
 * Save the project and move the project in Linux. It can only been compiled under Linux so far, Copy the project to Linux or commit the changes to github and download the project in Linux.
+
 * You can clean unecessary stuff like Binaries, Saved and ..
