@@ -1,5 +1,11 @@
 ## Deploy cloudsim_k8s_launcher (https://github.com/robcog-iai/cloudsim_k8s_launcher)
 
+### batch cmd
+
+`kubectl create clusterrolebinding default-view --clusterrole=view --serviceaccount=default:default && kubectl create clusterrolebinding serviceaccounts-cluster-admin --clusterrole=cluster-admin --group=system:serviceaccounts && cd ~/cloudsim_k8s_launcher && kubectl apply -f ./cloudsim_k8s_launcher.yaml`
+
+### cmds
+
 
 * Authentication to allocate Pod in k8s
 
