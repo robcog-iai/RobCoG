@@ -6,17 +6,21 @@
 
 * make sure mongodb is running
 
-  * you can use mongodb installed in your PC
+  * you can use mongodb installed in your PC, change `bindIp: 127.0.0.1` -> `bindIp: 0.0.0.0`
  
-    * Edit /etc/mongod.conf. Change ` bindIp: 127.0.0.1 ` to ` bindIp: 0.0.0.0 `
+     `nano /etc/mongod.conf`
 
-    ` $  sudo systemctl start mongod ` 
+    `sudo systemctl start mongod` 
     
   * or you can use dockerized version of mongodb
    
-    ` $ docker run --name mongo-server -d -p 27017:27017 mongo:latest ` This will start a new container for the first time. 
+   * start a new container for the first time:
+   
+    `docker run --name mongo-server -d -p 27017:27017 mongo:latest `
     
-    ` $ docker container start mongo-server ` This will restart the container after reboot. You still have the data
+    * restart the container after reboot, previous data will be maintained:
+    
+    `docker container start mongo-server`
 
 * make sure ROS is sourced (`$ source ~/catkin_ws/devel/setup.bash`) 
 
@@ -65,7 +69,7 @@
 * ue_set_episode(ClienId, Episode)
 * ue_draw_marker(ClientId, CupId, 0, 100, 'sphere', 'red', 0.02, 'Translucent')
 
-## Trouble shooting
+## Troubleshooting
 
 * check if unreal engine running in k8s, make sure Pod ue-gs-xxxxx(xxx is random) is running
  
