@@ -1,11 +1,11 @@
 ## Setup k8s cluster for CloudSim
 
-### One cmd
+### batch cmd
 
 `yes | sudo kubeadm reset && sudo swapoff -a && sudo kubeadm init --pod-network-cidr=10.244.0.0/16 && mkdir -p $HOME/.kube && yes | sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && sudo chown $(id -u):$(id -g) $HOME/.kube/config && kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml && kubectl taint nodes --all node-role.kubernetes.io/master- && kubectl create namespace agones-system && kubectl apply -f https://raw.githubusercontent.com/googleforgames/agones/release-1.10.0/install/yaml/install.yaml`
 
 
-### commands
+### cmds
 
 * Reset k8s cluster after reboot the PC:
 * 
