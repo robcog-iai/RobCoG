@@ -27,3 +27,5 @@ The following image shows how CloudSim works. A GameServer Launcher is reponsibl
 ## Soft reboot
 
 `kubectl delete gameservers --all`
+
+`kubectl delete pods --all`
