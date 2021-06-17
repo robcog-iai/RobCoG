@@ -23,3 +23,11 @@ The following image shows how CloudSim works. A GameServer Launcher is reponsibl
 
 1. CloudSim Level development with RobCoG project in Windows [here](./CustomCSMap_Development.md)
 2. Package CloudSim Level in a Docker Image in Linux [here](./CustomCSMap_Package.md)
+
+## Soft reboot
+
+`kubectl delete gameservers --all`
+
+`kubectl delete pods --all`
+
+`cd ~/cloudsim_k8s_launcher && kubectl apply -f ./cloudsim_k8s_launcher.yaml`
