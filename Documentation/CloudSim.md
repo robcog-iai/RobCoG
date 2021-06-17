@@ -29,3 +29,5 @@ The following image shows how CloudSim works. A GameServer Launcher is reponsibl
 `kubectl delete gameservers --all`
 
 `kubectl delete pods --all`
+
+`cd ~/cloudsim_k8s_launcher && kubectl apply -f ./cloudsim_k8s_launcher.yaml`
