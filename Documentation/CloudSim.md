@@ -37,3 +37,7 @@ The following image shows how CloudSim works. A GameServer Launcher is reponsibl
 ```
 yes | sudo kubeadm reset && sudo swapoff -a && sudo kubeadm init --pod-network-cidr=10.244.0.0/16 && mkdir -p $HOME/.kube && yes | sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && sudo chown $(id -u):$(id -g) $HOME/.kube/config && kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml && kubectl taint nodes --all node-role.kubernetes.io/master- && kubectl create namespace agones-system && kubectl apply -f https://raw.githubusercontent.com/googleforgames/agones/release-1.10.0/install/yaml/install.yaml && kubectl create clusterrolebinding default-view --clusterrole=view --serviceaccount=default:default && kubectl create clusterrolebinding serviceaccounts-cluster-admin --clusterrole=cluster-admin --group=system:serviceaccounts && cd ~/cloudsim_k8s_launcher && kubectl apply -f ./cloudsim_k8s_launcher.yaml && sudo systemctl start mongod
 ```
+
+### Troubleshooting
+
+* if simulation loops endlessly, remove `rosprolog` database from mongo and start again.
