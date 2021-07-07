@@ -22,10 +22,6 @@
 	path = Plugins/UPhysicsBasedMC
 	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
 	branch = master
-[submodule "Plugins/OrionStreamer"]
-	path = Plugins/OrionStreamer
-	url = https://github.com/robcog-iai/OrionStreamer.git
-	branch = master
 [submodule "Plugins/SRanipal"]
 	path = Plugins/SRanipal
 	url = https://github.com/robcog-iai/SRanipal.git
