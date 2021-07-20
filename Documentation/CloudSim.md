@@ -6,9 +6,6 @@ CloudSim is a robot simulation system that is deployed on the Kubernetes cluster
 
 The following image shows how CloudSim works. A GameServer Launcher is reponsible for creating and closing the Unreal Eninge Pixel Streaming applications in the cluster. Each Unreal Eninge Pixel Streaming application is wrap as an Agones GameServer. A Pixel Streaming application is composed of three components, Unreal Engine application, WebRTC Proxy Server,  Signalling and Web Server.
 
-- ![cloudsim](/Users/lanxiaojun/Desktop/RobCoG/Documentation/Img/CloudSim.jpg)
-
-
 
 ## CloudSim Tutorial
 
