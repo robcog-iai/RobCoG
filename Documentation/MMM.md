@@ -12,7 +12,7 @@
   * `RobCoG/Plugins/USemLog` - semantic logger module for writing the episodic memories
   * `RobCoG/Plugins/UMongoC` - module for writing episodic memories to MongoDB
 * install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
-* install Unreal Engine 4.23
+* install Unreal Engine 4.25
 
 ## Project structure
 
