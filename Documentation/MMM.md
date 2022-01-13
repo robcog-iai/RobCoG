@@ -7,7 +7,7 @@
   * `$ git submodule update --init Plugins/UPhysicsBasedMC`
   * `$ git submodule update --init Plugins/USemLog`
   * `$ git submodule update --init Plugins/UMongoC`
-* make sure the following plugins were cloned and are up to date  
+* make sure the following plugins were cloned and are up to date (e.g. `cd Plugins/USemLog` and `git pull origin master`)  
   * `RobCoG/Plugins/UPhysicsBasedMC` - VR-enabled hand movements
   * `RobCoG/Plugins/USemLog` - semantic logger module for writing the episodic memories
   * `RobCoG/Plugins/UMongoC` - module for writing episodic memories to MongoDB
