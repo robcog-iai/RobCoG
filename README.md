@@ -81,13 +81,12 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
   year      = {2021},
   address   = {Xi'an, China},
   pages     = {9460-9466},
-  doi       = {10.1109/ICRA48506.2021.9562016}
   url       = {https://doi.org/10.1109/ICRA48506.2021.9562016}
   note      = {Finalist for Best Paper Award on Human-Robot Interaction},
 }
 
 @inproceedings{haidu19ameva,
-  author    = {A. {Haidu} and M. {Beetz}},
+  author    = {Andrei Haidu and Michael Beetz},
   title     = {Automated Models of Human Everyday Activity based on Game and Virtual Reality Technology},
   booktitle = {2019 International Conference on Robotics and Automation (ICRA)},
   year      = {2019},
