@@ -33,3 +33,6 @@
 [submodule "Plugins/UProtobuf"]
 	path = Plugins/UProtobuf
 	url = https://github.com/robcog-iai/UProtobuf.git
+[submodule "Plugins/UUtils"]
+	path = Plugins/UUtils
+	url = https://github.com:robcog-iai/UUtils.git

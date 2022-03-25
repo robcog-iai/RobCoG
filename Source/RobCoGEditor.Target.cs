@@ -8,7 +8,8 @@ public class RobCoGEditorTarget : TargetRules
 {
 	public RobCoGEditorTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Editor;
+		Type = TargetType.Editor;        
+        //DefaultBuildSettings = BuildSettingsVersion.V2;
 
 		ExtraModuleNames.AddRange( new string[] { "RobCoG" } );
 	}
