@@ -35,19 +35,19 @@
 	url = https://github.com/robcog-iai/UProtobuf.git
 [submodule "Plugins/UUtils"]
 	path = Plugins/UUtils
-	url = https://github.com:robcog-iai/UUtils.git
+	url = https://github.com/robcog-iai/UUtils.git
 [submodule "Plugins/UROSBridge"]
 	path = Plugins/UROSBridge
-	url = https://github.com:robcog-iai/UROSBridge.git
+	url = https://github.com/robcog-iai/UROSBridge.git
 [submodule "Plugins/UTFPublisher"]
 	path = Plugins/UTFPublisher
-	url = https://github.com:robcog-iai/UTFPublisher.git
+	url = https://github.com/robcog-iai/UTFPublisher.git
 [submodule "Plugins/UROSWorldControl"]
 	path = Plugins/UROSWorldControl
-	url = https://github.com:robcog-iai/UROSWorldControl.git
+	url = https://github.com/robcog-iai/UROSWorldControl.git
 [submodule "Plugins/URoboSim"]
 	path = Plugins/URoboSim
-	url = https://github.com:robcog-iai/URoboSim.git
+	url = https://github.com/robcog-iai/URoboSim.git
 [submodule "Plugins/URoboVision"]
 	path = Plugins/URoboVision
-	url = https://github.com:robcog-iai/URoboVision.git
+	url = https://github.com/robcog-iai/URoboVision.git
