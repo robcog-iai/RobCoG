@@ -77,8 +77,8 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 
 ```bibtex
 @inproceedings{haidu21ameva2,
-  title     = {Automated acquisition of structured, semantic models of manipulation activities from human VR demonstration}, 
   author    = {Andrei Haidu and Michael Beetz},
+  title     = {Automated acquisition of structured, semantic models of manipulation activities from human VR demonstration},  
   booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
   year      = {2021},
   address   = {Xi'an, China},
@@ -86,6 +86,18 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
   url       = {https://doi.org/10.1109/ICRA48506.2021.9562016}
   note      = {Finalist for Best Paper Award on Human-Robot Interaction},
 }
+
+@inproceedings{haidu21amevacv,
+ title      = {Knowledge-Enabled Generation of Semantically Annotated Image Sequences of Manipulation Activities from VR Demonstrations},
+ author     = {Andrei Haidu and Xiaoyue Zhang and Michael Beetz}, 
+ booktitle  = {Computer Vision Systems},
+ year       = {2021},
+ publisher  = {Springer International Publishing},
+ pages      = {130--143},
+ isbn       = {978-3-030-87156-7}
+ url        = {https://doi.org/10.1007/978-3-030-87156-7_11}
+}
+
 
 @inproceedings{haidu19ameva,
   author    = {Andrei Haidu and Michael Beetz},
@@ -97,9 +109,9 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 }
 
 @inproceedings{haidu18krsim,
-  author    = {Andrei Haidu, Daniel Bessler, Asil Kaan Bozcuoglu, Michael Beetz},
+  author    = {Andrei Haidu and Daniel Bessler and Asil Kaan Bozcuoglu and Michael Beetz},
   title     = {KnowRob_SIM - Game Engine-Enabled Knowledge Processing Towards Cognition-Enabled Robot Control},
-  booktitle = {2018 {IEEE/RSJ} International Conference on Intelligent Robots and Systems, {IROS} 2018, Madrid, Spain, October 1-5, 2018},
+  booktitle = {{IEEE/RSJ} International Conference on Intelligent Robots and Systems, {IROS} 2018, Madrid, Spain, October 1-5, 2018},
   year      = {2018},
   url       = {https://doi.org/10.1109/IROS.2018.8593935}
 }
