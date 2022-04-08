@@ -9,6 +9,8 @@
 
 ### Capabilities
 
+![](Documentation/GIF/robcog_urobosim.gif)
+
 ![](Documentation/GIF/robcog_interaction.gif)
 
 ![](Documentation/GIF/robcog_pouring.gif)
