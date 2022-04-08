@@ -94,10 +94,9 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
  year       = {2021},
  publisher  = {Springer International Publishing},
  pages      = {130--143},
- isbn       = {978-3-030-87156-7}
+ isbn       = {978-3-030-87156-7},
  url        = {https://doi.org/10.1007/978-3-030-87156-7_11}
 }
-
 
 @inproceedings{haidu19ameva,
   author    = {Andrei Haidu and Michael Beetz},
