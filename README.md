@@ -83,7 +83,7 @@ $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
   year      = {2021},
   address   = {Xi'an, China},
   pages     = {9460-9466},
-  url       = {https://doi.org/10.1109/ICRA48506.2021.9562016}
+  url       = {https://doi.org/10.1109/ICRA48506.2021.9562016},
   note      = {Finalist for Best Paper Award on Human-Robot Interaction},
 }
 
