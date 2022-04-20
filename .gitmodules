@@ -1,53 +1,53 @@
 [submodule "Meshes/Private"]
 	path = Meshes/Private
-	url = https://github.com/robcog-iai/PrivateMeshes.git
+	url = git@github.com:robcog-iai/PrivateMeshes.git
 	branch = master
 [submodule "Meshes/Public"]
 	path = Meshes/Public
-	url = https://github.com/robcog-iai/PublicMeshes.git
+	url = git@github.com:robcog-iai/PublicMeshes.git
 	branch = master
 [submodule "Scripts"]
 	path = Scripts
-	url = https://github.com/robcog-iai/Scripts.git
+	url = git@github.com:robcog-iai/Scripts.git
 	branch = master
 [submodule "Content/Private"]
 	path = Content/Private
-	url = https://github.com/robcog-iai/PrivateContent.git
+	url = git@github.com:robcog-iai/PrivateContent.git
 	branch = master
 [submodule "Plugins/USemLog"]
 	path = Plugins/USemLog
-	url = https://github.com/robcog-iai/USemLog.git
+	url = git@github.com:robcog-iai/USemLog.git
 	branch = master
 [submodule "Plugins/UPhysicsBasedMC"]
 	path = Plugins/UPhysicsBasedMC
-	url = https://github.com/robcog-iai/UPhysicsBasedMC.git
+	url = git@github.com:robcog-iai/UPhysicsBasedMC.git
 	branch = master
 [submodule "Plugins/SRanipal"]
 	path = Plugins/SRanipal
-	url = https://github.com/robcog-iai/SRanipal.git
+	url = git@github.com:robcog-iai/SRanipal.git
 	branch = master
 [submodule "Plugins/UMongoC"]
 	path = Plugins/UMongoC
-	url = https://github.com/robcog-iai/UMongoC.git
+	url = git@github.com:robcog-iai/UMongoC.git
 	branch = master
 [submodule "Plugins/UProtobuf"]
 	path = Plugins/UProtobuf
-	url = https://github.com/robcog-iai/UProtobuf.git
+	url = git@github.com:robcog-iai/UProtobuf.git
 [submodule "Plugins/UUtils"]
 	path = Plugins/UUtils
-	url = https://github.com/robcog-iai/UUtils.git
+	url = git@github.com:robcog-iai/UUtils.git
 [submodule "Plugins/UROSBridge"]
 	path = Plugins/UROSBridge
-	url = https://github.com/robcog-iai/UROSBridge.git
+	url = git@github.com:robcog-iai/UROSBridge.git
 [submodule "Plugins/UTFPublisher"]
 	path = Plugins/UTFPublisher
-	url = https://github.com/robcog-iai/UTFPublisher.git
+	url = git@github.com:robcog-iai/UTFPublisher.git
 [submodule "Plugins/UROSWorldControl"]
 	path = Plugins/UROSWorldControl
-	url = https://github.com/robcog-iai/UROSWorldControl.git
+	url = git@github.com:robcog-iai/UROSWorldControl.git
 [submodule "Plugins/URoboSim"]
 	path = Plugins/URoboSim
-	url = https://github.com/robcog-iai/URoboSim.git
+	url = git@github.com:robcog-iai/URoboSim.git
 [submodule "Plugins/URoboVision"]
 	path = Plugins/URoboVision
-	url = https://github.com/robcog-iai/URoboVision.git
+	url = git@github.com:robcog-iai/URoboVision.git
