@@ -14,6 +14,15 @@
 * install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 * install Unreal Engine 4.27
 
+### Building the Project
+Before opening the project from Unreal you have to build the project externally. This is done via Visual Studio, which can be 
+dowloaded [here](https://visualstudio.microsoft.com/). 
+Create a Visual Studio project file:
+![](Img/vs_solution_file.png)
+
+Open this file and find the Solution Explorer in Visual Studio, there you can build your project as in the image. 
+![](Img/vs_build.png)
+
 ## Project structure
 
 * mmm main map location `RobCoG/Content/Maps/MMM/MMM_IAIKitchen_VR.umap`
