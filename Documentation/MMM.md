@@ -20,10 +20,14 @@ dowloaded [here](https://visualstudio.microsoft.com/).
 Create a Visual Studio project file:
 ![](Img/vs_solution_file.png)
 
-Open this file and find the Solution Explorer in Visual Studio, there you can build your project as in the image. 
-Note: If the button is missing do the following on Windows PC: 
+*Note- If the button is missing do the following on Windows PC:
+
 Take this file: “C:\Program Files (x86)\Epic Games\Launcher\Engine\Binaries\Win64\UnrealVersionSelector.exe”.
 And paste it into “C:\Program Files\Epic Games\UE_4.15\Engine\Binaries\Win64” then double click it.
+And if it does not build check this [side](https://docs.unrealengine.com/4.27/en-US/ProductionPipelines/DevelopmentSetup/VisualStudioSetup/) 
+
+Open this file and find the Solution Explorer in Visual Studio, there you can build your project as in the image. 
+
 
 ![](Img/vs_build.png)
 
