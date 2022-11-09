@@ -1,8 +1,6 @@
 
 [![](Documentation/Img/RobCoG.png)](http://robcog.org/)
-
-### Start RobCoG 2.0
-
+### Stable Masterbranch for new features please take a look into the dev branch.
 ### UE Version: **4.27**
 
 ### Environments
