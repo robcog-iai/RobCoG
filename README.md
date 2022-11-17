@@ -66,7 +66,7 @@ $ git clone --recurse-submodules -b master https://github.com/robcog-iai/RobCoG.
 ```
 
 ### Build and Debug Project with Microsoft Visual Studio
-1. First step is to generate visual studio files. Right click on RobCog UE file and select "generate visual studio files"
+1. First step is to generate visual studio files. Right click on RobCog UE file and select "Generate Visual Studio Project files"
 ![](Documentation/Img/Generate_Visual_Studio_files.png)
 2. Now Along with few folders, there will be RobCog.sln file in the directory. Open it with Visual Studio.
 3. Once the RobCog project is open in Visual Studio, right click on RobCog and build the project.
