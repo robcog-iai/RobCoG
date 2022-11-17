@@ -62,7 +62,7 @@ $ git submodule update --init --recursive
 * or clone the repository with all the submodules:
 
 ```
-$ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
+$ git clone --recurse-submodules -b master https://github.com/robcog-iai/RobCoG.git
 ```
 
 ### Documentation
