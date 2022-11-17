@@ -65,6 +65,18 @@ $ git submodule update --init --recursive
 $ git clone --recursive -b master https://github.com/robcog-iai/RobCoG.git
 ```
 
+### Build and Debug Project with Microsoft Visual Studio
+1. First step is to generate visual studio files. Right click on RobCog UE file and select "generate visual studio files"
+![](Documentation/Img/Generate_Visual_Studio_files.png)
+2. Now Along with few folders, there will be RobCog.sln file in the directory. Open it with Visual Studio.
+3. Once the RobCog project is open in Visual Studio, right click on RobCog and build the project.
+![](Documentation/Img/build_robcog.png)
+4. Once build process is finished, right click on RobCog again and select "Set as Startup Project"
+![](Documentation/Img/set_robocog_as_startup_project.png)
+5. At last, select "DebugGame Editor" option and press "Local Windows Debugger" button.
+![](Documentation/Img/debug_game_editor.png)
+5. Now the world of RobCog will be available in UE in Debug mode!
+
 ### Documentation
 
 * [MC](Documentation/MC.md)
