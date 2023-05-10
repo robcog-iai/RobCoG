@@ -1,0 +1,111 @@
+FString FSLKRRestClient::SendCreateActorRequest(FString create_actor_url) {
+    FString Return_Actor;
+    FHttpRequestRef Request = FHttpModule::Get().CreateRequest();
+    //
+    FString FINAL_URL = URL + create_actor_url;
+    Request->SetURL(FINAL_URL);
+    Request->SetVerb((TEXT("GET")));
+    Request->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
+    Request->OnProcessRequestComplete().BindLambda(
+        // Here, we "capture" the 'this' pointer (the "&"), so our lambda can call this
+        // class's methods in the callback.
+        [&](
+            FHttpRequestPtr Request,
+            FHttpResponsePtr Response,
+            bool connectedSuccessfully) mutable {
+
+                if (connectedSuccessfully) {
+
+                    UE_LOG(LogTemp, Display, TEXT("Successfully connected to the server"));
+                    // We should have a JSON response - attempt to process it.
+                    FString ResponseJsonString = *Response->GetContentAsString(); //Json converted to FString
+                    //UE_LOG(LogTemp, Display, TEXT("Response %s"), *ResponseJsonString); // log the response as string
+
+                    TSharedPtr<FJsonObject> JsonResponseObject;
+
+                    // Create a reader pointer to read the json data
+                    TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(Response->GetContentAsString());
+
+                    // Deserialize the json data given Reader and the actual object to deserialize
+                    if (FJsonSerializer::Deserialize(Reader, JsonResponseObject) && JsonResponseObject.IsValid()) {
+                        //Get the value of the json object by field name
+                        Return_Actor = JsonResponseObject->GetStringField("Actor");
+                        
+                        //UE_LOG(LogTemp, Display, TEXT("Actor found: %s"), *Return_Actor); // log actor as string
+                    }
+                }
+                else {
+                    switch (Request->GetStatus()) {
+                    case EHttpRequestStatus::Failed_ConnectionError:
+                        UE_LOG(LogTemp, Error, TEXT("Connection failed."));
+                    default:
+                        UE_LOG(LogTemp, Error, TEXT("Request failed."));
+                    }
+                }
+        });
+    Request->ProcessRequest();
+    return Return_Actor;
+}
+
+
+
+TArray<FString> FSLKRRestClient::SendGetActorsRequest(FString find_all_actors_url) {
+
+    TArray<FString> Return_Actors;
+    FHttpRequestRef Request = FHttpModule::Get().CreateRequest();
+    //
+    FString FINAL_URL = URL + find_all_actors_url;
+    Request->SetURL(FINAL_URL);
+    Request->SetVerb((TEXT("GET")));
+    Request->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
+    Request->OnProcessRequestComplete().BindLambda(
+        // Here, we "capture" the 'this' pointer (the "&"), so our lambda can call this
+        // class's methods in the callback.
+        [&](
+            FHttpRequestPtr Request,
+            FHttpResponsePtr Response,
+            bool connectedSuccessfully) mutable {
+
+                if (connectedSuccessfully) {
+
+                    UE_LOG(LogTemp, Display, TEXT("Successfully connected to the server"));
+                    // We should have a JSON response - attempt to process it.
+                    FString ResponseJsonString = *Response->GetContentAsString(); //Json converted to FString
+                    //UE_LOG(LogTemp, Display, TEXT("Response %s"), *ResponseJsonString); // log the response as string
+                    
+                    // Array of json objects at top level of json. 
+                    // It is important to note here that if the response has 
+                    // an array then only TArray is correctly deserialized.
+                    TArray<TSharedPtr<FJsonValue>> JsonArray;
+
+                    // Create a reader pointer to read the json data
+                    TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(ResponseJsonString);
+
+                    // Deserialize the json data given Reader and the actual object to deserialize
+                    if (FJsonSerializer::Deserialize(Reader, JsonArray) && JsonArray.Num() != 0) {
+                        //Get the value of the json object by field name
+                        FString actor = JsonArray[0]->AsObject()->GetStringField("Actor");
+                        Return_Actors.Emplace(actor);
+                        //UE_LOG(LogTemp, Display, TEXT("Actor found: %s"), *actor); // log actor as string
+                    }
+                }
+                else {
+                    switch (Request->GetStatus()) {
+                    case EHttpRequestStatus::Failed_ConnectionError:
+                        UE_LOG(LogTemp, Error, TEXT("Connection failed."));
+                    default:
+                        UE_LOG(LogTemp, Error, TEXT("Request failed."));
+                    }
+                }
+        });
+    Request->ProcessRequest();
+
+    if (Return_Actors.Num() == 0) {
+        UE_LOG(LogTemp, Display, TEXT("There are no actors in the knowedge base, please create one!"));
+        // create an actor
+        FString actor = SendCreateActorRequest(TEXT("create_actor"));
+        Return_Actors.Emplace(actor);
+        UE_LOG(LogTemp, Display, TEXT("Actor created: %s"), *actor);
+    }
+    return Return_Actors;
+}
