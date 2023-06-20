@@ -37,7 +37,7 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 	SaveDirectory += TEXT("SavedData.csv");
 
 	// if overwriting is allowed then overwrite the file each time the game starts.
-	FString FinalString = TEXT("SourceContainer,DestinationContainer,PouringTime,RotationSpeed,MinimumAngle,MaximumAngle,PosDiffX,PosDiffY,PosDiffZ,IsPouringFailed");
+	FString FinalString = TEXT("SourceContainer,DestinationContainer,PouringTime,RotationSpeed,MinimumAngle,MaximumAngle,SourcePosX,SourcePosY,SourcePosZ,DestPosX,DestPosY,DestPosZ,NumberOfParticles,IsPouringFailed");
 	FinalString += LINE_TERMINATOR;
 
 	FString FinalOutPutStr = "";
@@ -81,6 +81,13 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 			MinimumPouringAngle = FirstRawArrayData[4];
 			MaximumPouringAngle = LastRawArrayData[4];
 		}
+
+		// here do check for minimum angle if it is less than threshold, lets say 45' then ignore the data. 
+		// Since it is due to the popcorn effect that the particles have jumped
+		/*float MinimumPouringAngleFloat = FCString::Atof(*MinimumPouringAngle);
+		if (MinimumPouringAngleFloat < 45) {
+			return;
+		}*/
 		
 		for (int i = 0; i < FirstRawArrayData.Num(); i++) {
 			// if the value of array is time (i == 2) or angle value (i == 4) then use calculated values

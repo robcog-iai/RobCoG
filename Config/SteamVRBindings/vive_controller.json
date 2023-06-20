@@ -142,6 +142,36 @@
 					}
 				},
 				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/trackpad",
+					"parameters":
+					{
+						"sub_mode": "click"
+					},
+					"inputs":
+					{
+						"north":
+						{
+							"output": "/actions/main/in/SLAudioStartTrigger"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/trackpad",
+					"parameters":
+					{
+						"sub_mode": "click"
+					},
+					"inputs":
+					{
+						"south":
+						{
+							"output": "/actions/main/in/SLAudioStopTrigger"
+						}
+					}
+				},
+				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/trigger",
 					"inputs":
@@ -197,5 +227,5 @@
 			]
 		}
 	},
-	"description": ""
+	"description": "RobCoG-18319896"
 }
