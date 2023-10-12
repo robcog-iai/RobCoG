@@ -184,14 +184,6 @@
 			"type": "boolean"
 		},
 		{
-			"name": "/actions/main/in/SLAudioStartTrigger",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/SLAudioStopTrigger",
-			"type": "boolean"
-		},
-		{
 			"name": "/actions/main/in/LeftGrasp axis",
 			"type": "vector1"
 		},
@@ -449,8 +441,6 @@
 			"/actions/main/in/SLTrigger": "SLTrigger",
 			"/actions/main/in/LeftGraspHelper": "LeftGraspHelper",
 			"/actions/main/in/RightGraspHelper": "RightGraspHelper",
-			"/actions/main/in/SLAudioStartTrigger": "SLAudioStartTrigger",
-			"/actions/main/in/SLAudioStopTrigger": "SLAudioStopTrigger",
 			"/actions/main/in/LeftGrasp axis": "LeftGrasp",
 			"/actions/main/in/RightGrasp axis": "RightGrasp",
 			"/actions/main": "Main Game Actions"

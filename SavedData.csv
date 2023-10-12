@@ -1,0 +1,4 @@
+SourceContainer,DestinationContainer,PouringTime,RotationSpeed,MaximumAngle,SourcePosX,SourcePosY,SourcePosZ,DestPosX,DestPosY,DestPosZ,NumberOfParticles,IsPouringFailed
+SM_Cup,SM_Blue_Cup,2.485097,1.0,110.0,-0.06665,-6.788941,63.928764,-0.066666,0.375078,49.741776,132,True
+SM_Cup,SM_Blue_Cup,1.969125,1.0,110.0,-0.06665,-6.788941,63.928764,-0.066666,0.375078,49.741776,132,True
+
