@@ -32,6 +32,12 @@ private:
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	bool isPouringFailed;
 
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float timeElapsed;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float turnedDegrees;
+
 	//UFUNCTION(BlueprintCallable, Category = "Custom", meta = (Keywords = "SaveData"))
 	//static bool SaveData(TArray<FString> SaveText);
 };
