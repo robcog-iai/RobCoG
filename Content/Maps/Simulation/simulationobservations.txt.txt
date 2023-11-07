@@ -1,0 +1,4 @@
+first if both poured into and out events are not logged by robcog then ignore that experiment all togather.
+Then only take those data values which has both events logged properly.
+Ignore particles which are dropped out of containers due to failure in collision info.
+Find out a way to detect colllision for each particile(so if there are total 10 particles then 10 contact events for cup as well as bowl should happen, intotal 20 contact events)
