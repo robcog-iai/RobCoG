@@ -38,6 +38,15 @@ private:
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float turnedDegrees;
 
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	int failedParticleAmount = 0;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	bool isFillingBlueprint = false;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float startTimeStamp = 0.0f;
+
 	//UFUNCTION(BlueprintCallable, Category = "Custom", meta = (Keywords = "SaveData"))
 	//static bool SaveData(TArray<FString> SaveText);
 };
