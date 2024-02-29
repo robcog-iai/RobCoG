@@ -46,10 +46,6 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 	int TotalDataRaws = DataRaws.Num();
 	FString PourinFailedStr = isPouringFailed ? TEXT("True") : TEXT("False");
 	if (TotalDataRaws > 0) {
-		// Keep in mind that the DataRaws do not have Pouring Faied Status in them so add it here to do correct calculation of that array
-		if (isFillingBlueprint) {
-			timeElapsed = timeElapsed - startTimeStamp;
-		}
 		FString FirstDataRaw = DataRaws[0] + TEXT(",") + FString::FromInt(failedParticleAmount) + TEXT(",") + FString::SanitizeFloat((turnedDegrees / timeElapsed)) + TEXT(",") + PourinFailedStr;
 		FString LastDataRaw = DataRaws[TotalDataRaws - 1] + TEXT(",") + FString::SanitizeFloat((turnedDegrees / timeElapsed)) + TEXT(",") + PourinFailedStr;
 		

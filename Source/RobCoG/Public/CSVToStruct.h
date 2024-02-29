@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "TrialStruct.h"
 #include "Engine/DataTable.h"
 #include "CSVToStruct.generated.h"
 
