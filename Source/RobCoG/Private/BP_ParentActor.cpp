@@ -37,7 +37,7 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 	SaveDirectory += TEXT("SavedData.csv");
 
 	// if overwriting is allowed then overwrite the file each time the game starts.
-	FString FinalString = TEXT("SourceContainer,DestinationContainer,PouringTime,RotationSpeed,MinimumAngle,MaximumAngle,SourcePosX,SourcePosY,SourcePosZ,DestPosX,DestPosY,DestPosZ,NumberOfParticles,IsPouringFailed");
+	FString FinalString = TEXT("SourceContainer,DestinationContainer,PouringTime,RotationSpeed,MaximumAngle,SourcePosX,SourcePosY,SourcePosZ,DestPosX,DestPosY,DestPosZ,NumberOfParticles,NumberOfFailedParticles,RotationInDegreePerSecond,IsPouringFailed");
 	FinalString += LINE_TERMINATOR;
 
 	FString FinalOutPutStr = "";
@@ -46,9 +46,8 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 	int TotalDataRaws = DataRaws.Num();
 	FString PourinFailedStr = isPouringFailed ? TEXT("True") : TEXT("False");
 	if (TotalDataRaws > 0) {
-		// Keep in mind that the DataRaws do not have Pouring Faied Status in them so add it here to do correct calculation of that array
-		FString FirstDataRaw = DataRaws[0] + TEXT(",") + PourinFailedStr;
-		FString LastDataRaw = DataRaws[TotalDataRaws - 1] + TEXT(",") + PourinFailedStr;
+		FString FirstDataRaw = DataRaws[0] + TEXT(",") + FString::FromInt(failedParticleAmount) + TEXT(",") + FString::SanitizeFloat((turnedDegrees / timeElapsed)) + TEXT(",") + PourinFailedStr;
+		FString LastDataRaw = DataRaws[TotalDataRaws - 1] + TEXT(",") + FString::SanitizeFloat((turnedDegrees / timeElapsed)) + TEXT(",") + PourinFailedStr;
 		
 		// TODO: Remove it in final version add all 3 lines first raw and last raw and modified raw into csv file
 		/*FinalString += FirstDataRaw ;
@@ -74,11 +73,11 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 
 		// this is basically time stamps from first and last raws and getting how long it took to pour.
 		double PouringTime = 0.0;
-		FString MinimumPouringAngle, MaximumPouringAngle;
+		FString MaximumPouringAngle;
 		// check if all data are correctly logged from the blueprint
 		if(LastRawArrayData.Num() > 5 && FirstRawArrayData.Num() > 5) {
 			PouringTime = FCString::Atod(*LastRawArrayData[2]) - FCString::Atod(*FirstRawArrayData[2]);
-			MinimumPouringAngle = FirstRawArrayData[4];
+			//MinimumPouringAngle = FirstRawArrayData[4];
 			MaximumPouringAngle = LastRawArrayData[4];
 		}
 
@@ -95,7 +94,7 @@ void ABP_ParentActor::EndPlay(const EEndPlayReason::Type reason) {
 				FinalOutPutStr += FString::SanitizeFloat(PouringTime) + TEXT(",");
 			}
 			else if (i == 4) {
-				FinalOutPutStr += MinimumPouringAngle + TEXT(",");
+				//FinalOutPutStr += MinimumPouringAngle + TEXT(",");
 				FinalOutPutStr += MaximumPouringAngle + TEXT(",");
 			}
 			else {

@@ -2,10 +2,10 @@
 	"source": "UE",
 	"applications": [
 		{
-			"app_key": "application.generated.ue.robcog-18319896.ue4editor-win64-debuggame.exe",
+			"app_key": "application.generated.ue.robcog-18319896.ue4editor.exe",
 			"launch_type": "url",
 			"url": "steam://launch/",
-			"action_manifest_path": "C:/workspace/Abhijit/latest working RobCog/RobCoG/Config/SteamVRBindings/steamvr_manifest.json",
+			"action_manifest_path": "E:/RobCoG/Config/SteamVRBindings/steamvr_manifest.json",
 			"strings":
 			{
 				"en_us":
